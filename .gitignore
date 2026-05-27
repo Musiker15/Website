@@ -1,0 +1,118 @@
+# ============================================================
+# .gitignore — Musiker15 Website
+# ============================================================
+
+# --- Dependencies ------------------------------------------
+node_modules/
+.pnp
+.pnp.js
+.yarn/install-state.gz
+jspm_packages/
+
+# --- Package-Manager-Lockfiles ------------------------------
+# pnpm-lock.yaml ist commited (deterministische Builds)
+# npm/yarn-Locks dagegen ausschließen, falls jemand sie aus Versehen erzeugt
+package-lock.json
+yarn.lock
+
+# --- Next.js Build-Output -----------------------------------
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# --- Turbopack-Cache ----------------------------------------
+.turbo/
+
+# --- Logs ---------------------------------------------------
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# --- Test-Output --------------------------------------------
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+.lighthouseci/
+
+# --- Environment-Dateien (NIEMALS committen) ----------------
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test.local
+.env.production
+.env.production.local
+.env.*.local
+# Beispiel/Template hingegen schon
+!.env.example
+
+# --- Generierte Such-Indizes --------------------------------
+public/search-index.json
+public/sitemap.xml
+# (werden zur Build-Zeit erzeugt — kein Commit)
+
+# --- Editoren / IDEs ----------------------------------------
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+.claude/
+CLAUDE.md
+*.bak
+*.orig
+*.tmp
+
+# --- OS-spezifisch ------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Thumbs.db:encryptable
+Desktop.ini
+ehthumbs.db
+ehthumbs_vista.db
+
+# --- TypeScript ---------------------------------------------
+*.tsbuildinfo
+
+# --- Lokale Tools / Caches ----------------------------------
+.eslintcache
+.stylelintcache
+.prettiercache
+.cache/
+.parcel-cache/
+
+# --- Deployment-Artefakte -----------------------------------
+*.tar.gz
+*.zip
+release.tar.gz
+deploy-*.tar.gz
+
+# --- Vercel (falls als Preview-Umgebung genutzt) ------------
+.vercel
+
+# --- Sentry / Telemetrie ------------------------------------
+.sentryclirc
+
+# --- Misc ---------------------------------------------------
+*.pem
+*.key
+.history/
+.serverless/
+
+# --- Lokale Markdown-Drafts ---------------------------------
+# Markdown-Files mit „.draft.md"-Suffix werden ignoriert,
+# damit man lokal Entwürfe halten kann
+content/**/*.draft.md

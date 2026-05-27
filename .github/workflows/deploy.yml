@@ -1,0 +1,223 @@
+# =============================================================================
+# Deploy to Production (Debian + Apache2 + systemd)
+# -----------------------------------------------------------------------------
+# Trigger:    Push auf `main` oder manuelles Dispatch
+# Ablauf:     1. Build im Runner (Validate Content → Lint → TypeCheck → Build → Search-Index)
+#             2. Artifact-Tarball nach /tmp auf Server
+#             3. Atomisches Symlink-Swap unter /opt/musiker15/
+#             4. systemd-Reload (musiker15.service)
+# -----------------------------------------------------------------------------
+# Erforderliche Repository-Secrets:
+#   DEPLOY_HOST  — Hostname oder IP des Servers
+#   DEPLOY_USER  — SSH-User mit sudo-Rechten für `chown` und `systemctl restart musiker15`
+#                  (typisch: musiker15-deploy oder ein bestehender Deploy-User)
+#   DEPLOY_KEY   — Privater SSH-Key (passwort-los, key-only Auth)
+#   DEPLOY_PORT  — (optional) SSH-Port, default 22
+#
+# Voraussetzung auf dem Server:
+#   • musiker15-User existiert:   sudo useradd -r -s /usr/sbin/nologin musiker15
+#   • DEPLOY_USER hat passwortloses sudo für:
+#       /bin/chown -R musiker15\:musiker15 /opt/musiker15*
+#       /bin/systemctl restart musiker15.service
+#       /bin/systemctl status musiker15.service
+# =============================================================================
+
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "README.md"
+      - "AUTHORING.md"
+      - "CLAUDE.md"
+      - "SECURITY.md"
+      - ".gitignore"
+      - ".gitattributes"
+      - "LICENSE"
+      - "deploy/**"           # Server-Configs werden manuell appliziert
+      - ".github/**"          # CI-Configs deployen sich nicht selbst …
+      - "!.github/workflows/deploy.yml"   # … außer deploy.yml selbst
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: "22"
+  APP_PATH: "/opt/musiker15"
+  APP_USER: "musiker15"
+  APP_PORT: "3101"
+  SERVICE_NAME: "musiker15.service"
+  PUBLIC_URL: "https://www.musiker15.de"
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # pnpm-Version kommt aus package.json -> "packageManager": "pnpm@x.y.z"
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate content (Frontmatter)
+        run: pnpm run validate:content
+
+      - name: Type-check
+        run: pnpm run type-check
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Build
+        run: pnpm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+          NODE_ENV: production
+
+      - name: Build search index
+        run: pnpm run build:search
+
+      - name: Prune dev dependencies
+        run: pnpm prune --prod
+
+      - name: Package release tarball
+        run: |
+          tar -czf release.tar.gz \
+            .next \
+            public \
+            content \
+            config \
+            node_modules \
+            package.json \
+            pnpm-lock.yaml \
+            next.config.ts \
+            tsconfig.json
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: release.tar.gz
+          retention-days: 7
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: production
+      url: https://www.musiker15.de
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release
+
+      - name: Copy release to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          port: ${{ secrets.DEPLOY_PORT || 22 }}
+          source: "release.tar.gz"
+          target: "/tmp/"
+
+      - name: Extract & atomic swap on server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          port: ${{ secrets.DEPLOY_PORT || 22 }}
+          script: |
+            set -euo pipefail
+            APP="${{ env.APP_PATH }}"
+            APP_USER="${{ env.APP_USER }}"
+            APP_PORT="${{ env.APP_PORT }}"
+            TS="$(date +%Y%m%d-%H%M%S)"
+            RELEASES="$APP/releases"
+            NEW="$RELEASES/$TS"
+            SHARED="$APP/shared"
+
+            echo "→ Vorbereitung der Verzeichnisse"
+            sudo mkdir -p "$RELEASES" "$SHARED"
+
+            echo "→ Entpacke Release nach $NEW"
+            sudo mkdir -p "$NEW"
+            sudo tar -xzf /tmp/release.tar.gz -C "$NEW"
+            rm -f /tmp/release.tar.gz
+
+            echo "→ Verknüpfe shared Resources (env)"
+            if [ -f "$SHARED/.env.production" ]; then
+              sudo ln -sf "$SHARED/.env.production" "$NEW/.env.production"
+            fi
+
+            echo "→ Symlink-Swap: $APP/current → $NEW"
+            sudo ln -sfn "$NEW" "$APP/current"
+
+            echo "→ Hauptverzeichnis aktualisieren"
+            # Die systemd-Unit zeigt auf /opt/musiker15 direkt — daher
+            # spiegeln wir die current-Inhalte über rsync.
+            #
+            # WICHTIG: Die Excludes MÜSSEN mit "/" beginnen — sonst matcht rsync
+            # rekursiv jeden gleichnamigen Ordner (z.B. node_modules/next/dist/shared
+            # wäre ohne führenden "/" auch betroffen → Next bricht mit
+            # "Cannot find module '../shared/lib/constants'" ab).
+            sudo rsync -a --delete \
+              --exclude "/releases" \
+              --exclude "/shared" \
+              --exclude "/current" \
+              "$NEW/" "$APP/"
+
+            echo "→ Ownership auf $APP_USER setzen"
+            sudo chown -R "$APP_USER:$APP_USER" "$APP"
+
+            echo "→ systemd-Service neustarten"
+            sudo /bin/systemctl restart ${{ env.SERVICE_NAME }}
+
+            echo "→ Health-Check (Port $APP_PORT)"
+            sleep 3
+            for i in 1 2 3 4 5; do
+              if curl -fsS "http://127.0.0.1:$APP_PORT/de" >/dev/null 2>&1; then
+                echo "✓ Service erreichbar"
+                break
+              fi
+              echo "  Versuch $i/5 — warte 2s …"
+              sleep 2
+            done
+
+            echo "→ Aufräumen: behalte die letzten 5 Releases"
+            cd "$RELEASES"
+            sudo ls -1t | tail -n +6 | xargs -r sudo rm -rf
+            echo "✓ Deploy fertig — $TS"
+
+      - name: Verify deployment
+        run: |
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            STATUS=$(curl -o /dev/null -s -w "%{http_code}" ${{ env.PUBLIC_URL }}/de || echo "000")
+            if [ "$STATUS" = "200" ]; then
+              echo "✓ Live: ${{ env.PUBLIC_URL }} antwortet mit 200"
+              exit 0
+            fi
+            echo "Versuch $i/10 — Status $STATUS — warte 3s …"
+            sleep 3
+          done
+          echo "✗ Production-Smoke-Test fehlgeschlagen"
+          exit 1

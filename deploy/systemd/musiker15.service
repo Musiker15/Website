@@ -1,0 +1,103 @@
+# =============================================================================
+# systemd-Service — Musiker15 Website (Next.js 16)
+# -----------------------------------------------------------------------------
+# Datei:       /etc/systemd/system/musiker15.service
+# App-Pfad:    /opt/musiker15/
+# User/Group:  musiker15:musiker15
+# Port:        3101 (loopback, hinter Apache2)
+# Node:        v22 LTS (über nvm oder apt nodesource)
+#
+# Hinweis: Dieser Service läuft *eigenständig* (nicht über PM2), damit Restart-
+# und Boot-Verhalten direkt von systemd verwaltet wird.
+#
+# Installation:
+#   sudo cp deploy/systemd/musiker15.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now musiker15.service
+#   sudo systemctl status musiker15.service
+#
+# Logs:
+#   sudo journalctl -u musiker15.service -f
+#   sudo journalctl -u musiker15.service --since "1 hour ago"
+# =============================================================================
+
+[Unit]
+Description=Musiker15 Website (Next.js)
+Documentation=https://www.musiker15.de
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=musiker15
+Group=musiker15
+WorkingDirectory=/opt/musiker15
+
+# ---------------------------------------------------------------------------
+# Umgebungsvariablen
+# ---------------------------------------------------------------------------
+Environment=NODE_ENV=production
+Environment=PORT=3101
+Environment=HOSTNAME=127.0.0.1
+Environment=NEXT_TELEMETRY_DISABLED=1
+# Lädt zusätzlich /opt/musiker15/.env.production falls vorhanden
+EnvironmentFile=-/opt/musiker15/.env.production
+
+# ---------------------------------------------------------------------------
+# Start / Stop / Reload
+# ---------------------------------------------------------------------------
+# Voraussetzung: `pnpm install --prod` und `pnpm build` wurden bereits ausgeführt
+# (siehe deploy.yml). Wir starten den Production-Server direkt via Node.
+ExecStart=/usr/bin/env node_modules/.bin/next start -p 3101 -H 127.0.0.1
+
+# Sanfter Reload bei SIGHUP (Next.js ignoriert das aktuell, daher voller Restart)
+ExecReload=/bin/kill -HUP $MAINPID
+
+# Stop: 30 s freundlich, dann SIGKILL
+KillSignal=SIGTERM
+KillMode=mixed
+TimeoutStopSec=30s
+
+# ---------------------------------------------------------------------------
+# Restart-Verhalten
+# ---------------------------------------------------------------------------
+Restart=always
+RestartSec=5s
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+# ---------------------------------------------------------------------------
+# Resource-Limits
+# ---------------------------------------------------------------------------
+LimitNOFILE=65535
+
+# ---------------------------------------------------------------------------
+# Security-Hardening
+# ---------------------------------------------------------------------------
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/opt/musiker15
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+MemoryDenyWriteExecute=false
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged @resources @mount
+
+# ---------------------------------------------------------------------------
+# Logging
+# ---------------------------------------------------------------------------
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=musiker15
+
+[Install]
+WantedBy=multi-user.target

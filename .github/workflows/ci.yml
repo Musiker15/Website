@@ -1,0 +1,65 @@
+# =============================================================================
+# CI — Lint, Type-Check, Tests, Build (alle Branches + Pull-Requests)
+# -----------------------------------------------------------------------------
+# Trigger-Logik:
+#   • push    auf jede Branch        → CI läuft (auch auf main, parallel zu Deploy)
+#   • pull_request gegen main/develop → CI läuft
+#
+# Bei PRs aus dem GLEICHEN Repo würde sowohl push als auch pull_request feuern.
+# Die concurrency-Gruppe dedupliziert das: gleicher ref → laufender Job wird
+# gecancelled und durch den neuen ersetzt.
+# =============================================================================
+
+name: CI
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: ["**"]
+
+concurrency:
+  # Eindeutig pro Workflow + ref + event-quelle — verhindert Doppel-Runs
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "22"
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      # pnpm-Version kommt aus package.json -> "packageManager": "pnpm@x.y.z"
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate content (Frontmatter)
+        run: pnpm run validate:content
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Type-check
+        run: pnpm run type-check
+
+      - name: Build
+        run: pnpm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+
+      - name: Test (Vitest)
+        # --passWithNoTests ist im test-Script (package.json) gesetzt — verhindert
+        # Exit 1, solange noch keine Tests existieren.
+        run: pnpm test --run

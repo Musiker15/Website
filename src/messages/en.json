@@ -1,0 +1,87 @@
+{
+  "common": {
+    "skipToContent": "Skip to content",
+    "loading": "Loading …",
+    "search": "Search",
+    "searchPlaceholder": "Search tutorials …",
+    "searchShortcut": "Ctrl",
+    "noResults": "No results",
+    "menu": "Menu",
+    "close": "Close",
+    "open": "Open",
+    "previous": "Previous",
+    "next": "Next",
+    "readMore": "Read more",
+    "all": "All",
+    "version": "Version",
+    "released": "Released",
+    "updated": "Updated",
+    "by": "by",
+    "language": "Language",
+    "theme": "Theme",
+    "lightMode": "Light mode",
+    "darkMode": "Dark mode",
+    "systemMode": "System default"
+  },
+  "home": {
+    "heroBadge": "Tutorials & Guides",
+    "heroCtaPrimary": "Browse tutorials",
+    "heroCtaSecondary": "GitHub",
+    "ctaTitle": "Want to chat?",
+    "ctaSubtitle": "Join us on Discord or check out the GitHub repos.",
+    "ctaPrimary": "Read tutorials",
+    "ctaSecondary": "Community",
+    "latestNews": "Latest news",
+    "moreNews": "All news"
+  },
+  "docs": {
+    "title": "Tutorials",
+    "subtitle": "Guides on Linux, Debian, server administration and self-hosting.",
+    "onThisPage": "On this page",
+    "editPage": "Edit this page",
+    "lastUpdated": "Last updated",
+    "categories": {
+      "debian-tutorials": "Debian Tutorials",
+      "pc-hardware": "PC Hardware"
+    }
+  },
+  "news": {
+    "title": "News & Updates",
+    "subtitle": "Latest posts, announcements and updates.",
+    "publishedOn": "Published on",
+    "readArticle": "Read article"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "What are you looking for?",
+    "resultsFor": "Results for",
+    "noResultsFor": "No results for",
+    "tryDifferent": "Try a different search term.",
+    "groupDocs": "Tutorials",
+    "groupNews": "News",
+    "groupPages": "Pages"
+  },
+  "footer": {
+    "madeWith": "Built with",
+    "and": "and"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "subtitle": "The requested page does not exist or has been moved.",
+    "backHome": "Back to home",
+    "search": "Search instead"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "subtitle": "An error occurred while loading the page.",
+    "retry": "Try again",
+    "backHome": "Back to home"
+  },
+  "callout": {
+    "info": "Information",
+    "tip": "Tip",
+    "warning": "Warning",
+    "danger": "Danger",
+    "note": "Note"
+  }
+}

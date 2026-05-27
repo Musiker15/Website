@@ -1,0 +1,17 @@
+# Fallback-robots.txt — wird durch app/robots.ts überschrieben sobald Next läuft.
+# Apache liefert diese Datei aus, wenn Node nicht erreichbar ist.
+
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+Sitemap: https://komascript.musiker15.de/sitemap.xml
+Host: https://komascript.musiker15.de

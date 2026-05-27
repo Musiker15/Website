@@ -1,0 +1,87 @@
+{
+  "common": {
+    "skipToContent": "Zum Inhalt springen",
+    "loading": "Lädt …",
+    "search": "Suchen",
+    "searchPlaceholder": "Tutorials durchsuchen …",
+    "searchShortcut": "Strg",
+    "noResults": "Keine Ergebnisse",
+    "menu": "Menü",
+    "close": "Schließen",
+    "open": "Öffnen",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "readMore": "Mehr lesen",
+    "all": "Alle",
+    "version": "Version",
+    "released": "Veröffentlicht",
+    "updated": "Aktualisiert",
+    "by": "von",
+    "language": "Sprache",
+    "theme": "Theme",
+    "lightMode": "Heller Modus",
+    "darkMode": "Dunkler Modus",
+    "systemMode": "Systemeinstellung"
+  },
+  "home": {
+    "heroBadge": "Tutorials & Guides",
+    "heroCtaPrimary": "Tutorials ansehen",
+    "heroCtaSecondary": "GitHub",
+    "ctaTitle": "Lust auf Austausch?",
+    "ctaSubtitle": "Komm in den Discord oder schau auf GitHub vorbei.",
+    "ctaPrimary": "Tutorials lesen",
+    "ctaSecondary": "Community",
+    "latestNews": "Aktuelle News",
+    "moreNews": "Alle News"
+  },
+  "docs": {
+    "title": "Tutorials",
+    "subtitle": "Guides rund um Linux, Debian, Server-Administration und Selbst-Hosting.",
+    "onThisPage": "Auf dieser Seite",
+    "editPage": "Seite bearbeiten",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "categories": {
+      "debian-tutorials": "Debian-Tutorials",
+      "pc-hardware": "PC-Hardware"
+    }
+  },
+  "news": {
+    "title": "News & Updates",
+    "subtitle": "Aktuelle Beiträge, Hinweise und Neuigkeiten.",
+    "publishedOn": "Veröffentlicht am",
+    "readArticle": "Artikel lesen"
+  },
+  "search": {
+    "title": "Suche",
+    "placeholder": "Was möchtest Du finden?",
+    "resultsFor": "Ergebnisse für",
+    "noResultsFor": "Keine Ergebnisse für",
+    "tryDifferent": "Versuche es mit anderen Suchbegriffen.",
+    "groupDocs": "Tutorials",
+    "groupNews": "News",
+    "groupPages": "Seiten"
+  },
+  "footer": {
+    "madeWith": "Erstellt mit",
+    "and": "und"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "subtitle": "Die angeforderte Seite existiert nicht oder wurde verschoben.",
+    "backHome": "Zur Startseite",
+    "search": "Stattdessen suchen"
+  },
+  "error": {
+    "title": "Etwas ist schiefgelaufen",
+    "subtitle": "Beim Laden der Seite ist ein Fehler aufgetreten.",
+    "retry": "Erneut versuchen",
+    "backHome": "Zur Startseite"
+  },
+  "callout": {
+    "info": "Information",
+    "tip": "Tipp",
+    "warning": "Achtung",
+    "danger": "Gefahr",
+    "note": "Hinweis"
+  }
+}

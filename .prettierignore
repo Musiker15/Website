@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+build
+dist
+public
+.turbo
+pnpm-lock.yaml
+*.tar.gz

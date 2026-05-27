@@ -1,0 +1,90 @@
+# =============================================================================
+# Dependabot Configuration
+# -----------------------------------------------------------------------------
+# Sorgt für regelmäßige Dependency-Updates und gruppiert Security-Alerts,
+# damit nicht 5 PRs gleichzeitig den CI-Runner blockieren.
+# Docs: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+# =============================================================================
+
+version: 2
+
+updates:
+  # ---- npm / pnpm packages -------------------------------------------------
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 5
+    versioning-strategy: "increase"
+    labels:
+      - "dependencies"
+      - "automated"
+    commit-message:
+      prefix: "deps"
+      prefix-development: "deps-dev"
+      include: "scope"
+    # Group: bündelt verwandte Updates in einem PR
+    groups:
+      # Alle Security-Patches in einem PR
+      security-patches:
+        applies-to: "security-updates"
+        update-types:
+          - "patch"
+          - "minor"
+      # Next.js + React zusammen (gehören als Ökosystem)
+      next-react:
+        patterns:
+          - "next"
+          - "next-*"
+          - "@next/*"
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+        update-types:
+          - "minor"
+          - "patch"
+      # Radix UI gehört zusammen
+      radix-ui:
+        patterns:
+          - "@radix-ui/*"
+        update-types:
+          - "minor"
+          - "patch"
+      # Remark/Rehype-Stack
+      mdx-toolchain:
+        patterns:
+          - "remark*"
+          - "rehype*"
+          - "next-mdx-*"
+          - "@types/mdx"
+          - "shiki"
+        update-types:
+          - "minor"
+          - "patch"
+      # ESLint-Stack
+      lint-tools:
+        patterns:
+          - "eslint"
+          - "@eslint/*"
+          - "typescript-eslint"
+          - "prettier"
+          - "prettier-plugin-*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # ---- GitHub-Actions selbst -----------------------------------------------
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 3
+    labels:
+      - "ci"
+      - "automated"
+    commit-message:
+      prefix: "ci"

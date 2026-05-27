@@ -1,0 +1,406 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================================
+   KOMA-Script Design-Tokens (Tailwind v4 — CSS-First Config)
+   ============================================================================ */
+@theme {
+  /* Typografie — Fonts werden 100% lokal über @fontsource-variable geladen
+     (siehe imports in app/[locale]/layout.tsx). Keine externe Kommunikation. */
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  /* Farben — Light Mode (Tokens) */
+  --color-background: #ffffff;
+  --color-foreground: #0a0a0a;
+  --color-muted: #f4f4f5;
+  --color-muted-foreground: #71717a;
+  --color-border: #e4e4e7;
+  --color-input: #e4e4e7;
+  --color-ring: #1e40af;
+  --color-card: #ffffff;
+  --color-card-foreground: #0a0a0a;
+
+  --color-primary: #1e40af;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f4f4f5;
+  --color-secondary-foreground: #18181b;
+  --color-accent: #2563eb;
+  --color-accent-foreground: #ffffff;
+
+  --color-success: #16a34a;
+  --color-success-foreground: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-foreground: #ffffff;
+  --color-danger: #dc2626;
+  --color-danger-foreground: #ffffff;
+  --color-info: #0284c7;
+  --color-info-foreground: #ffffff;
+
+  /* Radien */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* Animationen */
+  --animate-fade-in: fadeIn 0.2s ease-out;
+  --animate-slide-up: slideUp 0.3s ease-out;
+  --animate-slide-down: slideDown 0.3s ease-out;
+}
+
+/* ============================================================================
+   Dark-Mode-Tokens
+   ============================================================================ */
+@layer base {
+  .dark {
+    --color-background: #0a0a0a;
+    --color-foreground: #fafafa;
+    --color-muted: #18181b;
+    --color-muted-foreground: #a1a1aa;
+    --color-border: #27272a;
+    --color-input: #27272a;
+    --color-ring: #60a5fa;
+    --color-card: #18181b;
+    --color-card-foreground: #fafafa;
+
+    --color-primary: #60a5fa;
+    --color-primary-foreground: #0a0a0a;
+    --color-secondary: #27272a;
+    --color-secondary-foreground: #fafafa;
+    --color-accent: #93c5fd;
+    --color-accent-foreground: #0a0a0a;
+  }
+
+  *,
+  *::before,
+  *::after {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+
+  /* Fokus-Ring */
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Smooth-Anchor-Scroll mit Header-Offset */
+  :target {
+    scroll-margin-top: 5rem;
+  }
+}
+
+/* ============================================================================
+   Animations
+   ============================================================================ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================================
+   Prose / Markdown-Content (rehype-pretty-code + Tailwind-Typography)
+   ============================================================================ */
+@layer components {
+  .prose {
+    color: var(--color-foreground);
+    max-width: none;
+  }
+  .prose a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+  .prose a:hover {
+    border-bottom-color: var(--color-primary);
+  }
+  .prose code {
+    font-family: var(--font-mono);
+    background-color: var(--color-muted);
+    padding: 0.125rem 0.375rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875em;
+    font-weight: 500;
+  }
+  .prose code::before,
+  .prose code::after {
+    content: none;
+  }
+  .prose pre {
+    background-color: var(--color-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+  .prose pre code {
+    background-color: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-weight: 400;
+  }
+
+  /* rehype-pretty-code */
+  .prose [data-rehype-pretty-code-figure] {
+    margin: 1.5rem 0;
+  }
+  .prose code[data-line-numbers] > [data-line]::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 1.75rem;
+    margin-right: 1rem;
+    text-align: right;
+    color: var(--color-muted-foreground);
+    opacity: 0.5;
+  }
+  .prose [data-highlighted-line] {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-left: 2px solid var(--color-primary);
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+  .prose [data-rehype-pretty-code-title] {
+    background-color: var(--color-muted);
+    border: 1px solid var(--color-border);
+    border-bottom: none;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--color-muted-foreground);
+  }
+  .prose [data-rehype-pretty-code-title] + pre {
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    margin-top: 0;
+  }
+
+  /* Heading-Anchors */
+  .prose h2 > a,
+  .prose h3 > a,
+  .prose h4 > a {
+    color: inherit;
+    border-bottom: none;
+  }
+  .prose h2 > a:hover::after,
+  .prose h3 > a:hover::after {
+    content: " #";
+    color: var(--color-muted-foreground);
+    opacity: 0.5;
+  }
+
+  /* Tabellen */
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.875rem;
+  }
+  .prose th {
+    text-align: left;
+    font-weight: 600;
+    padding: 0.625rem 0.75rem;
+    border-bottom: 2px solid var(--color-border);
+    background-color: var(--color-muted);
+  }
+  .prose td {
+    padding: 0.625rem 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  /* Blockquote */
+  .prose blockquote {
+    border-left: 3px solid var(--color-primary);
+    padding-left: 1rem;
+    font-style: italic;
+    color: var(--color-muted-foreground);
+    margin: 1.5rem 0;
+  }
+}
+
+/* ============================================================================
+   LatexExample-Wrapper
+   ----------------------------------------------------------------------------
+   Die Komponente nutzt `.not-prose`, daher gelten die `.prose pre`-Styles aus
+   diesem File nicht. Für eingebettete rehype-pretty-code-Blöcke setzen wir hier
+   eigene, integrierte Defaults (kein Border, kein Rundungsradius, kein Margin),
+   damit der Code-Block nahtlos in den Komponenten-Rahmen einrastet.
+   ============================================================================ */
+@layer components {
+  .latex-example-body figure[data-rehype-pretty-code-figure] {
+    margin: 0;
+  }
+
+  .latex-example-body [data-rehype-pretty-code-title] {
+    display: none; /* Titel wird oben in der Komponente angezeigt */
+  }
+
+  .latex-example-body pre {
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    padding: 1rem;
+    overflow-x: auto;
+    background-color: transparent;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.65;
+  }
+
+  .latex-example-body pre code {
+    background-color: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-weight: 400;
+  }
+}
+
+/* ============================================================================
+   Komponenten-Klassen (ehemals inline-styles — für strikte CSP nötig)
+   ============================================================================ */
+
+/* Hero-Background — radialer Akzent-Gradient hinter dem Hero-Text.
+   Ersetzt das ehemalige inline `style={{ background: "radial-gradient(...)" }}`
+   in src/components/home/Hero.tsx, damit CSP `style-src` ohne 'unsafe-inline'
+   auskommt. */
+.hero-decor-gradient {
+  background: radial-gradient(
+    ellipse 60% 40% at 50% 0%,
+    color-mix(in oklab, var(--color-primary) 8%, transparent),
+    transparent 70%
+  );
+}
+
+/* Root-404-Page (src/app/not-found.tsx) — eigene Klassen, weil die Page
+   außerhalb von [locale]/ liegt und keinen Zugriff auf das Layout-CSS hat.
+   Tailwind wird via Import von globals.css verfügbar gemacht. */
+.notfound-page-body {
+  display: flex;
+  min-height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans, system-ui, sans-serif);
+  margin: 0;
+  padding: 2rem;
+  background-color: var(--color-background, #ffffff);
+  color: var(--color-foreground, #0a0a0a);
+}
+.notfound-page-content {
+  text-align: center;
+}
+.notfound-page-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.notfound-page-text {
+  color: var(--color-muted-foreground, #666);
+  margin-bottom: 1.5rem;
+}
+.notfound-page-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--color-primary, #1e40af);
+  color: var(--color-primary-foreground, #ffffff);
+  text-decoration: none;
+  border-radius: var(--radius-md, 0.5rem);
+}
+
+/* ============================================================================
+   Utilities
+   ============================================================================ */
+@utility container-prose {
+  max-width: 65ch;
+  margin-inline: auto;
+}
+
+@utility container-page {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+@media (min-width: 768px) {
+  .container-page { padding-inline: 2rem; }
+}
+
+/* Skip-Link */
+.skip-link {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0.5rem 1rem;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  border: 1px solid var(--color-border);
+  transform: translateY(-200%);
+  transition: transform 0.2s;
+  z-index: 100;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Scrollbar */
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-muted);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-muted-foreground);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

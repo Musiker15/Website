@@ -62,7 +62,7 @@
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "@types/mdx": "^2.0.13",
-    "typescript": "^5.7.2",
+    "typescript": "^6.0.3",
     "eslint": "^9.17.0",
     "typescript-eslint": "^8.19.0",
     "@eslint/js": "^10.0.1",

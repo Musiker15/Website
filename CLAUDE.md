@@ -70,9 +70,10 @@ musiker15-website/
 │   └── ci.yml              ← Lint + Type-Check + Tests + Build
 ├── public/
 │   ├── favicon.ico, logo.png
-│   ├── og-default.svg      ← Backup (nicht im Layout referenziert)
 │   ├── robots.txt
 │   └── search-index.json   ← Build-Output (gitignored)
+├── assets/                  ← Repo-Backups, nicht deployed
+│   └── og-default.svg       ← statisches OG-Backup mit eingebettetem M-Logo
 ├── content/
 │   ├── pages/{de,en}/
 │   │   ├── about.md, faq.md, community.md

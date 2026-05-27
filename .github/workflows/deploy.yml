@@ -37,6 +37,7 @@ on:
       - "LICENSE"
       - "LICENSE.md"
       - "LICENSE_DE.md"
+      - "assets/**"           # Repo-Backups, nicht deployed
       - "deploy/**"           # Server-Configs werden manuell appliziert
       - ".github/**"          # CI-Configs deployen sich nicht selbst …
       - "!.github/workflows/deploy.yml"   # … außer deploy.yml selbst

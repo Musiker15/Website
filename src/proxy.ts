@@ -152,7 +152,17 @@ export default function middleware(request: NextRequest): NextResponse {
 export const config = {
   matcher: [
     // Alle Pfade außer:
-    //   /api, /_next/static, /_next/image, /favicon, /robots, /sitemap, /manifest, /og-*
-    "/((?!api|_next/static|_next/image|favicon\\.ico|favicon\\.svg|robots\\.txt|sitemap\\.xml|manifest\\.webmanifest|og-.*\\.png|.*\\..*$).*)",
+    //   • /api
+    //   • /_next/static, /_next/image (Next.js intern)
+    //   • Statische Public-Files: /favicon.ico, /robots.txt, /sitemap.xml,
+    //     /manifest.webmanifest
+    //   • Next.js File-Convention-Routes (Metadata-Image-APIs): /opengraph-image,
+    //     /twitter-image, /icon, /apple-icon — diese sind sprachneutrale
+    //     Server-generierte PNG-Routes und dürfen NICHT durch die i18n-
+    //     Middleware geschoben werden (sonst 307 → /de/opengraph-image, was
+    //     unter Catch-All landet und HTML statt PNG ausliefert).
+    //   • Alles mit Dateiendung (`.*\..*$`) — bleibt als Fallback für sonstige
+    //     statische Assets.
+    "/((?!api|_next/static|_next/image|favicon\\.ico|robots\\.txt|sitemap\\.xml|manifest\\.webmanifest|opengraph-image|twitter-image|icon|apple-icon|.*\\..*$).*)",
   ],
 };

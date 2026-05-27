@@ -65,7 +65,6 @@ export default async function Image() {
             zIndex: 1,
           }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={logoDataUrl}
             alt=""

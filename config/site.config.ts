@@ -25,8 +25,11 @@ const config = {
   // Öffentliche Basis-URL (ohne trailing Slash)
   url: "https://www.musiker15.de",
 
-  // OpenGraph-Default-Image (1200×630 SVG/PNG, liegt in /public)
-  ogImage: "/og-default.svg",
+  // OpenGraph-Default-Image (1200×630 PNG) — dynamisch generiert via
+  // src/app/opengraph-image.tsx (Next.js File-Convention).
+  // Social-Media-Crawler (Discord, Facebook, WhatsApp, Twitter) verlangen
+  // PNG/JPG — SVG ist für OG-Images unzuverlässig.
+  ogImage: "/opengraph-image",
 
   locales: ["de", "en"],
   defaultLocale: "de",

@@ -69,7 +69,8 @@ musiker15-website/
 │   ├── deploy.yml          ← SSH-Deploy auf Debian
 │   └── ci.yml              ← Lint + Type-Check + Tests + Build
 ├── public/
-│   ├── favicon.ico, og-default.svg, logo.png
+│   ├── favicon.ico, logo.png
+│   ├── og-default.svg      ← Backup (nicht im Layout referenziert)
 │   ├── robots.txt
 │   └── search-index.json   ← Build-Output (gitignored)
 ├── content/
@@ -104,6 +105,7 @@ musiker15-website/
 │   │   ├── search/{page.tsx,search-client.tsx}
 │   │   └── [slug]/page.tsx  ← Catch-All für /about, /faq, /community, /impressum, /datenschutz
 │   ├── app/sitemap.ts, robots.ts, manifest.ts, not-found.tsx
+│   ├── app/opengraph-image.tsx ← 1200×630 PNG via next/og (Satori)
 │   ├── components/
 │   │   ├── layout/{Header,Navbar,MobileMenu,Footer,LocaleSwitcher,Breadcrumbs}.tsx
 │   │   ├── content/{Callout,CodeBlock,DocSidebar,MDXComponents,TableOfContents}.tsx

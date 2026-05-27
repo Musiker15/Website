@@ -245,9 +245,34 @@ Details: Abschnitt „Datenschutz-Audit" in [CLAUDE.md](./CLAUDE.md).
 
 ## 📄 Lizenz
 
-- **Code:** MIT
-- **Inhalte unter `content/`**: CC-BY 4.0
+**Copyright © 2026 MSK Scripts — Alle Rechte vorbehalten.**
 
-Verantwortlich nach § 5 DDG: Moritz Kohm. Volle Details in
+Dieses Projekt steht unter der **MSK Source Available License (MSK-SAL) v1.0** —
+einer proprietären „Source Available"-Lizenz. Der Quellcode ist **einsehbar**,
+aber **nicht frei nutzbar**.
+
+> „Source Available" ≠ „Open Source"
+
+Volltext:
+- [LICENSE.md](LICENSE.md) (English)
+- [LICENSE_DE.md](LICENSE_DE.md) (Deutsch)
+
+Erlaubt (ohne weitere Genehmigung):
+- Lesen und Sichten des Quellcodes
+- Lokales Ausführen zu rein privaten, nicht-kommerziellen Studienzwecken
+- Bug-Reports via GitHub-Issues
+- Pull Requests, die dem Projekt zugutekommen
+
+Untersagt (ohne ausdrückliche schriftliche Genehmigung):
+Kopieren · abgeleitete Werke · öffentlicher Betrieb · kommerzielle Verwertung ·
+Weitergabe · Design-Nachahmung · Reverse Engineering · Entfernen von
+Urheberrechtshinweisen — siehe § 3 der Lizenz für die vollständige Liste.
+
+Für kommerzielle Lizenzen, Kooperationen oder Nutzungen außerhalb des
+gestatteten Rahmens: `info@msk-scripts.de` (Betreff: `MSK License Request`).
+
+---
+
+Verantwortlich nach § 5 DDG für die Website-Inhalte: Moritz Kohm. Volle Details in
 [Impressum](content/pages/de/impressum.md) und
 [Datenschutz](content/pages/de/datenschutz.md).

@@ -35,6 +35,8 @@ on:
       - ".gitignore"
       - ".gitattributes"
       - "LICENSE"
+      - "LICENSE.md"
+      - "LICENSE_DE.md"
       - "deploy/**"           # Server-Configs werden manuell appliziert
       - ".github/**"          # CI-Configs deployen sich nicht selbst …
       - "!.github/workflows/deploy.yml"   # … außer deploy.yml selbst

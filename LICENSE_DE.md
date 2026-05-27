@@ -3,15 +3,13 @@
 
 > **Copyright (c) 2026 MSK Scripts — Alle Rechte vorbehalten.**
 
-Diese Lizenz regelt die Nutzung, den Zugriff und die Weitergabe des gesamten Quellcodes, des Designs, der Grafiken, der Benutzeroberflächen, der Logik und aller sonstigen Bestandteile der folgenden Projekte (nachfolgend „das Projekt"):
+Diese Lizenz regelt die Nutzung, den Zugriff und die Weitergabe sämtlicher
+Inhalte **dieses Repositories** — einschließlich, aber nicht beschränkt auf
+Quellcode, Designs, Grafiken, Benutzeroberflächen, Logik, Konfigurationsdateien,
+Skripte und Assets (nachfolgend „das Projekt").
 
-- MSK Shop/Website
-- MSK Documentation
-- MSK Ticketbot (lediglich das Verify/Transcript System)
-- Musiker15 Website
-- Alle zugehörigen Konfigurationsdateien, Skripte und Assets
-
-Durch den Zugriff auf dieses Repository – ob durch Klonen, Forken, Lesen oder anderweitig – erklärst du dich mit den nachfolgenden Bedingungen einverstanden.
+Durch den Zugriff auf dieses Repository – ob durch Klonen, Forken, Lesen oder
+anderweitig – erklärst Du Dich mit den nachfolgenden Bedingungen einverstanden.
 
 📄 [License (EN)](LICENSE.md) · [License (DE)](LICENSE_DE.md)
 
@@ -23,7 +21,6 @@ Durch den Zugriff auf dieses Repository – ob durch Klonen, Forken, Lesen oder 
 |---|---|
 | **Urheber** | MSK Scripts sowie alle namentlich genannten Beitragenden, die ausdrücklich schriftlich als Urheber anerkannt wurden. |
 | **Das Projekt** | Der gesamte in diesem Repository enthaltene Quellcode, Konfigurationen, Designs, Texte, Grafiken, Datenstrukturen und sonstigen Inhalte. |
-| **Geschützte Teile** | Insbesondere: (a) das visuelle Design, (b) das Verify-System, (c) das Dashboard, (d) die Datenbankstruktur & API-Architektur, (e) alle proprietären Algorithmen und Geschäftslogiken. |
 | **Nutzung** | Jede Form des Zugriffs, Lesens, Kopierens, Ausführens, Modifizierens, Verteilens oder Abgeleiteten. |
 | **Dritte** | Jede natürliche oder juristische Person außer dem Urheber. |
 | **Kommerzielle Nutzung** | Jede Nutzung, die direkt oder indirekt auf finanzielle Gegenleistung, Gewinn oder geschäftliche Vorteile abzielt. |
@@ -32,12 +29,12 @@ Durch den Zugriff auf dieses Repository – ob durch Klonen, Forken, Lesen oder 
 
 ## § 2 — Gewährte Rechte
 
-Vorbehaltlich der Einschränkungen in § 3 gewährt der Urheber dir ein **beschränktes, nicht exklusives, nicht übertragbares, widerrufliches Recht** zu:
+Vorbehaltlich der Einschränkungen in § 3 gewährt der Urheber Dir ein **beschränktes, nicht exklusives, nicht übertragbares, widerrufliches Recht** zu:
 
 - **(a)** den Quellcode zu lesen und zu sichten;
-- **(b)** das Projekt zu rein privaten, nicht-kommerziellen Studienzwecken lokal auf deinem eigenen Gerät auszuführen;
+- **(b)** das Projekt zu rein privaten, nicht-kommerziellen Studienzwecken lokal auf Deinem eigenen Gerät auszuführen;
 - **(c)** Issues (Fehlerberichte) im offiziellen Repository zu melden;
-- **(d)** Pull Requests einzureichen, die ausdrücklich dem Projekt zugutekommen — wobei eingebrachte Beiträge vollständig auf den Urheber übergehen (siehe § 5).
+- **(d)** Pull Requests einzureichen, die ausdrücklich dem Projekt zugutekommen — wobei eingebrachte Beiträge vollständig auf den Urheber übergehen (siehe § 4).
 
 ---
 
@@ -64,7 +61,7 @@ Jede kommerzielle Nutzung, insbesondere:
 Die Weitergabe des Quellcodes, von Binärdateien, Konfigurationen oder sonstiger Bestandteile an Dritte — weder öffentlich noch privat.
 
 ### 3.6 Nachahmung des Designs
-Die bewusste Nachahmung, Imitation oder das Nachbauen des visuellen Designs, der UI-Layouts, Farbwelten, Animationen oder anderer ästhetischer Elemente der Geschützten Teile — auch wenn kein Quellcode übernommen wird.
+Die bewusste Nachahmung, Imitation oder das Nachbauen des visuellen Designs, der UI-Layouts, Farbwelten, Animationen oder anderer ästhetischer Elemente des Projekts — auch wenn kein Quellcode übernommen wird.
 
 ### 3.7 Reverse Engineering
 Das Zurückentwickeln, Dekompilieren oder Analysieren des Projekts mit dem Ziel, die zugrunde liegenden Algorithmen, Strukturen oder Geschäftslogiken für eigene Zwecke zu reproduzieren.
@@ -77,37 +74,17 @@ Das Übertragen, Unterlizenzieren oder Abtreten der durch § 2 gewährten Rechte
 
 ---
 
-## § 4 — Besonderer Schutz der Geschützten Teile
+## § 4 — Beiträge (Contributions)
 
-Die folgenden Bestandteile des Projekts genießen **besonderen Schutz** und dürfen unter keinen Umständen ohne schriftliche Einzelgenehmigung des Urhebers genutzt, kopiert, nachgeahmt oder in Drittprodukte integriert werden:
+Wenn Du einen Beitrag (z. B. Pull Request, Patch, Code-Vorschlag) einreichst:
 
-### 4.1 MSK Verify-System
-Das gesamte Verifikationssystem des MSK Ticketbots, einschließlich Verifikationslogik, Benutzerfluss, Datenverarbeitung, Datenbankstruktur und visueller Darstellung.
-
-### 4.2 MSK Dashboard
-Das administrative Dashboard des MSK Ticketbots, einschließlich aller Ansichten, Steuerungselemente, Datenvisualisierungen, API-Endpunkte und der zugrundeliegenden Architektur.
-
-### 4.3 MSK Shop Design
-Das vollständige visuelle Erscheinungsbild des MSK Shops, einschließlich Produktdarstellung, UI-Komponenten und Animationen.
-
-### 4.4 MSK Website Design
-Das vollständige visuelle Erscheinungsbild der MSK Website, einschließlich Seitenstrukturen, Navigationskonzepte, Typografie und Medieneinsatz.
-
-> ⚠️ Jede Verletzung dieser besonderen Schutzbestimmungen berechtigt den Urheber, unverzüglich rechtliche Schritte einzuleiten und Schadensersatz zu fordern.
+- **(a)** räumst Du dem Urheber unwiderruflich, weltweit, kostenfrei und nicht exklusiv alle Rechte an Deinem Beitrag ein, einschließlich des Rechts zur Nutzung, Modifikation, Veröffentlichung und kommerziellen Verwertung;
+- **(b)** bestätigst Du, dass Du berechtigt bist, diese Rechte einzuräumen, und dass Dein Beitrag keine Rechte Dritter verletzt;
+- **(c)** erwirbst Du durch Deinen Beitrag keine Lizenz an oder Eigentumsrechte am Projekt selbst über die in § 2 beschriebenen Rechte hinaus.
 
 ---
 
-## § 5 — Beiträge (Contributions)
-
-Wenn du einen Beitrag (z. B. Pull Request, Patch, Code-Vorschlag) einreichst:
-
-- **(a)** räumst du dem Urheber unwiderruflich, weltweit, kostenfrei und nicht exklusiv alle Rechte an deinem Beitrag ein, einschließlich des Rechts zur Nutzung, Modifikation, Veröffentlichung und kommerziellen Verwertung;
-- **(b)** bestätigst du, dass du berechtigt bist, diese Rechte einzuräumen, und dass dein Beitrag keine Rechte Dritter verletzt;
-- **(c)** erwirbst du durch deinen Beitrag keine Lizenz an oder Eigentumsrechte am Projekt selbst über die in § 2 beschriebenen Rechte hinaus.
-
----
-
-## § 6 — Haftungsausschluss & Gewährleistung
+## § 5 — Haftungsausschluss & Gewährleistung
 
 > **DAS PROJEKT WIRD „WIE BESEHEN" (AS IS) BEREITGESTELLT**, OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GARANTIE, EINSCHLIESSLICH — ABER NICHT BESCHRÄNKT AUF — GARANTIEN DER MARKTGÄNGIGKEIT, EIGNUNG FÜR EINEN BESTIMMTEN ZWECK ODER NICHTVERLETZUNG VON RECHTEN DRITTER.
 >
@@ -115,23 +92,23 @@ Wenn du einen Beitrag (z. B. Pull Request, Patch, Code-Vorschlag) einreichst:
 
 ---
 
-## § 7 — Lizenzverletzungen & Rechtsdurchsetzung
+## § 6 — Lizenzverletzungen & Rechtsdurchsetzung
 
-- **7.1** Bei Verstoß gegen diese Lizenz erlöschen alle gemäß § 2 gewährten Rechte **automatisch und ohne Vorankündigung**.
-- **7.2** Der Urheber behält sich vor, bei Lizenzverstößen: (a) Unterlassungsansprüche geltend zu machen, (b) Schadensersatz — einschließlich entgangenen Gewinns — zu fordern, (c) die Entfernung verletzender Inhalte von Plattformen zu verlangen, (d) weitere rechtliche Schritte nach geltendem Recht einzuleiten.
-- **7.3** Die Nichtverfolgung eines Verstoßes stellt keinen Verzicht auf das Recht zur späteren Verfolgung dar.
-
----
-
-## § 8 — Anwendbares Recht & Gerichtsstand
-
-- **8.1** Diese Lizenz unterliegt dem Recht der **Bundesrepublik Deutschland** unter Ausschluss des UN-Kaufrechts (CISG).
-- **8.2** Ausschließlicher Gerichtsstand für alle Streitigkeiten ist — soweit gesetzlich zulässig — der Sitz des Urhebers.
-- **8.3** Sollte eine Bestimmung dieser Lizenz unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt **(Salvatorische Klausel)**.
+- **6.1** Bei Verstoß gegen diese Lizenz erlöschen alle gemäß § 2 gewährten Rechte **automatisch und ohne Vorankündigung**.
+- **6.2** Der Urheber behält sich vor, bei Lizenzverstößen: (a) Unterlassungsansprüche geltend zu machen, (b) Schadensersatz — einschließlich entgangenen Gewinns — zu fordern, (c) die Entfernung verletzender Inhalte von Plattformen zu verlangen, (d) weitere rechtliche Schritte nach geltendem Recht einzuleiten.
+- **6.3** Die Nichtverfolgung eines Verstoßes stellt keinen Verzicht auf das Recht zur späteren Verfolgung dar.
 
 ---
 
-## § 9 — Lizenzierungsanfragen
+## § 7 — Anwendbares Recht & Gerichtsstand
+
+- **7.1** Diese Lizenz unterliegt dem Recht der **Bundesrepublik Deutschland** unter Ausschluss des UN-Kaufrechts (CISG).
+- **7.2** Ausschließlicher Gerichtsstand für alle Streitigkeiten ist — soweit gesetzlich zulässig — der Sitz des Urhebers.
+- **7.3** Sollte eine Bestimmung dieser Lizenz unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt **(Salvatorische Klausel)**.
+
+---
+
+## § 8 — Lizenzierungsanfragen
 
 Für kommerzielle Lizenzierungen, Kooperationen, White-Label-Anfragen oder sonstige Nutzungen, die über § 2 hinausgehen:
 
@@ -142,7 +119,7 @@ Anfragen werden in der Regel innerhalb von 7 Werktagen beantwortet.
 
 ---
 
-## § 10 — Änderungen dieser Lizenz
+## § 9 — Änderungen dieser Lizenz
 
 Der Urheber behält sich vor, diese Lizenz jederzeit zu aktualisieren. Die jeweils aktuelle Version ist im Repository unter dem Pfad `LICENSE.md` einsehbar. Für bereits abgeschlossene Nutzungsvereinbarungen gilt die zum Zeitpunkt des Vertragsschlusses gültige Fassung.
 

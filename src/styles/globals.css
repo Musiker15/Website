@@ -156,9 +156,15 @@
     font-size: 0.875em;
     font-weight: 500;
   }
+  /* Tailwind-Typography rendert standardmäßig Backticks um inline-<code>
+     via ::before/::after Pseudo-Elemente. Wir wollen das nicht — der
+     Code-Stil (monospace + grauer Background) ist visuell genug.
+     Cascade-Note: `!important` ist nötig, weil Tailwind Typography v4
+     die Backtick-Regel mit gleicher Specificity, aber später im CSS-
+     Output emittiert. */
   .prose code::before,
   .prose code::after {
-    content: none;
+    content: "" !important;
   }
   .prose pre {
     background-color: var(--color-muted);

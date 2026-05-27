@@ -8,7 +8,10 @@ import { mdxComponents } from "@/components/content/MDXComponents";
 const prettyCodeOptions: PrettyCodeOptions = {
   theme: { dark: "github-dark", light: "github-light" },
   keepBackground: false,
-  defaultLang: { block: "latex", inline: "latex" },
+  // Default-Sprache, falls in einem Code-Fence kein Lang-Tag angegeben ist.
+  // "plaintext" verhindert, dass z.B. eine inline-`info@musiker15.de` als
+  // Code irgendeiner Sprache geparst wird.
+  defaultLang: { block: "plaintext", inline: "plaintext" },
 };
 
 /**

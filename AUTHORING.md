@@ -163,8 +163,8 @@ sudo apt update && sudo apt upgrade -y
 
 ```apache
 <VirtualHost *:443>
-    ServerName www.musiker15.de
-    DocumentRoot /var/www/html/musiker15
+    ServerName www.example.com
+    ProxyPass / http://127.0.0.1:3000/
 </VirtualHost>
 ```
 ````

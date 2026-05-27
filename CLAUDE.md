@@ -69,7 +69,7 @@ musiker15-website/
 │   ├── deploy.yml          ← SSH-Deploy auf Debian
 │   └── ci.yml              ← Lint + Type-Check + Tests + Build
 ├── public/
-│   ├── favicon.svg, og-default.svg, logo.png
+│   ├── favicon.ico, og-default.svg, logo.png
 │   ├── robots.txt
 │   └── search-index.json   ← Build-Output (gitignored)
 ├── content/
@@ -317,19 +317,39 @@ upgrade-insecure-requests
 
 ```
 [Service]
+Type=simple
 User=musiker15
 Group=musiker15
-WorkingDirectory=/opt/musiker15/current
-ExecStart=/usr/bin/node node_modules/next/dist/bin/next start -p 3101
+WorkingDirectory=/opt/musiker15
+ExecStart=/usr/bin/env node_modules/.bin/next start -p 3101 -H 127.0.0.1
+EnvironmentFile=-/opt/musiker15/.env.production
 Environment=NODE_ENV=production
 Environment=PORT=3101
+Environment=HOSTNAME=127.0.0.1
+Environment=NEXT_TELEMETRY_DISABLED=1
 Restart=always
-NoNewPrivileges=yes
+RestartSec=5s
+KillSignal=SIGTERM
+TimeoutStopSec=30s
+LimitNOFILE=65535
+
+# Security-Hardening
+NoNewPrivileges=true
+PrivateTmp=true
 ProtectSystem=strict
-ProtectHome=yes
-PrivateTmp=yes
-SystemCallFilter=@system-service
+ProtectHome=read-only
 ReadWritePaths=/opt/musiker15
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged @resources @mount
 ```
 
 ---
@@ -384,8 +404,24 @@ grep -rE "fonts\.googleapis|fonts\.gstatic|googletagmanager|google-analytics|use
 - **Security-Header Single Source of Truth:** Alle Security-Header in [next.config.ts](next.config.ts), CSP separat mit Nonce in [src/proxy.ts](src/proxy.ts). Apache vHost setzt **keine** eigenen.
 - **App-Routes sind dynamisch** (`ƒ Dynamic` im Build-Output), nicht SSG — bewusster Trade-off für Nonce-CSP.
 - **Inline-`<script>`-Tags** im Layout/in Komponenten brauchen das `nonce`-Prop aus `(await headers()).get("x-nonce")`, sonst blockiert CSP.
+- **Apache vHost-Reihenfolge:** Beim Aktivieren des neuen vHosts darauf achten,
+  dass kein alter vHost (z.B. vom Docusaurus-Setup) dieselbe `ServerName www.musiker15.de`
+  beansprucht. Apache nimmt bei Konflikten den alphabetisch ersten vHost — der
+  alte würde dann mit leerem `DocumentRoot /var/www/html/musiker15/` einen 403
+  zurückgeben. Mit `sudo apache2ctl -S` prüfen, welche Datei für die Domain
+  zuständig ist; ggf. alten vHost via `sudo a2dissite <name>.conf` deaktivieren.
+
+---
+
+## Status
+
+✅ **Live unter [www.musiker15.de](https://www.musiker15.de)** seit 2026-05-27.
+GitHub-Repo: [Musiker15/Website](https://github.com/Musiker15/Website).
+Apache Reverse-Proxy + systemd-Service laufen, GitHub-Actions-Deploy ist
+betriebsbereit.
 
 ---
 
 *Erstellt: 2026-05-27 — Migration von Docusaurus auf Next.js 16 + MDX,
-basierend auf der KOMA-Script-Homepage als Vorlage.*
+basierend auf der KOMA-Script-Homepage als Vorlage. Site nach Aktivierung
+des neuen Apache-vHosts (und Deaktivierung des alten Docusaurus-vHosts) live.*

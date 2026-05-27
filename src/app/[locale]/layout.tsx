@@ -86,7 +86,7 @@ export async function generateMetadata({
       siteName: siteConfig.name,
       title,
       description,
-      images: [{ url: siteConfig.ogImage, width: 1200, height: 480, alt: siteConfig.name }],
+      images: [{ url: siteConfig.ogImage, width: 900, height: 360, alt: siteConfig.name }],
     },
     twitter: {
       card: "summary_large_image",

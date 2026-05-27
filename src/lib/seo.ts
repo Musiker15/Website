@@ -53,7 +53,7 @@ export function buildMetadata(params: BuildMetadataParams): Metadata {
       siteName: siteConfig.name,
       title,
       description,
-      images: [{ url: ogImage, width: 1200, height: 480, alt: imageAlt ?? title }],
+      images: [{ url: ogImage, width: 900, height: 360, alt: imageAlt ?? title }],
       ...(type === "article" && {
         publishedTime: publishedTime?.toISOString(),
         modifiedTime: modifiedTime?.toISOString(),

@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 /**
- * Dynamisches OpenGraph-Image — 1200×600 PNG.
+ * Dynamisches OpenGraph-Image — 900×360 PNG.
  *
  * Wird von Next.js automatisch unter `/opengraph-image` ausgeliefert und in
  * die HTML-Metadata jeder Seite eingebunden, sofern nicht eine speziellere
@@ -13,33 +13,38 @@ import path from "node:path";
  * Discord, Facebook, WhatsApp und Twitter verlangen PNG/JPG. Diese Route
  * generiert das PNG zur Build-Zeit via `next/og` (Satori).
  *
- * Schriftart: **Geist**. Wird von `next/og` mit ausgeliefert
- * (`node_modules/next/dist/compiled/@vercel/og/Geist-Regular.ttf`). Wir
- * registrieren sie explizit für Regular UND Bold (Satori synthesiert Bold
- * aus Regular) — sonst greift Satori auf eine generische System-Font zurück,
- * die "AI-generiert" wirkt.
+ * Schriftart: **Geist** (Regular + Bold als echte TTF aus dem `geist`-Paket
+ * von Vercel). Wichtig: WEDER Geist-Regular ALLEINE registrieren NOCH Bold
+ * "synthesizen" lassen — sonst rendert Satori den 700er-Weight als künstlich
+ * verfetteten Regular, was breit/verzerrt wirkt.
  *
- * Format: 1200×480 (2.5:1 — bewusst kompakter als der 1200×630-OG-Standard,
- * damit der Embed nicht leer-räumig wirkt. Twitter, Facebook und Discord
- * crop OG-Images sowieso flexibel; ein bisschen kleiner als der Standard
- * ist unproblematisch.)
+ * Format: 900×360 (≈ 2.5:1) — kompakt, der Block (Logo + Text) ist horizontal
+ * zentriert (`justifyContent: center`), sodass der Freiraum links und rechts
+ * vom Inhalt symmetrisch ist.
  */
 
-export const size = { width: 1200, height: 480 };
+export const size = { width: 900, height: 360 };
 export const contentType = "image/png";
 export const alt = "Musiker15 — Tutorials & Guides";
 
 export default async function Image() {
-  // Logo + Geist-Font lokal als Buffer laden
+  // Logo lokal als data-URL einbetten
   const logoBuffer = await readFile(
     path.join(process.cwd(), "public/logo.png"),
   );
   const logoDataUrl = `data:image/png;base64,${logoBuffer.toString("base64")}`;
 
+  // Echtes Geist (Regular + Bold) — aus dem `geist`-Paket
   const geistRegular = await readFile(
     path.join(
       process.cwd(),
-      "node_modules/next/dist/compiled/@vercel/og/Geist-Regular.ttf",
+      "node_modules/geist/dist/fonts/geist-sans/Geist-Regular.ttf",
+    ),
+  );
+  const geistBold = await readFile(
+    path.join(
+      process.cwd(),
+      "node_modules/geist/dist/fonts/geist-sans/Geist-Bold.ttf",
     ),
   );
 
@@ -52,62 +57,63 @@ export default async function Image() {
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "flex-start",
-          padding: "0 90px",
+          // Block (Logo + Text) horizontal zentrieren → Freiraum links und
+          // rechts symmetrisch.
+          justifyContent: "center",
           background:
             "linear-gradient(135deg, #0a1638 0%, #1a3a8a 100%)",
           color: "#ffffff",
           fontFamily: "Geist",
         }}
       >
-        {/* Subtiler Glow hinter dem Logo */}
+        {/* Logo-Spalte (mit subtilem Glow direkt am Logo dahinter) */}
         <div
           style={{
-            position: "absolute",
-            top: 100,
-            left: 60,
+            display: "flex",
+            position: "relative",
             width: 280,
             height: 280,
-            background:
-              "radial-gradient(circle, rgba(59,130,246,0.32) 0%, rgba(59,130,246,0) 70%)",
-            display: "flex",
-          }}
-        />
-
-        {/* Logo-Spalte */}
-        <div
-          style={{
-            display: "flex",
-            width: 220,
-            height: 220,
-            marginRight: 56,
+            marginRight: 36,
             flexShrink: 0,
-            zIndex: 1,
           }}
         >
+          {/* Glow */}
+          <div
+            style={{
+              position: "absolute",
+              top: -40,
+              left: -40,
+              width: 360,
+              height: 360,
+              background:
+                "radial-gradient(circle, rgba(59,130,246,0.32) 0%, rgba(59,130,246,0) 70%)",
+              display: "flex",
+            }}
+          />
+          {/* M-Logo */}
           <img
             src={logoDataUrl}
             alt=""
-            width={220}
-            height={220}
-            style={{ objectFit: "contain" }}
+            width={280}
+            height={280}
+            style={{ objectFit: "contain", position: "relative" }}
           />
         </div>
 
-        {/* Text-Spalte */}
+        {/* Text-Spalte — alle Children am linken Rand (alignItems: flex-start) */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            zIndex: 1,
+            alignItems: "flex-start",
           }}
         >
           <div
             style={{
-              fontSize: 96,
+              display: "flex",
+              fontSize: 104,
               fontWeight: 700,
-              letterSpacing: "-3px",
               lineHeight: 1,
             }}
           >
@@ -115,30 +121,33 @@ export default async function Image() {
           </div>
           <div
             style={{
-              fontSize: 36,
-              marginTop: 14,
+              display: "flex",
+              fontSize: 38,
+              marginTop: 12,
               color: "#cbd5e1",
-              letterSpacing: "-0.5px",
+              fontWeight: 400,
             }}
           >
             Tutorials &amp; Guides
           </div>
           <div
             style={{
-              fontSize: 22,
-              marginTop: 36,
-              color: "#94a3b8",
               display: "flex",
+              fontSize: 24,
+              marginTop: 32,
+              color: "#94a3b8",
+              fontWeight: 400,
             }}
           >
             www.musiker15.de
           </div>
           <div
             style={{
-              fontSize: 18,
-              marginTop: 6,
-              color: "#64748b",
               display: "flex",
+              fontSize: 19,
+              marginTop: 4,
+              color: "#64748b",
+              fontWeight: 400,
             }}
           >
             Linux · Debian · Self-Hosting
@@ -157,7 +166,7 @@ export default async function Image() {
         },
         {
           name: "Geist",
-          data: geistRegular,
+          data: geistBold,
           weight: 700,
           style: "normal",
         },

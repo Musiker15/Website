@@ -7,10 +7,10 @@ toc: false
 
 ## Information according to § 5 DDG
 
-**Moritz Kohm**
-c/o Impressumservice Dein-Impressum
-Stettiner Str. 41
-35410 Hungen
+**Moritz Kohm**  
+c/o Impressumservice Dein-Impressum  
+Stettiner Str. 41  
+35410 Hungen  
 Germany
 
 ## Contact
@@ -19,10 +19,10 @@ Email: `info@musiker15.de`
 
 ## Responsible for content according to § 18 para. 2 MStV
 
-**Moritz Kohm**
-c/o Impressumservice Dein-Impressum
-Stettiner Str. 41
-35410 Hungen
+**Moritz Kohm**  
+c/o Impressumservice Dein-Impressum  
+Stettiner Str. 41  
+35410 Hungen  
 Germany
 
 ## Disclaimer

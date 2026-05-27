@@ -32,8 +32,8 @@ contact the operator for any further questions.
 
 The contents of this website are hosted with the following provider:
 
-**netcup GmbH**
-Daimlerstraße 25
+**netcup GmbH**  
+Daimlerstraße 25  
 D-76185 Karlsruhe, Germany
 
 When you visit this website, netcup automatically collects the following
@@ -72,10 +72,10 @@ with the statutory data protection regulations and this privacy policy.
 
 The party responsible for data processing on this website is:
 
-**Moritz Kohm**
-c/o Impressumservice Dein-Impressum
-Stettiner Str. 41
-35410 Hungen
+**Moritz Kohm**  
+c/o Impressumservice Dein-Impressum  
+Stettiner Str. 41  
+35410 Hungen  
 Germany
 
 **Contact:**
@@ -150,11 +150,11 @@ In the event of violations of the GDPR, data subjects have the right to
 lodge a complaint with a supervisory authority. The supervisory authority
 responsible for the operator is:
 
-**State Commissioner for Data Protection and Freedom of Information Baden-Württemberg**
-Lautenschlagerstraße 20
-70173 Stuttgart, Germany
-Phone: +49 711 615541-0
-Email: `poststelle@lfdi.bwl.de`
+**State Commissioner for Data Protection and Freedom of Information Baden-Württemberg**  
+Lautenschlagerstraße 20  
+70173 Stuttgart, Germany  
+Phone: +49 711 615541-0  
+Email: `poststelle@lfdi.bwl.de`  
 Web: [baden-wuerttemberg.datenschutz.de](https://www.baden-wuerttemberg.datenschutz.de)
 
 ### SSL / TLS encryption

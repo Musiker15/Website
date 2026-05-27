@@ -34,8 +34,8 @@ weiteren Fragen kannst Du Dich jederzeit an den Betreiber wenden.
 
 Die Inhalte dieser Website werden bei folgendem Anbieter gehostet:
 
-**netcup GmbH**
-Daimlerstraße 25
+**netcup GmbH**  
+Daimlerstraße 25  
 D-76185 Karlsruhe
 
 Wenn Du diese Website besuchst, erfasst netcup als Auftragsverarbeiter in
@@ -76,9 +76,9 @@ behandelt.
 
 Verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:
 
-**Moritz Kohm**
-c/o Impressumservice Dein-Impressum
-Stettiner Str. 41
+**Moritz Kohm**  
+c/o Impressumservice Dein-Impressum  
+Stettiner Str. 41  
 35410 Hungen
 
 **Kontakt:**
@@ -157,12 +157,12 @@ Im Falle von Verstößen gegen die DSGVO steht den Betroffenen ein
 Beschwerderecht bei einer Aufsichtsbehörde zu. Für den Betreiber
 zuständige Aufsichts­behörde ist:
 
-**Der Landesbeauftragte für den Datenschutz und die Informations­freiheit Baden-Württemberg**
-Lautenschlagerstraße 20
-70173 Stuttgart
-Telefon: +49 711 615541-0
-E-Mail: `poststelle@lfdi.bwl.de`
-Web: [baden-wuerttemberg.datenschutz.de](https://www.baden-wuerttemberg.datenschutz.de)
+**Der Landesbeauftragte für den Datenschutz und die Informations­freiheit Baden-Württemberg**  
+Lautenschlagerstraße 20  
+70173 Stuttgart  
+Telefon: +49 711 615541-0  
+E-Mail: `poststelle@lfdi.bwl.de`  
+Web: [baden-wuerttemberg.datenschutz.de](https://www.baden-wuerttemberg.datenschutz.de)  
 
 ### SSL- bzw. TLS-Verschlüsselung
 

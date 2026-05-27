@@ -23,7 +23,7 @@ import { NavigationConfigSchema, type NavigationConfig } from "@/types/config";
 const config = {
   primary: [
     {
-      label: { de: "Start", en: "Home" },
+      label: { de: "Home", en: "Home" },
       href: "/",
     },
     {
@@ -53,7 +53,7 @@ const config = {
       href: "/news",
     },
     {
-      label: "FAQ",
+      label: { de: "FAQ", en: "FAQ" },
       href: "/faq",
     },
     {

@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 /**
- * Dynamisches OpenGraph-Image — 1200×630 PNG.
+ * Dynamisches OpenGraph-Image — 1200×600 PNG.
  *
  * Wird von Next.js automatisch unter `/opengraph-image` ausgeliefert und in
  * die HTML-Metadata jeder Seite eingebunden, sofern nicht eine speziellere
@@ -12,17 +12,36 @@ import path from "node:path";
  * Hintergrund: SVG ist als OG-Image-Format unzuverlässig — Crawler wie
  * Discord, Facebook, WhatsApp und Twitter verlangen PNG/JPG. Diese Route
  * generiert das PNG zur Build-Zeit via `next/og` (Satori).
+ *
+ * Schriftart: **Geist**. Wird von `next/og` mit ausgeliefert
+ * (`node_modules/next/dist/compiled/@vercel/og/Geist-Regular.ttf`). Wir
+ * registrieren sie explizit für Regular UND Bold (Satori synthesiert Bold
+ * aus Regular) — sonst greift Satori auf eine generische System-Font zurück,
+ * die "AI-generiert" wirkt.
+ *
+ * Format: 1200×480 (2.5:1 — bewusst kompakter als der 1200×630-OG-Standard,
+ * damit der Embed nicht leer-räumig wirkt. Twitter, Facebook und Discord
+ * crop OG-Images sowieso flexibel; ein bisschen kleiner als der Standard
+ * ist unproblematisch.)
  */
 
-export const size = { width: 1200, height: 630 };
+export const size = { width: 1200, height: 480 };
 export const contentType = "image/png";
 export const alt = "Musiker15 — Tutorials & Guides";
 
 export default async function Image() {
-  // Logo lokal lesen und als data-URL einbetten, damit Satori es ohne
-  // Netzwerk-Roundtrip rendert.
-  const logoBuffer = await readFile(path.join(process.cwd(), "public/logo.png"));
+  // Logo + Geist-Font lokal als Buffer laden
+  const logoBuffer = await readFile(
+    path.join(process.cwd(), "public/logo.png"),
+  );
   const logoDataUrl = `data:image/png;base64,${logoBuffer.toString("base64")}`;
+
+  const geistRegular = await readFile(
+    path.join(
+      process.cwd(),
+      "node_modules/next/dist/compiled/@vercel/og/Geist-Regular.ttf",
+    ),
+  );
 
   return new ImageResponse(
     (
@@ -33,23 +52,24 @@ export default async function Image() {
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          padding: "0 80px",
+          justifyContent: "flex-start",
+          padding: "0 90px",
           background:
-            "linear-gradient(180deg, #0a1638 0%, #1a3a8a 100%)",
+            "linear-gradient(135deg, #0a1638 0%, #1a3a8a 100%)",
           color: "#ffffff",
-          fontFamily: "system-ui, sans-serif",
+          fontFamily: "Geist",
         }}
       >
-        {/* Subtiler Glow hinter dem Logo (radial-gradient via SVG-Background) */}
+        {/* Subtiler Glow hinter dem Logo */}
         <div
           style={{
             position: "absolute",
-            top: 130,
-            left: 50,
-            width: 380,
-            height: 380,
+            top: 100,
+            left: 60,
+            width: 280,
+            height: 280,
             background:
-              "radial-gradient(circle, rgba(59,130,246,0.35) 0%, rgba(59,130,246,0) 70%)",
+              "radial-gradient(circle, rgba(59,130,246,0.32) 0%, rgba(59,130,246,0) 70%)",
             display: "flex",
           }}
         />
@@ -58,9 +78,9 @@ export default async function Image() {
         <div
           style={{
             display: "flex",
-            width: 300,
-            height: 300,
-            marginRight: 70,
+            width: 220,
+            height: 220,
+            marginRight: 56,
             flexShrink: 0,
             zIndex: 1,
           }}
@@ -68,8 +88,8 @@ export default async function Image() {
           <img
             src={logoDataUrl}
             alt=""
-            width={300}
-            height={300}
+            width={220}
+            height={220}
             style={{ objectFit: "contain" }}
           />
         </div>
@@ -85,9 +105,9 @@ export default async function Image() {
         >
           <div
             style={{
-              fontSize: 104,
+              fontSize: 96,
               fontWeight: 700,
-              letterSpacing: "-2px",
+              letterSpacing: "-3px",
               lineHeight: 1,
             }}
           >
@@ -95,9 +115,10 @@ export default async function Image() {
           </div>
           <div
             style={{
-              fontSize: 38,
-              marginTop: 18,
+              fontSize: 36,
+              marginTop: 14,
               color: "#cbd5e1",
+              letterSpacing: "-0.5px",
             }}
           >
             Tutorials &amp; Guides
@@ -105,9 +126,8 @@ export default async function Image() {
           <div
             style={{
               fontSize: 22,
-              marginTop: 60,
+              marginTop: 36,
               color: "#94a3b8",
-              fontFamily: "monospace",
               display: "flex",
             }}
           >
@@ -116,9 +136,8 @@ export default async function Image() {
           <div
             style={{
               fontSize: 18,
-              marginTop: 8,
+              marginTop: 6,
               color: "#64748b",
-              fontFamily: "monospace",
               display: "flex",
             }}
           >
@@ -127,6 +146,22 @@ export default async function Image() {
         </div>
       </div>
     ),
-    { ...size },
+    {
+      ...size,
+      fonts: [
+        {
+          name: "Geist",
+          data: geistRegular,
+          weight: 400,
+          style: "normal",
+        },
+        {
+          name: "Geist",
+          data: geistRegular,
+          weight: 700,
+          style: "normal",
+        },
+      ],
+    },
   );
 }

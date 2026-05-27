@@ -107,9 +107,21 @@ function NavbarItem({ item, locale }: { item: NavItem; locale: Locale }) {
   );
 }
 
+/**
+ * Bestimmt, ob ein Nav-Link aktuell aktiv ist.
+ *
+ * - **Home/Locale-Root** (z. B. `/de`, `/en`): nur aktiv, wenn der Pfad exakt
+ *   diesem Root entspricht. Sonst wäre er auf jeder Unterseite mit-aktiv,
+ *   weil `"/de/community".startsWith("/de")` true ist.
+ * - **Sub-Routen** (z. B. `/de/docs`): aktiv, wenn der Pfad gleich ist oder
+ *   mit `<href>/` weitergeht. So matcht `/de/docs` auch `/de/docs/certbot`,
+ *   aber `/de/news` matcht NICHT `/de/news-foo` (Wort-Boundary).
+ */
 function isActive(pathname: string, href: string): boolean {
-  if (href === `/${pathname.split("/")[1] ?? ""}` && pathname.split("/").length <= 2) {
+  // Locale-Root erkennen — zwei-Zeichen-Locale wie /de oder /en
+  const isLocaleRoot = /^\/[a-z]{2}$/.test(href);
+  if (isLocaleRoot) {
     return pathname === href;
   }
-  return pathname.startsWith(href);
+  return pathname === href || pathname.startsWith(`${href}/`);
 }

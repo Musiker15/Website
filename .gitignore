@@ -67,7 +67,6 @@ public/sitemap.xml
 *.swo
 *~
 .claude/
-CLAUDE.md
 *.bak
 *.orig
 *.tmp

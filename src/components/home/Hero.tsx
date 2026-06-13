@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, Github } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
+import { GitHubIcon } from "@/components/ui/BrandIcons";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
@@ -55,7 +56,7 @@ export function Hero({ locale }: HeroProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Github className="h-4 w-4" />
+                  <GitHubIcon className="h-4 w-4" />
                   {t("heroCtaSecondary")}
                 </Link>
               </Button>

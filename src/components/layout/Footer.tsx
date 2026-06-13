@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Github, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import { GitHubIcon } from "@/components/ui/BrandIcons";
 import { siteConfig } from "@/config/site.config";
 import { footerConfig } from "@/config/footer.config";
 import { cn, t, isExternal } from "@/lib/utils";
@@ -89,7 +90,7 @@ export function Footer({ locale }: FooterProps) {
 }
 
 function SocialIcon({ platform }: { platform: string }) {
-  if (platform === "github") return <Github className="h-4 w-4" />;
+  if (platform === "github") return <GitHubIcon className="h-4 w-4" />;
   if (platform === "discord") {
     // Canonical Discord-Marke (simpleicons.org, MIT). Wichtig: alle Arcs/Curves
     // als RELATIVE Kommandos (Kleinbuchstaben) — der vorherige Pfad hatte ein

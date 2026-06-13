@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Github } from "lucide-react";
+import { GitHubIcon } from "@/components/ui/BrandIcons";
 import { Navbar } from "./Navbar";
 import { MobileMenu } from "./MobileMenu";
 import { LocaleSwitcher } from "./LocaleSwitcher";
@@ -16,7 +16,7 @@ interface HeaderProps {
 }
 
 const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
-  github: Github,
+  github: GitHubIcon,
 };
 
 export function Header({ locale }: HeaderProps) {

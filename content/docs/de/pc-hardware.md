@@ -5,6 +5,8 @@ order: 10
 tags: ["hardware"]
 ---
 
+*Stand: Juni 2026*
+
 ## Hardware
 
 **Neuwert:** ca. 3.600 €

@@ -1,6 +1,6 @@
 ---
 title: "Sinusbot"
-description: "Musik-Bot für TeamSpeak: Sinusbot installieren, konfigurieren und updaten."
+description: "Music bot for TeamSpeak: install, configure and update Sinusbot."
 order: 6
 tags: ["debian", "sinusbot", "teamspeak"]
 ---
@@ -14,8 +14,8 @@ tags: ["debian", "sinusbot", "teamspeak"]
 ---
 
 <Callout type="info">
-Sinusbot wird seit Jahren nicht mehr aktiv weiterentwickelt. Diese Anleitung
-ist daher eher für Bestandssysteme bzw. zu Archivzwecken gedacht.
+Sinusbot hasn't been actively maintained for years. This guide is therefore
+intended mainly for existing systems or for archival purposes.
 </Callout>
 
 ## Installation
@@ -28,10 +28,9 @@ apt-get install -y x11vnc xvfb libxcursor1 ca-certificates curl bzip2 \
 update-ca-certificates
 ```
 
-Der nächste Schritt ist optional und muss nur installiert werden, wenn die
-YouTube-Funktion genutzt werden möchte. Statt des eingestellten `youtube-dl`
-(die Domain `yt-dl.org` ist offline) nutzen wir den aktiv gepflegten
-Nachfolger **`yt-dlp`**:
+The next step is optional and only needs to be installed if you want to use
+the YouTube feature. Instead of the deprecated `youtube-dl` (the domain
+`yt-dl.org` is offline) we use the actively maintained successor **`yt-dlp`**:
 
 ```bash
 apt-get install -y python3
@@ -40,19 +39,19 @@ chmod a+rx /usr/local/bin/yt-dlp
 ```
 
 <Callout type="info">
-Kein `chown` auf den `sinusbot`-Benutzer nötig — durch `chmod a+rx` darf jeder
-Benutzer (also auch `sinusbot`) die Datei ausführen. Den Benutzer selbst legen
-wir erst im nächsten Schritt an.
+No `chown` to the `sinusbot` user needed — thanks to `chmod a+rx` any user
+(including `sinusbot`) may execute the file. We create the user itself in the
+next step.
 </Callout>
 
-Nach dem erstmaligen Start des Sinusbot muss in der `config.ini` dann
-folgendes ersetzt werden. Der Sinusbot muss danach neugestartet werden:
+After the first start of Sinusbot, the following has to be replaced in the
+`config.ini`. Sinusbot then has to be restarted:
 
 ```ini
 YoutubeDLPath = "/usr/local/bin/yt-dlp"
 ```
 
-Nun kann mit der Installation fortgefahren werden:
+Now we can continue with the installation:
 
 ```bash
 adduser --disabled-login sinusbot
@@ -77,24 +76,23 @@ screen -S sinusbot
 su sinusbot && cd /opt/sinusbot/sinusbot
 ```
 
-Mit dem Befehl `su sinusbot` loggen wir uns in den `sinusbot`-Benutzer ein,
-da wir nicht mit dem `root`-Benutzer starten wollen.
+With the command `su sinusbot` we log in to the `sinusbot` user, since we
+don't want to start as the `root` user.
 
-Zum Verlassen des Screens einfach `Strg+A+D` drücken und man ist wieder in
-der normalen Server-Konsole.
+To leave the screen, simply press `Ctrl+A+D` and you're back in the normal
+server console.
 
-Um wieder in den Screen zu kommen und den Bot zu stoppen:
+To get back into the screen and stop the bot:
 
 ```bash
-screen -r sinusbot   # Betritt den Screen
-# Strg+C (2x drücken stoppt den Sinusbot)
+screen -r sinusbot   # Enters the screen
+# Ctrl+C (press twice to stop Sinusbot)
 ```
 
-Um das Webinterface des Sinusbots aufzurufen, einfach folgendes im Browser
-eingeben:
+To open the Sinusbot web interface, simply enter the following in the browser:
 
 ```
-http://www.deine-domain.de:8087
+http://www.your-domain.com:8087
 ```
 
 ---
@@ -114,7 +112,7 @@ chown -R sinusbot:sinusbot /opt/sinusbot
 ### TeamSpeak Client Update
 
 <Callout type="info">
-Aktuell wird leider nur bis maximal Client-Version 3.5.3 unterstützt.
+Unfortunately only up to client version 3.5.3 is currently supported.
 </Callout>
 
 ```bash
@@ -124,20 +122,20 @@ chmod +x TeamSpeak3-Client-linux_amd64-3.5.3.run
 ./TeamSpeak3-Client-linux_amd64-3.5.3.run
 ```
 
-Jetzt müssen die neuen Nutzungsbedingungen akzeptiert werden. Als nächstes
-müssen ein Ordner und eine Datei gelöscht werden:
+Now the new terms of use have to be accepted. Next, a folder and a file have to
+be deleted:
 
 ```bash
 rm -rf data/ts3
 rm TeamSpeak3-Client-linux_amd64/xcbglintegrations/libqxcb-glx-integration.so
 ```
 
-Jetzt müssen wir das TeamSpeak-Client-Plugin wieder kopieren, damit Sinusbot
-sich mit dem TeamSpeak-Client verbindet, und wieder passende Rechte vergeben:
+Now we have to copy the TeamSpeak client plugin again so that Sinusbot
+connects to the TeamSpeak client, and set the appropriate permissions again:
 
 ```bash
 cp plugin/libsoundbot_plugin.so TeamSpeak3-Client-linux_amd64/plugins/
 chown -R sinusbot:sinusbot /opt/sinusbot
 ```
 
-Jetzt kann Sinusbot wieder ganz normal gestartet werden.
+Now Sinusbot can be started again as usual.

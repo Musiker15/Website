@@ -10,6 +10,13 @@ tags: ["debian", "teamspeak"]
 Wir installieren nun einen TeamSpeak 3 Server manuell, ohne irgendwelche
 Installer-Scripte.
 
+<Callout type="info">
+Die hier verwendete Version `3.13.7` war zum Zeitpunkt der Anleitung aktuell.
+Die jeweils neueste Version findest Du unter
+[files.teamspeak-services.com/releases/server](https://files.teamspeak-services.com/releases/server/)
+— Versionsnummer in den Befehlen entsprechend anpassen.
+</Callout>
+
 ```bash
 adduser --disabled-login ts3
 cd /home/ts3/
@@ -27,17 +34,36 @@ Mit dem Befehl `su ts3` loggen wir uns in den `ts3`-Benutzer ein, da wir
 nicht mit dem `root`-Benutzer einen Server starten wollen.
 
 Ich empfehle außerdem, den Query-Port unseres TeamSpeak-Servers zu ändern.
-Dazu müssen wir im Startbefehl einfach `query_port=PORT` eingeben. `PORT`
-ist in diesem Fall der neue Query-Port. Das müssen wir bei jedem Start so
-ausführen.
+Dazu kann man ihn entweder beim Start als Parameter `query_port=PORT`
+mitgeben — oder, dauerhaft und ohne ihn jedes Mal angeben zu müssen, fest in
+einer `ts3server.ini` hinterlegen.
 
-**Beispiel:** `/home/ts3/teamspeak3-server_linux_amd64/ts3server_startscript.sh start query_port=12345`
+**Variante 1 — pro Start (temporär):**
+
+```bash
+/home/ts3/teamspeak3-server_linux_amd64/ts3server_startscript.sh start query_port=12345
+```
+
+**Variante 2 — dauerhaft über die `ts3server.ini`** (im Server-Verzeichnis
+anlegen, der Startscript liest sie automatisch):
+
+```ini
+query_port=12345
+```
 
 <Callout type="warning">
 **Wichtig:** Admin Server Query Login und den Token kopieren!
 </Callout>
 
 **Kompletter Pfad:** `/home/ts3/teamspeak3-server_linux_amd64/ts3server_startscript.sh {start/stop/restart}`
+
+<Callout type="tip">
+Für den dauerhaften Betrieb (Autostart beim Booten, sauberes Start/Stop)
+empfiehlt sich ein **systemd-Service** statt des manuellen Starts. Eine Unit
+unter `/etc/systemd/system/ts3server.service` mit `User=ts3` und
+`ExecStart=/home/ts3/teamspeak3-server_linux_amd64/ts3server_startscript.sh start`
+(Type `forking`) erledigt das zuverlässig.
+</Callout>
 
 ---
 

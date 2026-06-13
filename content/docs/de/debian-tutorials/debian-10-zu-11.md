@@ -9,6 +9,14 @@ In diesem Tutorial erkläre ich Schritt für Schritt wie man von Debian 10
 auf Debian 11 updaten kann. Es werden natürlich keine Daten verloren gehen
 und man kann das System ganz normal wie vorher weiter verwenden.
 
+<Callout type="info">
+Debian 11 (Bullseye) ist inzwischen *oldstable*. Aktuell sind Debian 12
+(Bookworm) und Debian 13 (Trixie). Das Prinzip eines Major-Upgrades bleibt
+identisch — man wiederholt die Schritte einfach für jede Version
+(10 → 11 → 12 → 13), immer nur einen Versionssprung auf einmal und mit den
+jeweils passenden Repository-Namen.
+</Callout>
+
 Als erstes prüfen wir nochmal unsere Version:
 
 ```bash
@@ -48,10 +56,15 @@ deb http://ftp.debian.org/debian bullseye-backports main contrib non-free
 `/etc/apt/sources.list.d/` zu finden.
 </Callout>
 
-Nachdem wir alles geändert haben, können wir nun alle Pakete aktualisieren:
+Nachdem wir alles geändert haben, können wir nun alle Pakete aktualisieren.
+Die Debian-Release-Notes empfehlen für ein Major-Upgrade einen zweistufigen
+Ablauf: erst ein „minimales" Upgrade (ohne neue Pakete), dann das volle
+Upgrade. Das reduziert das Risiko von Konflikten:
 
 ```bash
-apt update && apt full-upgrade -y
+apt update
+apt upgrade --without-new-pkgs -y
+apt full-upgrade -y
 ```
 
 Das kann nun eine Zeit in Anspruch nehmen. Sobald das ganze durchgelaufen

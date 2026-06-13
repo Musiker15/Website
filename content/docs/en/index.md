@@ -7,12 +7,6 @@ order: 1
 Welcome to the tutorials section! Here you'll find a collection of guides
 on Linux/Debian, server setup, self-hosting and my personal hardware setup.
 
-<Callout type="info">
-Most tutorials are currently only available in German. If you're interested in
-an English translation, feel free to open an issue on
-[GitHub](https://github.com/Musiker15/Website/issues).
-</Callout>
-
 ## Social Media &amp; Gaming
 
 | Platform | Name |

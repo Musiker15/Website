@@ -5,24 +5,6 @@ order: 2
 tags: ["debian", "apache", "php", "mariadb", "phpmyadmin"]
 ---
 
-## PHP-Version wechseln
-
-```bash
-update-alternatives --config php
-```
-
-## Update von PHP 7.4 auf PHP 8.3
-
-Falls Du ein Upgrade von PHP 7.4 auf PHP 8.3 durchführen möchtest, mache
-bitte folgendes nach der Installation von PHP 8.3:
-
-```bash
-a2dismod php7.4
-a2enmod php8.3
-systemctl restart apache2
-apt-get purge -y php7.*
-```
-
 ## Installation von Apache 2, PHP 8.3 und MariaDB
 
 ```bash
@@ -39,7 +21,7 @@ apt update
 apt install apache2 -y
 
 # Install PHP 8.3 packages
-apt install php8.3 php8.3-common php8.3-cli php8.3-{bz2,curl,mbstring,intl}
+apt install php8.3 php8.3-common php8.3-cli php8.3-{bz2,curl,mbstring,intl} -y
 apt install php8.3-mysql php8.3-opcache php8.3-xml php8.3-xsl php8.3-zip php8.3-apcu -y
 
 # Install MySQL/MariaDB packages
@@ -51,6 +33,27 @@ apt install mariadb-server mariadb-client -y
 mysql_secure_installation
 ```
 
+## PHP-Version verwalten
+
+Die aktive PHP-CLI-Version lässt sich jederzeit umstellen:
+
+```bash
+update-alternatives --config php
+```
+
+### Upgrade von PHP 7.4 auf PHP 8.3
+
+Falls Du von einer älteren PHP-Version (z.B. 7.4) kommst, deaktivierst Du nach
+der Installation von PHP 8.3 das alte Apache-Modul und räumst die alten Pakete
+auf:
+
+```bash
+a2dismod php7.4
+a2enmod php8.3
+systemctl restart apache2
+apt-get purge -y php7.*
+```
+
 ## Automatische Installation von phpMyAdmin
 
 <Callout type="tip">
@@ -59,9 +62,8 @@ Ich empfehle die [manuelle Installation](#manuelle-installation-von-phpmyadmin).
 
 Es kann sein, dass das Paket nicht gefunden wird. Wenn das der Fall sein
 sollte, muss die manuelle Installation durchgeführt werden. Es kann außerdem
-sein, dass das phpMyAdmin-Paket nicht das aktuellste ist. Der Vorteil ist
-jedoch, dass man `apt update && apt upgrade -y` benötigt, um das ganze zu
-aktualisieren.
+sein, dass das phpMyAdmin-Paket nicht das aktuellste ist. Der Vorteil ist aber,
+dass man es bequem über `apt update && apt upgrade -y` mit aktuell hält.
 
 ```bash
 apt install phpmyadmin
@@ -78,11 +80,13 @@ MariaDB-Servers.
 Sobald wir das ganze mit ENTER bestätigt haben, wurde phpMyAdmin nun
 installiert. Man kann nun versuchen, die Seite mit
 `www.deine-domain.de/phpmyadmin` aufzurufen. Falls das allerdings nicht
-klappt, müssen wir noch zwei Befehle eingeben:
+klappt, binden wir die mitgelieferte Apache-Konfiguration sauber über
+`conf-available` ein (statt sie an `apache2.conf` anzuhängen):
 
 ```bash
-echo Include /etc/phpmyadmin/apache.conf >> /etc/apache2/apache2.conf
-/etc/init.d/apache2 restart
+ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
+a2enconf phpmyadmin
+systemctl reload apache2
 ```
 
 Jetzt sollte phpMyAdmin problemlos aufrufbar sein.
@@ -141,6 +145,17 @@ mkdir /usr/share/phpmyadmin/tmp/
 chown -R www-data:www-data /usr/share/phpmyadmin/tmp/
 ```
 
+Außerdem braucht phpMyAdmin eine eigene Konfigurationsdatei mit einem
+zufälligen `blowfish_secret` (32 Zeichen, für die Cookie-Verschlüsselung) —
+sonst erscheint im Webinterface eine entsprechende Warnung:
+
+```bash
+cp /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpmyadmin/config.inc.php
+# Zufälligen Wert erzeugen und in die Zeile $cfg['blowfish_secret'] eintragen:
+openssl rand -base64 24
+nano /usr/share/phpmyadmin/config.inc.php
+```
+
 Im Prinzip ist der MySQL bzw. MariaDB Server nun fertig konfiguriert,
 allerdings kann man sich aus Sicherheitsgründen nicht direkt als Root-Nutzer
 im phpMyAdmin anmelden. Man kann allerdings einen neuen Nutzer erstellen
@@ -157,6 +172,14 @@ CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON *.* TO 'username'@'localhost' WITH GRANT OPTION;
 exit
 ```
+
+<Callout type="warning">
+`GRANT ALL PRIVILEGES ON *.*` mit `WITH GRANT OPTION` macht diesen Nutzer
+faktisch zum Administrator (Root-äquivalent). Für einen reinen Anwendungs-
+oder Datenbank-Nutzer solltest Du die Rechte stattdessen auf eine konkrete
+Datenbank einschränken, z.B.:
+`GRANT ALL PRIVILEGES ON meine_db.* TO 'username'@'localhost';`
+</Callout>
 
 Jetzt ist der MySQL bzw. MariaDB Server fertig konfiguriert und man kann
 sich im Browser mit dem soeben erstellten Nutzer und Passwort anmelden.

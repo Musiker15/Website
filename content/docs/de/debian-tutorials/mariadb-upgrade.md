@@ -47,9 +47,15 @@ Als nächstes müssen wir den alten MariaDB-Server löschen, damit wir die
 neue Version herunterladen können:
 
 ```bash
-apt remove mariadb-*
+apt remove 'mariadb-*'
 apt install mariadb-server
 ```
+
+<Callout type="warning">
+Das `mariadb-*` muss in Anführungszeichen stehen, sonst versucht die Shell,
+das `*` mit Dateien im aktuellen Verzeichnis aufzulösen, bevor `apt` es
+überhaupt sieht.
+</Callout>
 
 Im Anschluss sollten wir prüfen, ob der MariaDB-Server gestartet wurde:
 
@@ -65,6 +71,20 @@ service mysql start
 status
 exit
 ```
+
+Nach einem Major-Upgrade müssen die System-Tabellen an die neue Version
+angepasst werden. Das erledigt `mariadb-upgrade` (bei älteren Versionen
+`mysql_upgrade`):
+
+```bash
+mariadb-upgrade
+```
+
+<Callout type="tip">
+`mariadb-upgrade` ist nach einem Versionssprung Pflicht — es prüft und
+aktualisiert die System-Tabellen. Ohne diesen Schritt kann es nach dem
+Upgrade zu unerwarteten Fehlern kommen.
+</Callout>
 
 In seltenen Fällen gibt es nach der Installation ein paar kleinere Probleme,
 wenn man sich z.B. mit phpMyAdmin versucht anzumelden. Dieser Fehler könnte

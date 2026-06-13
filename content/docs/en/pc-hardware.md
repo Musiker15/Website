@@ -5,6 +5,8 @@ order: 10
 tags: ["hardware"]
 ---
 
+*As of: June 2026*
+
 ## Hardware
 
 **Approximate value when new:** ca. 3,600 €

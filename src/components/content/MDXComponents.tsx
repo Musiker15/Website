@@ -1,6 +1,7 @@
 import type { MDXComponents as MDXComponentsType } from "mdx/types";
 import Link from "next/link";
 import { Callout } from "./Callout";
+import { CodeBlock } from "./CodeBlock";
 import { isExternal } from "@/lib/utils";
 
 /**
@@ -9,6 +10,9 @@ import { isExternal } from "@/lib/utils";
 export const mdxComponents: MDXComponentsType = {
   // Custom-Komponenten direkt in MDX nutzbar
   Callout,
+
+  // Code-Blöcke (rehype-pretty-code rendert <pre>) bekommen einen Copy-Button.
+  pre: CodeBlock,
 
   // Links: interne → next/link, externe → mit rel & target
   a: ({ href = "", children, ...rest }) => {

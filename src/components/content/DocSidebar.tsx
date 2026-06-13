@@ -28,23 +28,44 @@ function TreeNode({ node, depth }: { node: DocTreeNode; depth: number }) {
   const [open, setOpen] = useState(true);
 
   if (node.type === "folder") {
+    const folderActive = pathname === node.href;
     return (
       <li>
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className={cn(
-            "flex w-full items-center gap-1 rounded px-2 py-1.5 text-left font-semibold text-[var(--color-foreground)]",
-            "hover:bg-[var(--color-muted)]",
-          )}
-        >
-          {open ? (
-            <ChevronDown className="h-3.5 w-3.5 flex-shrink-0" />
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Einklappen" : "Ausklappen"}
+            className="flex-shrink-0 rounded p-1 text-[var(--color-foreground)] hover:bg-[var(--color-muted)]"
+          >
+            {open ? (
+              <ChevronDown className="h-3.5 w-3.5" />
+            ) : (
+              <ChevronRight className="h-3.5 w-3.5" />
+            )}
+          </button>
+          {node.href ? (
+            <Link
+              href={node.href}
+              className={cn(
+                "flex-1 rounded px-2 py-1.5 font-semibold transition-colors hover:bg-[var(--color-muted)]",
+                folderActive
+                  ? "text-[var(--color-primary)]"
+                  : "text-[var(--color-foreground)]",
+              )}
+            >
+              {node.label}
+            </Link>
           ) : (
-            <ChevronRight className="h-3.5 w-3.5 flex-shrink-0" />
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              className="flex-1 rounded px-2 py-1.5 text-left font-semibold text-[var(--color-foreground)] hover:bg-[var(--color-muted)]"
+            >
+              {node.label}
+            </button>
           )}
-          <span>{node.label}</span>
-        </button>
+        </div>
         {open && node.children && (
           <ul className={cn("ml-3 mt-1 space-y-0.5 border-l border-[var(--color-border)] pl-2")}>
             {node.children.map((child) => (

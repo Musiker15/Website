@@ -9,11 +9,6 @@ Willkommen im Tutorial-Bereich! Hier findest Du eine Sammlung von Anleitungen
 zu Themen rund um Linux/Debian, Server-Setup, Selbst-Hosting und meine
 persönliche Hardware-Ausstattung.
 
-## Worüber Du hier etwas findest
-
-- **[PC-Hardware](/de/docs/pc-hardware)** — meine aktuelle Workstation, vom Gehäuse bis zur Tastatur
-- **[Debian-Tutorials](/de/docs/debian-tutorials)** — Server-Setup, Apache, MariaDB, Certbot, TeamSpeak, Sinusbot und mehr
-
 ## Social Media &amp; Gaming
 
 | Plattform | Name |

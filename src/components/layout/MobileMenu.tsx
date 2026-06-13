@@ -82,21 +82,33 @@ function MobileItem({
     <li>
       {hasChildren ? (
         <>
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
+          <div
             className={cn(
-              "flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm font-medium",
+              "flex items-center justify-between rounded-md text-sm font-medium",
               "hover:bg-[var(--color-muted)]",
               active && "text-[var(--color-primary)]",
             )}
           >
-            <span>{t(item.label, locale)}</span>
-            <ChevronDown
-              className={cn("h-4 w-4 transition-transform", open && "rotate-180")}
-              aria-hidden
-            />
-          </button>
+            <Link
+              href={href}
+              onClick={onNavigate}
+              className="flex-1 rounded-md px-3 py-2"
+            >
+              {t(item.label, locale)}
+            </Link>
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? t({ de: "Einklappen", en: "Collapse" }, locale) : t({ de: "Ausklappen", en: "Expand" }, locale)}
+              aria-expanded={open}
+              className="rounded-md px-3 py-2 hover:bg-[var(--color-muted)]"
+            >
+              <ChevronDown
+                className={cn("h-4 w-4 transition-transform", open && "rotate-180")}
+                aria-hidden
+              />
+            </button>
+          </div>
           {open && (
             <ul className="ml-3 mt-1 space-y-0.5 border-l border-[var(--color-border)] pl-3">
               {item.children!.map((child) => (

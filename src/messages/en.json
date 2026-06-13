@@ -37,6 +37,7 @@
   "docs": {
     "title": "Tutorials",
     "subtitle": "Guides on Linux, Debian, server administration and self-hosting.",
+    "sections": "Sections",
     "onThisPage": "On this page",
     "editPage": "Edit this page",
     "lastUpdated": "Last updated",

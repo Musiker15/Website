@@ -22,6 +22,7 @@ export interface DocTreeNode {
   name: string;
   label: string;
   href?: string;
+  description?: string;
   order: number;
   children?: DocTreeNode[];
 }

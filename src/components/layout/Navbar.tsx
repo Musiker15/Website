@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { navigationConfig } from "@/config/navigation.config";
@@ -36,6 +36,7 @@ export function Navbar({ locale }: NavbarProps) {
 
 function NavbarItem({ item, locale }: { item: NavItem; locale: Locale }) {
   const pathname = usePathname();
+  const router = useRouter();
   const localizedHref = item.external ? item.href : `/${locale}${item.href === "/" ? "" : item.href}`;
   const active = isActive(pathname, localizedHref);
   const label = t(item.label, locale);
@@ -44,6 +45,15 @@ function NavbarItem({ item, locale }: { item: NavItem; locale: Locale }) {
     return (
       <NavigationMenu.Item>
         <NavigationMenu.Trigger
+          onClick={(e) => {
+            // Echter Mausklick (detail > 0) → zur Übersichtsseite navigieren.
+            // Tastatur-Aktivierung (detail === 0) bleibt dem Radix-Dropdown
+            // überlassen, Hover öffnet das Menü ohnehin.
+            if (e.detail > 0) {
+              e.preventDefault();
+              router.push(localizedHref);
+            }
+          }}
           className={cn(
             "group flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
             "hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)]",

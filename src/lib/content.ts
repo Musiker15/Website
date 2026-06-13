@@ -31,7 +31,7 @@ export function getContent(
     if (!frontmatterResult.success) {
       throw new Error(
         `Invalides Frontmatter in ${path.relative(process.cwd(), filePath)}:\n` +
-          frontmatterResult.error.errors.map((e) => `  - ${e.path.join(".")}: ${e.message}`).join("\n"),
+          frontmatterResult.error.issues.map((e) => `  - ${e.path.join(".")}: ${e.message}`).join("\n"),
       );
     }
     const frontmatter: Frontmatter = frontmatterResult.data;

@@ -54,7 +54,7 @@
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.0",
     "remark-toc": "^9.0.0",
-    "shiki": "^4.1.0",
+    "shiki": "^4.2.0",
     "tailwind-merge": "^2.5.5",
     "zod": "^4.4.3"
   },
@@ -63,7 +63,7 @@
     "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4.0.0",
     "@tailwindcss/typography": "^0.5.15",
-    "@types/mdx": "^2.0.13",
+    "@types/mdx": "^2.0.14",
     "@types/node": "^25.9.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.0.2",

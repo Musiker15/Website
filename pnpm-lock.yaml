@@ -41,8 +41,8 @@ importers:
         specifier: ^0.8.212
         version: 0.8.212
       geist:
-        specifier: ^1.7.1
-        version: 1.7.1(next@16.2.9(@playwright/test@1.60.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
+        specifier: ^1.7.2
+        version: 1.7.2(next@16.2.9(@playwright/test@1.60.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
@@ -601,8 +601,8 @@ packages:
       '@types/react': '>=16'
       react: '>=16'
 
-  '@napi-rs/wasm-runtime@1.1.4':
-    resolution: {integrity: sha512-3NQNNgA1YSlJb/kMH1ildASP9HW7/7kYnRI2szWJaofaS1hWmbGI4H+d3+22aGzXXN9IJ+n+GiFVcGipJP18ow==}
+  '@napi-rs/wasm-runtime@1.1.5':
+    resolution: {integrity: sha512-AWPoBRJ9tsnVhor4sjO7rkni+7p+2IAEFj6cx06UgP10jkQHqay/36uRV/bFkgrh18D9vb4cr8Q0Pthskgzy+Q==}
     peerDependencies:
       '@emnapi/core': ^1.7.1
       '@emnapi/runtime': ^1.7.1
@@ -1879,8 +1879,8 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  geist@1.7.1:
-    resolution: {integrity: sha512-XF8DM30ODhDu0Ng5S2kOS8j4ZkG/6z2fKWAiFJA7wG0Hc92ZXgjYLrwbD9bVU4nGVzwboPtG+QtaPGsfgnXLaA==}
+  geist@1.7.2:
+    resolution: {integrity: sha512-Gu5lDFa3pLRyoBlBPf0QIFHVdWAnpco7fS1bJm41jyLPFoguBgiubseUN2oLXMgqZ7uxAxDoXcHMhCY/fOTTgg==}
     peerDependencies:
       next: '>=13.2.0'
 
@@ -2720,6 +2720,10 @@ packages:
     resolution: {integrity: sha512-pn99VhoACYR8nFHhxqix+uvsbXineAasWm5ojXoN8xEwK5Kd3/TrhNn1wByuD52UxWRLy8pu+kRMniEi6Eq9Zg==}
     engines: {node: '>=12.0.0'}
 
+  tinyglobby@0.2.17:
+    resolution: {integrity: sha512-wXR/dYpcqKmfWpEdZjiKJOwCNFndD0DMnrW/cYjVGttEkBfVgcLFHoNrlj47mjOVic9yyNu65alsgF4NQyTa2g==}
+    engines: {node: '>=12.0.0'}
+
   tinyrainbow@3.1.0:
     resolution: {integrity: sha512-Bf+ILmBgretUrdJxzXM0SgXLZ3XfiaUuOj/IKQHuTXip+05Xn+uyEYdVg0kYDipTBcLrCVyUzAPz7QmArb0mmw==}
     engines: {node: '>=14.0.0'}
@@ -3303,7 +3307,7 @@ snapshots:
       '@types/react': 19.2.17
       react: 19.2.7
 
-  '@napi-rs/wasm-runtime@1.1.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
+  '@napi-rs/wasm-runtime@1.1.5(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
     dependencies:
       '@emnapi/core': 1.10.0
       '@emnapi/runtime': 1.10.0
@@ -3768,7 +3772,7 @@ snapshots:
     dependencies:
       '@emnapi/core': 1.10.0
       '@emnapi/runtime': 1.10.0
-      '@napi-rs/wasm-runtime': 1.1.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)
+      '@napi-rs/wasm-runtime': 1.1.5(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)
     optional: true
 
   '@rolldown/binding-win32-arm64-msvc@1.0.2':
@@ -4469,7 +4473,7 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  geist@1.7.1(next@16.2.9(@playwright/test@1.60.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)):
+  geist@1.7.2(next@16.2.9(@playwright/test@1.60.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)):
     dependencies:
       next: 16.2.9(@playwright/test@1.60.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
 
@@ -5647,6 +5651,11 @@ snapshots:
       fdir: 6.5.0(picomatch@4.0.4)
       picomatch: 4.0.4
 
+  tinyglobby@0.2.17:
+    dependencies:
+      fdir: 6.5.0(picomatch@4.0.4)
+      picomatch: 4.0.4
+
   tinyrainbow@3.1.0: {}
 
   trim-lines@3.0.1: {}
@@ -5782,7 +5791,7 @@ snapshots:
       picomatch: 4.0.4
       postcss: 8.5.15
       rolldown: 1.0.2
-      tinyglobby: 0.2.16
+      tinyglobby: 0.2.17
     optionalDependencies:
       '@types/node': 25.9.1
       esbuild: 0.28.1

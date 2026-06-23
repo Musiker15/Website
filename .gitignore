@@ -40,6 +40,7 @@ coverage/
 playwright-report/
 test-results/
 .lighthouseci/
+CLAUDE.md
 
 # --- Environment-Dateien (NIEMALS committen) ----------------
 .env

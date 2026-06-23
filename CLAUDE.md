@@ -8,6 +8,12 @@
 > Whenever architecture, file layout, env-variable names, command patterns, or
 > runtime behavior change, update this file in the same commit.
 
+## 🌐 Sprache & Commit-Konventionen (WICHTIG)
+
+- **GitHub-Inhalte auf Englisch** (Code-Kommentare, Commit-Messages, PR-Titel/-Body, README, Issues, Workflows). Damit jeder alles versteht.
+- **Interne Doku auf Deutsch erlaubt:** `CLAUDE.md` (alle gitignored).
+- **Commits AUSSCHLIESSLICH OHNE `Co-Authored-By`-Trailer.** Niemals einen Co-Author-Trailer anhängen.
+
 ---
 
 ## 1. Projekt-Übersicht

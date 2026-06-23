@@ -17,6 +17,7 @@ self-hosted server.
 - **[Certbot — Let's Encrypt](/en/docs/debian-tutorials/certbot)** — free SSL certificates
 - **[TeamSpeak 3 Server](/en/docs/debian-tutorials/teamspeak3)** — manual TS3 setup
 - **[Sinusbot](/en/docs/debian-tutorials/sinusbot)** — music bot for TeamSpeak
+- **[pgAdmin 4 — Setup Runbook](/en/docs/debian-tutorials/pgadmin-setup)** — PostgreSQL web UI behind Apache + HTTPS
 
 <Callout type="warning">
 Commands run with `sudo` or as root can permanently change the system. Read

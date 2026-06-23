@@ -17,6 +17,7 @@ Server selbst aufsetzen, pflegen oder erweitern wollen.
 - **[Certbot — Let's Encrypt](/de/docs/debian-tutorials/certbot)** — kostenlose SSL-Zertifikate
 - **[TeamSpeak 3 Server](/de/docs/debian-tutorials/teamspeak3)** — TS3-Server manuell aufsetzen
 - **[Sinusbot](/de/docs/debian-tutorials/sinusbot)** — Musik-Bot für TeamSpeak
+- **[pgAdmin 4 — Setup-Runbook](/de/docs/debian-tutorials/pgadmin-setup)** — PostgreSQL-Weboberfläche hinter Apache + HTTPS
 
 <Callout type="warning">
 Befehle, die mit `sudo` oder als root ausgeführt werden, können das System

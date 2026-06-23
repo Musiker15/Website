@@ -20,10 +20,11 @@ allowBuilds:
 # Parent-Pakete (z.B. vitest, tsx) nominell verlangen. Wird genutzt um
 # Security-Patches durchzusetzen, ohne auf einen Parent-Bump warten zu müssen.
 overrides:
-  # CVE: Path Traversal in Optimized Deps .map Handling
-  # Mit vitest 4 läuft sowieso vite >= 6, der Override ist nur Safety-Net
-  # gegen versehentliche Downgrades durch andere Pakete.
-  vite: '>=5.4.20'
+  # GHSA (high):     server.fs.deny bypass via Windows alternate paths
+  # GHSA (moderate): launch-editor NTLMv2 hash disclosure via UNC paths
+  # Beide betreffen vite >= 8.0.0, <= 8.0.15 — gepatcht in 8.0.16.
+  # Greift als Override auf das transitive vite aus vitest.
+  vite: '>=8.0.16'
 
   # CVE: XSS via Unescaped </style> in CSS Stringify Output
   # postcss < 8.5.0 ist betroffen.

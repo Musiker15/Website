@@ -11,3 +11,4 @@ und `tsconfig.json`).
 | Datei | Beschreibung |
 |---|---|
 | `og-default.svg` | Statisches Backup-OG-Bild mit eingebettetem M-Logo (base64). 1200×630 SVG. Wird **nicht** als OG-Image referenziert — das aktuelle OG-Bild kommt aus [src/app/opengraph-image.tsx](../src/app/opengraph-image.tsx) (dynamisches PNG via `next/og`). Diese SVG dient nur als manueller Export, z. B. für Print oder externe Tools. |
+

@@ -34,3 +34,9 @@ overrides:
   # file read (betroffen: >= 0.27.3, < 0.28.1). vite 8 verlangt esbuild ^0.28.0,
   # daher greift der Override jetzt (anders als früher unter vite 5/esbuild ^0.21).
   esbuild: '>=0.28.1'
+
+  # GHSA-h67p-54hq-rp68 (moderate): js-yaml Quadratic-complexity DoS im
+  # Merge-Key-Handling via wiederholte Aliases. Betroffen: < 3.15.0, gepatcht
+  # in 3.15.0. Greift auf das transitive js-yaml 3.14.2 aus gray-matter
+  # (verlangt ^3.13.1, mit 3.15.0 kompatibel). Der 4.x-Zweig bleibt unberührt.
+  js-yaml@<3.15.0: '3.15.0'

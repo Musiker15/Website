@@ -44,14 +44,30 @@ function walkSection(section: string, locale: string): string[][] {
   return out;
 }
 
+// Entfernt HTML-Tags vollständig. Ein einzelner Replace ist unvollständig, weil
+// verschachtelte Konstrukte (z.B. "<<script>script>") nach einem Durchlauf ein
+// intaktes Tag zurücklassen. Deshalb wird bis zum Fixpunkt wiederholt und danach
+// jede verbliebene spitze Klammer entfernt, sodass kein "<script"-Fragment in den
+// Suchindex gelangen kann.
+function stripHtmlTags(input: string): string {
+  let prev: string;
+  let out = input;
+  do {
+    prev = out;
+    out = out.replace(/<[^>]*>/g, "");
+  } while (out !== prev);
+  return out.replace(/[<>]/g, "");
+}
+
 function stripMarkdown(md: string): string {
-  return md
-    .replace(/```[\s\S]*?```/g, "")
-    .replace(/`[^`]+`/g, "")
-    .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
-    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
-    .replace(/<[^>]+>/g, "")
-    .replace(/[#*_~>|]+/g, "")
+  return stripHtmlTags(
+    md
+      .replace(/```[\s\S]*?```/g, "")
+      .replace(/`[^`]+`/g, "")
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1"),
+  )
+    .replace(/[#*_~|]+/g, "")
     .replace(/\s+/g, " ")
     .trim();
 }

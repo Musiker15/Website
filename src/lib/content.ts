@@ -38,12 +38,17 @@ export function getContent(
     if (frontmatter.draft && process.env.NODE_ENV === "production") return null;
     const stat = statSync(filePath);
     const pathStr = slug.join("/");
+    // URL-Segmente werden encodiert: korrekt für ungewöhnliche Dateinamen und
+    // zugleich Sanitizer — ein `javascript:`-Schema kann so nie in einen href
+    // gelangen (der Doppelpunkt würde encodiert). `locale`/`section` sind feste
+    // Enums bzw. Literale und daher unkritisch.
+    const urlPath = slug.map(encodeURIComponent).join("/");
     return {
       section,
       locale,
       slug,
       path: section === "pages" ? pathStr : `${section}/${pathStr}`,
-      url: `/${locale}/${section === "pages" ? pathStr : `${section}/${pathStr}`}`.replace(/\/+$/, ""),
+      url: `/${locale}/${section === "pages" ? urlPath : `${section}/${urlPath}`}`.replace(/\/+$/, ""),
       frontmatter,
       content,
       modifiedAt: stat.mtime,

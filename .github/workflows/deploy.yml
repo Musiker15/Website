@@ -47,6 +47,11 @@ concurrency:
   group: deploy-production
   cancel-in-progress: false
 
+# Least-Privilege: Beide Jobs brauchen nur Lesezugriff auf den Code. Deploy
+# selbst läuft über SSH-Secrets, nicht über den GITHUB_TOKEN.
+permissions:
+  contents: read
+
 env:
   NODE_VERSION: "22"
   APP_PATH: "/opt/musiker15"

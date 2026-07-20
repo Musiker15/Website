@@ -54,7 +54,12 @@ jobs:
     runs-on: ubuntu-latest
     # In Forks nicht spiegeln. Ob die Secrets gesetzt sind, prüft der Step unten,
     # der secrets-Kontext ist auf dieser Ebene nicht lesbar.
-    if: github.repository_owner == 'Musiker15'
+    #
+    # Dependabot-Pushes werden übersprungen: deren Läufe nutzen den separaten
+    # Dependabot-Secret-Store ohne Zugriff auf CODEBERG_TOKEN, der Mirror könnte
+    # dort nie erfolgreich sein und würde nur einen roten Check erzeugen. Beim
+    # Merge nach main pusht der Mirror ohnehin alle aktuellen Refs mit --prune.
+    if: github.repository_owner == 'Musiker15' && github.actor != 'dependabot[bot]'
 
     steps:
       - name: Checkout (vollständige History, alle Refs)

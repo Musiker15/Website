@@ -16,7 +16,7 @@ export default function NotFound() {
     <html lang="de">
       <body className="notfound-page-body">
         <div className="notfound-page-content">
-          <h1 className="notfound-page-title">404 — Seite nicht gefunden</h1>
+          <h1 className="notfound-page-title">404: Seite nicht gefunden</h1>
           <p className="notfound-page-text">Die angeforderte Seite existiert nicht.</p>
           <Link href="/de" className="notfound-page-link">
             Zur Startseite

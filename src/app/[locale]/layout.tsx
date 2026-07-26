@@ -45,7 +45,7 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!hasLocale(SUPPORTED_LOCALES, locale)) return {};
   const l = locale as Locale;
-  const title = `${siteConfig.name} — ${siteConfig.tagline[l]}`;
+  const title = `${siteConfig.name} | ${siteConfig.tagline[l]}`;
   const description = siteConfig.description[l];
 
   return {

@@ -25,7 +25,7 @@ import path from "node:path";
 
 export const size = { width: 900, height: 360 };
 export const contentType = "image/png";
-export const alt = "Musiker15 — Tutorials & Guides";
+export const alt = "Musiker15 | Tutorials & Guides";
 
 export default async function Image() {
   // Logo lokal als data-URL einbetten

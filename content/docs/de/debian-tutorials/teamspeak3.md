@@ -13,8 +13,8 @@ Installer-Scripte.
 <Callout type="info">
 Die hier verwendete Version `3.13.7` war zum Zeitpunkt der Anleitung aktuell.
 Die jeweils neueste Version findest Du unter
-[files.teamspeak-services.com/releases/server](https://files.teamspeak-services.com/releases/server/)
-— Versionsnummer in den Befehlen entsprechend anpassen.
+[files.teamspeak-services.com/releases/server](https://files.teamspeak-services.com/releases/server/).
+Die Versionsnummer in den Befehlen entsprechend anpassen.
 </Callout>
 
 ```bash
@@ -35,16 +35,16 @@ nicht mit dem `root`-Benutzer einen Server starten wollen.
 
 Ich empfehle außerdem, den Query-Port unseres TeamSpeak-Servers zu ändern.
 Dazu kann man ihn entweder beim Start als Parameter `query_port=PORT`
-mitgeben — oder, dauerhaft und ohne ihn jedes Mal angeben zu müssen, fest in
+mitgeben oder, dauerhaft und ohne ihn jedes Mal angeben zu müssen, fest in
 einer `ts3server.ini` hinterlegen.
 
-**Variante 1 — pro Start (temporär):**
+**Variante 1 (pro Start, temporär):**
 
 ```bash
 /home/ts3/teamspeak3-server_linux_amd64/ts3server_startscript.sh start query_port=12345
 ```
 
-**Variante 2 — dauerhaft über die `ts3server.ini`** (im Server-Verzeichnis
+**Variante 2, dauerhaft über die `ts3server.ini`** (im Server-Verzeichnis
 anlegen, der Startscript liest sie automatisch):
 
 ```ini

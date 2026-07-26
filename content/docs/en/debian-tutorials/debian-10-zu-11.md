@@ -12,7 +12,7 @@ exactly as before.
 <Callout type="info">
 Debian 11 (Bullseye) is now *oldstable*. The current releases are Debian 12
 (Bookworm) and Debian 13 (Trixie). The principle of a major upgrade stays the
-same — you simply repeat the steps for each version (10 → 11 → 12 → 13), only
+same. You simply repeat the steps for each version (10 → 11 → 12 → 13), only
 one version jump at a time and with the matching repository names.
 </Callout>
 

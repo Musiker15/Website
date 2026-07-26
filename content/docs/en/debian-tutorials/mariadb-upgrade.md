@@ -6,7 +6,7 @@ tags: ["debian", "mariadb"]
 ---
 
 During a MariaDB upgrade from, say, version 10 to version 11, all existing
-databases are preserved. So there's no data loss — everything works exactly
+databases are preserved. So there's no data loss. Everything works exactly
 the same after the upgrade as before.
 
 <Callout type="warning">
@@ -78,7 +78,7 @@ mariadb-upgrade
 ```
 
 <Callout type="tip">
-`mariadb-upgrade` is mandatory after a version jump — it checks and updates
+`mariadb-upgrade` is mandatory after a version jump. It checks and updates
 the system tables. Without this step you may run into unexpected errors after
 the upgrade.
 </Callout>

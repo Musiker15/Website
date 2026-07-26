@@ -17,7 +17,7 @@ data by which you can be personally identified.
 
 This website is a Next.js-rendered page without any tracking, analytics
 or marketing components. The website operator does **not** collect any
-data themselves — there are no forms, no tracking scripts and no
+data themselves. There are no forms, no tracking scripts and no
 analytics tools. The only data processing happens automatically via the
 hosting provider (see section "Hosting & Server Log Files").
 
@@ -44,7 +44,7 @@ data is not merged with other data sources.
 
 **Retention period:** Server logs are processed exclusively for the
 purposes of technical operation, stability and security. They are
-deleted after at most 14 days — or, in the event of a security
+deleted after at most 14 days, or in the event of a security
 incident, until the incident has been fully resolved. The operator does
 not associate this data with you personally.
 

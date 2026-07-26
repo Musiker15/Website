@@ -1,6 +1,6 @@
 ---
 title: "Community"
-description: "Discord, GitHub, MSK Scripts — alle Plätze, an denen Du mich findest."
+description: "Discord, GitHub, MSK Scripts: alle Plätze, an denen Du mich findest."
 order: 2
 ---
 
@@ -16,8 +16,8 @@ und allgemeine Fragen. Komm vorbei, ich bin meistens online:
 
 ## GitHub
 
-Mein persönliches GitHub-Profil enthält alle möglichen Projekte —
-Webanwendungen, Tools, Skripte:
+Mein persönliches GitHub-Profil enthält alle möglichen Projekte, etwa
+Webanwendungen, Tools und Skripte:
 
 **[github.com/musiker15](https://github.com/musiker15)**
 

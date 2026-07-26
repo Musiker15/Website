@@ -81,7 +81,7 @@ mariadb-upgrade
 ```
 
 <Callout type="tip">
-`mariadb-upgrade` ist nach einem Versionssprung Pflicht — es prüft und
+`mariadb-upgrade` ist nach einem Versionssprung Pflicht. Es prüft und
 aktualisiert die System-Tabellen. Ohne diesen Schritt kann es nach dem
 Upgrade zu unerwarteten Fehlern kommen.
 </Callout>

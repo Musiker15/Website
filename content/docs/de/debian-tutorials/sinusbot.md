@@ -7,9 +7,9 @@ tags: ["debian", "sinusbot", "teamspeak"]
 
 ## Downloads
 
-- [Sinusbot v1.0.1](https://www.sinusbot.com/pre/sinusbot-1.0.1-amd64.tar.bz2) — Mirror: [Sinusbot v1.0.1](https://cloud.musiker15.de/index.php/s/wRgebXoXYXTYHGS)
-- [Sinusbot v1.0.2](https://www.sinusbot.com/pre/sinusbot-1.0.2-amd64.tar.bz2) — Mirror: [Sinusbot v1.0.2](https://cloud.musiker15.de/index.php/s/tbGpCQCZFexELis)
-- [TeamSpeak Client 3.5.3](https://files.teamspeak-services.com/releases/client/3.5.3/TeamSpeak3-Client-linux_amd64-3.5.3.run) — Mirror: [TeamSpeak Client 3.5.3](https://cloud.musiker15.de/index.php/s/WdHZWPJkAFAQ75L)
+- [Sinusbot v1.0.1](https://www.sinusbot.com/pre/sinusbot-1.0.1-amd64.tar.bz2), Mirror: [Sinusbot v1.0.1](https://cloud.musiker15.de/index.php/s/wRgebXoXYXTYHGS)
+- [Sinusbot v1.0.2](https://www.sinusbot.com/pre/sinusbot-1.0.2-amd64.tar.bz2), Mirror: [Sinusbot v1.0.2](https://cloud.musiker15.de/index.php/s/tbGpCQCZFexELis)
+- [TeamSpeak Client 3.5.3](https://files.teamspeak-services.com/releases/client/3.5.3/TeamSpeak3-Client-linux_amd64-3.5.3.run), Mirror: [TeamSpeak Client 3.5.3](https://cloud.musiker15.de/index.php/s/WdHZWPJkAFAQ75L)
 
 ---
 
@@ -40,7 +40,7 @@ chmod a+rx /usr/local/bin/yt-dlp
 ```
 
 <Callout type="info">
-Kein `chown` auf den `sinusbot`-Benutzer nötig — durch `chmod a+rx` darf jeder
+Kein `chown` auf den `sinusbot`-Benutzer nötig, durch `chmod a+rx` darf jeder
 Benutzer (also auch `sinusbot`) die Datei ausführen. Den Benutzer selbst legen
 wir erst im nächsten Schritt an.
 </Callout>

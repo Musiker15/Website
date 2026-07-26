@@ -13,8 +13,8 @@ scripts.
 <Callout type="info">
 The version `3.13.7` used here was the latest at the time of writing. You can
 find the most recent version at
-[files.teamspeak-services.com/releases/server](https://files.teamspeak-services.com/releases/server/)
-— adjust the version number in the commands accordingly.
+[files.teamspeak-services.com/releases/server](https://files.teamspeak-services.com/releases/server/).
+Adjust the version number in the commands accordingly.
 </Callout>
 
 ```bash
@@ -34,16 +34,16 @@ With the command `su ts3` we log in to the `ts3` user, since we don't want to
 start a server as the `root` user.
 
 I also recommend changing the query port of our TeamSpeak server. You can
-either pass it at startup as the parameter `query_port=PORT` — or, permanently
+either pass it at startup as the parameter `query_port=PORT` or, permanently
 and without having to specify it every time, set it in a `ts3server.ini`.
 
-**Option 1 — per start (temporary):**
+**Option 1 (per start, temporary):**
 
 ```bash
 /home/ts3/teamspeak3-server_linux_amd64/ts3server_startscript.sh start query_port=12345
 ```
 
-**Option 2 — permanently via the `ts3server.ini`** (create it in the server
+**Option 2, permanently via the `ts3server.ini`** (create it in the server
 directory, the start script reads it automatically):
 
 ```ini

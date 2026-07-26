@@ -14,7 +14,7 @@ to my commercial projects at [MSK Scripts](https://www.msk-scripts.de).
 
 ### Are the tutorials maintained?
 
-Yes — whenever something important changes (new Debian release, new MariaDB,
+Yes, whenever something important changes (new Debian release, new MariaDB,
 security topics), I update the corresponding guides. The "Last updated"
 date on each page reflects the current state.
 
@@ -54,7 +54,7 @@ sudo apt update && sudo apt full-upgrade -y
 
 ### Does this also work on Ubuntu?
 
-Yes — Ubuntu is based on Debian, so the `apt` commands are identical.
+Yes, Ubuntu is based on Debian, so the `apt` commands are identical.
 Some package names or paths may differ slightly.
 
 ## Sinusbot / TeamSpeak
@@ -64,7 +64,7 @@ Some package names or paths may differ slightly.
 Currently up to **3.5.3** maximum. Newer client versions are not
 compatible (as of the date of the tutorial).
 
-### My Sinusbot doesn't start — what now?
+### My Sinusbot doesn't start. What now?
 
 Common causes:
 

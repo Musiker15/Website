@@ -1,11 +1,11 @@
 ---
-title: "pgAdmin 4 — Setup-Runbook"
+title: "pgAdmin 4: Setup-Runbook"
 description: "pgAdmin 4 (Web) hinter Apache mit HTTPS auf Debian installieren."
 order: 7
 tags: ["debian", "pgadmin", "postgres"]
 ---
 
-# pgAdmin 4 — Setup-Runbook
+# pgAdmin 4: Setup-Runbook
 
 ## DNS
 A-Record anlegen: `pgadmin.your-domain.com` → Server-IP.
@@ -35,7 +35,7 @@ sudo a2enmod wsgi headers ssl rewrite
 
 ## SSL-Zertifikat-Pfad ermitteln
 Wenn bereits ein (Wildcard-)Zertifikat für deine Domain vorhanden ist, kannst du es
-mitnutzen — andernfalls vorab per [Certbot](/de/docs/debian-tutorials/certbot) eines
+mitnutzen, andernfalls vorab per [Certbot](/de/docs/debian-tutorials/certbot) eines
 ausstellen. Die genutzten Pfade findest du am einfachsten aus einem bestehenden vhost:
 ```bash
 sudo grep -Rns "SSLCertificate" /etc/apache2/sites-available/   # zeigt die genutzten .pem-Pfade
@@ -103,13 +103,13 @@ sudo apache2ctl configtest && sudo systemctl reload apache2
 
 <Callout type="note">
 Das Auto-Renewal des Zertifikats läuft unverändert über deinen bestehenden
-Mechanismus. Beim Erneuern muss Apache neu geladen werden — falls das nicht
+Mechanismus. Beim Erneuern muss Apache neu geladen werden. Falls das nicht
 ohnehin per `deploy-hook` passiert, sorge dafür, dass dein Renewal-Hook
 `systemctl reload apache2` ausführt.
 </Callout>
 
 ## Dedizierte DB-Admin-Rolle anlegen
-Eigener Superuser für pgAdmin — **nicht** den Applikations-DB-User verwenden.
+Eigener Superuser für pgAdmin, **nicht** den Applikations-DB-User verwenden.
 ```bash
 sudo -u postgres psql
 ```
@@ -126,7 +126,7 @@ verschafft ein geleaktes Passwort vollen Zugriff auf alle Datenbanken.
 </Callout>
 
 - `SUPERUSER` = alle Rechte (alle DBs sehen/bearbeiten, Rollen/DBs anlegen, Bypass aller Checks).
-- **Wichtig:** Weil der Name in Anführungszeichen angelegt ist, ist er **case-sensitive** —
+- **Wichtig:** Weil der Name in Anführungszeichen angelegt ist, ist er **case-sensitive**,
   in pgAdmin exakt `DbAdmin` als Username eintragen. (Alternativ ohne Quotes
   `CREATE ROLE dbadmin …` → dann immer klein `dbadmin`.)
 - Passwort später ändern: `ALTER ROLE "DbAdmin" WITH PASSWORD 'neu';`
@@ -160,7 +160,7 @@ sudo systemctl restart fail2ban
 ```
 - **IP-Whitelist** (`Require ip …`) aktivieren, falls feste IP → größter Sicherheitsgewinn.
 - Updates: `sudo apt update && sudo apt upgrade pgadmin4-web`.
-- Postgres bleibt loopback-only — **niemals** 5432 in UFW öffnen.
+- Postgres bleibt loopback-only, **niemals** 5432 in UFW öffnen.
 
 ---
 
@@ -169,9 +169,9 @@ Wenn die mod_wsgi-Integration stört, kann pgAdmin als **gunicorn-Dienst auf
 `127.0.0.1:5050`** laufen und Apache per `ProxyPass` davorhängen.
 
 ## Alternative: Adminer (schlank, phpMyAdmin-Klon)
-Eine einzige PHP-Datei unter dem bestehenden Apache+PHP — in ~2 Minuten aufgesetzt,
+Eine einzige PHP-Datei unter dem bestehenden Apache+PHP, in ~2 Minuten aufgesetzt,
 falls pgAdmin zu schwergewichtig ist.
 
 ---
 
-*Erstellt: 2026-06-21 — Tool: pgAdmin 4 (mod_wsgi), Zugriff: Subdomain + HTTPS + Auth.*
+*Erstellt: 2026-06-21. Tool: pgAdmin 4 (mod_wsgi), Zugriff: Subdomain + HTTPS + Auth.*

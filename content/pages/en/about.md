@@ -4,24 +4,24 @@ description: "Who's behind musiker15.de? A short profile."
 order: 1
 ---
 
-Hi, I'm **Moritz Kohm** — better known online as **Musiker15**. This site
+Hi, I'm **Moritz Kohm**, better known online as **Musiker15**. This site
 is my personal collection of tutorials, guides and notes on Linux, Debian,
 server administration and self-hosting.
 
 ## What you'll find here
 
-- **[Tutorials](/en/docs)** — step-by-step guides I use on my own servers
-- **[News](/en/news)** — updates and announcements
-- **[Community](/en/community)** — Discord server, GitHub profiles and my
+- **[Tutorials](/en/docs)**: step-by-step guides I use on my own servers
+- **[News](/en/news)**: updates and announcements
+- **[Community](/en/community)**: Discord server, GitHub profiles and my
   second venture **MSK Scripts**
 
 ## Professional Background
 
-Self-employed since May 2022 — with two main areas:
+Self-employed since May 2022, with two main areas:
 
-- **Software development** — web apps, Discord bots and FiveM scripts
+- **Software development**: web apps, Discord bots and FiveM scripts
   (see [MSK Scripts](https://www.msk-scripts.de))
-- **Montageservice Kohm** — electrical engineering services (since August 2025)
+- **Montageservice Kohm**: electrical engineering services (since August 2025)
 
 ## Hardware
 

@@ -15,7 +15,7 @@ als Steckbrief und Verlinkung auf meine kommerziellen Projekte unter
 
 ### Werden die Tutorials gepflegt?
 
-Ja — wenn sich etwas Wichtiges ändert (neue Debian-Version, neue MariaDB,
+Ja, wenn sich etwas Wichtiges ändert (neue Debian-Version, neue MariaDB,
 Sicherheitsthemen), aktualisiere ich die jeweiligen Anleitungen. Das
 Datum unter „Zuletzt aktualisiert" auf jeder Seite zeigt den letzten
 Stand.
@@ -58,7 +58,7 @@ sudo apt update && sudo apt full-upgrade -y
 
 ### Funktioniert das auch auf Ubuntu?
 
-Ja — Ubuntu basiert auf Debian, daher sind die `apt`-Befehle identisch.
+Ja, Ubuntu basiert auf Debian, daher sind die `apt`-Befehle identisch.
 Einzelne Paketnamen oder Pfade können sich minimal unterscheiden.
 
 ## Sinusbot / TeamSpeak
@@ -68,7 +68,7 @@ Einzelne Paketnamen oder Pfade können sich minimal unterscheiden.
 Aktuell maximal **3.5.3**. Neuere Client-Versionen sind nicht kompatibel
 (Stand: siehe Tutorial).
 
-### Mein Sinusbot startet nicht — was tun?
+### Mein Sinusbot startet nicht. Was tun?
 
 Häufige Ursachen:
 

@@ -12,7 +12,7 @@ und man kann das System ganz normal wie vorher weiter verwenden.
 <Callout type="info">
 Debian 11 (Bullseye) ist inzwischen *oldstable*. Aktuell sind Debian 12
 (Bookworm) und Debian 13 (Trixie). Das Prinzip eines Major-Upgrades bleibt
-identisch — man wiederholt die Schritte einfach für jede Version
+identisch, man wiederholt die Schritte einfach für jede Version
 (10 → 11 → 12 → 13), immer nur einen Versionssprung auf einmal und mit den
 jeweils passenden Repository-Namen.
 </Callout>

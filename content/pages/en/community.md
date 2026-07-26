@@ -1,6 +1,6 @@
 ---
 title: "Community"
-description: "Discord, GitHub, MSK Scripts — where to find me."
+description: "Discord, GitHub, MSK Scripts: where to find me."
 order: 2
 ---
 
@@ -9,14 +9,14 @@ Want to chat, give feedback or just say hi? Here's where to reach me:
 ## Discord
 
 My Discord server has channels for tutorials, FiveM scripts and general
-questions. Stop by — I'm mostly online:
+questions. Stop by, I'm mostly online:
 
 **[discord.gg/5hHSBRHvJE](https://discord.gg/5hHSBRHvJE)**
 
 ## GitHub
 
-My personal GitHub profile hosts all sorts of projects — web apps, tools,
-scripts:
+My personal GitHub profile hosts all sorts of projects, from web apps to
+tools and scripts:
 
 **[github.com/musiker15](https://github.com/musiker15)**
 

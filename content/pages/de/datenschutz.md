@@ -18,7 +18,7 @@ identifiziert werden kannst.
 
 Diese Website ist eine in Next.js gerenderte Seite ohne eigene Tracking-,
 Analyse- oder Marketing-Komponenten. Es findet **keine eigene
-Datenerhebung** durch den Websitebetreiber statt — weder über Formulare
+Datenerhebung** durch den Websitebetreiber statt, weder über Formulare
 noch über Tracking-Skripte oder Analyse-Tools. Die einzige
 Datenverarbeitung erfolgt automatisch durch den Hosting-Provider (siehe
 Abschnitt „Hosting & Server-Log-Dateien").
@@ -47,7 +47,7 @@ mit anderen Datenquellen erfolgt nicht.
 
 **Speicherdauer:** Die Server-Logs werden ausschließlich zu Zwecken der
 technischen Bereitstellung, Stabilität und Sicherheit verarbeitet. Sie
-werden spätestens nach 14 Tagen gelöscht — im Falle eines
+werden spätestens nach 14 Tagen gelöscht, im Falle eines
 Sicherheits­vorfalls bis zur abschließenden Klärung des Vorfalls. Eine
 Zuordnung dieser Daten zu Deiner Person nimmt der Betreiber nicht vor.
 

@@ -1,5 +1,5 @@
 ---
-title: "Certbot — Let's Encrypt (free SSL certificates)"
+title: "Certbot: Let's Encrypt (free SSL certificates)"
 description: "Install Certbot and have SSL certificates from Let's Encrypt renewed automatically."
 order: 4
 tags: ["debian", "apache", "ssl", "letsencrypt", "certbot"]
@@ -15,8 +15,8 @@ certbot --apache -d your-domain.com -d www.your-domain.com
 
 <Callout type="warning">
 Since Debian 11 the package is called `python3-certbot-apache` (no longer
-`python-certbot-apache` — that was the old Python 2 package and no longer
-exists in current Debian versions).
+`python-certbot-apache`, the old Python 2 package, which no longer exists in
+current Debian versions).
 </Callout>
 
 The Apache plugin (`--apache`) handles both domain validation and setting up
@@ -25,7 +25,7 @@ email address and accept the license terms with `A`.
 
 <Callout type="tip">
 The certificates are only valid for 90 days. Certbot automatically sets up a
-systemd timer (`certbot.timer`) for renewal during installation — you can
+systemd timer (`certbot.timer`) for renewal during installation. You can
 verify it like this:
 
 ```bash

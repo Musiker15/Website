@@ -18,8 +18,8 @@ const config = {
     en: "Tutorials & Guides",
   },
   description: {
-    de: "Persönliche Webseite von Moritz Kohm — Tutorials, Guides und Hintergrund-Infos rund um Linux/Debian, Server-Administration und Selbst-Hosting.",
-    en: "Personal website of Moritz Kohm — tutorials, guides and background info on Linux/Debian, server administration and self-hosting.",
+    de: "Persönliche Webseite von Moritz Kohm mit Tutorials, Guides und Hintergrund-Infos rund um Linux/Debian, Server-Administration und Selbst-Hosting.",
+    en: "Personal website of Moritz Kohm with tutorials, guides and background info on Linux/Debian, server administration and self-hosting.",
   },
 
   // Öffentliche Basis-URL (ohne trailing Slash)

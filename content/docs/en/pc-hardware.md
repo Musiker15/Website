@@ -1,6 +1,6 @@
 ---
 title: "PC Hardware"
-description: "My current workstation — chassis, CPU, GPU, monitors and peripherals."
+description: "My current workstation: chassis, CPU, GPU, monitors and peripherals."
 order: 10
 tags: ["hardware"]
 ---
@@ -11,13 +11,13 @@ tags: ["hardware"]
 
 **Approximate value when new:** ca. 3,600 €
 
-- **Chassis:** Lian Li O11D EVO RGB, Tempered Glass — black
-- **Fans:** Lian Li UNI FAN SL-INF 120 ARGB Reverse Blade PWM — 120 mm, black
+- **Chassis:** Lian Li O11D EVO RGB, Tempered Glass, black
+- **Fans:** Lian Li UNI FAN SL-INF 120 ARGB Reverse Blade PWM, 120 mm, black
 - **PSU:** ASUS ROG STRIX 1000W Gold Aura Edition
 - **Mainboard:** Gigabyte X870E AORUS Master, socket AM5
 - **CPU:** AMD Ryzen 7 9800X3D
-- **CPU cooler:** Lian Li GALAHAD II 360 Trinity SL-INF AiO water cooling, ARGB — black
-- **RAM:** G.Skill Trident Z5 RGB DDR5-6000, CL30, XMP — 64 GB dual-kit, black
+- **CPU cooler:** Lian Li GALAHAD II 360 Trinity SL-INF AiO water cooling, ARGB, black
+- **RAM:** G.Skill Trident Z5 RGB DDR5-6000, CL30, XMP, 64 GB dual-kit, black
 - **GPU:** Gigabyte GeForce RTX 4080 Super Gaming OC 16 GB
 - **Storage:**
   - 1× Samsung 970 EVO 1 TB NVMe M.2 (system)

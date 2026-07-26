@@ -146,7 +146,7 @@ chown -R www-data:www-data /usr/share/phpmyadmin/tmp/
 ```
 
 Außerdem braucht phpMyAdmin eine eigene Konfigurationsdatei mit einem
-zufälligen `blowfish_secret` (32 Zeichen, für die Cookie-Verschlüsselung) —
+zufälligen `blowfish_secret` (32 Zeichen, für die Cookie-Verschlüsselung),
 sonst erscheint im Webinterface eine entsprechende Warnung:
 
 ```bash

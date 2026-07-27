@@ -13,5 +13,5 @@ Disallow: /
 User-agent: CCBot
 Disallow: /
 
-Sitemap: https://komascript.musiker15.de/sitemap.xml
-Host: https://komascript.musiker15.de
+Sitemap: https://www.musiker15.de/sitemap.xml
+Host: https://www.musiker15.de

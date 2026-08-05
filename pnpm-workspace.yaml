@@ -28,7 +28,14 @@ overrides:
 
   # CVE: XSS via Unescaped </style> in CSS Stringify Output (< 8.5.0) sowie ein
   # weiteres Advisory, das erst in 8.5.18 gepatcht ist.
-  postcss: '>=8.5.18'
+  # GHSA-fxqj-rqcc-2cmp (moderate): unvollständiger Fix von GHSA-6g55-p6wh-862q,
+  # ein angreifergesteuertes sourceMappingURL liest beliebige .map-Dateien, wenn
+  # `from` nicht gesetzt ist (betroffen: <= 8.5.22, gepatcht in 8.5.23).
+  # Die alte Untergrenze 8.5.18 ließ 8.5.20 stehen. Betroffen waren zwei
+  # Stränge: @tailwindcss/postcss und next selbst, beide auf 8.5.20. Der
+  # Override zwingt next damit über seine eigene Pin hinaus, nach dem Bump
+  # also gegenprüfen, dass der CSS-Build weiter durchläuft.
+  postcss: '>=8.5.23'
 
   # GHSA-g7r4-m6w7-qqqr: esbuild Dev-Server erlaubt unter Windows arbitrary
   # file read (betroffen: >= 0.27.3, < 0.28.1). vite 8 verlangt esbuild ^0.28.0,

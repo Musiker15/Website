@@ -18,6 +18,7 @@ self-hosted server.
 - **[TeamSpeak 3 Server](/en/docs/debian-tutorials/teamspeak3)**: manual TS3 setup
 - **[Sinusbot](/en/docs/debian-tutorials/sinusbot)**: music bot for TeamSpeak
 - **[pgAdmin 4: Setup Runbook](/en/docs/debian-tutorials/pgadmin-setup)**: PostgreSQL web UI behind Apache + HTTPS
+- **[Wildcard SSL with acme.sh and IONOS DNS](/en/docs/debian-tutorials/acme-sh-wildcard-ionos)**: auto-renewing wildcard certificates via DNS-01
 
 <Callout type="warning">
 Commands run with `sudo` or as root can permanently change the system. Read

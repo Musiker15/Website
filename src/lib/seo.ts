@@ -16,6 +16,34 @@ interface BuildMetadataParams {
   authors?: string[];
 }
 
+/**
+ * Seiten, deren Slug sich zwischen den Sprachen unterscheidet.
+ *
+ * Ohne diese Tabelle würde der hreflang-Alternate mechanisch aus dem Pfad
+ * abgeleitet: aus `/de/impressum` entstünde `/en/impressum`, und diese Seite
+ * existiert nicht (sie heißt `/en/imprint`). Beide Schreibweisen stehen als
+ * Key drin, damit die Auflösung aus jeder Sprachrichtung funktioniert.
+ *
+ * Alle übrigen Seiten (about, faq, community, docs, news) haben in beiden
+ * Sprachen denselben Slug und brauchen hier keinen Eintrag.
+ */
+const LOCALIZED_SLUGS: Record<string, Record<Locale, string>> = {
+  impressum: { de: "impressum", en: "imprint" },
+  imprint: { de: "impressum", en: "imprint" },
+  datenschutz: { de: "datenschutz", en: "privacy" },
+  privacy: { de: "datenschutz", en: "privacy" },
+};
+
+/**
+ * Baut den locale-freien Pfadrest für die hreflang-Alternate einer Zielsprache.
+ * `/de/impressum` + "en" → `/imprint`, `/de/docs/certbot` + "en" → `/docs/certbot`.
+ */
+function alternatePath(path: string, target: Locale): string {
+  const rest = path.replace(/^\/(de|en)(?=\/|$)/, "");
+  const mapped = LOCALIZED_SLUGS[rest.replace(/^\//, "")];
+  return mapped ? `/${mapped[target]}` : rest;
+}
+
 export function buildMetadata(params: BuildMetadataParams): Metadata {
   const {
     title,
@@ -32,7 +60,8 @@ export function buildMetadata(params: BuildMetadataParams): Metadata {
 
   const url = `${siteConfig.url}${path.startsWith("/") ? path : `/${path}`}`;
   const ogImage = image ?? siteConfig.ogImage;
-  const altPath = path.replace(/^\/(de|en)/, "");
+  const altDe = alternatePath(path, "de");
+  const altEn = alternatePath(path, "en");
   const ogLocale = locale === "de" ? "de_DE" : "en_US";
 
   return {
@@ -41,9 +70,9 @@ export function buildMetadata(params: BuildMetadataParams): Metadata {
     alternates: {
       canonical: url,
       languages: {
-        "de-DE": `${siteConfig.url}/de${altPath}`,
-        "en-US": `${siteConfig.url}/en${altPath}`,
-        "x-default": `${siteConfig.url}/de${altPath}`,
+        "de-DE": `${siteConfig.url}/de${altDe}`,
+        "en-US": `${siteConfig.url}/en${altEn}`,
+        "x-default": `${siteConfig.url}/de${altDe}`,
       },
     },
     openGraph: {

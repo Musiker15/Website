@@ -38,6 +38,7 @@ on:
       - "LICENSE.md"
       - "LICENSE_DE.md"
       - "assets/**"           # Repo-Backups, nicht deployed
+      - "graphify-out/**"     # Codebase-Graph, reiner Repo-Inhalt
       - "deploy/**"           # Server-Configs werden manuell appliziert
       - ".github/**"          # CI-Configs deployen sich nicht selbst …
       - "!.github/workflows/deploy.yml"   # … außer deploy.yml selbst

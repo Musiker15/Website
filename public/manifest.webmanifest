@@ -1,0 +1,24 @@
+{
+  "name": "Musiker15",
+  "short_name": "Musiker15",
+  "description": "Persönliche Webseite von Moritz Kohm mit Tutorials, Guides und Hintergrund-Infos rund um Linux/Debian, Server-Administration und Selbst-Hosting.",
+  "start_url": "/de",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e40af",
+  "lang": "de",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "type": "image/x-icon",
+      "sizes": "48x48"
+    },
+    {
+      "src": "/logo.png",
+      "type": "image/png",
+      "sizes": "678x671",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 ---
 title: "Upgrade from Debian 10 to Debian 11"
 description: "Step-by-step guide for the major release upgrade from Debian Buster to Bullseye."
+date: 2026-06-13
 order: 1
 tags: ["debian", "upgrade"]
 ---

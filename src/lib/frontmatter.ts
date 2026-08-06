@@ -6,6 +6,12 @@ import { z } from "zod";
  */
 export const FrontmatterSchema = z.object({
   title: z.string().min(1).max(160),
+  /**
+   * Optionaler Titel für Suchergebnis und Browser-Tab. Fällt auf `title`
+   * zurück. Nutzen, wenn die sichtbare H1 aus dem Seitenzusammenhang lebt, im
+   * Google-Snippet aber ohne diesen Zusammenhang gelesen wird.
+   */
+  metaTitle: z.string().min(1).max(160).optional(),
   description: z.string().max(320).optional(),
   date: z.coerce.date().optional(),
   updated: z.coerce.date().optional(),

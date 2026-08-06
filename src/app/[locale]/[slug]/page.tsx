@@ -4,7 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { getContent, listContent } from "@/lib/content";
 import { renderMDX } from "@/lib/mdx";
-import { buildArticleMetadata } from "@/lib/seo";
+import { buildArticleMetadata, buildBreadcrumbLd, buildJsonLdGraph } from "@/lib/seo";
 import { SUPPORTED_LOCALES, type Locale } from "@/types/config";
 
 interface Props {
@@ -37,8 +37,13 @@ export default async function CatchAllPage({ params }: Props) {
 
   const content = await renderMDX(item.content);
 
+  const ld = buildJsonLdGraph([
+    buildBreadcrumbLd([{ name: item.frontmatter.title }]),
+  ]);
+
   return (
     <article className="container-page max-w-3xl py-10">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ld }} />
       <Breadcrumbs locale={locale} items={[{ label: item.frontmatter.title }]} />
       {!item.frontmatter.hideTitle && (
         <header className="mb-8 border-b border-[var(--color-border)] pb-6">

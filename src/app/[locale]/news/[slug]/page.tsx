@@ -5,9 +5,8 @@ import { Calendar, User } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { getContent, listContent } from "@/lib/content";
 import { renderMDX } from "@/lib/mdx";
-import { buildArticleMetadata, buildJsonLd } from "@/lib/seo";
+import { buildArticleMetadata, buildArticleLd, buildBreadcrumbLd, buildJsonLdGraph } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
-import { siteConfig } from "@/config/site.config";
 import { SUPPORTED_LOCALES, type Locale } from "@/types/config";
 
 interface Props {
@@ -41,15 +40,19 @@ export default async function NewsArticlePage({ params }: Props) {
 
   const content = await renderMDX(item.content);
 
-  const ld = buildJsonLd({
-    "@type": "BlogPosting",
-    headline: item.frontmatter.title,
-    description: item.frontmatter.description,
-    datePublished: item.frontmatter.date?.toISOString(),
-    dateModified: (item.frontmatter.updated ?? item.modifiedAt).toISOString(),
-    author: { "@type": "Person", name: item.frontmatter.author ?? siteConfig.author.name },
-    inLanguage: locale === "de" ? "de-DE" : "en-US",
-  });
+  const ld = buildJsonLdGraph([
+    buildArticleLd({
+      type: "BlogPosting",
+      frontmatter: item.frontmatter,
+      locale,
+      path: item.url,
+      modifiedAt: item.modifiedAt,
+    }),
+    buildBreadcrumbLd([
+      { name: t("title"), path: `/${locale}/news` },
+      { name: item.frontmatter.title },
+    ]),
+  ]);
 
   return (
     <article className="container-page max-w-3xl py-10">

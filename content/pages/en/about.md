@@ -1,5 +1,6 @@
 ---
 title: "About Musiker15"
+metaTitle: "About me: Moritz Kohm"
 description: "Who's behind musiker15.de? A short profile."
 order: 1
 ---

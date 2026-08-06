@@ -115,6 +115,39 @@ export function listNews(locale: Locale): ContentItem[] {
 }
 
 /**
+ * Thematisch verwandte Docs zu einem Item, sortiert nach Anzahl gemeinsamer Tags.
+ *
+ * Bei Gleichstand entscheidet die Nähe im Verzeichnisbaum (gleicher Ordner
+ * zuerst), danach `order`. Items ohne gemeinsamen Tag fallen raus, es wird also
+ * nicht mit beliebigen Seiten aufgefüllt: lieber zwei passende Vorschläge als
+ * vier, von denen zwei nichts miteinander zu tun haben.
+ */
+export function getRelatedDocs(item: ContentItem, locale: Locale, limit = 4): ContentItem[] {
+  const tags = new Set(item.frontmatter.tags);
+  if (tags.size === 0) return [];
+
+  const folderOf = (i: ContentItem) => i.slug.slice(0, -1).join("/");
+  const ownFolder = folderOf(item);
+
+  return listAllContentItems("docs", locale)
+    .filter((candidate) => candidate.url !== item.url && candidate.slug.length > 0)
+    .map((candidate) => ({
+      candidate,
+      shared: candidate.frontmatter.tags.filter((t) => tags.has(t)).length,
+    }))
+    .filter((entry) => entry.shared > 0)
+    .sort((a, b) => {
+      if (a.shared !== b.shared) return b.shared - a.shared;
+      const aSame = folderOf(a.candidate) === ownFolder ? 0 : 1;
+      const bSame = folderOf(b.candidate) === ownFolder ? 0 : 1;
+      if (aSame !== bSame) return aSame - bSame;
+      return a.candidate.frontmatter.order - b.candidate.frontmatter.order;
+    })
+    .slice(0, limit)
+    .map((entry) => entry.candidate);
+}
+
+/**
  * Erzeugt einen hierarchischen Doc-Baum für die Sidebar.
  */
 export function buildDocTree(locale: Locale): DocTreeNode[] {

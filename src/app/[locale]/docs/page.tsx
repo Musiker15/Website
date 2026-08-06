@@ -4,9 +4,10 @@ import { ChevronRight } from "lucide-react";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DocSidebar } from "@/components/content/DocSidebar";
-import { buildDocTree, getContent } from "@/lib/content";
+import { buildDocTree, getContent, listAllContentItems } from "@/lib/content";
 import { renderMDX } from "@/lib/mdx";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, buildBreadcrumbLd, buildJsonLdGraph, LD_IDS } from "@/lib/seo";
+import { siteConfig } from "@/config/site.config";
 import type { DocTreeNode } from "@/types/content";
 import type { Locale } from "@/types/config";
 
@@ -17,9 +18,13 @@ interface Props {
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "docs" });
+  // Titel und Beschreibung kommen aus content/docs/<locale>/index.md, damit sie
+  // redaktionell pflegbar sind. `metaTitle` erlaubt dort einen Suchtitel, der
+  // von der sichtbaren H1 abweicht. Die Übersetzungsstrings bleiben Fallback.
+  const index = getContent("docs", locale, []);
   return buildMetadata({
-    title: t("title"),
-    description: t("subtitle"),
+    title: index?.frontmatter.metaTitle ?? index?.frontmatter.title ?? t("title"),
+    description: index?.frontmatter.description ?? t("subtitle"),
     locale,
     path: `/${locale}/docs`,
   });
@@ -37,8 +42,35 @@ export default async function DocsIndexPage({ params }: Props) {
   const heading = index?.frontmatter.title ?? t("title");
   const subtitle = index?.frontmatter.description ?? t("subtitle");
 
+  // CollectionPage plus ItemList: sagt der Suchmaschine, dass diese Seite eine
+  // Sammlung ist und welche Tutorials dazugehören. Die Liste folgt derselben
+  // Sortierung wie die sichtbaren Karten.
+  const items = listAllContentItems("docs", locale).filter((i) => i.slug.length > 0);
+  const ld = buildJsonLdGraph([
+    {
+      "@type": "CollectionPage",
+      "@id": `${siteConfig.url}/${locale}/docs`,
+      name: index?.frontmatter.title ?? t("title"),
+      description: index?.frontmatter.description ?? t("subtitle"),
+      isPartOf: { "@id": LD_IDS.website },
+      inLanguage: locale === "de" ? "de-DE" : "en-US",
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: items.length,
+        itemListElement: items.map((item, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: item.frontmatter.title,
+          url: `${siteConfig.url}${item.url}`,
+        })),
+      },
+    },
+    buildBreadcrumbLd([{ name: t("title") }]),
+  ]);
+
   return (
     <div className="container-page py-8 lg:py-10">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ld }} />
       <div className="grid gap-8 lg:grid-cols-[16rem_minmax(0,1fr)]">
         {/* Sidebar — Doc-Baum, identisch zu den Unterseiten */}
         <aside className="hidden lg:block lg:sticky lg:top-20 lg:max-h-[calc(100dvh-6rem)] lg:overflow-y-auto">

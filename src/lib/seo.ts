@@ -3,6 +3,14 @@ import { siteConfig } from "@/config/site.config";
 import type { Locale } from "@/types/config";
 import type { Frontmatter } from "./frontmatter";
 
+/**
+ * Maße des OG-Bildes. Einzige Quelle für die `og:image:width`/`height`-Angaben.
+ * Muss mit `export const size` in `src/app/opengraph-image.tsx` übereinstimmen,
+ * sonst melden die Karten-Debugger von Facebook und LinkedIn eine Abweichung
+ * zwischen deklarierter und tatsächlicher Bildgröße.
+ */
+export const OG_IMAGE_SIZE = { width: 1200, height: 630 } as const;
+
 interface BuildMetadataParams {
   title: string;
   description?: string;
@@ -84,7 +92,7 @@ export function buildMetadata(params: BuildMetadataParams): Metadata {
       siteName: siteConfig.name,
       title,
       description,
-      images: [{ url: ogImage, width: 900, height: 360, alt: imageAlt ?? title }],
+      images: [{ url: ogImage, width: OG_IMAGE_SIZE.width, height: OG_IMAGE_SIZE.height, alt: imageAlt ?? title }],
       ...(type === "article" && {
         publishedTime: publishedTime?.toISOString(),
         modifiedTime: modifiedTime?.toISOString(),
@@ -102,7 +110,11 @@ export function buildMetadata(params: BuildMetadataParams): Metadata {
 
 export function buildArticleMetadata(frontmatter: Frontmatter, locale: Locale, path: string): Metadata {
   return buildMetadata({
-    title: frontmatter.title,
+    // `metaTitle` erlaubt einen Titel für Suchergebnis und Browser-Tab, der von
+    // der sichtbaren H1 abweicht. Gedacht für Fälle, in denen die H1 aus dem
+    // Seitenzusammenhang kurz sein darf ("Über Musiker15"), der Titel im
+    // Suchergebnis aber ohne diesen Zusammenhang funktionieren muss.
+    title: frontmatter.metaTitle ?? frontmatter.title,
     description: frontmatter.description,
     locale,
     path,
@@ -120,4 +132,93 @@ export function buildArticleMetadata(frontmatter: Frontmatter, locale: Locale, p
  */
 export function buildJsonLd(payload: Record<string, unknown>): string {
   return JSON.stringify({ "@context": "https://schema.org", ...payload });
+}
+
+/**
+ * Mehrere JSON-LD-Knoten in EINEM `<script>`-Tag, über `@graph`.
+ *
+ * Google liest mehrere einzelne Tags genauso, aber im Graph lassen sich die
+ * Knoten über `@id` aufeinander beziehen (Artikel → Autor → Website), statt
+ * dieselbe Person in jedem Block erneut auszuschreiben.
+ */
+export function buildJsonLdGraph(nodes: Array<Record<string, unknown>>): string {
+  return JSON.stringify({ "@context": "https://schema.org", "@graph": nodes });
+}
+
+/** Stabile Knoten-IDs, damit sich die Graph-Teile gegenseitig referenzieren können. */
+export const LD_IDS = {
+  person: `${siteConfig.url}/#person`,
+  website: `${siteConfig.url}/#website`,
+} as const;
+
+export interface BreadcrumbEntry {
+  name: string;
+  /** Absolut oder als Pfad ab Root. Der letzte Eintrag darf ohne URL bleiben. */
+  path?: string;
+}
+
+/**
+ * BreadcrumbList für die Suchergebnis-Darstellung.
+ *
+ * Google ersetzt damit die URL-Zeile im Snippet durch den Navigationspfad
+ * ("Musiker15 > Tutorials > Debian-Tutorials > Certbot"). Ohne diese Auszeichnung
+ * fällt es auf die rohe URL zurück, obwohl die Krümel auf der Seite sichtbar sind.
+ */
+export function buildBreadcrumbLd(entries: BreadcrumbEntry[]): Record<string, unknown> {
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: entries.map((entry, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: entry.name,
+      ...(entry.path ? { item: `${siteConfig.url}${entry.path}` } : {}),
+    })),
+  };
+}
+
+interface ArticleLdParams {
+  type: "TechArticle" | "BlogPosting";
+  frontmatter: Frontmatter;
+  locale: Locale;
+  /** Pfad der Seite, z.B. `/de/docs/debian-tutorials/certbot`. */
+  path: string;
+  /** Fallback, wenn im Frontmatter kein `updated` steht. */
+  modifiedAt: Date;
+}
+
+/**
+ * Artikel-Knoten für Tutorials (`TechArticle`) und News (`BlogPosting`).
+ *
+ * Enthält bewusst `mainEntityOfPage` und `image`: ohne beides stuft der Rich
+ * Results Test den Artikel als unvollständig ein, und `image` ist die Angabe,
+ * die in der mobilen Suche über die Vorschau entscheidet.
+ */
+export function buildArticleLd({
+  type,
+  frontmatter,
+  locale,
+  path,
+  modifiedAt,
+}: ArticleLdParams): Record<string, unknown> {
+  const url = `${siteConfig.url}${path}`;
+  const image = `${siteConfig.url}${frontmatter.image ?? siteConfig.ogImage}`;
+
+  return {
+    "@type": type,
+    "@id": `${url}#article`,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    url,
+    headline: frontmatter.title,
+    ...(frontmatter.description ? { description: frontmatter.description } : {}),
+    image,
+    ...(frontmatter.date ? { datePublished: frontmatter.date.toISOString() } : {}),
+    dateModified: (frontmatter.updated ?? frontmatter.date ?? modifiedAt).toISOString(),
+    author: frontmatter.author
+      ? { "@type": "Person", name: frontmatter.author }
+      : { "@id": LD_IDS.person },
+    publisher: { "@id": LD_IDS.person },
+    isPartOf: { "@id": LD_IDS.website },
+    inLanguage: locale === "de" ? "de-DE" : "en-US",
+    ...(frontmatter.tags.length > 0 ? { keywords: frontmatter.tags.join(", ") } : {}),
+  };
 }

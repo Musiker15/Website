@@ -41,6 +41,7 @@
     "onThisPage": "On this page",
     "editPage": "Edit this page",
     "lastUpdated": "Last updated",
+    "related": "Related tutorials",
     "categories": {
       "debian-tutorials": "Debian Tutorials",
       "pc-hardware": "PC Hardware"

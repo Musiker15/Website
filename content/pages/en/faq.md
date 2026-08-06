@@ -1,5 +1,6 @@
 ---
 title: "FAQ"
+metaTitle: "FAQ on the Debian tutorials and the server stack"
 description: "Frequently asked questions about the tutorials, server stack and Musiker15 itself."
 order: 3
 ---

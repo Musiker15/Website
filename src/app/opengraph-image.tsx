@@ -18,12 +18,18 @@ import path from "node:path";
  * "synthesizen" lassen — sonst rendert Satori den 700er-Weight als künstlich
  * verfetteten Regular, was breit/verzerrt wirkt.
  *
- * Format: 900×360 (≈ 2.5:1) — kompakt, der Block (Logo + Text) ist horizontal
- * zentriert (`justifyContent: center`), sodass der Freiraum links und rechts
- * vom Inhalt symmetrisch ist.
+ * Format: 1200×630 (1.91:1) — das Standardmaß für OpenGraph-Karten. Vorher lag
+ * die Route bei 900×360. Das war kompakter, aber unter zwei Grenzen: Google
+ * verlangt für Artikel-Rich-Results mindestens 1200 Pixel Breite, und Facebook,
+ * LinkedIn sowie WhatsApp zeigen Bilder unterhalb von 1200×630 als kleine
+ * quadratische Vorschau statt als große Karte.
+ *
+ * Der Block (Logo + Text) ist horizontal zentriert (`justifyContent: center`),
+ * sodass der Freiraum links und rechts vom Inhalt symmetrisch ist. Durch das
+ * höhere Format kommt oben und unten mehr Luft dazu.
  */
 
-export const size = { width: 900, height: 360 };
+export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = "Musiker15 | Tutorials & Guides";
 

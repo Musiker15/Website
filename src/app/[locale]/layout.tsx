@@ -9,7 +9,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/config/site.config";
 import { SUPPORTED_LOCALES, type Locale } from "@/types/config";
-import { buildJsonLd } from "@/lib/seo";
+import { buildJsonLdGraph, LD_IDS, OG_IMAGE_SIZE } from "@/lib/seo";
 
 // Fonts werden vollständig lokal über das @fontsource-Paket geladen.
 // Keine Kommunikation zu Google/Adobe — weder beim Build noch zur Laufzeit.
@@ -78,6 +78,11 @@ export async function generateMetadata({
         "en-US": "/en",
         "x-default": "/de",
       },
+      types: {
+        "application/rss+xml": [
+          { url: `/${l}/news/feed.xml`, title: `${siteConfig.name} | News` },
+        ],
+      },
     },
     openGraph: {
       type: "website",
@@ -86,7 +91,14 @@ export async function generateMetadata({
       siteName: siteConfig.name,
       title,
       description,
-      images: [{ url: siteConfig.ogImage, width: 900, height: 360, alt: siteConfig.name }],
+      images: [
+        {
+          url: siteConfig.ogImage,
+          width: OG_IMAGE_SIZE.width,
+          height: OG_IMAGE_SIZE.height,
+          alt: siteConfig.name,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
@@ -146,39 +158,45 @@ export default async function LocaleLayout({
   // dynamisch (kein SSG mehr) — Trade-off für die strikte Nonce-CSP.
   const nonce = (await headers()).get("x-nonce") ?? undefined;
 
-  // JSON-LD: Person + Website
-  const orgLd = buildJsonLd({
-    "@type": "Person",
-    name: siteConfig.author.name,
-    url: siteConfig.url,
-    image: `${siteConfig.url}/logo.png`,
-    sameAs: [
-      siteConfig.repositories.github,
-      siteConfig.repositories.mskScripts,
-      siteConfig.discord,
-    ].filter(Boolean),
-  });
-
-  const siteLd = buildJsonLd({
-    "@type": "WebSite",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    inLanguage: l === "de" ? "de-DE" : "en-US",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${siteConfig.url}/${l}/search?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
+  // JSON-LD: Person + Website als ein Graph. Die stabilen @id-Werte aus LD_IDS
+  // referenzieren die Artikel-Knoten auf den Unterseiten (author, publisher,
+  // isPartOf), statt dieselben Angaben pro Seite zu wiederholen.
+  const siteLd = buildJsonLdGraph([
+    {
+      "@type": "Person",
+      "@id": LD_IDS.person,
+      name: siteConfig.author.name,
+      alternateName: siteConfig.name,
+      url: siteConfig.url,
+      image: `${siteConfig.url}/logo.png`,
+      sameAs: [
+        siteConfig.repositories.github,
+        siteConfig.repositories.mskScripts,
+        siteConfig.discord,
+      ].filter(Boolean),
     },
-  });
+    {
+      "@type": "WebSite",
+      "@id": LD_IDS.website,
+      name: siteConfig.name,
+      url: siteConfig.url,
+      description: siteConfig.description[l],
+      publisher: { "@id": LD_IDS.person },
+      inLanguage: l === "de" ? "de-DE" : "en-US",
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${siteConfig.url}/${l}/search?q={search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
+      },
+    },
+  ]);
 
   return (
     <html lang={l} suppressHydrationWarning>
       <body className="flex min-h-dvh flex-col bg-[var(--color-background)] text-[var(--color-foreground)] antialiased">
-        <script
-          type="application/ld+json"
-          nonce={nonce}
-          dangerouslySetInnerHTML={{ __html: orgLd }}
-        />
         <script
           type="application/ld+json"
           nonce={nonce}

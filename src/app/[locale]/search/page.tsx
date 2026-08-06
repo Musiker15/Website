@@ -12,11 +12,17 @@ interface Props {
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "search" });
-  return buildMetadata({
-    title: t("title"),
-    locale,
-    path: `/${locale}/search`,
-  });
+  return {
+    ...buildMetadata({
+      title: t("title"),
+      locale,
+      path: `/${locale}/search`,
+    }),
+    // Suchergebnisseiten gehören nicht in den Index: sie erzeugen pro Query eine
+    // eigene URL mit Inhalten, die anderswo bereits kanonisch stehen. `follow`
+    // bleibt an, damit die verlinkten Treffer trotzdem gecrawlt werden.
+    robots: { index: false, follow: true },
+  };
 }
 
 export default async function SearchPage({ params, searchParams }: Props) {

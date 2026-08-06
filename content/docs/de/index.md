@@ -1,6 +1,8 @@
 ---
 title: "Willkommen"
+metaTitle: "Tutorials & Guides für Debian, Apache und Server-Administration"
 description: "Tutorials und Guides rund um Linux, Debian, Server-Administration und Selbst-Hosting."
+date: 2026-05-27
 order: 1
 hideTitle: false
 ---

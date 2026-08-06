@@ -6,11 +6,11 @@ import { CalendarClock, Pencil } from "lucide-react";
 import { Breadcrumbs, type Crumb } from "@/components/layout/Breadcrumbs";
 import { DocSidebar } from "@/components/content/DocSidebar";
 import { TableOfContents } from "@/components/content/TableOfContents";
-import { buildDocTree, getContent, listContent } from "@/lib/content";
+import { RelatedDocs } from "@/components/content/RelatedDocs";
+import { buildDocTree, getContent, getRelatedDocs, listContent } from "@/lib/content";
 import { renderMDX, extractHeadings } from "@/lib/mdx";
-import { buildArticleMetadata, buildJsonLd } from "@/lib/seo";
+import { buildArticleMetadata, buildArticleLd, buildBreadcrumbLd, buildJsonLdGraph } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
-import { siteConfig } from "@/config/site.config";
 import { SUPPORTED_LOCALES, type Locale } from "@/types/config";
 
 interface Props {
@@ -45,29 +45,54 @@ export default async function DocPage({ params }: Props) {
   const headings = extractHeadings(item.content);
   const content = await renderMDX(item.content);
   const tree = buildDocTree(locale);
+  const related = getRelatedDocs(item, locale);
 
-  // Breadcrumbs aufbauen
-  const crumbs: Crumb[] = [{ label: t("title"), href: `/${locale}/docs` }];
-  for (let i = 0; i < slug.length - 1; i++) {
-    const seg = slug[i];
-    if (!seg) continue;
-    crumbs.push({ label: seg.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) });
-  }
-  crumbs.push({ label: item.frontmatter.title });
+  // Beschriftung einer Zwischenebene: bevorzugt der Titel aus der index.md des
+  // Ordners ("Debian-Tutorials"), sonst der humanisierte Verzeichnisname als
+  // Notnagel ("Debian Tutorials"). Der Unterschied landet sichtbar im Snippet,
+  // sobald Google die BreadcrumbList übernimmt.
+  const segmentLabel = (index: number): string => {
+    const segments = slug.slice(0, index + 1);
+    const seg = segments[index] ?? "";
+    return (
+      getContent("docs", locale, segments)?.frontmatter.title ??
+      seg.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+    );
+  };
 
-  const articleLd = buildJsonLd({
-    "@type": "TechArticle",
-    headline: item.frontmatter.title,
-    description: item.frontmatter.description,
-    datePublished: item.frontmatter.date?.toISOString(),
-    dateModified: (item.frontmatter.updated ?? item.modifiedAt).toISOString(),
-    author: { "@type": "Person", name: item.frontmatter.author ?? siteConfig.author.name },
-    inLanguage: locale === "de" ? "de-DE" : "en-US",
-  });
+  const parents = slug.slice(0, -1).map((_, i) => ({
+    name: segmentLabel(i),
+    path: `/${locale}/docs/${slug.slice(0, i + 1).join("/")}`,
+  }));
+
+  const crumbs: Crumb[] = [
+    { label: t("title"), href: `/${locale}/docs` },
+    ...parents.map((p) => ({ label: p.name, href: p.path })),
+    { label: item.frontmatter.title },
+  ];
+
+  // Dieselben Krümel als BreadcrumbList. Der letzte Eintrag bleibt bewusst ohne
+  // URL, so verlangt es die Schema.org-Empfehlung für die aktuelle Seite.
+  const ldCrumbs = [
+    { name: t("title"), path: `/${locale}/docs` },
+    ...parents,
+    { name: item.frontmatter.title },
+  ];
+
+  const pageLd = buildJsonLdGraph([
+    buildArticleLd({
+      type: "TechArticle",
+      frontmatter: item.frontmatter,
+      locale,
+      path: item.url,
+      modifiedAt: item.modifiedAt,
+    }),
+    buildBreadcrumbLd(ldCrumbs),
+  ]);
 
   return (
     <div className="container-page py-8 lg:py-10">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: articleLd }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageLd }} />
 
       <div className="grid gap-8 lg:grid-cols-[16rem_minmax(0,1fr)_14rem]">
         {/* Sidebar — Doc-Baum */}
@@ -110,6 +135,8 @@ export default async function DocPage({ params }: Props) {
           )}
 
           <div className="prose dark:prose-invert">{content}</div>
+
+          <RelatedDocs heading={t("related")} items={related} />
         </article>
 
         {/* Table of Contents */}

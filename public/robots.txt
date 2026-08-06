@@ -1,13 +1,29 @@
-# Fallback-robots.txt — wird durch app/robots.ts überschrieben sobald Next läuft.
-# Apache liefert diese Datei aus, wenn Node nicht erreichbar ist.
+# robots.txt — einzige Quelle für /robots.txt
+#
+# Diese Datei wird von Apache direkt ausgeliefert:
+#   Alias     /robots.txt  /opt/musiker15/public/robots.txt
+#   ProxyPass /robots.txt  !
+# Der Request erreicht Node also nie. Eine parallele app/robots.ts hätte keine
+# Wirkung, deshalb gibt es sie nicht mehr. Änderungen gehören hierher.
 
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_next/
+# Hält den Suchindex (public/search-index.json, rund 86 KB Fließtext) draußen.
+Disallow: /*.json$
+# Suchergebnisseiten stehen zusätzlich per Metadata auf noindex.
+Disallow: /de/search
+Disallow: /en/search
 
+# Google-Extended steuert ausschließlich, ob Inhalte für Gemini und die
+# AI-Overviews genutzt werden. Auf das Ranking in der normalen Google-Suche hat
+# der Token keinen Einfluss, der Googlebot bleibt davon unberührt. Bewusst
+# nicht gesperrt, damit die Tutorials auch in KI-Antworten auftauchen können.
+
+# GPTBot und CCBot sammeln primär Trainingsdaten und liefern im Gegenzug keine
+# Sichtbarkeit zurück.
 User-agent: GPTBot
-Disallow: /
-
-User-agent: Google-Extended
 Disallow: /
 
 User-agent: CCBot

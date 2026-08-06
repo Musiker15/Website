@@ -64,6 +64,6 @@ jobs:
           NEXT_TELEMETRY_DISABLED: "1"
 
       - name: Test (Vitest)
-        # --passWithNoTests ist im test-Script (package.json) gesetzt — verhindert
-        # Exit 1, solange noch keine Tests existieren.
-        run: pnpm test --run
+        # `pnpm test` ist `vitest run` (einmalig, kein Watch-Mode). Kein
+        # --passWithNoTests mehr: ein leerer Lauf soll auffallen, nicht durchgehen.
+        run: pnpm test

@@ -37,8 +37,10 @@ const LOCALIZED_SLUGS: Record<string, Record<Locale, string>> = {
 /**
  * Baut den locale-freien Pfadrest für die hreflang-Alternate einer Zielsprache.
  * `/de/impressum` + "en" → `/imprint`, `/de/docs/certbot` + "en" → `/docs/certbot`.
+ *
+ * Exportiert für den Unit-Test in `seo.test.ts`, außerhalb davon nicht gedacht.
  */
-function alternatePath(path: string, target: Locale): string {
+export function alternatePath(path: string, target: Locale): string {
   const rest = path.replace(/^\/(de|en)(?=\/|$)/, "");
   const mapped = LOCALIZED_SLUGS[rest.replace(/^\//, "")];
   return mapped ? `/${mapped[target]}` : rest;

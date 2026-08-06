@@ -26,7 +26,8 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,mdx,css}\"",
     "validate:content": "tsx scripts/validate-content.ts",
     "build:search": "tsx scripts/build-search-index.ts",
-    "test": "vitest --passWithNoTests",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "test:e2e": "playwright test",
     "prebuild": "pnpm run validate:content && pnpm run build:search"
   },

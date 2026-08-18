@@ -54,7 +54,7 @@ permissions:
   contents: read
 
 env:
-  NODE_VERSION: "22"
+  NODE_VERSION: "24"
   APP_PATH: "/opt/musiker15"
   APP_USER: "musiker15"
   APP_PORT: "3101"

@@ -44,14 +44,28 @@ overrides:
 
   # GHSA-h67p-54hq-rp68 (moderate): js-yaml Quadratic-complexity DoS im
   # Merge-Key-Handling via wiederholte Aliases. Betroffen: < 3.15.0, gepatcht
-  # in 3.15.0. Greift auf das transitive js-yaml 3.14.2 aus gray-matter
-  # (verlangt ^3.13.1, mit 3.15.0 kompatibel).
-  js-yaml@<3.15.0: '3.15.0'
+  # in 3.15.0. Greift auf das transitive js-yaml aus gray-matter
+  # (verlangt ^3.13.1, mit 3.15.x kompatibel).
+  #
+  # GHSA-5p4m-2wfm-xmqj (high): dieselbe Klasse, aber in der !!omap-Aufloesung.
+  # Der Fix zu CVE-2026-59870 war nicht auf 3.x zurueckportiert. Betroffen:
+  # >= 3.0.0, < 3.15.1, gepatcht in 3.15.1. Untergrenze deshalb angehoben.
+  js-yaml@<3.15.1: '3.15.1'
 
   # GHSA-52cp-r559-cp3m (high): dieselbe Merge-Key-Klasse, aber im 4.x-Zweig.
   # Betroffen: >= 4.0.0, < 4.3.0, gepatcht in 4.3.0. Trifft das transitive
-  # js-yaml 4.2.0 (dev-scope, u.a. über die Lint-Toolchain).
-  js-yaml@>=4.0.0 <4.3.0: '4.3.0'
+  # js-yaml (dev-scope, u.a. über die Lint-Toolchain).
+  #
+  # GHSA-5p4m-2wfm-xmqj (high): !!omap-Variante, siehe oben. Betroffen:
+  # >= 4.0.0, < 4.3.1, gepatcht in 4.3.1. Parent ist @eslint/eslintrc, das
+  # ^4.1.0 verlangt, 4.3.1 liegt also innerhalb seiner Range.
+  js-yaml@>=4.0.0 <4.3.1: '4.3.1'
+  # GHSA-2v37-7h3g-55p8 (high): nanoid laeuft mit einem Custom-Generator und
+  # size 0 in eine Endlosschleife. Betroffen: < 3.3.18, gepatcht in 3.3.18.
+  # Kommt transitiv ueber postcss (verlangt ^3.3.11), das seinerseits an next,
+  # @tailwindcss/postcss und direkt am Projekt haengt. Bewusst auf den
+  # 3.x-Zweig begrenzt: nanoid 5 ist ESM-only und wuerde postcss brechen.
+  nanoid@<3.3.18: '3.3.18'
 
   # GHSA-f88m-g3jw-g9cj (high): sharp erbt vier libvips-CVEs (CVE-2026-33327,
   # -33328, -35590, -35591). Betroffen: < 0.35.0, gepatcht in 0.35.0.

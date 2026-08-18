@@ -146,7 +146,11 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY }}
           port: ${{ secrets.DEPLOY_PORT || 22 }}
           source: "release.tar.gz"
-          target: "/tmp/"
+          # Eigenes Zielverzeichnis pro Lauf. Vorher lag das Tarball für
+          # jedes Projekt unter /tmp/release.tar.gz. Deployen musiker15 und
+          # komascript gleichzeitig, löscht der eine per `rm -f` das Archiv
+          # des anderen, bevor der es entpacken kann (passiert am 18.08.2026).
+          target: "/tmp/musiker15-deploy-${{ github.run_id }}/"
 
       - name: Extract & atomic swap on server
         uses: appleboy/ssh-action@v1.2.5
@@ -170,8 +174,9 @@ jobs:
 
             echo "→ Entpacke Release nach $NEW"
             sudo mkdir -p "$NEW"
-            sudo tar -xzf /tmp/release.tar.gz -C "$NEW"
-            rm -f /tmp/release.tar.gz
+            TARBALL_DIR="/tmp/musiker15-deploy-${{ github.run_id }}"
+            sudo tar -xzf "$TARBALL_DIR/release.tar.gz" -C "$NEW"
+            rm -rf "$TARBALL_DIR"
 
             echo "→ Verknüpfe shared Resources (env)"
             if [ -f "$SHARED/.env.production" ]; then

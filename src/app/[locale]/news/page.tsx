@@ -46,7 +46,15 @@ export default async function NewsIndexPage({ params }: Props) {
 
           Keine Karten. Bei etwas, das man von oben nach unten überfliegt,
           trennt eine Haarlinie zuverlässiger als ein Rahmen um jeden Eintrag. */}
-      <ol className="divide-y divide-[var(--color-border)] border-b border-[var(--color-border)]">
+      {items.length === 0 && (
+        // Leerzustand. Eine Überschrift über einer leeren Liste sieht aus wie
+        // ein Ladefehler, nicht wie eine Aussage.
+        <p className="max-w-[var(--measure)] leading-relaxed text-[var(--color-muted-foreground)]">
+          {t("empty")}
+        </p>
+      )}
+
+      <ol className="divide-y divide-[var(--color-border)] border-b border-[var(--color-border)] empty:hidden">
         {items.map((item) => (
           <li key={item.url}>
             <Link

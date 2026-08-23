@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { GitHubIcon } from "@/components/ui/BrandIcons";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
@@ -80,17 +80,14 @@ export function Hero({ locale }: HeroProps) {
             aria-labelledby="hero-latest"
             className="overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-raised)]"
           >
-            <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border)] px-5 py-3">
+            {/* Kein zweiter Link nach /docs an dieser Stelle. Der Knopf
+                "Tutorials ansehen" links daneben führt bereits dorthin, zwei
+                Beschriftungen für dasselbe Ziel auf einem Bildschirm sind eine
+                Entscheidung zu viel. */}
+            <div className="border-b border-[var(--color-border)] px-5 py-3">
               <h2 id="hero-latest" className="text-sm font-semibold tracking-tight">
                 {t("latestDocs")}
               </h2>
-              <Link
-                href={`/${locale}/docs`}
-                className="inline-flex items-center gap-1 text-xs font-medium text-[var(--color-primary)] transition-colors duration-[var(--duration-hover)] hover:text-[var(--color-primary-hover)]"
-              >
-                {t("allDocs")}
-                <ArrowUpRight className="h-3 w-3" aria-hidden />
-              </Link>
             </div>
 
             <ul className="stagger-rise divide-y divide-[var(--color-border)]">

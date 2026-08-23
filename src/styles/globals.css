@@ -207,10 +207,11 @@
     font-variant-numeric: tabular-nums;
   }
 
+  /* Kein `border-radius` hier. Der Umriss folgt ohnehin der Rundung des
+     Elements, und die Angabe verlor gegen jede `rounded-*`-Utility. */
   :focus-visible {
     outline: 2px solid var(--color-ring);
     outline-offset: 2px;
-    border-radius: var(--radius-sm);
   }
 
   :target {
@@ -291,21 +292,17 @@
 @keyframes modalIn {
   from {
     opacity: 0;
-    transform: translateX(-50%) scale(0.97);
   }
   to {
     opacity: 1;
-    transform: translateX(-50%) scale(1);
   }
 }
 @keyframes modalOut {
   from {
     opacity: 1;
-    transform: translateX(-50%) scale(1);
   }
   to {
     opacity: 0;
-    transform: translateX(-50%) scale(0.98);
   }
 }
 
@@ -338,12 +335,17 @@
 
 /* Ein Modal hängt an keinem Auslöser, es bleibt in der Mitte verankert.
    Die Verschiebung um -50% steckt in den Keyframes, sonst überschreibt die
-   Animation die Zentrierung. */
+   Animation die Zentrierung.
+
+   Bewusst kürzer und ohne Skalierung: der Suchdialog wird per Strg+K geöffnet,
+   und eine Tastenaktion, die man mehrmals am Tag auslöst, wirkt mit sichtbarer
+   Bewegung träge. Ganz ohne Übergang blitzt er dagegen, weil die Abdunkelung
+   dahinter einblendet. */
 @utility ui-modal {
-  animation: modalIn var(--duration-pop) var(--ease-out);
+  animation: modalIn 110ms var(--ease-out);
 
   &[data-state="closed"] {
-    animation: modalOut var(--duration-pop-exit) var(--ease-out);
+    animation: modalOut 80ms var(--ease-out);
   }
 }
 

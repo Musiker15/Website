@@ -27,8 +27,7 @@
     "moreNews": "All news",
     "heroTitle": "Tutorials for Debian, Apache and running your own server",
     "heroLead": "Written down step by step while setting up my own servers. Tested on Debian, with every command you need included.",
-    "latestDocs": "Recently written",
-    "allDocs": "All tutorials"
+    "latestDocs": "Recently written"
   },
   "docs": {
     "title": "Tutorials",
@@ -43,7 +42,8 @@
   },
   "news": {
     "title": "News & Updates",
-    "subtitle": "Latest posts, announcements and updates."
+    "subtitle": "Latest posts, announcements and updates.",
+    "empty": "Nothing here yet. The tutorials are the better starting point."
   },
   "search": {
     "title": "Search",

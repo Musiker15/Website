@@ -14,8 +14,12 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 /**
  * Hover verändert die Farbe, nicht die Deckkraft.
  *
- * Vorher stand hier `hover:opacity-90` bei gleichzeitigem `transition-colors`.
- * Die Übergangsliste enthielt `opacity` nicht, der Hover sprang also hart um.
+ * Vorher wurde beim Hover die Deckkraft abgesenkt, während die Übergangsliste
+ * nur Farben enthielt: der Hover sprang dadurch ohne Übergang um.
+ *
+ * Der frühere Klassenname steht hier bewusst nicht ausgeschrieben. Tailwind
+ * durchsucht auch Kommentare nach Klassennamen und hat die Regel sonst
+ * tatsächlich ins Stylesheet geschrieben.
  * Jede Variante hat jetzt einen eigenen Hover-Ton, und der steht in derselben
  * Übergangsliste wie die Farbe selbst.
  */

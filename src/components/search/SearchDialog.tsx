@@ -135,7 +135,7 @@ export function SearchDialog({ open, onOpenChange }: Props) {
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
-        <Dialog.Overlay className="ui-overlay fixed inset-0 z-50 bg-[#08111c]/60 backdrop-blur-sm" />
+        <Dialog.Overlay className="ui-overlay fixed inset-0 z-50 bg-[#0e111b]/60 backdrop-blur-sm" />
         <Dialog.Content
           onKeyDown={onKeyDown}
           className={cn(

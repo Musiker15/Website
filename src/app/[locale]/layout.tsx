@@ -31,8 +31,8 @@ export const viewport: Viewport = {
   // steht die Browserleiste auf Mobilgeräten in einem anderen Ton als die
   // Seite darunter.
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fcfcfd" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b0e14" },
+    { media: "(prefers-color-scheme: light)", color: "#eef0f4" },
+    { media: "(prefers-color-scheme: dark)", color: "#1c2029" },
   ],
   colorScheme: "light dark",
 };

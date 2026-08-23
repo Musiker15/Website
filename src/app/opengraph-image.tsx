@@ -67,7 +67,7 @@ export default async function Image() {
           // rechts symmetrisch.
           justifyContent: "center",
           background:
-            "linear-gradient(135deg, #0a1638 0%, #1a3a8a 100%)",
+            "linear-gradient(135deg, #0d1b4b 0%, #2744a9 100%)",
           color: "#ffffff",
           fontFamily: "Geist",
         }}
@@ -92,7 +92,7 @@ export default async function Image() {
               width: 360,
               height: 360,
               background:
-                "radial-gradient(circle, rgba(59,130,246,0.32) 0%, rgba(59,130,246,0) 70%)",
+                "radial-gradient(circle, rgba(58,94,207,0.38) 0%, rgba(58,94,207,0) 70%)",
               display: "flex",
             }}
           />
@@ -130,7 +130,7 @@ export default async function Image() {
               display: "flex",
               fontSize: 38,
               marginTop: 12,
-              color: "#cbd5e1",
+              color: "#d5dbe8",
               fontWeight: 400,
             }}
           >
@@ -141,7 +141,7 @@ export default async function Image() {
               display: "flex",
               fontSize: 24,
               marginTop: 32,
-              color: "#94a3b8",
+              color: "#bcc3d3",
               fontWeight: 400,
             }}
           >
@@ -152,7 +152,7 @@ export default async function Image() {
               display: "flex",
               fontSize: 19,
               marginTop: 4,
-              color: "#64748b",
+              color: "#a8b0c1",
               fontWeight: 400,
             }}
           >

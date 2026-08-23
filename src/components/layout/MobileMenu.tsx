@@ -28,7 +28,7 @@ export function MobileMenu({ locale }: Props) {
         </Button>
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="ui-overlay fixed inset-0 z-40 bg-[#08111c]/60 backdrop-blur-sm" />
+        <Dialog.Overlay className="ui-overlay fixed inset-0 z-40 bg-[#0e111b]/60 backdrop-blur-sm" />
         <Dialog.Content
           className={cn(
             "ui-drawer fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col",

@@ -24,45 +24,60 @@
     "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
-  /* --- Flächen und Text, Light ------------------------------------------- */
-  /* Kein reines Weiß als Grundfläche: die Karten sollen sich davon abheben
-     können, ohne dass dafür ein Schatten die ganze Arbeit machen muss. */
-  --color-background: #fcfcfd;
-  --color-foreground: #0c0e14;
-  --color-muted: #f1f3f7;
-  --color-muted-foreground: #5a6270;
-  --color-border: #e2e5ec;
+  /* --- Flächen und Text, Light -------------------------------------------
+     Alle Neutraltöne liegen auf dem Farbton des Logos (OKLCH H = 266,7°) mit
+     sehr wenig Buntheit. Dadurch sind Grau und Blau derselben Familie, statt
+     nebeneinander zu stehen. Die Flächen sind dunkler als zuvor: der Grund
+     war #fcfcfd und damit praktisch Weiß, die Karten konnten sich nicht mehr
+     davon abheben. */
+  --color-background: #eef0f4;
+  --color-foreground: #131721;
+  --color-muted: #e2e5ed;
+  --color-muted-foreground: #5d6576;
+  --color-border: #d0d5e0;
   /* Trennt zwei Aufgaben: `border` ist die Haarlinie zwischen Flächen und darf
      zurückhaltend sein, `border-strong` umreißt Bedienelemente (Umriss-Knopf,
      Suchfeld, Tabellenkopf) und hält deshalb die 3:1 aus WCAG 1.4.11. */
-  --color-border-strong: #8b93a1;
-  --color-input: #e2e5ec;
-  --color-card: #ffffff;
-  --color-card-foreground: #0c0e14;
+  --color-border-strong: #828999;
+  --color-input: #d0d5e0;
+  /* Karten liegen eine Stufe über dem Grund, nicht darunter. */
+  --color-card: #fafbfe;
+  --color-card-foreground: #131721;
+  /* Codeblöcke bekommen eine eigene Fläche. Das Syntax-Theme
+     (github-light/github-dark) ist auf einen weißen bzw. fast schwarzen Grund
+     gerechnet, auf unseren mittleren Flächen verlieren einzelne Tokenfarben
+     sonst zu viel Kontrast. Im hellen Modus liegt die Fläche deshalb über dem
+     Seitengrund, im dunklen darunter. */
+  --color-code: #f8f9fd;
 
-  /* --- Akzent, Light ------------------------------------------------------ */
-  --color-primary: #1d4ed8;
-  --color-primary-hover: #1a45bd;
+  /* --- Akzent, Light ------------------------------------------------------
+     `--color-primary` ist der aus `public/logo.png` gemittelte Markenblauton,
+     `--color-primary-hover` das dunkle Ende seines Verlaufs. Beide sind exakt
+     aus der Bilddatei entnommen, nicht nachempfunden. Weiße Schrift darauf
+     erreicht 7,45:1, als Linkfarbe auf dem Grund 6,53:1. */
+  --color-primary: #2b4bba;
+  --color-primary-hover: #213fae;
   --color-primary-foreground: #ffffff;
-  --color-primary-quiet: #eaf0ff;
-  --color-primary-line: #c3d3fb;
-  --color-ring: #1d4ed8;
+  --color-primary-quiet: #e4edff;
+  --color-primary-line: #b6ccfe;
+  --color-ring: #2b4bba;
 
-  --color-secondary: #f1f3f7;
-  --color-secondary-foreground: #16181f;
-  --color-accent: #1d4ed8;
+  --color-secondary: #e2e5ed;
+  --color-secondary-foreground: #131721;
+  --color-accent: #2b4bba;
   --color-accent-foreground: #ffffff;
 
   /* --- Semantik, Light ---------------------------------------------------- */
   /* Alle vier tragen weiße Schrift und liegen dafür auf 700er-Stufen.
-     Die 500er-Varianten (#f59e0b, #16a34a) schaffen mit Weiß keine 4,5:1. */
+     Die 500er-Varianten (#f59e0b, #16a34a) schaffen mit Weiß keine 4,5:1.
+     `info` ist bewusst der Markenblauton, kein zweites Blau daneben. */
   --color-success: #15803d;
   --color-success-foreground: #ffffff;
   --color-warning: #b45309;
   --color-warning-foreground: #ffffff;
   --color-danger: #b91c1c;
   --color-danger-foreground: #ffffff;
-  --color-info: #0369a1;
+  --color-info: #2b4bba;
   --color-info-foreground: #ffffff;
 
   /* --- Breiten ------------------------------------------------------------
@@ -92,7 +107,7 @@
   /* Getönt statt neutralschwarz, jeweils mit Versatz und weicher Streuung.
      Ein Schein ohne Versatz wäre Dekoration, keine Tiefe. */
   --shadow-raised: 0 1px 2px -1px rgb(12 14 20 / 0.1), 0 2px 6px -2px rgb(12 14 20 / 0.08);
-  --shadow-floating: 0 6px 14px -6px rgb(12 14 20 / 0.18), 0 16px 40px -20px rgb(12 14 20 / 0.22);
+  --shadow-floating: 0 6px 14px -6px rgb(19 23 33 / 0.2), 0 16px 40px -20px rgb(19 23 33 / 0.24);
 
   /* --- Bewegung ----------------------------------------------------------- */
   /* Die eingebauten CSS-Kurven sind zu schwach, um beabsichtigt zu wirken.
@@ -118,42 +133,50 @@
    ============================================================================ */
 @layer base {
   .dark {
-    --color-background: #0b0e14;
-    --color-foreground: #e6edf3;
-    --color-muted: #141922;
-    --color-muted-foreground: #9aa4b4;
-    --color-border: #262c38;
-    --color-border-strong: #5b6472;
-    --color-input: #262c38;
-    --color-card: #121722;
-    --color-card-foreground: #e6edf3;
+    /* Deutlich heller als zuvor (#0b0e14). Der Grund war so dunkel, dass
+       Karten und Codeblöcke kaum eine eigene Stufe bekamen. Auch hier liegen
+       alle Neutraltöne auf dem Logo-Farbton. */
+    --color-background: #1c2029;
+    --color-foreground: #e9edf5;
+    --color-muted: #2a2f39;
+    --color-muted-foreground: #a9b0c0;
+    --color-border: #3c4251;
+    --color-border-strong: #6a7184;
+    --color-input: #3c4251;
+    --color-card: #262b35;
+    --color-card-foreground: #e9edf5;
+    --color-code: #161a22;
 
-    --color-primary: #58a6ff;
-    --color-primary-hover: #7cbaff;
-    --color-primary-foreground: #08111c;
-    --color-primary-quiet: #131c2b;
-    --color-primary-line: #24466f;
-    --color-ring: #58a6ff;
+    /* Der Markenblauton selbst käme hier auf 1,6:1 gegen den Grund und wäre
+       als Text unlesbar. Deshalb dieselbe Achse (H = 266,7°), nur heller:
+       7,48:1 gegen den Grund, dunkle Schrift darauf 8,44:1. Der exakte
+       Logowert bleibt dem hellen Modus vorbehalten. */
+    --color-primary: #8daeff;
+    --color-primary-hover: #aac6ff;
+    --color-primary-foreground: #161a24;
+    --color-primary-quiet: #283452;
+    --color-primary-line: #3b5394;
+    --color-ring: #8daeff;
 
-    --color-secondary: #1a2029;
-    --color-secondary-foreground: #e6edf3;
-    --color-accent: #58a6ff;
-    --color-accent-foreground: #08111c;
+    --color-secondary: #2a2f39;
+    --color-secondary-foreground: #e9edf5;
+    --color-accent: #8daeff;
+    --color-accent-foreground: #161a24;
 
     /* Auf dunklem Grund tragen die Semantikfarben dunkle Schrift, nicht weiße.
        Sonst müsste jede Farbe gleichzeitig hell genug für den Hintergrund und
        dunkel genug für weißen Text sein, was nicht aufgeht. */
-    --color-success: #3fb950;
-    --color-success-foreground: #08111c;
-    --color-warning: #d29922;
-    --color-warning-foreground: #08111c;
-    --color-danger: #f85149;
-    --color-danger-foreground: #08111c;
-    --color-info: #58a6ff;
-    --color-info-foreground: #08111c;
+    --color-success: #5fd37f;
+    --color-success-foreground: #161a24;
+    --color-warning: #ffa467;
+    --color-warning-foreground: #161a24;
+    --color-danger: #fd7467;
+    --color-danger-foreground: #161a24;
+    --color-info: #8daeff;
+    --color-info-foreground: #161a24;
 
-    --shadow-raised: 0 1px 2px -1px rgb(0 0 0 / 0.45), 0 2px 8px -3px rgb(0 0 0 / 0.5);
-    --shadow-floating: 0 8px 18px -8px rgb(0 0 0 / 0.6), 0 20px 48px -24px rgb(0 0 0 / 0.7);
+    --shadow-raised: 0 1px 2px -1px rgb(0 0 0 / 0.4), 0 2px 8px -3px rgb(0 0 0 / 0.45);
+    --shadow-floating: 0 8px 18px -8px rgb(0 0 0 / 0.55), 0 20px 48px -24px rgb(0 0 0 / 0.6);
   }
 
   *,
@@ -379,7 +402,7 @@
   --tw-prose-captions: var(--color-muted-foreground);
   --tw-prose-code: var(--color-foreground);
   --tw-prose-pre-code: var(--color-foreground);
-  --tw-prose-pre-bg: var(--color-muted);
+  --tw-prose-pre-bg: var(--color-code);
   --tw-prose-th-borders: var(--color-border);
   --tw-prose-td-borders: var(--color-border);
 }
@@ -400,7 +423,7 @@
   --tw-prose-invert-captions: var(--color-muted-foreground);
   --tw-prose-invert-code: var(--color-foreground);
   --tw-prose-invert-pre-code: var(--color-foreground);
-  --tw-prose-invert-pre-bg: var(--color-muted);
+  --tw-prose-invert-pre-bg: var(--color-code);
   --tw-prose-invert-th-borders: var(--color-border);
   --tw-prose-invert-td-borders: var(--color-border);
 }
@@ -490,7 +513,7 @@
   content: "" !important;
 }
 .prose pre {
-  background-color: var(--color-muted);
+  background-color: var(--color-code);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 1rem;
@@ -506,7 +529,25 @@
   font-weight: 400;
 }
 
-/* rehype-pretty-code */
+/* rehype-pretty-code
+   ---------------------------------------------------------------------------
+   Das Plugin läuft mit zwei Themes (`github-light` und `github-dark`) und
+   schreibt die Tokenfarben deshalb NICHT als `color`, sondern als
+   `--shiki-light` und `--shiki-dark` in das `style`-Attribut jedes Spans.
+   Ohne die beiden folgenden Regeln liest diese Variablen niemand aus, und
+   jeder Codeblock rendert einfarbig in der Textfarbe. Genau so war es hier
+   bisher: 28 Codeblöcke auf einer Tutorial-Seite, eine einzige Farbe.
+
+   Die Syntaxfarben bleiben bewusst außerhalb des Markenblautons. Sie
+   unterscheiden Tokenarten voneinander, und genau diese Unterscheidung ginge
+   verloren, wenn man sie auf einen Farbton zwingt. */
+.prose pre span {
+  color: var(--shiki-light, inherit);
+}
+.dark .prose pre span {
+  color: var(--shiki-dark, inherit);
+}
+
 .prose [data-rehype-pretty-code-figure] {
   margin: 1.75rem 0;
 }
@@ -527,7 +568,7 @@
   padding: 0 1rem;
 }
 .prose [data-rehype-pretty-code-title] {
-  background-color: var(--color-muted);
+  background-color: var(--color-code);
   border: 1px solid var(--color-border);
   border-bottom: none;
   border-radius: var(--radius-md) var(--radius-md) 0 0;
@@ -612,8 +653,8 @@
   font-family: var(--font-sans, system-ui, sans-serif);
   margin: 0;
   padding: 2rem;
-  background-color: var(--color-background, #fcfcfd);
-  color: var(--color-foreground, #0c0e14);
+  background-color: var(--color-background, #eef0f4);
+  color: var(--color-foreground, #131721);
 }
 .notfound-page-content {
   text-align: center;
@@ -624,13 +665,13 @@
   margin-bottom: 0.5rem;
 }
 .notfound-page-text {
-  color: var(--color-muted-foreground, #5a6270);
+  color: var(--color-muted-foreground, #5d6576);
   margin-bottom: 1.5rem;
 }
 .notfound-page-link {
   display: inline-block;
   padding: 0.625rem 1.125rem;
-  background: var(--color-primary, #1d4ed8);
+  background: var(--color-primary, #2b4bba);
   color: var(--color-primary-foreground, #ffffff);
   text-decoration: none;
   border-radius: var(--radius-md, 0.5rem);
@@ -641,15 +682,15 @@
    der im Dunkelmodus unterwegs ist, hell entgegen. */
 @media (prefers-color-scheme: dark) {
   .notfound-page-body {
-    background-color: #0b0e14;
-    color: #e6edf3;
+    background-color: #1c2029;
+    color: #e9edf5;
   }
   .notfound-page-text {
-    color: #9aa4b4;
+    color: #a9b0c0;
   }
   .notfound-page-link {
-    background: #58a6ff;
-    color: #08111c;
+    background: #8daeff;
+    color: #161a24;
   }
 }
 

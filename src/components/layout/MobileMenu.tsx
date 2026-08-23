@@ -28,11 +28,11 @@ export function MobileMenu({ locale }: Props) {
         </Button>
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0" />
+        <Dialog.Overlay className="ui-overlay fixed inset-0 z-40 bg-[#08111c]/60 backdrop-blur-sm" />
         <Dialog.Content
           className={cn(
-            "fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col bg-[var(--color-background)] shadow-xl",
-            "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-right data-[state=closed]:slide-out-to-right",
+            "ui-drawer fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col",
+            "border-l border-[var(--color-border)] bg-[var(--color-background)] shadow-[var(--shadow-floating)]",
           )}
         >
           <div className="flex items-center justify-between border-b border-[var(--color-border)] p-4">
@@ -84,22 +84,22 @@ function MobileItem({
         <>
           <div
             className={cn(
-              "flex items-center justify-between rounded-md text-sm font-medium",
+              "flex items-center justify-between rounded-md text-sm font-medium transition-colors duration-[var(--duration-hover)]",
               "hover:bg-[var(--color-muted)]",
-              active && "text-[var(--color-primary)]",
+              active && "bg-[var(--color-primary-quiet)] text-[var(--color-primary)]",
             )}
           >
-            <Link
-              href={href}
-              onClick={onNavigate}
-              className="flex-1 rounded-md px-3 py-2"
-            >
+            <Link href={href} onClick={onNavigate} className="flex-1 rounded-md px-3 py-2">
               {t(item.label, locale)}
             </Link>
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              aria-label={open ? t({ de: "Einklappen", en: "Collapse" }, locale) : t({ de: "Ausklappen", en: "Expand" }, locale)}
+              aria-label={
+                open
+                  ? t({ de: "Einklappen", en: "Collapse" }, locale)
+                  : t({ de: "Ausklappen", en: "Expand" }, locale)
+              }
               aria-expanded={open}
               className="rounded-md px-3 py-2 hover:bg-[var(--color-muted)]"
             >
@@ -110,7 +110,7 @@ function MobileItem({
             </button>
           </div>
           {open && (
-            <ul className="ml-3 mt-1 space-y-0.5 border-l border-[var(--color-border)] pl-3">
+            <ul className="mt-1 ml-3 space-y-0.5 border-l border-[var(--color-border)] pl-3">
               {item.children!.map((child) => (
                 <li key={child.href}>
                   <Link
@@ -130,13 +130,12 @@ function MobileItem({
           href={href}
           onClick={onNavigate}
           className={cn(
-            "block rounded-md px-3 py-2 text-sm font-medium",
-            "hover:bg-[var(--color-muted)]",
+            "block rounded-md px-3 py-2 text-sm font-medium transition-colors duration-[var(--duration-hover)]",
             item.highlight
               ? "bg-[var(--color-primary)] text-[var(--color-primary-foreground)]"
               : active
-                ? "text-[var(--color-primary)]"
-                : "text-[var(--color-foreground)]",
+                ? "bg-[var(--color-primary-quiet)] text-[var(--color-primary)]"
+                : "text-[var(--color-foreground)] hover:bg-[var(--color-muted)]",
           )}
         >
           {t(item.label, locale)}

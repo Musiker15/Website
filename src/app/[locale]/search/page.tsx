@@ -32,10 +32,12 @@ export default async function SearchPage({ params, searchParams }: Props) {
   const t = await getTranslations("search");
 
   return (
-    <div className="container-page max-w-3xl py-10">
+    <div className="container-page py-12 md:py-16">
       <Breadcrumbs locale={locale} items={[{ label: t("title") }]} />
       <header className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight">{t("title")}</h1>
+        <h1 className="text-[1.875rem] leading-tight font-semibold tracking-[-0.025em] md:text-4xl">
+          {t("title")}
+        </h1>
       </header>
       <SearchPageClient locale={locale} initialQuery={q} />
     </div>

@@ -1,38 +1,34 @@
 {
   "common": {
     "skipToContent": "Skip to content",
-    "loading": "Loading …",
     "search": "Search",
     "searchPlaceholder": "Search tutorials …",
-    "searchShortcut": "Ctrl",
-    "noResults": "No results",
     "menu": "Menu",
     "close": "Close",
-    "open": "Open",
-    "previous": "Previous",
-    "next": "Next",
-    "readMore": "Read more",
-    "all": "All",
-    "version": "Version",
-    "released": "Released",
-    "updated": "Updated",
-    "by": "by",
     "language": "Language",
     "theme": "Theme",
     "lightMode": "Light mode",
     "darkMode": "Dark mode",
-    "systemMode": "System default"
+    "systemMode": "System default",
+    "collapse": "Collapse",
+    "expand": "Expand",
+    "copyCode": "Copy code",
+    "copied": "Copied",
+    "toClose": "to close"
   },
   "home": {
-    "heroBadge": "Tutorials & Guides",
     "heroCtaPrimary": "Browse tutorials",
     "heroCtaSecondary": "GitHub",
-    "ctaTitle": "Want to chat?",
-    "ctaSubtitle": "Join us on Discord or check out the GitHub repos.",
-    "ctaPrimary": "Read tutorials",
-    "ctaSecondary": "Community",
+    "ctaTitle": "Questions, corrections or your own experience?",
+    "ctaSubtitle": "Discord is where I answer fastest. For mistakes in a tutorial, GitHub is the shortest route to me.",
+    "ctaPrimary": "Go to community",
+    "ctaSecondary": "Open Discord",
     "latestNews": "Latest news",
-    "moreNews": "All news"
+    "moreNews": "All news",
+    "heroTitle": "Tutorials for Debian, Apache and running your own server",
+    "heroLead": "Written down step by step while setting up my own servers. Tested on Debian, with every command you need included.",
+    "latestDocs": "Recently written",
+    "allDocs": "All tutorials"
   },
   "docs": {
     "title": "Tutorials",
@@ -42,16 +38,12 @@
     "editPage": "Edit this page",
     "lastUpdated": "Last updated",
     "related": "Related tutorials",
-    "categories": {
-      "debian-tutorials": "Debian Tutorials",
-      "pc-hardware": "PC Hardware"
-    }
+    "sidebarLabel": "Tutorial navigation",
+    "allTutorials": "All tutorials"
   },
   "news": {
     "title": "News & Updates",
-    "subtitle": "Latest posts, announcements and updates.",
-    "publishedOn": "Published on",
-    "readArticle": "Read article"
+    "subtitle": "Latest posts, announcements and updates."
   },
   "search": {
     "title": "Search",
@@ -61,11 +53,9 @@
     "tryDifferent": "Try a different search term.",
     "groupDocs": "Tutorials",
     "groupNews": "News",
-    "groupPages": "Pages"
-  },
-  "footer": {
-    "madeWith": "Built with",
-    "and": "and"
+    "groupPages": "Pages",
+    "hintNavigate": "to navigate",
+    "hintOpen": "to open"
   },
   "notFound": {
     "title": "Page not found",

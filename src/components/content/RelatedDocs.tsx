@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { ContentItem } from "@/types/content";
+import { cn } from "@/lib/utils";
 
 interface Props {
   heading: string;
@@ -19,8 +20,11 @@ export function RelatedDocs({ heading, items }: Props) {
   if (items.length === 0) return null;
 
   return (
-    <nav aria-labelledby="related-docs" className="mt-12 border-t border-[var(--color-border)] pt-8">
-      <h2 id="related-docs" className="mb-4 text-lg font-semibold tracking-tight">
+    <nav
+      aria-labelledby="related-docs"
+      className="mt-16 border-t border-[var(--color-border)] pt-8"
+    >
+      <h2 id="related-docs" className="mb-5 text-lg font-semibold tracking-tight">
         {heading}
       </h2>
       <ul className="grid gap-3 sm:grid-cols-2">
@@ -28,14 +32,23 @@ export function RelatedDocs({ heading, items }: Props) {
           <li key={item.url}>
             <Link
               href={item.url}
-              className="group block h-full rounded-lg border border-[var(--color-border)] p-4 transition-colors hover:border-[var(--color-primary)]/40"
+              className={cn(
+                "group block h-full rounded-lg border border-[var(--color-border)] p-4",
+                "transition-[border-color,background-color] duration-[var(--duration-hover)] ease-[var(--ease-out)]",
+                "hover:border-[var(--color-primary-line)] hover:bg-[var(--color-muted)]",
+              )}
             >
-              <span className="flex items-center justify-between gap-2 font-medium">
+              <span className="flex items-start justify-between gap-2 leading-snug font-medium transition-colors duration-[var(--duration-hover)] group-hover:text-[var(--color-primary)]">
                 <span>{item.frontmatter.title}</span>
-                <ArrowRight className="h-4 w-4 flex-shrink-0 opacity-0 transition-opacity group-hover:opacity-100" />
+                {/* Dauerhaft sichtbar. Ein Pfeil, der nur bei Hover erscheint,
+                    existiert auf Touchgeräten nicht. */}
+                <ArrowRight
+                  className="mt-0.5 h-4 w-4 flex-shrink-0 text-[var(--color-muted-foreground)] transition-transform duration-[var(--duration-hover)] ease-[var(--ease-out)] group-hover:translate-x-0.5"
+                  aria-hidden
+                />
               </span>
               {item.frontmatter.description && (
-                <span className="mt-1 block text-sm text-[var(--color-muted-foreground)]">
+                <span className="mt-1.5 block text-sm leading-relaxed text-[var(--color-muted-foreground)]">
                   {item.frontmatter.description}
                 </span>
               )}

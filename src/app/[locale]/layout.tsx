@@ -27,9 +27,12 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  // Muss zu `--color-background` in src/styles/globals.css passen, sonst
+  // steht die Browserleiste auf Mobilgeräten in einem anderen Ton als die
+  // Seite darunter.
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    { media: "(prefers-color-scheme: light)", color: "#fcfcfd" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0e14" },
   ],
   colorScheme: "light dark",
 };
@@ -63,9 +66,21 @@ export async function generateMetadata({
     // Issue #278). Daher beide Stellen synchron halten.
     referrer: "strict-origin-when-cross-origin",
     keywords: [
-      "Musiker15", "Moritz Kohm", "Tutorials", "Guides", "Debian", "Linux",
-      "Apache", "MariaDB", "Server", "Self-Hosting", "Certbot", "Let's Encrypt",
-      "MSK Scripts", "TeamSpeak", "Sinusbot",
+      "Musiker15",
+      "Moritz Kohm",
+      "Tutorials",
+      "Guides",
+      "Debian",
+      "Linux",
+      "Apache",
+      "MariaDB",
+      "Server",
+      "Self-Hosting",
+      "Certbot",
+      "Let's Encrypt",
+      "MSK Scripts",
+      "TeamSpeak",
+      "Sinusbot",
     ],
     authors: [{ name: siteConfig.author.name }],
     creator: siteConfig.author.name,
@@ -79,9 +94,7 @@ export async function generateMetadata({
         "x-default": "/de",
       },
       types: {
-        "application/rss+xml": [
-          { url: `/${l}/news/feed.xml`, title: `${siteConfig.name} | News` },
-        ],
+        "application/rss+xml": [{ url: `/${l}/news/feed.xml`, title: `${siteConfig.name} | News` }],
       },
     },
     openGraph: {
@@ -107,10 +120,7 @@ export async function generateMetadata({
       images: [siteConfig.ogImage],
     },
     icons: {
-      icon: [
-        { url: "/favicon.ico" },
-        { url: "/logo.png", type: "image/png", sizes: "any" },
-      ],
+      icon: [{ url: "/favicon.ico" }, { url: "/logo.png", type: "image/png", sizes: "any" }],
       apple: "/logo.png",
       shortcut: "/favicon.ico",
     },

@@ -21,12 +21,14 @@ export function Navbar({ locale }: NavbarProps) {
         ))}
       </NavigationMenu.List>
 
-      <div className="absolute left-0 top-full flex justify-center">
+      <div className="absolute top-full left-0 flex justify-center">
+        {/* `ui-pop` in globals.css ersetzt die früheren `animate-in`-Klassen.
+            Die stammen aus dem Plugin `tailwindcss-animate`, das hier nie
+            installiert war: das Menü erschien also völlig übergangslos. */}
         <NavigationMenu.Viewport
           className={cn(
-            "relative mt-2 h-[var(--radix-navigation-menu-viewport-height)] w-[var(--radix-navigation-menu-viewport-width)]",
-            "origin-top overflow-hidden rounded-md border border-[var(--color-border)] bg-[var(--color-background)] shadow-lg",
-            "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0",
+            "ui-pop relative mt-2 h-[var(--radix-navigation-menu-viewport-height)] w-[var(--radix-navigation-menu-viewport-width)]",
+            "origin-top overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-floating)]",
           )}
         />
       </div>
@@ -37,7 +39,9 @@ export function Navbar({ locale }: NavbarProps) {
 function NavbarItem({ item, locale }: { item: NavItem; locale: Locale }) {
   const pathname = usePathname();
   const router = useRouter();
-  const localizedHref = item.external ? item.href : `/${locale}${item.href === "/" ? "" : item.href}`;
+  const localizedHref = item.external
+    ? item.href
+    : `/${locale}${item.href === "/" ? "" : item.href}`;
   const active = isActive(pathname, localizedHref);
   const label = t(item.label, locale);
 
@@ -55,30 +59,33 @@ function NavbarItem({ item, locale }: { item: NavItem; locale: Locale }) {
             }
           }}
           className={cn(
-            "group flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-            "hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)]",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]",
-            active ? "text-[var(--color-primary)]" : "text-[var(--color-foreground)]",
+            "group flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium",
+            "transition-[background-color,color] duration-[var(--duration-hover)] ease-[var(--ease-out)]",
+            "hover:bg-[var(--color-muted)]",
+            "focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:outline-none",
+            active
+              ? "bg-[var(--color-primary-quiet)] text-[var(--color-primary)]"
+              : "text-[var(--color-foreground)]",
           )}
         >
           {label}
           <ChevronDown
-            className="h-3 w-3 transition-transform duration-200 group-data-[state=open]:rotate-180"
+            className="h-3 w-3 transition-transform duration-[var(--duration-pop)] ease-[var(--ease-out)] group-data-[state=open]:rotate-180"
             aria-hidden
           />
         </NavigationMenu.Trigger>
-        <NavigationMenu.Content className="absolute left-0 top-0 w-full md:w-auto">
+        <NavigationMenu.Content className="absolute top-0 left-0 w-full md:w-auto">
           <ul className="grid w-[28rem] gap-1 p-3 md:grid-cols-2">
             {item.children.map((child) => (
               <li key={child.href}>
                 <NavigationMenu.Link asChild>
                   <Link
                     href={`/${locale}${child.href === "/" ? "" : child.href}`}
-                    className="block select-none space-y-0.5 rounded-md p-3 leading-none transition-colors hover:bg-[var(--color-muted)] focus:bg-[var(--color-muted)]"
+                    className="block rounded-md p-3 transition-colors duration-[var(--duration-hover)] ease-[var(--ease-out)] select-none hover:bg-[var(--color-muted)] focus:bg-[var(--color-muted)]"
                   >
                     <div className="text-sm font-medium">{t(child.label, locale)}</div>
                     {child.description && (
-                      <p className="text-xs text-[var(--color-muted-foreground)]">
+                      <p className="mt-1 text-xs leading-relaxed text-[var(--color-muted-foreground)]">
                         {t(child.description, locale)}
                       </p>
                     )}
@@ -100,14 +107,14 @@ function NavbarItem({ item, locale }: { item: NavItem; locale: Locale }) {
           target={item.external ? "_blank" : undefined}
           rel={item.external ? "noopener noreferrer" : undefined}
           className={cn(
-            "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-            "hover:bg-[var(--color-muted)]",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]",
+            "rounded-md px-3 py-2 text-sm font-medium",
+            "transition-[background-color,color] duration-[var(--duration-hover)] ease-[var(--ease-out)]",
+            "focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:outline-none",
             item.highlight
-              ? "bg-[var(--color-primary)] text-[var(--color-primary-foreground)] hover:opacity-90 hover:bg-[var(--color-primary)]"
+              ? "bg-[var(--color-primary)] text-[var(--color-primary-foreground)] hover:bg-[var(--color-primary-hover)]"
               : active
-                ? "text-[var(--color-primary)]"
-                : "text-[var(--color-foreground)]",
+                ? "bg-[var(--color-primary-quiet)] text-[var(--color-primary)] hover:bg-[var(--color-primary-quiet)]"
+                : "text-[var(--color-foreground)] hover:bg-[var(--color-muted)]",
           )}
         >
           {label}

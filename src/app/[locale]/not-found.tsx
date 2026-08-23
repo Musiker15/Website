@@ -9,13 +9,15 @@ export default function NotFound() {
   const locale = useLocale() as Locale;
 
   return (
-    <div className="container-page flex min-h-[60vh] flex-col items-center justify-center py-16 text-center">
+    <div className="container-page flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
       <p className="font-mono text-sm text-[var(--color-muted-foreground)]">404</p>
-      <h1 className="mt-2 text-balance text-3xl font-bold tracking-tight md:text-4xl">
+      <h1 className="mt-3 text-[1.875rem] leading-tight font-semibold tracking-[-0.025em] text-balance md:text-4xl">
         {t("title")}
       </h1>
-      <p className="mt-3 max-w-md text-balance text-[var(--color-muted-foreground)]">{t("subtitle")}</p>
-      <div className="mt-8 flex flex-wrap gap-3">
+      <p className="mt-3 max-w-md leading-relaxed text-pretty text-[var(--color-muted-foreground)]">
+        {t("subtitle")}
+      </p>
+      <div className="mt-8 flex flex-wrap justify-center gap-3">
         <Button asChild variant="primary">
           <Link href={`/${locale}`}>
             <Home className="h-4 w-4" />

@@ -22,12 +22,15 @@ const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
 export function Header({ locale }: HeaderProps) {
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-background)]/85 backdrop-blur-md supports-[backdrop-filter]:bg-[var(--color-background)]/70">
-      {/* Volle Browserbreite — nur leichtes Edge-Padding für Atmungsfreiheit */}
-      <div className="flex h-16 w-full items-center gap-4 px-4 md:px-6 lg:px-8">
+      {/* Die Trennlinie läuft über die volle Breite, der Inhalt nicht: Header,
+          Seiteninhalt und Footer teilen sich `container-page`. Vorher war der
+          Header voll-breit, das Logo stand dadurch auf 1440px sichtbar 75px
+          links neben der Überschrift darunter. */}
+      <div className="container-page flex h-16 items-center gap-4">
         {/* Logo */}
         <Link
           href={`/${locale}`}
-          className="flex items-center gap-2 font-semibold tracking-tight transition-opacity hover:opacity-80"
+          className="flex shrink-0 items-center gap-2 font-semibold tracking-tight text-[var(--color-foreground)] transition-colors duration-[var(--duration-hover)] ease-[var(--ease-out)] hover:text-[var(--color-primary)]"
           aria-label={siteConfig.name}
         >
           <Image
@@ -76,4 +79,3 @@ export function Header({ locale }: HeaderProps) {
     </header>
   );
 }
-

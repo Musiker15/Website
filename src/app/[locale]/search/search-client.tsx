@@ -37,13 +37,20 @@ export function SearchPageClient({ locale, initialQuery }: Props) {
 
   return (
     <>
-      <div className="flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-muted)]/40 px-3">
-        <Search className="h-4 w-4 text-[var(--color-muted-foreground)]" />
+      {/* Eingabefeld auf Lesespaltenbreite. Die Trefferliste darunter darf über
+          die volle Rahmenbreite laufen, ein 1262px breites Eingabefeld sieht
+          dagegen aus wie ein Fehler im Layout. */}
+      <div className="flex max-w-[var(--measure)] items-center gap-2 rounded-md border border-[var(--color-border-strong)] bg-[var(--color-muted)]/40 px-3 transition-colors duration-[var(--duration-hover)] focus-within:border-[var(--color-primary)]">
+        <Search
+          className="h-4 w-4 flex-shrink-0 text-[var(--color-muted-foreground)]"
+          aria-hidden
+        />
         <input
           autoFocus
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={t("placeholder")}
+          aria-label={t("title")}
           className="h-12 flex-1 bg-transparent text-base outline-none"
         />
       </div>
@@ -52,23 +59,27 @@ export function SearchPageClient({ locale, initialQuery }: Props) {
         {!query.trim() ? null : results.length === 0 ? (
           <p className="text-[var(--color-muted-foreground)]">
             {t("noResultsFor")}{" "}
-            <span className="font-medium text-[var(--color-foreground)]">"{query}"</span> · {t("tryDifferent")}
+            <span className="font-medium text-[var(--color-foreground)]">{query}</span>.{" "}
+            {t("tryDifferent")}
           </p>
         ) : (
           <>
             <p className="mb-4 text-sm text-[var(--color-muted-foreground)]">
-              {results.length} {t("resultsFor")} "{query}"
+              {results.length} {t("resultsFor")}{" "}
+              <span className="font-medium text-[var(--color-foreground)]">{query}</span>
             </p>
-            <ul className="space-y-3">
+            <ul className="divide-y divide-[var(--color-border)]">
               {results.map((r) => (
                 <li key={r.id}>
                   <Link
                     href={r.url}
-                    className="block rounded-md border border-[var(--color-border)] p-4 transition-colors hover:border-[var(--color-primary)]/40"
+                    className="group -mx-3 block rounded-md px-3 py-3 transition-colors duration-[var(--duration-hover)] ease-[var(--ease-out)] hover:bg-[var(--color-muted)]"
                   >
-                    <p className="font-medium">{r.title}</p>
+                    <p className="leading-snug font-medium transition-colors duration-[var(--duration-hover)] group-hover:text-[var(--color-primary)]">
+                      {r.title}
+                    </p>
                     {r.description && (
-                      <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
+                      <p className="mt-1 text-sm leading-relaxed text-[var(--color-muted-foreground)]">
                         {r.description}
                       </p>
                     )}

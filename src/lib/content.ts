@@ -31,7 +31,9 @@ export function getContent(
     if (!frontmatterResult.success) {
       throw new Error(
         `Invalides Frontmatter in ${path.relative(process.cwd(), filePath)}:\n` +
-          frontmatterResult.error.issues.map((e) => `  - ${e.path.join(".")}: ${e.message}`).join("\n"),
+          frontmatterResult.error.issues
+            .map((e) => `  - ${e.path.join(".")}: ${e.message}`)
+            .join("\n"),
       );
     }
     const frontmatter: Frontmatter = frontmatterResult.data;
@@ -48,7 +50,10 @@ export function getContent(
       locale,
       slug,
       path: section === "pages" ? pathStr : `${section}/${pathStr}`,
-      url: `/${locale}/${section === "pages" ? urlPath : `${section}/${urlPath}`}`.replace(/\/+$/, ""),
+      url: `/${locale}/${section === "pages" ? urlPath : `${section}/${urlPath}`}`.replace(
+        /\/+$/,
+        "",
+      ),
       frontmatter,
       content,
       modifiedAt: stat.mtime,
@@ -97,7 +102,8 @@ export function listAllContentItems(section: ContentSection, locale: Locale): Co
     if (item) items.push(item);
   }
   items.sort((a, b) => {
-    if (a.frontmatter.order !== b.frontmatter.order) return a.frontmatter.order - b.frontmatter.order;
+    if (a.frontmatter.order !== b.frontmatter.order)
+      return a.frontmatter.order - b.frontmatter.order;
     return a.frontmatter.title.localeCompare(b.frontmatter.title);
   });
   return items;
@@ -112,6 +118,50 @@ export function listNews(locale: Locale): ContentItem[] {
     const db = b.frontmatter.date?.getTime() ?? 0;
     return db - da;
   });
+}
+
+/**
+ * Die zuletzt geschriebenen Tutorials, absteigend nach `date`.
+ *
+ * Übersichtsseiten fallen raus: ein Item ist ein Ordner-Index, wenn ein
+ * anderes Item einen längeren Slug mit demselben Anfang hat. Das kommt ohne
+ * Dateisystemzugriff aus und bleibt damit auch dann richtig, wenn ein Ordner
+ * einmal ohne `index.md` existiert.
+ *
+ * Bewusst nach Datum und nicht nach Beliebtheit: es gibt kein Analytics auf
+ * dieser Seite, eine Sortierung nach "meistgelesen" wäre also erfunden.
+ */
+export function listLatestDocs(locale: Locale, limit = 3): ContentItem[] {
+  const all = listAllContentItems("docs", locale);
+  const isOverview = (item: ContentItem) =>
+    item.slug.length === 0 ||
+    all.some(
+      (other) =>
+        other.slug.length > item.slug.length && item.slug.every((seg, i) => other.slug[i] === seg),
+    );
+
+  return all
+    .filter((item) => !isOverview(item))
+    .sort((a, b) => {
+      const da = a.frontmatter.date?.getTime() ?? 0;
+      const db = b.frontmatter.date?.getTime() ?? 0;
+      if (db !== da) return db - da;
+      return a.frontmatter.title.localeCompare(b.frontmatter.title);
+    })
+    .slice(0, limit);
+}
+
+/**
+ * Beschriftung des Bereichs, in dem ein Tutorial liegt.
+ *
+ * Bevorzugt der Titel aus der `index.md` des Ordners, damit im Hero
+ * "Debian-Tutorials" steht und nicht der humanisierte Verzeichnisname.
+ * Liegt das Tutorial direkt unter `docs/`, gibt es keinen Bereich.
+ */
+export function getSectionLabel(item: ContentItem, locale: Locale): string | undefined {
+  const parent = item.slug.slice(0, -1);
+  if (parent.length === 0) return undefined;
+  return getContent("docs", locale, parent)?.frontmatter.title ?? humanize(parent.at(-1) ?? "");
 }
 
 /**
@@ -209,7 +259,5 @@ export function buildDocTree(locale: Locale): DocTreeNode[] {
 }
 
 function humanize(segment: string): string {
-  return segment
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+  return segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }

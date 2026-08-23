@@ -4,78 +4,156 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ============================================================================
-   KOMA-Script Design-Tokens (Tailwind v4 — CSS-First Config)
+   Musiker15 Design-Tokens (Tailwind v4, CSS-First Config)
+   ----------------------------------------------------------------------------
+   Eine Quelle für Farbe, Radius, Schatten und Bewegung. Komponenten greifen
+   ausschließlich über `var(--…)` darauf zu, nie über Hex-Werte im JSX.
+
+   Farbsystem: ein blauer Akzent auf kühlen Neutraltönen. Die Blaustufen sind
+   so gewählt, dass Text darauf in beiden Modi mindestens WCAG AA erreicht:
+   `--color-primary` trägt weiße Schrift (Light) bzw. dunkle Schrift (Dark),
+   `--color-primary-quiet` ist eine Fläche, kein Textträger.
    ============================================================================ */
 @theme {
-  /* Typografie — Fonts werden 100% lokal über @fontsource-variable geladen
-     (siehe imports in app/[locale]/layout.tsx). Keine externe Kommunikation. */
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+  /* Typografie. Fonts werden zu 100% lokal über @fontsource-variable geladen
+     (Imports in app/[locale]/layout.tsx). Keine externe Kommunikation. */
+  --font-sans:
+    "Inter Variable", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  --font-mono:
+    "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
-  /* Farben — Light Mode (Tokens) */
-  --color-background: #ffffff;
-  --color-foreground: #0a0a0a;
-  --color-muted: #f4f4f5;
-  --color-muted-foreground: #71717a;
-  --color-border: #e4e4e7;
-  --color-input: #e4e4e7;
-  --color-ring: #1e40af;
+  /* --- Flächen und Text, Light ------------------------------------------- */
+  /* Kein reines Weiß als Grundfläche: die Karten sollen sich davon abheben
+     können, ohne dass dafür ein Schatten die ganze Arbeit machen muss. */
+  --color-background: #fcfcfd;
+  --color-foreground: #0c0e14;
+  --color-muted: #f1f3f7;
+  --color-muted-foreground: #5a6270;
+  --color-border: #e2e5ec;
+  /* Trennt zwei Aufgaben: `border` ist die Haarlinie zwischen Flächen und darf
+     zurückhaltend sein, `border-strong` umreißt Bedienelemente (Umriss-Knopf,
+     Suchfeld, Tabellenkopf) und hält deshalb die 3:1 aus WCAG 1.4.11. */
+  --color-border-strong: #8b93a1;
+  --color-input: #e2e5ec;
   --color-card: #ffffff;
-  --color-card-foreground: #0a0a0a;
+  --color-card-foreground: #0c0e14;
 
-  --color-primary: #1e40af;
+  /* --- Akzent, Light ------------------------------------------------------ */
+  --color-primary: #1d4ed8;
+  --color-primary-hover: #1a45bd;
   --color-primary-foreground: #ffffff;
-  --color-secondary: #f4f4f5;
-  --color-secondary-foreground: #18181b;
-  --color-accent: #2563eb;
+  --color-primary-quiet: #eaf0ff;
+  --color-primary-line: #c3d3fb;
+  --color-ring: #1d4ed8;
+
+  --color-secondary: #f1f3f7;
+  --color-secondary-foreground: #16181f;
+  --color-accent: #1d4ed8;
   --color-accent-foreground: #ffffff;
 
-  --color-success: #16a34a;
+  /* --- Semantik, Light ---------------------------------------------------- */
+  /* Alle vier tragen weiße Schrift und liegen dafür auf 700er-Stufen.
+     Die 500er-Varianten (#f59e0b, #16a34a) schaffen mit Weiß keine 4,5:1. */
+  --color-success: #15803d;
   --color-success-foreground: #ffffff;
-  --color-warning: #f59e0b;
+  --color-warning: #b45309;
   --color-warning-foreground: #ffffff;
-  --color-danger: #dc2626;
+  --color-danger: #b91c1c;
   --color-danger-foreground: #ffffff;
-  --color-info: #0284c7;
+  --color-info: #0369a1;
   --color-info-foreground: #ffffff;
 
-  /* Radien */
+  /* --- Breiten ------------------------------------------------------------
+     Zwei Maße, mehr nicht.
+     `--frame` ist der äußere Rahmen: Header, Footer, Hero, Doc-Raster und
+     jede Inhaltsseite sitzen darin, deshalb fluchten ihre Kanten.
+     `--measure` ist die Lesespalte. Vorher hatte jede Seite ihre eigene
+     Breite (News 896px, Artikel 768px, Rechtliches 768px, Docs 1280px), was
+     beim Wechsel zwischen zwei Seiten sichtbar sprang.
+
+     Die beiden Werte hängen zusammen: Rahmen innen 1312px minus Baum (240),
+     Verzeichnis (192) und zwei Abstände (je 40) ergibt genau 800px. Deshalb
+     ist die Textspalte eines Tutorials exakt so breit wie die einer Seite
+     ohne Seitenleisten. Wer einen der Werte ändert, rechnet den anderen mit. */
+  --frame: 86rem;
+  --measure: 50rem;
+
+  /* --- Radien ------------------------------------------------------------- */
+  /* Eine Skala, drei Stufen, konsequent durchgezogen: Steuerelemente `md`,
+     Container `lg`, kleine Marker `sm`. */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
 
-  /* Animationen */
-  --animate-fade-in: fadeIn 0.2s ease-out;
-  --animate-slide-up: slideUp 0.3s ease-out;
-  --animate-slide-down: slideDown 0.3s ease-out;
+  /* --- Schatten ----------------------------------------------------------- */
+  /* Getönt statt neutralschwarz, jeweils mit Versatz und weicher Streuung.
+     Ein Schein ohne Versatz wäre Dekoration, keine Tiefe. */
+  --shadow-raised: 0 1px 2px -1px rgb(12 14 20 / 0.1), 0 2px 6px -2px rgb(12 14 20 / 0.08);
+  --shadow-floating: 0 6px 14px -6px rgb(12 14 20 / 0.18), 0 16px 40px -20px rgb(12 14 20 / 0.22);
+
+  /* --- Bewegung ----------------------------------------------------------- */
+  /* Die eingebauten CSS-Kurven sind zu schwach, um beabsichtigt zu wirken.
+     `ease-in` kommt bewusst nicht vor: es verzögert genau den Moment, in dem
+     der Blick am Element hängt, und lässt jede Interaktion träge wirken. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --duration-press: 140ms;
+  --duration-hover: 180ms;
+  --duration-pop: 170ms;
+  --duration-pop-exit: 120ms;
+  --duration-drawer: 320ms;
+  --duration-drawer-exit: 220ms;
 }
 
 /* ============================================================================
    Dark-Mode-Tokens
+   ----------------------------------------------------------------------------
+   Tiefes Blaugrau statt Schwarz, damit Karten und Codeblöcke eine Stufe
+   darüber liegen können. `muted-foreground` steht auf 7,7:1 (vorher 6,2:1).
    ============================================================================ */
 @layer base {
   .dark {
-    /* GitHub-Dark-inspiriertes Schema — heller und kontrastreicher als reines
-       Schwarz. `background` ist leicht ins blau-graue gezogen, `muted` (Code-
-       Blöcke, Cards) hebt sich klar vom Body ab. */
-    --color-background: #0d1117;
+    --color-background: #0b0e14;
     --color-foreground: #e6edf3;
-    --color-muted: #161b22;
-    --color-muted-foreground: #8b949e;
-    --color-border: #30363d;
-    --color-input: #30363d;
-    --color-ring: #58a6ff;
-    --color-card: #161b22;
+    --color-muted: #141922;
+    --color-muted-foreground: #9aa4b4;
+    --color-border: #262c38;
+    --color-border-strong: #5b6472;
+    --color-input: #262c38;
+    --color-card: #121722;
     --color-card-foreground: #e6edf3;
 
     --color-primary: #58a6ff;
-    --color-primary-foreground: #0d1117;
-    --color-secondary: #21262d;
+    --color-primary-hover: #7cbaff;
+    --color-primary-foreground: #08111c;
+    --color-primary-quiet: #131c2b;
+    --color-primary-line: #24466f;
+    --color-ring: #58a6ff;
+
+    --color-secondary: #1a2029;
     --color-secondary-foreground: #e6edf3;
-    --color-accent: #79c0ff;
-    --color-accent-foreground: #0d1117;
+    --color-accent: #58a6ff;
+    --color-accent-foreground: #08111c;
+
+    /* Auf dunklem Grund tragen die Semantikfarben dunkle Schrift, nicht weiße.
+       Sonst müsste jede Farbe gleichzeitig hell genug für den Hintergrund und
+       dunkel genug für weißen Text sein, was nicht aufgeht. */
+    --color-success: #3fb950;
+    --color-success-foreground: #08111c;
+    --color-warning: #d29922;
+    --color-warning-foreground: #08111c;
+    --color-danger: #f85149;
+    --color-danger-foreground: #08111c;
+    --color-info: #58a6ff;
+    --color-info-foreground: #08111c;
+
+    --shadow-raised: 0 1px 2px -1px rgb(0 0 0 / 0.45), 0 2px 8px -3px rgb(0 0 0 / 0.5);
+    --shadow-floating: 0 8px 18px -8px rgb(0 0 0 / 0.6), 0 20px 48px -24px rgb(0 0 0 / 0.7);
   }
 
   *,
@@ -86,6 +164,8 @@
 
   html {
     scroll-behavior: smooth;
+    /* Sprungziele landen unter dem klebenden Header (h-16 plus Luft). */
+    scroll-padding-top: 5.5rem;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
@@ -99,272 +179,429 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* --- Browser-Oberflächen ------------------------------------------------
+     Auswahl, Cursor, Aufzählungspunkte und Fokusring kommen ungestylt mit
+     Browser-Defaults, die zu keinem Designsystem gehören. Hier eingefärbt. */
   ::selection {
-    background-color: var(--color-primary);
-    color: var(--color-primary-foreground);
+    background-color: var(--color-primary-line);
+    color: var(--color-foreground);
   }
 
-  /* Fokus-Ring */
+  :where(input, textarea) {
+    caret-color: var(--color-primary);
+  }
+
+  ::marker {
+    color: var(--color-muted-foreground);
+  }
+
+  ::placeholder {
+    color: var(--color-muted-foreground);
+    opacity: 1;
+  }
+
+  /* Ziffern in Datums- und Zahlenangaben laufen auf gleicher Breite, damit
+     Listen untereinander nicht zappeln. */
+  time,
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
   :focus-visible {
     outline: 2px solid var(--color-ring);
     outline-offset: 2px;
     border-radius: var(--radius-sm);
   }
 
-  /* Smooth-Anchor-Scroll mit Header-Offset */
   :target {
-    scroll-margin-top: 5rem;
+    scroll-margin-top: 5.5rem;
   }
 }
 
 /* ============================================================================
-   Animations
+   Bewegung
+   ----------------------------------------------------------------------------
+   Radix montet und demontiert seine Overlays, deshalb Keyframes statt
+   Transitions: Radix wartet beim Schließen auf das `animationend`.
+   Zwei Regeln durchgehend: nichts beginnt bei `scale(0)`, und der Ausgang ist
+   schneller als der Eingang.
    ============================================================================ */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-8px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes popOut {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+@keyframes drawerIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes drawerOut {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+@keyframes modalOut {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.98);
+  }
+}
+
+@utility ui-overlay {
+  animation: fadeIn var(--duration-pop) var(--ease-out);
+
+  &[data-state="closed"] {
+    animation: fadeOut var(--duration-pop-exit) var(--ease-out);
+  }
+}
+
+/* Popover, Dropdown und Navigationsmenü wachsen aus ihrem Auslöser heraus,
+   nicht aus ihrer Mitte. Radix liefert den Ursprung als CSS-Variable. */
+@utility ui-pop {
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin, center top);
+  animation: popIn var(--duration-pop) var(--ease-out);
+
+  &[data-state="closed"] {
+    animation: popOut var(--duration-pop-exit) var(--ease-out);
+  }
+}
+
+@utility ui-drawer {
+  animation: drawerIn var(--duration-drawer) var(--ease-drawer);
+
+  &[data-state="closed"] {
+    animation: drawerOut var(--duration-drawer-exit) var(--ease-drawer);
+  }
+}
+
+/* Ein Modal hängt an keinem Auslöser, es bleibt in der Mitte verankert.
+   Die Verschiebung um -50% steckt in den Keyframes, sonst überschreibt die
+   Animation die Zentrierung. */
+@utility ui-modal {
+  animation: modalIn var(--duration-pop) var(--ease-out);
+
+  &[data-state="closed"] {
+    animation: modalOut var(--duration-pop-exit) var(--ease-out);
+  }
 }
 
 /* ============================================================================
    Prose / Markdown-Content (rehype-pretty-code + Tailwind-Typography)
    ============================================================================ */
-@layer components {
-  /* Tailwind-Typography setzt seine Farben per --tw-prose-*-Variablen, die
-     in der Cascade nach unseren direkten `.prose pre`-Overrides kommen — wir
+/* Bewusst OHNE `@layer`.
+   Das Typography-Plugin emittiert `.prose { font-size; line-height; max-width }`
+   in der utilities-Ebene. Gleiche Specificity, spätere Ebene, also gewinnt es
+   gegen alles, was hier in `@layer components` stünde: die Lesespalte blieb
+   dadurch bei den 65ch des Plugins statt bei `--measure`, und die Schriftgröße
+   bei 16px. Regeln außerhalb jeder Ebene stehen in der Kaskade über allen
+   Ebenen und setzen sich verlässlich durch.
+   ---------------------------------------------------------------------------
+   Tailwind-Typography setzt seine Farben per --tw-prose-*-Variablen, die
+     in der Cascade nach unseren direkten `.prose pre`-Overrides kommen. Wir
      setzen die Variablen also direkt auf unsere Design-Tokens. Sonst rendern
-     Code-Blöcke im Light-Mode mit Typography's dunklem GitHub-Dark-Ton und
-     im Dark-Mode kaum abhebbar vom Body. */
-  .prose {
-    --tw-prose-body: var(--color-foreground);
-    --tw-prose-headings: var(--color-foreground);
-    --tw-prose-lead: var(--color-muted-foreground);
-    --tw-prose-links: var(--color-primary);
-    --tw-prose-bold: var(--color-foreground);
-    --tw-prose-counters: var(--color-muted-foreground);
-    --tw-prose-bullets: var(--color-border);
-    --tw-prose-hr: var(--color-border);
-    --tw-prose-quotes: var(--color-foreground);
-    --tw-prose-quote-borders: var(--color-primary);
-    --tw-prose-captions: var(--color-muted-foreground);
-    --tw-prose-code: var(--color-foreground);
-    --tw-prose-pre-code: var(--color-foreground);
-    --tw-prose-pre-bg: var(--color-muted);
-    --tw-prose-th-borders: var(--color-border);
-    --tw-prose-td-borders: var(--color-border);
-  }
-  /* prose-invert wird automatisch via `dark:prose-invert` aktiv. Dort gelten
-     die `--tw-prose-invert-*`-Vars — wir mappen sie auf die selben Tokens,
-     da unsere Design-Tokens (--color-foreground, --color-muted, …) im
-     `.dark`-Scope bereits den Dark-Mode-Wert haben. */
-  .prose-invert {
-    --tw-prose-invert-body: var(--color-foreground);
-    --tw-prose-invert-headings: var(--color-foreground);
-    --tw-prose-invert-lead: var(--color-muted-foreground);
-    --tw-prose-invert-links: var(--color-primary);
-    --tw-prose-invert-bold: var(--color-foreground);
-    --tw-prose-invert-counters: var(--color-muted-foreground);
-    --tw-prose-invert-bullets: var(--color-border);
-    --tw-prose-invert-hr: var(--color-border);
-    --tw-prose-invert-quotes: var(--color-foreground);
-    --tw-prose-invert-quote-borders: var(--color-primary);
-    --tw-prose-invert-captions: var(--color-muted-foreground);
-    --tw-prose-invert-code: var(--color-foreground);
-    --tw-prose-invert-pre-code: var(--color-foreground);
-    --tw-prose-invert-pre-bg: var(--color-muted);
-    --tw-prose-invert-th-borders: var(--color-border);
-    --tw-prose-invert-td-borders: var(--color-border);
-  }
+     Code-Blöcke im Light-Mode mit Typographys dunklem Ton und im Dark-Mode
+     kaum abhebbar vom Body. */
+.prose {
+  --tw-prose-body: var(--color-foreground);
+  --tw-prose-headings: var(--color-foreground);
+  --tw-prose-lead: var(--color-muted-foreground);
+  --tw-prose-links: var(--color-primary);
+  --tw-prose-bold: var(--color-foreground);
+  --tw-prose-counters: var(--color-muted-foreground);
+  --tw-prose-bullets: var(--color-border-strong);
+  --tw-prose-hr: var(--color-border);
+  --tw-prose-quotes: var(--color-foreground);
+  --tw-prose-quote-borders: var(--color-border);
+  --tw-prose-captions: var(--color-muted-foreground);
+  --tw-prose-code: var(--color-foreground);
+  --tw-prose-pre-code: var(--color-foreground);
+  --tw-prose-pre-bg: var(--color-muted);
+  --tw-prose-th-borders: var(--color-border);
+  --tw-prose-td-borders: var(--color-border);
+}
+/* prose-invert wird automatisch via `dark:prose-invert` aktiv. Dort gelten
+     die `--tw-prose-invert-*`-Vars. Wir mappen sie auf dieselben Tokens, da
+     unsere Design-Tokens im `.dark`-Scope bereits den Dark-Wert haben. */
+.prose-invert {
+  --tw-prose-invert-body: var(--color-foreground);
+  --tw-prose-invert-headings: var(--color-foreground);
+  --tw-prose-invert-lead: var(--color-muted-foreground);
+  --tw-prose-invert-links: var(--color-primary);
+  --tw-prose-invert-bold: var(--color-foreground);
+  --tw-prose-invert-counters: var(--color-muted-foreground);
+  --tw-prose-invert-bullets: var(--color-border-strong);
+  --tw-prose-invert-hr: var(--color-border);
+  --tw-prose-invert-quotes: var(--color-foreground);
+  --tw-prose-invert-quote-borders: var(--color-border);
+  --tw-prose-invert-captions: var(--color-muted-foreground);
+  --tw-prose-invert-code: var(--color-foreground);
+  --tw-prose-invert-pre-code: var(--color-foreground);
+  --tw-prose-invert-pre-bg: var(--color-muted);
+  --tw-prose-invert-th-borders: var(--color-border);
+  --tw-prose-invert-td-borders: var(--color-border);
+}
 
-  .prose {
-    color: var(--color-foreground);
-    max-width: none;
-  }
-  .prose a {
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: 500;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s ease;
-  }
-  .prose a:hover {
-    border-bottom-color: var(--color-primary);
-  }
-  .prose code {
-    font-family: var(--font-mono);
-    background-color: var(--color-muted);
-    padding: 0.125rem 0.375rem;
-    border-radius: var(--radius-sm);
-    font-size: 0.875em;
-    font-weight: 500;
-  }
-  /* Tailwind-Typography rendert standardmäßig Backticks um inline-<code>
-     via ::before/::after Pseudo-Elemente. Wir wollen das nicht — der
-     Code-Stil (monospace + grauer Background) ist visuell genug.
-     Cascade-Note: `!important` ist nötig, weil Tailwind Typography v4
-     die Backtick-Regel mit gleicher Specificity, aber später im CSS-
-     Output emittiert. */
-  .prose code::before,
-  .prose code::after {
-    content: "" !important;
-  }
-  .prose pre {
-    background-color: var(--color-muted);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 1rem;
-    overflow-x: auto;
-    font-size: 0.875rem;
-    line-height: 1.7;
-  }
-  .prose pre code {
-    background-color: transparent;
-    padding: 0;
-    font-size: inherit;
-    font-weight: 400;
-  }
+/* Lesbreite und Zeilenmaß.
+   `--measure` gilt dort, wo links eine Leiste steht und die Textspalte
+   dadurch ohnehin begrenzt ist, also auf den Tutorial-Seiten. Seiten ohne
+   Leiste tragen zusätzlich `prose-wide` und laufen bis an die
+   Verzeichnisspalte, sonst bliebe im Rahmen rechts ein leerer Streifen. */
+.prose {
+  color: var(--color-foreground);
+  max-width: var(--measure);
+  /* 18px statt 16px. Die Lesespalte ist auf ausdrücklichen Wunsch breiter
+       als die klassische Empfehlung von 65 bis 75 Zeichen, bei 800px sind es
+       rund 94. Eine größere Schrift und ein offener Zeilenabstand fangen den
+       weiten Zeilenrücksprung so weit ab, wie das ohne schmalere Spalte
+       möglich ist. */
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
 
-  /* rehype-pretty-code */
-  .prose [data-rehype-pretty-code-figure] {
-    margin: 1.5rem 0;
-  }
-  .prose code[data-line-numbers] > [data-line]::before {
-    counter-increment: line;
-    content: counter(line);
-    display: inline-block;
-    width: 1.75rem;
-    margin-right: 1rem;
-    text-align: right;
-    color: var(--color-muted-foreground);
-    opacity: 0.5;
-  }
-  .prose [data-highlighted-line] {
-    background-color: rgba(59, 130, 246, 0.1);
-    border-left: 2px solid var(--color-primary);
-    margin: 0 -1rem;
-    padding: 0 1rem;
-  }
-  .prose [data-rehype-pretty-code-title] {
-    background-color: var(--color-muted);
-    border: 1px solid var(--color-border);
-    border-bottom: none;
-    border-radius: var(--radius-md) var(--radius-md) 0 0;
-    padding: 0.5rem 1rem;
-    font-size: 0.75rem;
-    font-family: var(--font-mono);
-    color: var(--color-muted-foreground);
-  }
-  .prose [data-rehype-pretty-code-title] + pre {
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
-    margin-top: 0;
-  }
+/* Doppelte Klasse: die Regel oben hat dieselbe Specificity, so entscheidet
+   nicht die Reihenfolge im Stylesheet. */
+.prose.prose-wide {
+  max-width: none;
+}
+.prose :where(h2, h3, h4) {
+  scroll-margin-top: 5.5rem;
+  letter-spacing: -0.015em;
+}
+/* Mehr Luft über einer Überschrift als darunter: die Überschrift gehört
+     zum folgenden Absatz, nicht zum vorangegangenen. */
+/* Über einer Überschrift steht mehr Luft als darunter, sie gehört zum
+     folgenden Absatz. 2,75em waren dafür aber zu viel: bei 27px Schriftgröße
+     klafften 74px zwischen Absatzende und nächster Überschrift, der Text fiel
+     in Blöcke auseinander. Jetzt rund 47px über und 16px unter einer h2. */
+.prose :where(h2) {
+  margin-top: 1.75em;
+  margin-bottom: 0.6em;
+}
+.prose :where(h3) {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+.prose :where(h2):first-child,
+.prose :where(h3):first-child {
+  margin-top: 0;
+}
 
-  /* Heading-Anchors */
-  .prose h2 > a,
-  .prose h3 > a,
-  .prose h4 > a {
-    color: inherit;
-    border-bottom: none;
-  }
-  .prose h2 > a:hover::after,
-  .prose h3 > a:hover::after {
-    content: " #";
-    color: var(--color-muted-foreground);
-    opacity: 0.5;
-  }
+.prose a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--color-primary-line);
+  font-weight: 500;
+  transition: text-decoration-color var(--duration-hover) var(--ease-out);
+}
+.prose a:hover {
+  text-decoration-color: currentColor;
+}
+.prose :where(h2, h3, h4) a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: inherit;
+}
+.prose :where(h2, h3, h4) a:hover::after {
+  content: " #";
+  color: var(--color-muted-foreground);
+}
 
-  /* Tabellen */
-  .prose table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1.5rem 0;
-    font-size: 0.875rem;
-  }
-  .prose th {
-    text-align: left;
-    font-weight: 600;
-    padding: 0.625rem 0.75rem;
-    border-bottom: 2px solid var(--color-border);
-    background-color: var(--color-muted);
-  }
-  .prose td {
-    padding: 0.625rem 0.75rem;
-    border-bottom: 1px solid var(--color-border);
-  }
+.prose code {
+  font-family: var(--font-mono);
+  background-color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  padding: 0.1rem 0.35rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85em;
+  font-weight: 500;
+}
+/* Tailwind Typography rendert Backticks um inline-<code> per ::before und
+     ::after. Der Code-Stil trägt sich selbst, die Backticks können weg.
+     `!important` ist nötig, weil Typography v4 die Regel mit gleicher
+     Specificity, aber später im Output emittiert. */
+.prose code::before,
+.prose code::after {
+  content: "" !important;
+}
+.prose pre {
+  background-color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+.prose pre code {
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: 400;
+}
 
-  /* Blockquote */
-  .prose blockquote {
-    border-left: 3px solid var(--color-primary);
-    padding-left: 1rem;
-    font-style: italic;
-    color: var(--color-muted-foreground);
-    margin: 1.5rem 0;
-  }
+/* rehype-pretty-code */
+.prose [data-rehype-pretty-code-figure] {
+  margin: 1.75rem 0;
+}
+.prose code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1.75rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: var(--color-muted-foreground);
+  opacity: 0.5;
+}
+.prose [data-highlighted-line] {
+  background-color: var(--color-primary-quiet);
+  box-shadow: inset 2px 0 0 var(--color-primary);
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+.prose [data-rehype-pretty-code-title] {
+  background-color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  border-bottom: none;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--color-muted-foreground);
+}
+.prose [data-rehype-pretty-code-title] + pre {
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  margin-top: 0;
+}
+
+/* Tabellen */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.75rem 0;
+  font-size: 0.9375rem;
+}
+.prose th {
+  text-align: left;
+  font-weight: 600;
+  padding: 0.625rem 0.75rem;
+  border-bottom: 1px solid var(--color-border-strong);
+  background-color: var(--color-muted);
+}
+.prose td {
+  padding: 0.625rem 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+.prose tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Zitat. Kein farbiger Balken an der Kante: das ist die auffälligste
+     Signatur generierter Oberflächen. Stattdessen eingerückt, mit einer
+     Haarlinie und ruhigerer Farbe. */
+.prose blockquote {
+  border-left: 1px solid var(--color-border-strong);
+  padding-left: 1.25rem;
+  margin-left: 0;
+  font-style: normal;
+  color: var(--color-muted-foreground);
+}
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after {
+  content: "";
 }
 
 /* ============================================================================
-   LatexExample-Wrapper
+   Komponenten-Klassen
    ----------------------------------------------------------------------------
-   Die Komponente nutzt `.not-prose`, daher gelten die `.prose pre`-Styles aus
-   diesem File nicht. Für eingebettete rehype-pretty-code-Blöcke setzen wir hier
-   eigene, integrierte Defaults (kein Border, kein Rundungsradius, kein Margin),
-   damit der Code-Block nahtlos in den Komponenten-Rahmen einrastet.
-   ============================================================================ */
-@layer components {
-  .latex-example-body figure[data-rehype-pretty-code-figure] {
-    margin: 0;
-  }
-
-  .latex-example-body [data-rehype-pretty-code-title] {
-    display: none; /* Titel wird oben in der Komponente angezeigt */
-  }
-
-  .latex-example-body pre {
-    margin: 0;
-    border: 0;
-    border-radius: 0;
-    padding: 1rem;
-    overflow-x: auto;
-    background-color: transparent;
-    font-family: var(--font-mono);
-    font-size: 0.875rem;
-    line-height: 1.65;
-  }
-
-  .latex-example-body pre code {
-    background-color: transparent;
-    padding: 0;
-    font-size: inherit;
-    font-weight: 400;
-  }
-}
-
-/* ============================================================================
-   Komponenten-Klassen (ehemals inline-styles — für strikte CSP nötig)
+   Alles hier war einmal ein Inline-Style. Die strikte CSP kommt ohne
+   `style-src 'unsafe-inline'` aus, deshalb leben diese Regeln im Stylesheet.
    ============================================================================ */
 
-/* Hero-Background — radialer Akzent-Gradient hinter dem Hero-Text.
-   Ersetzt das ehemalige inline `style={{ background: "radial-gradient(...)" }}`
-   in src/components/home/Hero.tsx, damit CSP `style-src` ohne 'unsafe-inline'
-   auskommt. */
+/* Weicher Akzentschimmer hinter dem Hero. Bewusst flach gehalten: er soll den
+   Seitenanfang tragen, nicht als Farbfläche auffallen. */
 .hero-decor-gradient {
-  background: radial-gradient(
-    ellipse 60% 40% at 50% 0%,
-    color-mix(in oklab, var(--color-primary) 8%, transparent),
-    transparent 70%
-  );
+  background:
+    radial-gradient(
+      ellipse 70% 46% at 15% 0%,
+      color-mix(in oklab, var(--color-primary) 11%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 46% 34% at 88% 4%,
+      color-mix(in oklab, var(--color-primary) 6%, transparent),
+      transparent 70%
+    );
 }
 
-/* Root-404-Page (src/app/not-found.tsx) — eigene Klassen, weil die Page
-   außerhalb von [locale]/ liegt und keinen Zugriff auf das Layout-CSS hat.
-   Tailwind wird via Import von globals.css verfügbar gemacht. */
+/* Root-404 (src/app/not-found.tsx). Die Seite liegt außerhalb von [locale]/
+   und erbt kein Layout-CSS, deshalb eigene Klassen. */
 .notfound-page-body {
   display: flex;
   min-height: 100dvh;
@@ -373,57 +610,126 @@
   font-family: var(--font-sans, system-ui, sans-serif);
   margin: 0;
   padding: 2rem;
-  background-color: var(--color-background, #ffffff);
-  color: var(--color-foreground, #0a0a0a);
+  background-color: var(--color-background, #fcfcfd);
+  color: var(--color-foreground, #0c0e14);
 }
 .notfound-page-content {
   text-align: center;
 }
 .notfound-page-title {
   font-size: 2rem;
+  letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
 }
 .notfound-page-text {
-  color: var(--color-muted-foreground, #666);
+  color: var(--color-muted-foreground, #5a6270);
   margin-bottom: 1.5rem;
 }
 .notfound-page-link {
   display: inline-block;
-  padding: 0.5rem 1rem;
-  background: var(--color-primary, #1e40af);
+  padding: 0.625rem 1.125rem;
+  background: var(--color-primary, #1d4ed8);
   color: var(--color-primary-foreground, #ffffff);
   text-decoration: none;
   border-radius: var(--radius-md, 0.5rem);
 }
 
+/* Diese Seite liegt außerhalb von `/[locale]/` und bekommt deshalb nie die
+   `.dark`-Klasse vom ThemeProvider. Ohne diesen Block leuchtet sie jemandem,
+   der im Dunkelmodus unterwegs ist, hell entgegen. */
+@media (prefers-color-scheme: dark) {
+  .notfound-page-body {
+    background-color: #0b0e14;
+    color: #e6edf3;
+  }
+  .notfound-page-text {
+    color: #9aa4b4;
+  }
+  .notfound-page-link {
+    background: #58a6ff;
+    color: #08111c;
+  }
+}
+
 /* ============================================================================
    Utilities
    ============================================================================ */
-@utility container-prose {
-  max-width: 65ch;
-  margin-inline: auto;
-}
-
+/* Die eine Seitenbreite. Header, Inhalt und Footer richten sich alle daran
+   aus, sonst steht das Logo sichtbar links neben der Überschrift darunter. */
 @utility container-page {
-  max-width: 80rem;
+  max-width: var(--frame);
   margin-inline: auto;
   padding-inline: 1rem;
 }
 @media (min-width: 768px) {
-  .container-page { padding-inline: 2rem; }
+  .container-page {
+    padding-inline: 2rem;
+  }
+}
+
+/* Aufeinanderfolgende Elemente treten leicht versetzt ein. Der Versatz bleibt
+   klein (55ms), sonst wartet man beim Lesen auf die Oberfläche. Die Staffelung
+   läuft über nth-child statt über eine inline gesetzte Variable, damit im
+   Markup kein `style`-Attribut nötig wird. */
+.stagger-rise > * {
+  animation: riseIn 420ms var(--ease-out) both;
+}
+.stagger-rise > *:nth-child(2) {
+  animation-delay: 55ms;
+}
+.stagger-rise > *:nth-child(3) {
+  animation-delay: 110ms;
+}
+.stagger-rise > *:nth-child(4) {
+  animation-delay: 165ms;
+}
+.stagger-rise > *:nth-child(n + 5) {
+  animation-delay: 220ms;
+}
+
+/* Platzhalterflächen für den Ladezustand.
+   Die Form nimmt vorweg, was gleich kommt (Überschrift, Absätze, Codeblock).
+   Ein kreisender Ring an derselben Stelle sagt nur "es passiert etwas" und
+   lässt die Seite beim Einsetzen des Inhalts springen. */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-muted) 0%,
+    color-mix(in oklab, var(--color-muted) 55%, var(--color-border)) 50%,
+    var(--color-muted) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonSweep 1.4s var(--ease-in-out) infinite;
+  border-radius: var(--radius-sm);
+}
+@keyframes skeletonSweep {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none !important;
+    background: var(--color-muted);
+  }
 }
 
 /* Skip-Link */
 .skip-link {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 0.5rem;
+  top: 0.5rem;
   padding: 0.5rem 1rem;
-  background: var(--color-background);
+  border-radius: var(--radius-md);
+  background: var(--color-card);
   color: var(--color-foreground);
-  border: 1px solid var(--color-border);
-  transform: translateY(-200%);
-  transition: transform 0.2s;
+  border: 1px solid var(--color-border-strong);
+  box-shadow: var(--shadow-floating);
+  transform: translateY(-250%);
+  transition: transform var(--duration-pop) var(--ease-out);
   z-index: 100;
 }
 .skip-link:focus {
@@ -432,30 +738,56 @@
 
 /* Scrollbar */
 @media (pointer: fine) {
+  * {
+    scrollbar-color: var(--color-border) transparent;
+    scrollbar-width: thin;
+  }
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--color-muted);
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
     background: var(--color-border);
     border-radius: 5px;
+    border: 2px solid var(--color-background);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-muted-foreground);
+    background: var(--color-border-strong);
   }
 }
 
-/* Reduced Motion */
+/* Reduzierte Bewegung.
+   Ortswechsel und Skalierungen fallen weg, Ein- und Ausblenden bleibt: ein
+   Menü, das ohne jeden Übergang erscheint, wirkt wie ein Darstellungsfehler. */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  }
+  .ui-overlay,
+  .ui-pop,
+  .ui-drawer,
+  .ui-modal,
+  .stagger-rise > * {
+    animation-name: fadeIn !important;
+    animation-duration: 120ms !important;
+    animation-delay: 0ms !important;
+  }
+  /* Der Ausgang muss ein eigenes Keyframe behalten. Radix demontiert erst nach
+     `animationend`, und ein Element, das beim Schließen einblendet, blitzt. */
+  .ui-overlay[data-state="closed"],
+  .ui-pop[data-state="closed"],
+  .ui-drawer[data-state="closed"],
+  .ui-modal[data-state="closed"] {
+    animation-name: fadeOut !important;
   }
 }

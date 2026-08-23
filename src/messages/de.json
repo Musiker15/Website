@@ -1,38 +1,34 @@
 {
   "common": {
     "skipToContent": "Zum Inhalt springen",
-    "loading": "Lädt …",
     "search": "Suchen",
     "searchPlaceholder": "Tutorials durchsuchen …",
-    "searchShortcut": "Strg",
-    "noResults": "Keine Ergebnisse",
     "menu": "Menü",
     "close": "Schließen",
-    "open": "Öffnen",
-    "previous": "Zurück",
-    "next": "Weiter",
-    "readMore": "Mehr lesen",
-    "all": "Alle",
-    "version": "Version",
-    "released": "Veröffentlicht",
-    "updated": "Aktualisiert",
-    "by": "von",
     "language": "Sprache",
     "theme": "Theme",
     "lightMode": "Heller Modus",
     "darkMode": "Dunkler Modus",
-    "systemMode": "Systemeinstellung"
+    "systemMode": "Systemeinstellung",
+    "collapse": "Einklappen",
+    "expand": "Ausklappen",
+    "copyCode": "Code kopieren",
+    "copied": "Kopiert",
+    "toClose": "schließen"
   },
   "home": {
-    "heroBadge": "Tutorials & Guides",
     "heroCtaPrimary": "Tutorials ansehen",
     "heroCtaSecondary": "GitHub",
-    "ctaTitle": "Lust auf Austausch?",
-    "ctaSubtitle": "Komm in den Discord oder schau auf GitHub vorbei.",
-    "ctaPrimary": "Tutorials lesen",
-    "ctaSecondary": "Community",
+    "ctaTitle": "Fragen, Korrekturen oder eigene Erfahrungen?",
+    "ctaSubtitle": "Auf dem Discord antworte ich am schnellsten. Fehler in einem Tutorial meldest Du am besten direkt über GitHub.",
+    "ctaPrimary": "Zur Community",
+    "ctaSecondary": "Discord öffnen",
     "latestNews": "Aktuelle News",
-    "moreNews": "Alle News"
+    "moreNews": "Alle News",
+    "heroTitle": "Tutorials für Debian, Apache und den eigenen Server",
+    "heroLead": "Schritt für Schritt aufgeschrieben, während ich meine eigenen Server aufgesetzt habe. Getestet auf Debian, mit allen Befehlen zum Mitmachen.",
+    "latestDocs": "Zuletzt geschrieben",
+    "allDocs": "Alle Tutorials"
   },
   "docs": {
     "title": "Tutorials",
@@ -42,16 +38,12 @@
     "editPage": "Seite bearbeiten",
     "lastUpdated": "Zuletzt aktualisiert",
     "related": "Verwandte Tutorials",
-    "categories": {
-      "debian-tutorials": "Debian-Tutorials",
-      "pc-hardware": "PC-Hardware"
-    }
+    "sidebarLabel": "Tutorial-Navigation",
+    "allTutorials": "Alle Tutorials"
   },
   "news": {
     "title": "News & Updates",
-    "subtitle": "Aktuelle Beiträge, Hinweise und Neuigkeiten.",
-    "publishedOn": "Veröffentlicht am",
-    "readArticle": "Artikel lesen"
+    "subtitle": "Aktuelle Beiträge, Hinweise und Neuigkeiten."
   },
   "search": {
     "title": "Suche",
@@ -61,11 +53,9 @@
     "tryDifferent": "Versuche es mit anderen Suchbegriffen.",
     "groupDocs": "Tutorials",
     "groupNews": "News",
-    "groupPages": "Seiten"
-  },
-  "footer": {
-    "madeWith": "Erstellt mit",
-    "and": "und"
+    "groupPages": "Seiten",
+    "hintNavigate": "wechseln",
+    "hintOpen": "öffnen"
   },
   "notFound": {
     "title": "Seite nicht gefunden",

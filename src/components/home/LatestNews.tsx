@@ -1,8 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
 import { listNews } from "@/lib/content";
 import { formatDate } from "@/lib/utils";
 import type { Locale } from "@/types/config";
@@ -11,45 +9,59 @@ interface Props {
   locale: Locale;
 }
 
+/**
+ * Die drei jüngsten News-Beiträge.
+ *
+ * Bewusst ohne Karten: drei gleich große Kacheln mit Titel und Text sind die
+ * Ersatzstruktur, zu der man greift, wenn man keine trifft. Hier trennen
+ * Haarlinien und Abstand die Spalten, den Rahmen braucht es dafür nicht. Das
+ * hält die Sektion außerdem visuell auseinander vom Kasten im Hero darüber.
+ */
 export function LatestNews({ locale }: Props) {
   const t = useTranslations("home");
   const news = listNews(locale).slice(0, 3);
   if (news.length === 0) return null;
 
   return (
-    <section className="container-page py-16 md:py-20">
-      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-        <h2 className="text-2xl font-bold tracking-tight md:text-3xl">{t("latestNews")}</h2>
-        <Button asChild variant="link" className="h-auto p-0">
-          <Link href={`/${locale}/news`} className="inline-flex items-center gap-1">
-            {t("moreNews")} <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
-        </Button>
+    <section className="container-page py-16 md:py-24">
+      <div className="mb-10 flex flex-wrap items-baseline justify-between gap-4 border-b border-[var(--color-border)] pb-4">
+        <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">{t("latestNews")}</h2>
+        <Link
+          href={`/${locale}/news`}
+          className="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-primary)] transition-colors duration-[var(--duration-hover)] hover:text-[var(--color-primary-hover)]"
+        >
+          {t("moreNews")}
+          <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+        </Link>
       </div>
-      <div className="grid gap-4 md:grid-cols-3">
+
+      <ul className="grid gap-px bg-[var(--color-border)] md:grid-cols-3">
         {news.map((item) => (
-          <Card key={item.url} className="flex h-full flex-col">
-            <CardHeader>
-              <div className="mb-2 flex items-center gap-1.5 text-xs text-[var(--color-muted-foreground)]">
-                <Calendar className="h-3 w-3" />
-                {formatDate(item.frontmatter.date, locale)}
-              </div>
-              <CardTitle className="text-lg leading-tight">
-                <Link href={item.url} className="hover:underline">
-                  {item.frontmatter.title}
-                </Link>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="flex-1 pt-0">
-              {item.frontmatter.description && (
-                <CardDescription className="line-clamp-3">
-                  {item.frontmatter.description}
-                </CardDescription>
+          <li key={item.url} className="bg-[var(--color-background)]">
+            <Link
+              href={item.url}
+              className="group flex h-full flex-col gap-3 p-6 transition-colors duration-[var(--duration-hover)] ease-[var(--ease-out)] hover:bg-[var(--color-muted)] md:px-6 md:pb-8"
+            >
+              {item.frontmatter.date && (
+                <time
+                  dateTime={item.frontmatter.date.toISOString().slice(0, 10)}
+                  className="text-xs text-[var(--color-muted-foreground)]"
+                >
+                  {formatDate(item.frontmatter.date, locale)}
+                </time>
               )}
-            </CardContent>
-          </Card>
+              <h3 className="text-base leading-snug font-semibold tracking-tight transition-colors duration-[var(--duration-hover)] group-hover:text-[var(--color-primary)]">
+                {item.frontmatter.title}
+              </h3>
+              {item.frontmatter.description && (
+                <p className="line-clamp-3 text-sm leading-relaxed text-[var(--color-muted-foreground)]">
+                  {item.frontmatter.description}
+                </p>
+              )}
+            </Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }

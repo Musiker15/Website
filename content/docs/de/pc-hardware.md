@@ -6,7 +6,7 @@ order: 10
 tags: ["hardware"]
 ---
 
-*Stand: Juni 2026*
+_Stand: Juni 2026_
 
 ## Hardware
 

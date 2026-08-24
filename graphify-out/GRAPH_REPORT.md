@@ -1,16 +1,16 @@
-# Graph Report - musiker15-website  (2026-08-23)
+# Graph Report - musiker15-website  (2026-08-24)
 
 ## Corpus Check
-- 112 files · ~52,253 words
+- 115 files · ~54,442 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 781 nodes · 1272 edges · 86 communities (58 shown, 28 thin omitted)
+- 792 nodes · 1282 edges · 73 communities (67 shown, 6 thin omitted)
 - Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 79 edges (avg confidence: 0.87)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4e05a57f`
+- Built from commit: `e6b228a8`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -21,8 +21,8 @@
 - de/proton-drive-ignore-rules.md
 - Development Dependencies
 - Security and Vulnerabilities
-- Package Metadata
-- cn
+- scripts
+- Button.tsx
 - Brand and Profile Info
 - Project News and Updates
 - Locale
@@ -63,51 +63,37 @@
 - Consumer Arbitration Policy
 - English ACME Tutorial
 - de/proton-drive-ignore-rules-2026-08.md
-- Geist Font
-- Markdown Parser
-- Icon Library
-- Next.js Framework
-- Internationalization Library
-- MDX Remote Rendering
-- Theme Management
-- Radix Dialog Component
-- Radix Dropdown Component
-- Radix Navigation Component
-- Radix Slot Primitive
+- utils.ts
+- Header.tsx
+- cn
+- types/content.ts
+- build-search-index.ts
+- news/page.tsx
+- t
+- validate-content.ts
 - en/proton-drive-ignore-rules-2026-08.md
-- React Core
-- React DOM
-- Heading Autolinks
-- Heading Slugs
-- GitHub Flavored Markdown
-- Table of Contents Plugin
-- Syntax Highlighting
-- Tailwind Class Merger
-- Schema Validation
 - postcss.config.mjs
 - proxy.ts
 - Social Media Profiles
 - GitHub Profile Link
 - next.config.ts
-- Hero.tsx
+- lib/content.ts
 - config.ts
 - German SSL Tutorial
 - English SSL Tutorial
-- Code Block Styling
 - Footer.tsx
 - layout.tsx
 - sitemap.ts
-- @fontsource-variable/jetbrains-mono
 
 ## God Nodes (most connected - your core abstractions)
 1. `Locale` - 49 edges
 2. `cn()` - 40 edges
 3. `t()` - 23 edges
 4. `compilerOptions` - 21 edges
-5. `scripts` - 15 edges
+5. `scripts` - 16 edges
 6. `getContent()` - 15 edges
 7. `siteConfig` - 12 edges
-8. `DocPage()` - 11 edges
+8. `renderMDX()` - 12 edges
 9. `Button` - 11 edges
 10. `listAllContentItems()` - 11 edges
 
@@ -141,15 +127,15 @@
 - **TeamSpeak music bot stack: TS3 server, TS3 client, Sinusbot, yt-dlp** — content_docs_en_debian_tutorials_teamspeak3_ts3server_startscript, content_docs_en_debian_tutorials_sinusbot_ts3_client, content_docs_en_debian_tutorials_sinusbot_sinusbot_service, content_docs_en_debian_tutorials_sinusbot_yt_dlp [INFERRED 0.85]
 - **TeamSpeak-Voice-Stack (TS3-Server, TS3-Client, Sinusbot-Musik-Bot)** — content_docs_de_debian_tutorials_teamspeak3_ts3server_startscript, content_docs_de_debian_tutorials_sinusbot_ts3_client_plugin, content_docs_de_debian_tutorials_sinusbot_sinusbot_service, content_docs_de_debian_tutorials_sinusbot_webinterface_port_8087 [INFERRED 0.85]
 
-## Communities (86 total, 28 thin omitted)
+## Communities (73 total, 6 thin omitted)
 
 ### Community 0 - "[...slug]/page.tsx"
-Cohesion: 0.11
-Nodes (49): .next, DocsIndexPage(), generateMetadata(), DocPage(), generateMetadata(), generateStaticParams(), generateMetadata(), NewsIndexPage() (+41 more)
+Cohesion: 0.09
+Nodes (45): .next, DocsIndexPage(), generateMetadata(), DocPage(), generateMetadata(), generateStaticParams(), generateMetadata(), generateStaticParams() (+37 more)
 
 ### Community 1 - "site.config.ts"
-Cohesion: 0.21
-Nodes (7): config, siteConfig, GET(), xmlEscape(), metadata, SiteConfig, SiteConfigSchema
+Cohesion: 0.22
+Nodes (7): config, siteConfig, metadata, CTASection(), Props, SiteConfig, SiteConfigSchema
 
 ### Community 2 - "TypeScript Configuration"
 Cohesion: 0.05
@@ -167,13 +153,13 @@ Nodes (35): eslint, @eslint/js, devDependencies, eslint, @eslint/js, @playwright
 Cohesion: 0.07
 Nodes (32): Nonce-basierte CSP mit strict-dynamic, FlexSearch (clientseitige Suche), Lokal gebündelte Webfonts (Inter, JetBrains Mono), Nonce-based CSP with strict-dynamic, FlexSearch (client-side search), Locally bundled webfonts (Inter, JetBrains Mono), allowBuilds (Postinstall-Trust-Liste), brace-expansion@<1.1.16 → 1.1.16 (Override) (+24 more)
 
-### Community 6 - "Package Metadata"
-Cohesion: 0.07
-Nodes (29): author, description, engines, node, pnpm, license, name, packageManager (+21 more)
+### Community 6 - "scripts"
+Cohesion: 0.06
+Nodes (30): author, description, engines, node, pnpm, license, name, packageManager (+22 more)
 
-### Community 7 - "cn"
-Cohesion: 0.05
-Nodes (50): config, navigationConfig, Callout(), CalloutProps, CalloutType, config, CodeBlock(), CodeBlockProps (+42 more)
+### Community 7 - "Button.tsx"
+Cohesion: 0.15
+Nodes (10): LocaleSwitcher(), NAMES, ThemeItem(), ThemeToggle(), Button, ButtonProps, ButtonSize, ButtonVariant (+2 more)
 
 ### Community 8 - "Brand and Profile Info"
 Cohesion: 0.12
@@ -184,8 +170,8 @@ Cohesion: 0.14
 Nodes (17): Certbot-Korrektur: python3-certbot-apache, Kopieren-Button für Code-Blöcke, Debian 12 & 13, zweistufiger Upgrade-Ablauf, Tutorials jetzt auch auf Englisch (/en/docs), LAMP-Stack-Überarbeitung (Apache/PHP/MariaDB/phpMyAdmin), Ergänzter Schritt mariadb-upgrade, News DE: Englische Tutorials, überarbeitete Guides & Copy-Buttons, Überarbeitete Tutorials-Startseite (+9 more)
 
 ### Community 10 - "Locale"
-Cohesion: 0.06
-Nodes (38): CONTENT_ROOT, extractHeadings(), LOCALES, main(), OUT_FILE, PUBLIC_DIR, SECTIONS, stripHtmlTags() (+30 more)
+Cohesion: 0.16
+Nodes (13): Props, Props, Props, generateMetadata(), Props, Props, SearchPageClient(), Props (+5 more)
 
 ### Community 11 - "Privacy and Legal"
 Cohesion: 0.15
@@ -252,8 +238,8 @@ Cohesion: 0.38
 Nodes (7): Dark Blue Gradient OG Visual Theme (#0a1638 to #1a3a8a with #3b82f6 logo glow), Musiker15 Brand Identity (Tutorials & Guides, Linux / Debian / Self-Hosting, www.musiker15.de), Dynamic OG Image Route (src/app/opengraph-image.tsx, served at /opengraph-image), Embedded Musiker15 M-Logo (base64 PNG in SVG), Self-contained asset rule (no external resources) - rationale: the M-Logo is inlined as base64 PNG so the image renders standalone without any external host request, matching the site-wide privacy goal of zero third-party traffic, OpenGraph Default Backup Image (1200x630 SVG), SVG is unreliable for OG embeds (Discord, Facebook, WhatsApp, Twitter) - rationale: social scrapers do not render SVG reliably, so the live OG image is generated as a PNG and neither layout nor site.config.ts links to this SVG; it stays a manual backup only
 
 ### Community 27 - "dependencies"
-Cohesion: 0.29
-Nodes (7): clsx, @fontsource-variable/inter, dependencies, clsx, @fontsource-variable/inter, @radix-ui/react-tooltip, @radix-ui/react-tooltip
+Cohesion: 0.04
+Nodes (47): clsx, @fontsource-variable/inter, @fontsource-variable/jetbrains-mono, geist, get-nonce, gray-matter, lucide-react, next (+39 more)
 
 ### Community 28 - "German Server Runbooks"
 Cohesion: 0.38
@@ -323,6 +309,38 @@ Nodes (17): Common errors, Requirements, Several domains on one server, Step 1: 
 Cohesion: 0.50
 Nodes (3): Der Anlass, Es gibt keinen Download, Was der Fork kann
 
+### Community 48 - "utils.ts"
+Cohesion: 0.15
+Nodes (10): Callout(), CalloutProps, CalloutType, config, CodeBlock(), CodeBlockProps, mdxComponents, absoluteUrl() (+2 more)
+
+### Community 49 - "Header.tsx"
+Cohesion: 0.20
+Nodes (12): config, navigationConfig, ICONS, MobileMenu(), Props, isActive(), Navbar(), NavbarItem() (+4 more)
+
+### Community 50 - "cn"
+Cohesion: 0.20
+Nodes (13): Disclosure(), RelatedDocs(), Badge, BadgeProps, Variant, variants, Card, CardContent (+5 more)
+
+### Community 51 - "types/content.ts"
+Cohesion: 0.23
+Nodes (9): Props, Props, ResultGroup, SECTION_ICON, Frontmatter, ArticleLdParams, ContentItem, ContentSection (+1 more)
+
+### Community 52 - "build-search-index.ts"
+Cohesion: 0.23
+Nodes (10): CONTENT_ROOT, extractHeadings(), LOCALES, main(), OUT_FILE, PUBLIC_DIR, SECTIONS, stripHtmlTags() (+2 more)
+
+### Community 53 - "news/page.tsx"
+Cohesion: 0.32
+Nodes (6): generateMetadata(), NewsIndexPage(), Props, hrefFor(), alternatePath(), buildMetadata()
+
+### Community 54 - "t"
+Cohesion: 0.33
+Nodes (4): MobileItem(), SearchDialog(), SearchTrigger(), t()
+
+### Community 55 - "validate-content.ts"
+Cohesion: 0.50
+Nodes (4): CONTENT_ROOT, main(), ValidationError, walk()
+
 ### Community 59 - "en/proton-drive-ignore-rules-2026-08.md"
 Cohesion: 0.50
 Nodes (3): There is no download, What the fork does, Why
@@ -335,13 +353,13 @@ Nodes (5): buildCsp(), config, intlMiddleware, middleware(), patchLocaleCookie()
 Cohesion: 0.50
 Nodes (3): nextConfig, securityHeaders, withNextIntl
 
-### Community 76 - "Hero.tsx"
-Cohesion: 0.21
-Nodes (8): Props, CTASection(), Props, Hero(), HeroProps, GitHubIcon(), IconProps, listLatestDocs()
+### Community 76 - "lib/content.ts"
+Cohesion: 0.23
+Nodes (10): Props, Hero(), LatestNews(), Props, CONTENT_ROOT, getSectionLabel(), humanize(), listLatestDocs() (+2 more)
 
 ### Community 77 - "config.ts"
-Cohesion: 0.17
-Nodes (11): FooterColumn, FooterColumnSchema, FooterLink, FooterLinkSchema, FooterSocial, FooterSocialSchema, I18nStringSchema, NavAction (+3 more)
+Cohesion: 0.13
+Nodes (15): config, footerConfig, FooterColumn, FooterColumnSchema, FooterConfig, FooterConfigSchema, FooterLink, FooterLinkSchema (+7 more)
 
 ### Community 78 - "German SSL Tutorial"
 Cohesion: 0.50
@@ -352,16 +370,16 @@ Cohesion: 0.50
 Nodes (3): The pitfalls are the actual content, What it covers, Why the effort pays off
 
 ### Community 82 - "Footer.tsx"
-Cohesion: 0.24
-Nodes (7): config, footerConfig, Footer(), FooterProps, isExternal(), FooterConfig, FooterConfigSchema
+Cohesion: 0.28
+Nodes (6): Footer(), FooterProps, PLATFORM_NAMES, GitHubIcon(), IconProps, isExternal()
 
 ### Community 83 - "layout.tsx"
-Cohesion: 0.22
-Nodes (5): LocaleLayout(), viewport, Header(), ThemeProvider(), OG_IMAGE_SIZE
+Cohesion: 0.20
+Nodes (6): LocaleLayout(), viewport, Header(), NonceSetup(), ThemeProvider(), OG_IMAGE_SIZE
 
 ### Community 84 - "sitemap.ts"
-Cohesion: 0.80
-Nodes (4): languagesFor(), lastModifiedOf(), newestOf(), sitemap()
+Cohesion: 0.36
+Nodes (7): GET(), xmlEscape(), languagesFor(), lastModifiedOf(), newestOf(), sitemap(), listNews()
 
 ## Ambiguous Edges - Review These
 - `js-yaml@<3.15.0 → 3.15.0 (Override)` → `Nonce-basierte CSP mit strict-dynamic`  [AMBIGUOUS]
@@ -370,9 +388,9 @@ Nodes (4): languagesFor(), lastModifiedOf(), newestOf(), sitemap()
   public/robots.txt · relation: conceptually_related_to
 
 ## Knowledge Gaps
-- **278 isolated node(s):** `config`, `config`, `config`, `withNextIntl`, `securityHeaders` (+273 more)
+- **281 isolated node(s):** `config`, `config`, `config`, `withNextIntl`, `securityHeaders` (+276 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -382,12 +400,12 @@ _Questions this graph is uniquely positioned to answer:_
 - **What is the exact relationship between `Sitemap/Host zeigt auf komascript.musiker15.de` and `public/ Asset-Konventionen`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
 - **Why does `.next` connect `[...slug]/page.tsx` to `site.config.ts`, `TypeScript Configuration`, `next.config.ts`, `layout.tsx`, `sitemap.ts`?**
-  _High betweenness centrality (0.038) - this node is a cross-community bridge._
+  _High betweenness centrality (0.039) - this node is a cross-community bridge._
 - **Why does `exclude` connect `TypeScript Configuration` to `[...slug]/page.tsx`?**
   _High betweenness centrality (0.034) - this node is a cross-community bridge._
 - **What connects `config`, `config`, `config` to the rest of the system?**
-  _278 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _281 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `[...slug]/page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.1056547619047619 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09435028248587571 - nodes in this community are weakly interconnected._
 - **Should `TypeScript Configuration` be split into smaller, more focused modules?**
   _Cohesion score 0.05 - nodes in this community are weakly interconnected._

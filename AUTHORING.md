@@ -12,11 +12,11 @@ Wenn Du eine neue Markdown-Datei anlegst, taucht sie automatisch als Seite auf.
 
 ### Wo welche Inhalte hingehören
 
-| Ordner | Was kommt hier rein | URL-Beispiel |
-|---|---|---|
-| `content/pages/de/` | Statische Seiten (About, FAQ, Impressum, …) | `/de/about` |
-| `content/docs/de/` | Tutorials & Guides (Sidebar auto) | `/de/docs/pc-hardware` |
-| `content/news/de/` | News & Updates (sortiert nach Datum) | `/de/news/<slug>` |
+| Ordner              | Was kommt hier rein                         | URL-Beispiel           |
+| ------------------- | ------------------------------------------- | ---------------------- |
+| `content/pages/de/` | Statische Seiten (About, FAQ, Impressum, …) | `/de/about`            |
+| `content/docs/de/`  | Tutorials & Guides (Sidebar auto)           | `/de/docs/pc-hardware` |
+| `content/news/de/`  | News & Updates (sortiert nach Datum)        | `/de/news/<slug>`      |
 
 Für die englische Variante: `de` → `en`.
 
@@ -44,6 +44,7 @@ content/docs/en/debian-tutorials/my-tutorial.md   ← englisch (optional)
 ```
 
 Der **Dateiname** wird zur **URL**:
+
 - `mein-tutorial.md` → `/de/docs/debian-tutorials/mein-tutorial`
 - `pc-hardware.md` → `/de/docs/pc-hardware`
 
@@ -65,7 +66,7 @@ Hier kommt der Inhalt …
 ```markdown
 ## Eine Überschrift
 
-Ein Absatz mit **fett** und *kursiv* und `Inline-Code`.
+Ein Absatz mit **fett** und _kursiv_ und `Inline-Code`.
 
 - Liste-Punkt 1
 - Liste-Punkt 2
@@ -101,21 +102,21 @@ Das Deployment läuft automatisch via GitHub Actions.
 
 Vollständige Liste aller Felder, die im Frontmatter möglich sind:
 
-| Feld | Pflicht | Typ | Beispiel |
-|---|---|---|---|
-| `title` | ✓ | string (max 160) | `"Apache2, PHP 8, MariaDB"` |
-| `description` | – | string (max 320) | `"Wie installiere ich den LAMP-Stack?"` |
-| `date` | – | YYYY-MM-DD | `2026-05-09` |
-| `updated` | – | YYYY-MM-DD | `2026-05-14` |
-| `author` | – | string | `"Moritz Kohm"` |
-| `order` | – | Zahl ≥ 0 (default 999) | `10` |
-| `category` | – | string | `"debian"`, … |
-| `tags` | – | Array von Strings | `["debian", "apache"]` |
-| `draft` | – | true/false (default false) | `true` |
-| `toc` | – | true/false (default true) | `false` |
-| `hideTitle` | – | true/false (default false) | `true` |
-| `image` | – | Pfad | `/images/hero.png` |
-| `imageAlt` | – | string | `"Screenshot"` |
+| Feld          | Pflicht | Typ                        | Beispiel                                |
+| ------------- | ------- | -------------------------- | --------------------------------------- |
+| `title`       | ✓       | string (max 160)           | `"Apache2, PHP 8, MariaDB"`             |
+| `description` | –       | string (max 320)           | `"Wie installiere ich den LAMP-Stack?"` |
+| `date`        | –       | YYYY-MM-DD                 | `2026-05-09`                            |
+| `updated`     | –       | YYYY-MM-DD                 | `2026-05-14`                            |
+| `author`      | –       | string                     | `"Moritz Kohm"`                         |
+| `order`       | –       | Zahl ≥ 0 (default 999)     | `10`                                    |
+| `category`    | –       | string                     | `"debian"`, …                           |
+| `tags`        | –       | Array von Strings          | `["debian", "apache"]`                  |
+| `draft`       | –       | true/false (default false) | `true`                                  |
+| `toc`         | –       | true/false (default true)  | `false`                                 |
+| `hideTitle`   | –       | true/false (default false) | `true`                                  |
+| `image`       | –       | Pfad                       | `/images/hero.png`                      |
+| `imageAlt`    | –       | string                     | `"Screenshot"`                          |
 
 ### Spezialfelder erklärt
 
@@ -133,25 +134,15 @@ Diese **Spezialkomponenten** kannst Du in jedem Markdown-Dokument nutzen:
 ### Hinweis-Boxen (`<Callout>`)
 
 ```mdx
-<Callout type="info">
-Dies ist ein Informations-Hinweis.
-</Callout>
+<Callout type="info">Dies ist ein Informations-Hinweis.</Callout>
 
-<Callout type="tip">
-Dies ist ein nützlicher Tipp.
-</Callout>
+<Callout type="tip">Dies ist ein nützlicher Tipp.</Callout>
 
-<Callout type="warning">
-Achtung: hier ist etwas wichtig!
-</Callout>
+<Callout type="warning">Achtung: hier ist etwas wichtig!</Callout>
 
-<Callout type="danger">
-Gefahr! Vorsichtig sein.
-</Callout>
+<Callout type="danger">Gefahr! Vorsichtig sein.</Callout>
 
-<Callout type="note">
-Eine neutrale Anmerkung — auch ideal für Zitate aus externen Quellen.
-</Callout>
+<Callout type="note">Eine neutrale Anmerkung — auch ideal für Zitate aus externen Quellen.</Callout>
 ```
 
 ### Code-Blöcke mit Syntax-Highlighting
@@ -176,8 +167,8 @@ Unterstützte Sprachen: `bash`, `apache`, `nginx`, `ini`, `sql`, `json`,
 
 ```markdown
 | Spalte 1 | Spalte 2 | Spalte 3 |
-|---|---|---|
-| Wert | Wert | Wert |
+| -------- | -------- | -------- |
+| Wert     | Wert     | Wert     |
 ```
 
 ### Heading-Anchors
@@ -190,10 +181,10 @@ MDX 3 (das wir nutzen) interpretiert `<` als Beginn eines JSX-Tags. Das klassisc
 Markdown-Autolink-Syntax bricht den Build:
 
 ```markdown
-❌ <https://example.com>          ← bricht den Build
+❌ <https://example.com> ← bricht den Build
 
-✅ [example.com](https://example.com)   ← Markdown-Link
-✅ https://example.com                   ← einfache URL (kein Anchor-Element)
+✅ [example.com](https://example.com) ← Markdown-Link
+✅ https://example.com ← einfache URL (kein Anchor-Element)
 ```
 
 ### Aufgaben-Listen

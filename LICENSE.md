@@ -1,4 +1,5 @@
 # MSK SOURCE AVAILABLE LICENSE (MSK-SAL)
+
 ### Version 1.0 — 2026
 
 > **Copyright (c) 2026 MSK Scripts — All Rights Reserved.**
@@ -17,13 +18,13 @@ other means — you agree to the terms and conditions set forth below.
 
 ## § 1 — Definitions
 
-| Term | Definition |
-|---|---|
-| **Author** | MSK Scripts and any named contributors who have been explicitly acknowledged in writing as authors. |
-| **The Project** | All source code, configurations, designs, texts, graphics, data structures, and other content contained in this repository. |
-| **Use** | Any form of access, reading, copying, executing, modifying, distributing, or deriving. |
-| **Third Parties** | Any natural or legal person other than the Author. |
-| **Commercial Use** | Any use that directly or indirectly aims at financial compensation, profit, or business advantage. |
+| Term               | Definition                                                                                                                  |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| **Author**         | MSK Scripts and any named contributors who have been explicitly acknowledged in writing as authors.                         |
+| **The Project**    | All source code, configurations, designs, texts, graphics, data structures, and other content contained in this repository. |
+| **Use**            | Any form of access, reading, copying, executing, modifying, distributing, or deriving.                                      |
+| **Third Parties**  | Any natural or legal person other than the Author.                                                                          |
+| **Commercial Use** | Any use that directly or indirectly aims at financial compensation, profit, or business advantage.                          |
 
 ---
 
@@ -43,33 +44,43 @@ Subject to the restrictions in § 3, the Author grants you a **limited, non-excl
 Without the express, written permission of the Author, the following actions are expressly **PROHIBITED**:
 
 ### 3.1 Copying & Reproduction
+
 Any complete or partial reproduction of the source code, designs, user interfaces, or logic — regardless of whether it is verbatim or in modified form.
 
 ### 3.2 Derivative Works
+
 The creation of works that are based on, derived from, or contain substantial portions of the Project, including restructurings, translations, or ports to other programming languages.
 
 ### 3.3 Public Operation
+
 The public operation, hosting, or provision of the Project or substantial parts thereof as a service, bot, website, API, or in any other form to third parties — regardless of whether free of charge or paid.
 
 ### 3.4 Commercial Exploitation
+
 Any commercial use, in particular:
+
 - (a) selling, licensing, or renting the Project or parts thereof,
 - (b) incorporating it into paid products or services,
 - (c) monetizing through advertising, subscriptions, or donations based on the Project without express consent.
 
 ### 3.5 Distribution & Redistribution
+
 The distribution of source code, binaries, configurations, or other components to third parties — neither publicly nor privately.
 
 ### 3.6 Design Imitation
+
 The deliberate imitation, copying, or recreation of the visual design, UI layouts, color schemes, animations, or other aesthetic elements of the Project — even if no source code is directly copied.
 
 ### 3.7 Reverse Engineering
+
 The reverse engineering, decompilation, or analysis of the Project with the aim of reproducing the underlying algorithms, structures, or business logic for one's own purposes.
 
 ### 3.8 Removal of Copyright Notices
+
 The removal, concealment, or alteration of copyright notices, license notices, or attribution information in any project files.
 
 ### 3.9 Transfer of Rights
+
 The transfer, sublicensing, or assignment of the rights granted under § 2 to third parties.
 
 ---
@@ -129,8 +140,8 @@ The Author reserves the right to update this license at any time. The most curre
 
 **Copyright (c) 2026 MSK Scripts — All Rights Reserved.**
 
-*This project is not an open-source project.*  
-*The source code is viewable, but not freely usable.*  
-*"Source Available" ≠ "Open Source"*
+_This project is not an open-source project._  
+_The source code is viewable, but not freely usable._  
+_"Source Available" ≠ "Open Source"_
 
 </div>

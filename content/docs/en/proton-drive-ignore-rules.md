@@ -44,16 +44,16 @@ output without you writing a second rule for it. This can be turned off.
 
 The syntax is gitignore's, with Windows conventions where the two disagree:
 
-| Pattern | Meaning |
-|---|---|
-| `build` | any file or folder named `build`, at any depth |
-| `/build` | only `build` directly in the sync folder |
-| `build/` | only directories named `build` |
-| `*.log` | anything ending in `.log` |
-| `!important.log` | takes back what an earlier rule excludes |
-| `docs/*.pdf` | contains a slash, so it is anchored |
-| `docs/**/draft.md` | `draft.md` anywhere below `docs` |
-| `temp?` | `?` matches exactly one character |
+| Pattern            | Meaning                                        |
+| ------------------ | ---------------------------------------------- |
+| `build`            | any file or folder named `build`, at any depth |
+| `/build`           | only `build` directly in the sync folder       |
+| `build/`           | only directories named `build`                 |
+| `*.log`            | anything ending in `.log`                      |
+| `!important.log`   | takes back what an earlier rule excludes       |
+| `docs/*.pdf`       | contains a slash, so it is anchored            |
+| `docs/**/draft.md` | `draft.md` anywhere below `docs`               |
+| `temp?`            | `?` matches exactly one character              |
 
 ## Precedence
 

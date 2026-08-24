@@ -47,16 +47,16 @@ dass Du eine zweite Regel schreibst. Abschalten lässt sich das.
 Die Syntax ist die von gitignore, mit Windows-Konventionen dort, wo beide
 auseinandergehen:
 
-| Muster | Bedeutung |
-|---|---|
-| `build` | Datei oder Ordner namens `build`, auf jeder Ebene |
-| `/build` | nur `build` direkt im Sync-Ordner |
-| `build/` | nur Verzeichnisse namens `build` |
-| `*.log` | alles, was auf `.log` endet |
-| `!wichtig.log` | holt zurück, was eine frühere Regel ausschließt |
-| `docs/*.pdf` | enthält einen Schrägstrich, also verankert |
-| `docs/**/entwurf.md` | `entwurf.md` irgendwo unterhalb von `docs` |
-| `temp?` | `?` steht für genau ein Zeichen |
+| Muster               | Bedeutung                                         |
+| -------------------- | ------------------------------------------------- |
+| `build`              | Datei oder Ordner namens `build`, auf jeder Ebene |
+| `/build`             | nur `build` direkt im Sync-Ordner                 |
+| `build/`             | nur Verzeichnisse namens `build`                  |
+| `*.log`              | alles, was auf `.log` endet                       |
+| `!wichtig.log`       | holt zurück, was eine frühere Regel ausschließt   |
+| `docs/*.pdf`         | enthält einen Schrägstrich, also verankert        |
+| `docs/**/entwurf.md` | `entwurf.md` irgendwo unterhalb von `docs`        |
+| `temp?`              | `?` steht für genau ein Zeichen                   |
 
 ## Die Rangfolge
 

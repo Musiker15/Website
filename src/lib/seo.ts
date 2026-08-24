@@ -92,7 +92,14 @@ export function buildMetadata(params: BuildMetadataParams): Metadata {
       siteName: siteConfig.name,
       title,
       description,
-      images: [{ url: ogImage, width: OG_IMAGE_SIZE.width, height: OG_IMAGE_SIZE.height, alt: imageAlt ?? title }],
+      images: [
+        {
+          url: ogImage,
+          width: OG_IMAGE_SIZE.width,
+          height: OG_IMAGE_SIZE.height,
+          alt: imageAlt ?? title,
+        },
+      ],
       ...(type === "article" && {
         publishedTime: publishedTime?.toISOString(),
         modifiedTime: modifiedTime?.toISOString(),
@@ -108,7 +115,11 @@ export function buildMetadata(params: BuildMetadataParams): Metadata {
   };
 }
 
-export function buildArticleMetadata(frontmatter: Frontmatter, locale: Locale, path: string): Metadata {
+export function buildArticleMetadata(
+  frontmatter: Frontmatter,
+  locale: Locale,
+  path: string,
+): Metadata {
   return buildMetadata({
     // `metaTitle` erlaubt einen Titel für Suchergebnis und Browser-Tab, der von
     // der sichtbaren H1 abweicht. Gedacht für Fälle, in denen die H1 aus dem

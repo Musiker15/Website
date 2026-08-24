@@ -39,10 +39,10 @@ IONOS, auch wenn die Domain bei IONOS gekauft wurde.
 Es gibt zwei gängige Wege, einer Zertifizierungsstelle zu beweisen, dass die
 Domain Dir gehört:
 
-| Verfahren | Wie | Wildcard möglich |
-|---|---|---|
-| HTTP-01 | Datei unter `/.well-known/acme-challenge/` ablegen | nein |
-| DNS-01 | TXT-Record `_acme-challenge.example.de` setzen | ja |
+| Verfahren | Wie                                                | Wildcard möglich |
+| --------- | -------------------------------------------------- | ---------------- |
+| HTTP-01   | Datei unter `/.well-known/acme-challenge/` ablegen | nein             |
+| DNS-01    | TXT-Record `_acme-challenge.example.de` setzen     | ja               |
 
 Für ein Wildcard gibt es keine Wahl, es muss DNS-01 sein. Damit fällt Certbot
 als bequeme Option weg: es bringt kein offizielles Plugin für IONOS-DNS mit,
@@ -57,11 +57,11 @@ Fullchain liest.
 
 acme.sh spricht jeden ACME-Server. Drei kommen bei einer IONOS-Domain in Frage:
 
-| CA | EAB nötig | Laufzeit | Wurzel |
-|---|---|---|---|
-| ZeroSSL | nein, acme.sh holt es selbst | 90 Tage | USERTrust (über Sectigo) |
-| Let's Encrypt | nein | 90 Tage | ISRG |
-| IONOS ACME | ja, von Hand | wie gekauft | Sectigo |
+| CA            | EAB nötig                    | Laufzeit    | Wurzel                   |
+| ------------- | ---------------------------- | ----------- | ------------------------ |
+| ZeroSSL       | nein, acme.sh holt es selbst | 90 Tage     | USERTrust (über Sectigo) |
+| Let's Encrypt | nein                         | 90 Tage     | ISRG                     |
+| IONOS ACME    | ja, von Hand                 | wie gekauft | Sectigo                  |
 
 <Callout type="warning">
 **Der IONOS-ACME-Server stellt nicht frei aus.** Er bindet jede Anfrage an ein
@@ -523,27 +523,27 @@ greift.
 
 ## Häufige Fehler
 
-| Meldung | Ursache | Lösung |
-|---|---|---|
-| `Unknown parameter: ----home` | Installation über `get.acme.sh` mit eigenen Flags | Tarball-Weg nehmen, siehe Schritt 2 |
-| `No available certificate found for the requested domain(s).` | IONOS-ACME, kein freies Kontingent im Konto | ZeroSSL oder Let's Encrypt nehmen |
-| Registrierung bei ZeroSSL scheitert ohne klare Meldung | Server-URL nicht exakt | genau `https://acme.zerossl.com/v2/DV90` |
-| `AH02565: ... do not match` | neue Fullchain mit altem Schlüssel kombiniert | vhost-Pfade prüfen, siehe Schritt 5 |
-| `is already verified, skipping dns-01` | IONOS autorisiert eigene Domains vorab | kein Fehler, nur eine Info |
-| Validierung läuft in einen Timeout | DNS-Propagation zu langsam | `--dnssleep 180` anhängen |
-| `AH02218: no OCSP URI in certificate` | Let's Encrypt liefert seit 2025 keine OCSP-URL mehr | `SSLUseStapling off` oder CA wechseln |
-| `--install-cert` findet nichts | ECDSA-Zertifikat ohne `--ecc` angesprochen | `--ecc` ergänzen |
+| Meldung                                                       | Ursache                                             | Lösung                                   |
+| ------------------------------------------------------------- | --------------------------------------------------- | ---------------------------------------- |
+| `Unknown parameter: ----home`                                 | Installation über `get.acme.sh` mit eigenen Flags   | Tarball-Weg nehmen, siehe Schritt 2      |
+| `No available certificate found for the requested domain(s).` | IONOS-ACME, kein freies Kontingent im Konto         | ZeroSSL oder Let's Encrypt nehmen        |
+| Registrierung bei ZeroSSL scheitert ohne klare Meldung        | Server-URL nicht exakt                              | genau `https://acme.zerossl.com/v2/DV90` |
+| `AH02565: ... do not match`                                   | neue Fullchain mit altem Schlüssel kombiniert       | vhost-Pfade prüfen, siehe Schritt 5      |
+| `is already verified, skipping dns-01`                        | IONOS autorisiert eigene Domains vorab              | kein Fehler, nur eine Info               |
+| Validierung läuft in einen Timeout                            | DNS-Propagation zu langsam                          | `--dnssleep 180` anhängen                |
+| `AH02218: no OCSP URI in certificate`                         | Let's Encrypt liefert seit 2025 keine OCSP-URL mehr | `SSLUseStapling off` oder CA wechseln    |
+| `--install-cert` findet nichts                                | ECDSA-Zertifikat ohne `--ecc` angesprochen          | `--ecc` ergänzen                         |
 
 ## Warum sich das ohnehin lohnt
 
 Manuelle Zertifikatspflege läuft branchenweit aus. Das CA/Browser Forum hat mit
 Ballot SC-081v3 einen Stufenplan für alle öffentlichen CAs beschlossen:
 
-| ab | maximale Laufzeit |
-|---|---|
-| 15.03.2026 | 200 Tage |
-| 15.03.2027 | 100 Tage |
-| 15.03.2029 | 47 Tage |
+| ab         | maximale Laufzeit |
+| ---------- | ----------------- |
+| 15.03.2026 | 200 Tage          |
+| 15.03.2027 | 100 Tage          |
+| 15.03.2029 | 47 Tage           |
 
 Ein Zertifikat, das alle 47 Tage von Hand getauscht werden muss, tauscht
 irgendwann niemand mehr rechtzeitig. Die 90 Tage von ZeroSSL und Let's Encrypt

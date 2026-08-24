@@ -41,11 +41,11 @@ ausreicht.
 Die meisten Tutorials laufen auf jedem aktuellen Debian-VPS oder Mini-PC.
 Faustregel:
 
-| Use Case | Empfehlung |
-|---|---|
-| Reine statische Site | 1 vCPU, 1 GB RAM |
-| LAMP-Stack mit phpMyAdmin | 2 vCPUs, 2 GB RAM |
-| TeamSpeak + Sinusbot | 2 vCPUs, 4 GB RAM |
+| Use Case                        | Empfehlung        |
+| ------------------------------- | ----------------- |
+| Reine statische Site            | 1 vCPU, 1 GB RAM  |
+| LAMP-Stack mit phpMyAdmin       | 2 vCPUs, 2 GB RAM |
+| TeamSpeak + Sinusbot            | 2 vCPUs, 4 GB RAM |
 | Mehrere FiveM-Bots gleichzeitig | 4 vCPUs, 8 GB RAM |
 
 ### Ich bekomme den Fehler „Permission denied" beim Ausführen eines Befehls

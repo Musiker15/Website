@@ -162,7 +162,7 @@ Lautenschlagerstraße 20
 70173 Stuttgart  
 Telefon: +49 711 615541-0  
 E-Mail: `poststelle@lfdi.bwl.de`  
-Web: [baden-wuerttemberg.datenschutz.de](https://www.baden-wuerttemberg.datenschutz.de)  
+Web: [baden-wuerttemberg.datenschutz.de](https://www.baden-wuerttemberg.datenschutz.de)
 
 ### SSL- bzw. TLS-Verschlüsselung
 

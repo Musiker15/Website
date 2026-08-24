@@ -1,4 +1,5 @@
 # MSK SOURCE AVAILABLE LICENSE (MSK-SAL)
+
 ### Version 1.0 — 2026
 
 > **Copyright (c) 2026 MSK Scripts — Alle Rechte vorbehalten.**
@@ -17,13 +18,13 @@ anderweitig – erklärst Du Dich mit den nachfolgenden Bedingungen einverstande
 
 ## § 1 — Definitionen
 
-| Begriff | Bedeutung |
-|---|---|
-| **Urheber** | MSK Scripts sowie alle namentlich genannten Beitragenden, die ausdrücklich schriftlich als Urheber anerkannt wurden. |
-| **Das Projekt** | Der gesamte in diesem Repository enthaltene Quellcode, Konfigurationen, Designs, Texte, Grafiken, Datenstrukturen und sonstigen Inhalte. |
-| **Nutzung** | Jede Form des Zugriffs, Lesens, Kopierens, Ausführens, Modifizierens, Verteilens oder Abgeleiteten. |
-| **Dritte** | Jede natürliche oder juristische Person außer dem Urheber. |
-| **Kommerzielle Nutzung** | Jede Nutzung, die direkt oder indirekt auf finanzielle Gegenleistung, Gewinn oder geschäftliche Vorteile abzielt. |
+| Begriff                  | Bedeutung                                                                                                                                |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **Urheber**              | MSK Scripts sowie alle namentlich genannten Beitragenden, die ausdrücklich schriftlich als Urheber anerkannt wurden.                     |
+| **Das Projekt**          | Der gesamte in diesem Repository enthaltene Quellcode, Konfigurationen, Designs, Texte, Grafiken, Datenstrukturen und sonstigen Inhalte. |
+| **Nutzung**              | Jede Form des Zugriffs, Lesens, Kopierens, Ausführens, Modifizierens, Verteilens oder Abgeleiteten.                                      |
+| **Dritte**               | Jede natürliche oder juristische Person außer dem Urheber.                                                                               |
+| **Kommerzielle Nutzung** | Jede Nutzung, die direkt oder indirekt auf finanzielle Gegenleistung, Gewinn oder geschäftliche Vorteile abzielt.                        |
 
 ---
 
@@ -43,33 +44,43 @@ Vorbehaltlich der Einschränkungen in § 3 gewährt der Urheber Dir ein **beschr
 Ohne ausdrückliche, schriftliche Genehmigung des Urhebers ist Folgendes ausdrücklich **UNTERSAGT**:
 
 ### 3.1 Kopieren & Vervielfältigung
+
 Jede vollständige oder teilweise Vervielfältigung des Quellcodes, der Designs, der Benutzeroberflächen oder der Logik — unabhängig davon, ob sie wortgetreu oder in abgewandelter Form erfolgt.
 
 ### 3.2 Abgeleitete Werke
+
 Die Erstellung von Werken, die auf dem Projekt basieren, davon abgeleitet sind oder wesentliche Teile davon enthalten, einschließlich Umstrukturierungen, Übersetzungen oder Portierungen in andere Programmiersprachen.
 
 ### 3.3 Öffentlicher Betrieb
+
 Das öffentliche Betreiben, Hosten oder Bereitstellen des Projekts oder wesentlicher Teile davon als Dienst, Bot, Website, API oder in sonstiger Form gegenüber Dritten — gleichgültig, ob kostenlos oder kostenpflichtig.
 
 ### 3.4 Kommerzielle Verwertung
+
 Jede kommerzielle Nutzung, insbesondere:
+
 - (a) Verkauf, Lizenzierung oder Vermietung des Projekts oder von Teilen,
 - (b) Einbindung in kostenpflichtige Produkte oder Dienstleistungen,
 - (c) Monetarisierung über Werbung, Abonnements oder Donations auf Basis des Projekts ohne ausdrückliche Zustimmung.
 
 ### 3.5 Weitergabe & Redistribution
+
 Die Weitergabe des Quellcodes, von Binärdateien, Konfigurationen oder sonstiger Bestandteile an Dritte — weder öffentlich noch privat.
 
 ### 3.6 Nachahmung des Designs
+
 Die bewusste Nachahmung, Imitation oder das Nachbauen des visuellen Designs, der UI-Layouts, Farbwelten, Animationen oder anderer ästhetischer Elemente des Projekts — auch wenn kein Quellcode übernommen wird.
 
 ### 3.7 Reverse Engineering
+
 Das Zurückentwickeln, Dekompilieren oder Analysieren des Projekts mit dem Ziel, die zugrunde liegenden Algorithmen, Strukturen oder Geschäftslogiken für eigene Zwecke zu reproduzieren.
 
 ### 3.8 Entfernen von Urheberrechtsvermerken
+
 Das Entfernen, Verbergen oder Abändern von Copyright-Hinweisen, Lizenzhinweisen oder Attributionsangaben in jeglichen Projektdateien.
 
 ### 3.9 Übertragung von Rechten
+
 Das Übertragen, Unterlizenzieren oder Abtreten der durch § 2 gewährten Rechte an Dritte.
 
 ---
@@ -129,8 +140,8 @@ Der Urheber behält sich vor, diese Lizenz jederzeit zu aktualisieren. Die jewei
 
 **Copyright (c) 2026 MSK Scripts — Alle Rechte vorbehalten.**
 
-*Dieses Projekt ist kein Open-Source-Projekt.*  
-*Der Quellcode ist einsehbar, aber nicht frei nutzbar.*  
-*„Source Available" ≠ „Open Source"*
+_Dieses Projekt ist kein Open-Source-Projekt._  
+_Der Quellcode ist einsehbar, aber nicht frei nutzbar._  
+_„Source Available" ≠ „Open Source"_
 
 </div>

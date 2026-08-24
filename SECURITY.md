@@ -6,10 +6,10 @@ Diese Website wird kontinuierlich vom `main`-Branch deployed. Patches werden
 ausschließlich für die aktuelle Production-Version bereitgestellt — es gibt
 keine LTS-Branches oder versionierten Releases.
 
-| Version | Supported |
-|---|---|
-| `main` (Production) | ✅ |
-| Sonstige Branches / Tags | ❌ |
+| Version                  | Supported |
+| ------------------------ | --------- |
+| `main` (Production)      | ✅        |
+| Sonstige Branches / Tags | ❌        |
 
 ## Reporting a Vulnerability
 
@@ -41,12 +41,12 @@ Bitte verschlüssele sensible Details, wenn möglich (PGP-Key auf Anfrage).
 
 ## Response Timeline
 
-| Phase | Ziel |
-|---|---|
-| Eingangsbestätigung | innerhalb von **72 Stunden** |
-| Erste Einschätzung (Triage) | innerhalb von **7 Tagen** |
-| Fix in Production | abhängig von Severity (kritisch: ASAP; hoch: ≤ 30 Tage; mittel/niedrig: best-effort) |
-| Coordinated Disclosure | typischerweise 90 Tage nach Fix-Deployment |
+| Phase                       | Ziel                                                                                 |
+| --------------------------- | ------------------------------------------------------------------------------------ |
+| Eingangsbestätigung         | innerhalb von **72 Stunden**                                                         |
+| Erste Einschätzung (Triage) | innerhalb von **7 Tagen**                                                            |
+| Fix in Production           | abhängig von Severity (kritisch: ASAP; hoch: ≤ 30 Tage; mittel/niedrig: best-effort) |
+| Coordinated Disclosure      | typischerweise 90 Tage nach Fix-Deployment                                           |
 
 ## Out-of-Scope
 

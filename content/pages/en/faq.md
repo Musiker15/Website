@@ -37,11 +37,11 @@ projects (Next.js reverse proxies, PHP applications, static sites).
 
 Most tutorials run on any current Debian VPS or mini PC. Rule of thumb:
 
-| Use case | Recommendation |
-|---|---|
-| Pure static site | 1 vCPU, 1 GB RAM |
-| LAMP stack with phpMyAdmin | 2 vCPUs, 2 GB RAM |
-| TeamSpeak + Sinusbot | 2 vCPUs, 4 GB RAM |
+| Use case                    | Recommendation    |
+| --------------------------- | ----------------- |
+| Pure static site            | 1 vCPU, 1 GB RAM  |
+| LAMP stack with phpMyAdmin  | 2 vCPUs, 2 GB RAM |
+| TeamSpeak + Sinusbot        | 2 vCPUs, 4 GB RAM |
 | Multiple FiveM bots at once | 4 vCPUs, 8 GB RAM |
 
 ### I get "Permission denied" when running a command

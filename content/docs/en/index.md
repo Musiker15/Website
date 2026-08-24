@@ -11,11 +11,11 @@ on Linux/Debian, server setup, self-hosting and my personal hardware setup.
 
 ## Social Media &amp; Gaming
 
-| Platform | Name |
-|---|---|
-| **Steam** | `Musiker15` |
-| **Uplay** | `XxMusiker15xX` |
-| **EA / Origin** | `Musiker15` |
-| **Epic Games** | `Musiker15` |
-| **BattleNET** | `Musiker15` |
-| **Social Club** | `Musiker15` |
+| Platform        | Name            |
+| --------------- | --------------- |
+| **Steam**       | `Musiker15`     |
+| **Uplay**       | `XxMusiker15xX` |
+| **EA / Origin** | `Musiker15`     |
+| **Epic Games**  | `Musiker15`     |
+| **BattleNET**   | `Musiker15`     |
+| **Social Club** | `Musiker15`     |

@@ -39,4 +39,5 @@ A manual renewal is only needed in an emergency:
 ```bash
 certbot renew
 ```
+
 </Callout>

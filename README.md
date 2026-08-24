@@ -176,12 +176,12 @@ sudo systemctl reload apache2
 
 Setze folgende Secrets im Repo:
 
-| Secret | Inhalt |
-|---|---|
-| `DEPLOY_HOST` | Server-IP oder Hostname |
+| Secret        | Inhalt                                                            |
+| ------------- | ----------------------------------------------------------------- |
+| `DEPLOY_HOST` | Server-IP oder Hostname                                           |
 | `DEPLOY_USER` | SSH-User (mit `sudo` für `chown` & `systemctl restart musiker15`) |
-| `DEPLOY_KEY` | Privater SSH-Key (key-only Auth, kein Passwort) |
-| `DEPLOY_PORT` | (optional) SSH-Port, default 22 |
+| `DEPLOY_KEY`  | Privater SSH-Key (key-only Auth, kein Passwort)                   |
+| `DEPLOY_PORT` | (optional) SSH-Port, default 22                                   |
 
 Push auf `main` triggert automatisch das Deployment. Der Workflow validiert
 Content, baut Type-Check / Lint / Build / Search-Index, packt ein Release-
@@ -192,16 +192,16 @@ Fallback auf die letzten 5 Releases unter `/opt/musiker15/releases/`.
 
 ## 🌐 URL-Struktur
 
-| URL | Quelle |
-|---|---|
-| `/` → `/de` | `src/app/[locale]/page.tsx` |
-| `/de/docs` | Übersicht aus `content/docs/de/**/*.md` (Sidebar auto) |
-| `/de/docs/pc-hardware` | `content/docs/de/pc-hardware.md` |
-| `/de/docs/debian-tutorials/certbot` | `content/docs/de/debian-tutorials/certbot.md` |
-| `/de/news` | Liste sortiert nach `frontmatter.date` |
-| `/de/<slug>` | Catch-All: `content/pages/de/<slug>.md` |
-| `/sitemap.xml` | auto-generiert (`src/app/sitemap.ts`) |
-| `/robots.txt` | auto-generiert (`src/app/robots.ts`) |
+| URL                                 | Quelle                                                 |
+| ----------------------------------- | ------------------------------------------------------ |
+| `/` → `/de`                         | `src/app/[locale]/page.tsx`                            |
+| `/de/docs`                          | Übersicht aus `content/docs/de/**/*.md` (Sidebar auto) |
+| `/de/docs/pc-hardware`              | `content/docs/de/pc-hardware.md`                       |
+| `/de/docs/debian-tutorials/certbot` | `content/docs/de/debian-tutorials/certbot.md`          |
+| `/de/news`                          | Liste sortiert nach `frontmatter.date`                 |
+| `/de/<slug>`                        | Catch-All: `content/pages/de/<slug>.md`                |
+| `/sitemap.xml`                      | auto-generiert (`src/app/sitemap.ts`)                  |
+| `/robots.txt`                       | auto-generiert (`src/app/robots.ts`)                   |
 
 ---
 
@@ -211,9 +211,9 @@ Fallback auf die letzten 5 Releases unter `/opt/musiker15/releases/`.
 
 - **Nonce-basierte CSP**: pro Request wird in [src/proxy.ts](./src/proxy.ts)
   ein kryptographisch sicherer Nonce erzeugt und in `script-src 'self'
-  'nonce-XXX' 'strict-dynamic'` eingebettet. Kein `'unsafe-inline'` für
+'nonce-XXX' 'strict-dynamic'` eingebettet. Kein `'unsafe-inline'` für
   Scripts. `default-src 'none'`, `object-src 'none'`, `img-src 'self' data:
-  blob:`, `connect-src 'self'`, `font-src 'self' data:`.
+blob:`, `connect-src 'self'`, `font-src 'self' data:`.
 - **Single Source of Truth** für alle übrigen Security-Header in
   [next.config.ts](./next.config.ts) — Apache vHost setzt keine eigenen,
   sondern entfernt nur die von `security.conf` global gesetzten
@@ -254,10 +254,12 @@ aber **nicht frei nutzbar**.
 > „Source Available" ≠ „Open Source"
 
 Volltext:
+
 - [LICENSE.md](LICENSE.md) (English)
 - [LICENSE_DE.md](LICENSE_DE.md) (Deutsch)
 
 Erlaubt (ohne weitere Genehmigung):
+
 - Lesen und Sichten des Quellcodes
 - Lokales Ausführen zu rein privaten, nicht-kommerziellen Studienzwecken
 - Bug-Reports via GitHub-Issues

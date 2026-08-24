@@ -35,132 +35,120 @@ export const alt = "Musiker15 | Tutorials & Guides";
 
 export default async function Image() {
   // Logo lokal als data-URL einbetten
-  const logoBuffer = await readFile(
-    path.join(process.cwd(), "public/logo.png"),
-  );
+  const logoBuffer = await readFile(path.join(process.cwd(), "public/logo.png"));
   const logoDataUrl = `data:image/png;base64,${logoBuffer.toString("base64")}`;
 
   // Echtes Geist (Regular + Bold) — aus dem `geist`-Paket
   const geistRegular = await readFile(
-    path.join(
-      process.cwd(),
-      "node_modules/geist/dist/fonts/geist-sans/Geist-Regular.ttf",
-    ),
+    path.join(process.cwd(), "node_modules/geist/dist/fonts/geist-sans/Geist-Regular.ttf"),
   );
   const geistBold = await readFile(
-    path.join(
-      process.cwd(),
-      "node_modules/geist/dist/fonts/geist-sans/Geist-Bold.ttf",
-    ),
+    path.join(process.cwd(), "node_modules/geist/dist/fonts/geist-sans/Geist-Bold.ttf"),
   );
 
   return new ImageResponse(
-    (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        // Block (Logo + Text) horizontal zentrieren → Freiraum links und
+        // rechts symmetrisch.
+        justifyContent: "center",
+        background: "linear-gradient(135deg, #0d1b4b 0%, #2744a9 100%)",
+        color: "#ffffff",
+        fontFamily: "Geist",
+      }}
+    >
+      {/* Logo-Spalte (mit subtilem Glow direkt am Logo dahinter) */}
       <div
         style={{
-          width: "100%",
-          height: "100%",
           display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          // Block (Logo + Text) horizontal zentrieren → Freiraum links und
-          // rechts symmetrisch.
-          justifyContent: "center",
-          background:
-            "linear-gradient(135deg, #0d1b4b 0%, #2744a9 100%)",
-          color: "#ffffff",
-          fontFamily: "Geist",
+          position: "relative",
+          width: 280,
+          height: 280,
+          marginRight: 36,
+          flexShrink: 0,
         }}
       >
-        {/* Logo-Spalte (mit subtilem Glow direkt am Logo dahinter) */}
+        {/* Glow */}
         <div
           style={{
+            position: "absolute",
+            top: -40,
+            left: -40,
+            width: 360,
+            height: 360,
+            background: "radial-gradient(circle, rgba(58,94,207,0.38) 0%, rgba(58,94,207,0) 70%)",
             display: "flex",
-            position: "relative",
-            width: 280,
-            height: 280,
-            marginRight: 36,
-            flexShrink: 0,
           }}
-        >
-          {/* Glow */}
-          <div
-            style={{
-              position: "absolute",
-              top: -40,
-              left: -40,
-              width: 360,
-              height: 360,
-              background:
-                "radial-gradient(circle, rgba(58,94,207,0.38) 0%, rgba(58,94,207,0) 70%)",
-              display: "flex",
-            }}
-          />
-          {/* M-Logo */}
-          <img
-            src={logoDataUrl}
-            alt=""
-            width={280}
-            height={280}
-            style={{ objectFit: "contain", position: "relative" }}
-          />
-        </div>
+        />
+        {/* M-Logo */}
+        <img
+          src={logoDataUrl}
+          alt=""
+          width={280}
+          height={280}
+          style={{ objectFit: "contain", position: "relative" }}
+        />
+      </div>
 
-        {/* Text-Spalte — alle Children am linken Rand (alignItems: flex-start) */}
+      {/* Text-Spalte — alle Children am linken Rand (alignItems: flex-start) */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "flex-start",
+        }}
+      >
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "flex-start",
+            fontSize: 104,
+            fontWeight: 700,
+            lineHeight: 1,
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              fontSize: 104,
-              fontWeight: 700,
-              lineHeight: 1,
-            }}
-          >
-            Musiker15
-          </div>
-          <div
-            style={{
-              display: "flex",
-              fontSize: 38,
-              marginTop: 12,
-              color: "#d5dbe8",
-              fontWeight: 400,
-            }}
-          >
-            Tutorials &amp; Guides
-          </div>
-          <div
-            style={{
-              display: "flex",
-              fontSize: 24,
-              marginTop: 32,
-              color: "#bcc3d3",
-              fontWeight: 400,
-            }}
-          >
-            www.musiker15.de
-          </div>
-          <div
-            style={{
-              display: "flex",
-              fontSize: 19,
-              marginTop: 4,
-              color: "#a8b0c1",
-              fontWeight: 400,
-            }}
-          >
-            Linux · Debian · Self-Hosting
-          </div>
+          Musiker15
+        </div>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 38,
+            marginTop: 12,
+            color: "#d5dbe8",
+            fontWeight: 400,
+          }}
+        >
+          Tutorials &amp; Guides
+        </div>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 24,
+            marginTop: 32,
+            color: "#bcc3d3",
+            fontWeight: 400,
+          }}
+        >
+          www.musiker15.de
+        </div>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 19,
+            marginTop: 4,
+            color: "#a8b0c1",
+            fontWeight: 400,
+          }}
+        >
+          Linux · Debian · Self-Hosting
         </div>
       </div>
-    ),
+    </div>,
     {
       ...size,
       fonts: [

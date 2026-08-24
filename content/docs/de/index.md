@@ -13,11 +13,11 @@ persönliche Hardware-Ausstattung.
 
 ## Social Media &amp; Gaming
 
-| Plattform | Name |
-|---|---|
-| **Steam** | `Musiker15` |
-| **Uplay** | `XxMusiker15xX` |
-| **EA / Origin** | `Musiker15` |
-| **Epic Games** | `Musiker15` |
-| **BattleNET** | `Musiker15` |
-| **Social Club** | `Musiker15` |
+| Plattform       | Name            |
+| --------------- | --------------- |
+| **Steam**       | `Musiker15`     |
+| **Uplay**       | `XxMusiker15xX` |
+| **EA / Origin** | `Musiker15`     |
+| **Epic Games**  | `Musiker15`     |
+| **BattleNET**   | `Musiker15`     |
+| **Social Club** | `Musiker15`     |

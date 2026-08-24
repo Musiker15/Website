@@ -7,3 +7,7 @@ public
 .turbo
 pnpm-lock.yaml
 *.tar.gz
+
+# Generiert. Prettier wuerde graph.json und GRAPH_REPORT.md umformatieren,
+# und der naechste `graphify update` schriebe sie wieder zurueck.
+graphify-out

@@ -32,9 +32,9 @@ export function Footer({ locale }: FooterProps) {
   return (
     <footer className="border-t border-[var(--color-border)] bg-[var(--color-muted)]/30">
       <div className="container-page py-12">
-        <div className="grid gap-8 lg:grid-cols-5">
+        <div className="grid gap-8 lg:grid-cols-5 2xl:grid-cols-6">
           {/* Brand-Spalte */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 2xl:col-span-2">
             <Link
               href={`/${locale}`}
               className="inline-flex items-center gap-2 font-semibold tracking-tight transition-colors duration-[var(--duration-hover)] hover:text-[var(--color-primary)]"
@@ -44,7 +44,7 @@ export function Footer({ locale }: FooterProps) {
             {/* Nur die Beschreibung, nicht zusätzlich die Kurzform darüber.
                 Marke, Schlagzeile und Beschreibung übereinander sagen dreimal
                 dasselbe und lesen sich wie ein Platzhalter. */}
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-[var(--color-muted-foreground)]">
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-[var(--color-muted-foreground)]">
               {siteConfig.description[locale]}
             </p>
           </div>

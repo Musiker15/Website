@@ -37,7 +37,7 @@ export function Hero({ locale }: HeroProps) {
           Inline-Style, damit `style-src` ohne 'unsafe-inline' auskommt. */}
       <div aria-hidden className="hero-decor-gradient pointer-events-none absolute inset-0 -z-10" />
 
-      <div className="container-page grid gap-12 py-16 md:py-20 lg:grid-cols-[minmax(0,1fr)_23rem] lg:items-center lg:gap-16 lg:py-24">
+      <div className="container-page grid gap-12 py-16 md:py-20 lg:grid-cols-[minmax(0,1fr)_23rem] lg:items-center lg:gap-16 lg:py-24 2xl:grid-cols-[minmax(0,1fr)_35rem]">
         <div className="stagger-rise">
           {/* Ohne Breitenbegrenzung: die Zeile bricht dadurch zweimal statt
               dreimal, und `text-balance` verteilt die beiden Zeilen gleichmäßig.
@@ -47,7 +47,7 @@ export function Hero({ locale }: HeroProps) {
             {t("heroTitle")}
           </h1>
 
-          <p className="mt-6 max-w-[48ch] text-lg leading-relaxed text-pretty text-[var(--color-muted-foreground)] md:text-xl">
+          <p className="mt-6 max-w-[48ch] text-lg leading-relaxed text-pretty text-[var(--color-muted-foreground)] md:text-xl 2xl:max-w-[58ch]">
             {t("heroLead")}
           </p>
 

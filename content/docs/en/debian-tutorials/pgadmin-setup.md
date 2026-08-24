@@ -9,10 +9,12 @@ tags: ["debian", "pgadmin", "postgres"]
 # pgAdmin 4: Setup Runbook
 
 ## DNS
+
 Create an A record: `pgadmin.your-domain.com` → server IP.
 Only after that does certificate issuance (Let's Encrypt) work.
 
 ## Install pgAdmin 4 (official APT repo)
+
 ```bash
 curl -fsSL https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /usr/share/keyrings/packages-pgadmin-org.gpg
 sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list'
@@ -22,37 +24,46 @@ sudo apt install -y pgadmin4-web        # web variant (mod_wsgi), NOT the deskto
 ```
 
 ## Create the pgAdmin login + configure WSGI
+
 ```bash
 sudo /usr/pgadmin4/bin/setup-web.sh
 ```
+
 - Asks for **email + password** → pgAdmin login (choose a strong password).
 - "Configure Apache? (y/n)" → **y**.
 
 Disable the default mount `/pgadmin4` (on all vhosts) and use a dedicated subdomain instead:
+
 ```bash
 sudo a2disconf pgadmin4
 sudo a2enmod wsgi headers ssl rewrite
 ```
 
 ## Find the SSL certificate path
+
 If a (wildcard) certificate for your domain already exists, you can reuse it,
 otherwise issue one first via [Certbot](/en/docs/debian-tutorials/certbot). The
 easiest way to find the paths in use is from an existing vhost:
+
 ```bash
 sudo grep -Rns "SSLCertificate" /etc/apache2/sites-available/   # shows the .pem paths in use
 # or:
 sudo certbot certificates                                        # lists existing certs + paths
 ```
+
 Typically: `/etc/letsencrypt/live/your-domain.com/fullchain.pem` + `…/privkey.pem`
 (take the exact name from the output above).
 
 ## Apache vhost (HTTP→HTTPS redirect + HTTPS)
+
 Upstream basic auth (defense in depth, in addition to pgAdmin's own login):
+
 ```bash
 sudo htpasswd -c /etc/apache2/.pgadmin_htpasswd yourname
 ```
 
 `/etc/apache2/sites-available/pgadmin.your-domain.com.conf`:
+
 ```apache
 # HTTP → HTTPS
 <VirtualHost *:80>
@@ -84,8 +95,8 @@ sudo htpasswd -c /etc/apache2/.pgadmin_htpasswd yourname
         # Require ip 203.0.113.10
     </Directory>
 
-    # Security headers — pgAdmin-compatible!
-    # IMPORTANT: do NOT set Referrer-Policy to "no-referrer" — pgAdmin needs the
+    # Security headers, pgAdmin-compatible!
+    # IMPORTANT: do NOT set Referrer-Policy to "no-referrer". pgAdmin needs the
     # same-origin Referer for its CSRF/security check, otherwise the page stays blank.
     # nosniff + X-Frame-Options SAMEORIGIN, by contrast, are unproblematic.
     Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
@@ -97,6 +108,7 @@ sudo htpasswd -c /etc/apache2/.pgadmin_htpasswd yourname
     CustomLog ${APACHE_LOG_DIR}/pgadmin_access.log combined
 </VirtualHost>
 ```
+
 ```bash
 sudo a2ensite pgadmin.your-domain.com
 sudo apache2ctl configtest && sudo systemctl reload apache2
@@ -109,10 +121,13 @@ via a `deploy-hook`, make sure your renewal hook runs `systemctl reload apache2`
 </Callout>
 
 ## Create a dedicated DB admin role
+
 A dedicated superuser for pgAdmin. Do **not** use the application DB user.
+
 ```bash
 sudo -u postgres psql
 ```
+
 ```sql
 -- Case is only preserved with quotes → the role is named exactly "DbAdmin".
 CREATE ROLE "DbAdmin" WITH LOGIN SUPERUSER PASSWORD 'YOUR_SECURE_PASSWORD';
@@ -134,7 +149,9 @@ full access to all databases.
   (sees other DBs' **contents** only as owner/member → for "see everything" SUPERUSER is required).
 
 ## Connect the local Postgres server in pgAdmin
+
 Log in at `https://pgadmin.your-domain.com` → **Add New Server**:
+
 - **Host:** `127.0.0.1` · **Port:** `5432`
 - **Username:** `DbAdmin` · **Password:** (from "Create a dedicated DB admin role")
 - "Save password" only if you trust the pgAdmin master password (encrypted in pgAdmin's SQLite).
@@ -146,6 +163,7 @@ auth error: `sudo -u postgres psql -c "SHOW hba_file;"` → check that a line
 </Callout>
 
 ## Hardening
+
 ```bash
 sudo tee /etc/fail2ban/jail.d/pgadmin.conf >/dev/null <<'EOF'
 [apache-auth]
@@ -157,6 +175,7 @@ bantime  = 1h
 EOF
 sudo systemctl restart fail2ban
 ```
+
 - Enable the **IP whitelist** (`Require ip …`) if you have a static IP → biggest security gain.
 - Updates: `sudo apt update && sudo apt upgrade pgadmin4-web`.
 - Postgres stays loopback-only, **never** open 5432 in UFW.
@@ -164,13 +183,15 @@ sudo systemctl restart fail2ban
 ---
 
 ## Alternative: pgAdmin as its own service behind an Apache proxy
+
 If the mod_wsgi integration gets in the way, pgAdmin can run as a **gunicorn service
 on `127.0.0.1:5050`** with Apache in front via `ProxyPass`.
 
 ## Alternative: Adminer (lightweight, phpMyAdmin clone)
+
 A single PHP file under the existing Apache+PHP, set up in ~2 minutes, in case
 pgAdmin is too heavyweight.
 
 ---
 
-*Created: 2026-06-21. Tool: pgAdmin 4 (mod_wsgi), access: subdomain + HTTPS + auth.*
+_Created: 2026-06-21. Tool: pgAdmin 4 (mod_wsgi), access: subdomain + HTTPS + auth._

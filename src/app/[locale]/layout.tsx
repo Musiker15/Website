@@ -5,6 +5,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { useTranslations } from "next-intl";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { NonceSetup } from "@/components/layout/NonceSetup";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/config/site.config";
@@ -212,6 +213,8 @@ export default async function LocaleLayout({
           nonce={nonce}
           dangerouslySetInnerHTML={{ __html: siteLd }}
         />
+
+        <NonceSetup nonce={nonce} />
 
         <ThemeProvider
           attribute="class"

@@ -1,5 +1,5 @@
 # =============================================================================
-# CI — Lint, Type-Check, Tests, Build (alle Branches + Pull-Requests)
+# CI — Lint, Type-Check, Build, Vitest, Playwright (alle Branches + PRs)
 # -----------------------------------------------------------------------------
 # Trigger-Logik:
 #   • push    auf jede Branch        → CI läuft (auch auf main, parallel zu Deploy)
@@ -34,7 +34,7 @@ jobs:
   validate:
     name: Validate
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
 
@@ -67,3 +67,18 @@ jobs:
         # `pnpm test` ist `vitest run` (einmalig, kein Watch-Mode). Kein
         # --passWithNoTests mehr: ein leerer Lauf soll auffallen, nicht durchgehen.
         run: pnpm test
+
+      # Nur Chromium, und bewusst in diesem Job statt in einem eigenen: die
+      # E2E-Tests laufen gegen den Produktions-Build, der hier eine Stufe weiter
+      # oben ohnehin schon erzeugt wurde. Ein zweiter Job müsste ihn wiederholen.
+      - name: Install Playwright browser
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Test (Playwright)
+        # Startet `next start -p 3218` selbst, siehe webServer in
+        # playwright.config.ts. Deckt Sprungmarken, Statuscodes, Sprachwechsel
+        # und CSP-Verstöße ab, also alles, was nur an der laufenden Seite
+        # sichtbar ist.
+        run: pnpm run test:e2e
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"

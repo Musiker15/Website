@@ -25,10 +25,10 @@ export function CTASection({ locale }: Props) {
       <div className="container-page py-16 md:py-20">
         <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
           <div>
-            <h2 className="max-w-[20ch] text-2xl font-semibold tracking-tight text-balance md:text-3xl">
+            <h2 className="max-w-[20ch] text-2xl font-semibold tracking-tight text-balance md:text-3xl xl:max-w-[30ch]">
               {t("ctaTitle")}
             </h2>
-            <p className="mt-3 max-w-[52ch] leading-relaxed text-pretty text-[var(--color-muted-foreground)]">
+            <p className="mt-3 max-w-[52ch] leading-relaxed text-pretty text-[var(--color-muted-foreground)] xl:max-w-[78ch]">
               {t("ctaSubtitle")}
             </p>
           </div>

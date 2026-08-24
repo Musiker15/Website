@@ -31,20 +31,11 @@ export function formatDate(
   return new Intl.DateTimeFormat(locale === "de" ? "de-DE" : "en-US", options).format(d);
 }
 
-/**
- * Erzeugt aus einem Heading-Text einen URL-Slug.
- */
-export function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[äöüÄÖÜß]/g, (m) =>
-      ({ ä: "ae", ö: "oe", ü: "ue", Ä: "ae", Ö: "oe", Ü: "ue", ß: "ss" })[m] || m,
-    )
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
+/* Hier stand bis zum 24.08.2026 ein `slugify()` für Überschriften. Es wurde
+   nirgends aufgerufen und trug denselben Fehler wie die Fassung, die den
+   Sprungmarken-Bug ausgelöst hat: die Umlaut-Tabelle lag hinter der
+   NFD-Zerlegung und lief deshalb ins Leere. Anker-Slugs entstehen
+   ausschließlich in `src/lib/mdx.ts`, siehe Abschnitt 8b der CLAUDE.md. */
 
 /**
  * Liefert eine URL ohne führende/abschließende Slashes.

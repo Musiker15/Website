@@ -24,7 +24,11 @@ export function ThemeToggle() {
   }
 
   return (
-    <DropdownMenu.Root>
+    // `modal={false}`: die Vorgabe `true` zieht `react-remove-scroll` heran,
+    // das seinen Scroll-Lock über ein zur Laufzeit eingehängtes `<style>` ohne
+    // Nonce löst. Die CSP blockt das, im Log stand bei jedem Öffnen ein
+    // Verstoß. Ein Menü mit drei Einträgen braucht keinen Scroll-Lock.
+    <DropdownMenu.Root modal={false}>
       <DropdownMenu.Trigger asChild>
         <Button variant="ghost" size="icon" aria-label={t("theme")}>
           {/* Zwei Symbole, die sich am Platz ablösen. Bewusst nicht von

@@ -39,7 +39,7 @@ export default async function DocsIndexPage({ params }: Props) {
 
   // Top-Level-Index (content/docs/<locale>/index.md) rendern, falls vorhanden.
   const index = getContent("docs", locale, []);
-  const indexContent = index ? await renderMDX(index.content) : null;
+  const indexContent = index ? (await renderMDX(index.content)).content : null;
   const heading = index?.frontmatter.title ?? t("title");
   const subtitle = index?.frontmatter.description ?? t("subtitle");
 
@@ -99,7 +99,7 @@ export default async function DocsIndexPage({ params }: Props) {
 
           {/* Bereiche als Einstiegspunkte */}
           <h2 className="mb-5 text-xl font-semibold tracking-tight">{t("sections")}</h2>
-          <div className="grid items-start gap-5 md:grid-cols-2">
+          <div className="grid items-start gap-5 md:grid-cols-2 2xl:grid-cols-3">
             {tree.map((node) => (
               <DocCard key={node.name} node={node} />
             ))}

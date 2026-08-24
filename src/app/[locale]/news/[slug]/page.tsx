@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DocNavMobile } from "@/components/content/DocNavMobile";
 import { TableOfContents } from "@/components/content/TableOfContents";
 import { getContent, listContent } from "@/lib/content";
-import { renderMDX, extractHeadings } from "@/lib/mdx";
+import { renderMDX } from "@/lib/mdx";
 import {
   buildArticleMetadata,
   buildArticleLd,
@@ -45,8 +45,7 @@ export default async function NewsArticlePage({ params }: Props) {
   const item = getContent("news", locale, [slug]);
   if (!item) notFound();
 
-  const content = await renderMDX(item.content);
-  const headings = extractHeadings(item.content);
+  const { content, headings } = await renderMDX(item.content);
   const showToc = item.frontmatter.toc && headings.length > 1;
 
   const ld = buildJsonLdGraph([
@@ -66,7 +65,13 @@ export default async function NewsArticlePage({ params }: Props) {
   return (
     <div className="container-page py-12 md:py-16">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ld }} />
-      <div className={showToc ? "grid gap-10 xl:grid-cols-[minmax(0,1fr)_12rem]" : "grid gap-10"}>
+      <div
+        className={
+          showToc
+            ? "grid gap-10 xl:grid-cols-[minmax(0,var(--measure))_12rem] xl:justify-start"
+            : "grid gap-10"
+        }
+      >
         <article className="min-w-0">
           <Breadcrumbs
             locale={locale}
@@ -77,7 +82,7 @@ export default async function NewsArticlePage({ params }: Props) {
           />
           {showToc && <DocNavMobile headings={headings} />}
 
-          <header className="mb-10 border-b border-[var(--color-border)] pb-6">
+          <header className="mb-10 max-w-[var(--measure)] border-b border-[var(--color-border)] pb-6">
             <h1 className="text-[1.875rem] leading-tight font-semibold tracking-[-0.025em] text-balance md:text-4xl">
               {item.frontmatter.title}
             </h1>
@@ -104,7 +109,7 @@ export default async function NewsArticlePage({ params }: Props) {
             </div>
           </header>
 
-          <div className="prose prose-wide dark:prose-invert">{content}</div>
+          <div className="prose dark:prose-invert">{content}</div>
         </article>
 
         {showToc && (

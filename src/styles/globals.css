@@ -88,12 +88,18 @@
      Breite (News 896px, Artikel 768px, Rechtliches 768px, Docs 1280px), was
      beim Wechsel zwischen zwei Seiten sichtbar sprang.
 
-     Die beiden Werte hängen zusammen: Rahmen innen 1312px minus Baum (240),
-     Verzeichnis (192) und zwei Abstände (je 40) ergibt genau 800px. Deshalb
+     Die beiden Werte hängen zusammen: Rahmen innen 1824px minus Baum (240),
+     Verzeichnis (192) und zwei Abstände (je 40) ergibt genau 1312px. Deshalb
      ist die Textspalte eines Tutorials exakt so breit wie die einer Seite
-     ohne Seitenleisten. Wer einen der Werte ändert, rechnet den anderen mit. */
-  --frame: 86rem;
-  --measure: 50rem;
+     ohne Seitenleisten. Wer einen der Werte ändert, rechnet den anderen mit.
+
+     120rem entsprechen der `container-page` von msk-scripts.de, ebenso die
+     drei Stufen der Innenabstände (1/2/3rem). Bei 1920px Fensterbreite bleiben
+     davon 1824px übrig, und 1312px Textspalte sind derselbe Deckel, den der
+     Shop seinen Rechtstexten gibt. Vorher standen hier 86rem und 50rem, was
+     auf einem breiten Bildschirm links und rechts je rund 300px leer ließ. */
+  --frame: 120rem;
+  --measure: 82rem;
 
   /* --- Radien ------------------------------------------------------------- */
   /* Eine Skala, drei Stufen, konsequent durchgezogen: Steuerelemente `md`,
@@ -187,7 +193,11 @@
 
   html {
     scroll-behavior: smooth;
-    /* Sprungziele landen unter dem klebenden Header (h-16 plus Luft). */
+    /* Sprungziele landen unter dem klebenden Header (h-16 plus Luft).
+       Der einzige Versatz im Projekt. Es gab bis zum 24.08.2026 zusätzlich ein
+       `scroll-margin-top: 5.5rem` an `:target` und an den Prose-Überschriften.
+       Beides addiert sich zu diesem Wert, das Ziel landete also 176px unter der
+       Fensterkante statt 88px, mit 111px Leerraum über der Überschrift. */
     scroll-padding-top: 5.5rem;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
@@ -235,10 +245,6 @@
   :focus-visible {
     outline: 2px solid var(--color-ring);
     outline-offset: 2px;
-  }
-
-  :target {
-    scroll-margin-top: 5.5rem;
   }
 }
 
@@ -429,29 +435,29 @@
 }
 
 /* Lesbreite und Zeilenmaß.
-   `--measure` gilt dort, wo links eine Leiste steht und die Textspalte
-   dadurch ohnehin begrenzt ist, also auf den Tutorial-Seiten. Seiten ohne
-   Leiste tragen zusätzlich `prose-wide` und laufen bis an die
-   Verzeichnisspalte, sonst bliebe im Rahmen rechts ein leerer Streifen. */
+   `--measure` deckelt den Fließtext auf jeder Seite, egal ob links eine
+   Leiste steht oder nicht.
+
+   Bis zum 24.08.2026 hob eine Klasse `prose-wide` den Deckel auf Seiten ohne
+   linke Leiste auf, damit rechts im Rahmen kein leerer Streifen blieb. Bei
+   86rem Rahmen ging das auf, bei 120rem nicht mehr: das Impressum zog seine
+   Adresszeilen über 1814px, und der Rahmen wirkte dadurch leerer als vorher,
+   nicht voller. Einen 1920er Rahmen füllt man über Struktur, also über
+   Spalten, Karten und Leisten, nicht über längere Textzeilen. Genauso hält es
+   msk-scripts.de, dessen Rechtstexte auf denselben 82rem stehen. */
 .prose {
   color: var(--color-foreground);
   max-width: var(--measure);
   /* 18px statt 16px. Die Lesespalte ist auf ausdrücklichen Wunsch breiter
-       als die klassische Empfehlung von 65 bis 75 Zeichen, bei 800px sind es
-       rund 94. Eine größere Schrift und ein offener Zeilenabstand fangen den
+       als die klassische Empfehlung von 65 bis 75 Zeichen, bei 1312px sind es
+       rund 136. Eine größere Schrift und ein offener Zeilenabstand fangen den
        weiten Zeilenrücksprung so weit ab, wie das ohne schmalere Spalte
        möglich ist. */
   font-size: 1.125rem;
   line-height: 1.75;
 }
 
-/* Doppelte Klasse: die Regel oben hat dieselbe Specificity, so entscheidet
-   nicht die Reihenfolge im Stylesheet. */
-.prose.prose-wide {
-  max-width: none;
-}
 .prose :where(h2, h3, h4) {
-  scroll-margin-top: 5.5rem;
   letter-spacing: -0.015em;
 }
 /* Mehr Luft über einer Überschrift als darunter: die Überschrift gehört
@@ -707,6 +713,11 @@
 @media (min-width: 768px) {
   .container-page {
     padding-inline: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .container-page {
+    padding-inline: 3rem;
   }
 }
 

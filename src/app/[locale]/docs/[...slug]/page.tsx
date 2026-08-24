@@ -9,7 +9,7 @@ import { DocNavMobile } from "@/components/content/DocNavMobile";
 import { TableOfContents } from "@/components/content/TableOfContents";
 import { RelatedDocs } from "@/components/content/RelatedDocs";
 import { buildDocTree, getContent, getRelatedDocs, listContent } from "@/lib/content";
-import { renderMDX, extractHeadings } from "@/lib/mdx";
+import { renderMDX } from "@/lib/mdx";
 import {
   buildArticleMetadata,
   buildArticleLd,
@@ -48,8 +48,7 @@ export default async function DocPage({ params }: Props) {
   const item = getContent("docs", locale, slug);
   if (!item) notFound();
 
-  const headings = extractHeadings(item.content);
-  const content = await renderMDX(item.content);
+  const { content, headings } = await renderMDX(item.content);
   const tree = buildDocTree(locale);
   const related = getRelatedDocs(item, locale);
 

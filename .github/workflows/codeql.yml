@@ -3,7 +3,21 @@
 # -----------------------------------------------------------------------------
 # Analysiert JavaScript/TypeScript und die GitHub-Actions-Workflows selbst.
 # build-mode: none — kein Kompilat nötig, CodeQL liest den Source direkt.
-# Trigger: push + PR auf main, plus wöchentlicher Scan (Mittwoch nachts).
+# Trigger: push + PR auf main, wöchentlicher Scan (Mittwoch nachts), und von
+# Hand über workflow_dispatch.
+#
+# Das Handrad ist nicht Zierde. Am 24.08.2026 meldete GitHub einen
+# "Code scanning configuration error", der keiner war: die zwei Analysen eines
+# einzigen Commits trugen `error: "Unknown Error"`, alle Analysen davor und
+# danach waren sauber. Ein zweiter Lauf über denselben Commit lud sie
+# fehlerfrei hoch. Ohne workflow_dispatch geht das nur über die Run-ID des
+# alten Laufs (`gh run rerun <id>`), und die muss man erst suchen.
+#
+# Ob ein Banner überhaupt einen echten Fehler meint, klärt diese Abfrage:
+#   gh api "repos/OWNER/REPO/code-scanning/analyses?ref=refs/heads/main"
+#     --jq '.[] | "\(.created_at) \(.category) error=\(.error)"'
+# Leeres error-Feld heißt: die Analyse ist sauber. Ein echter
+# Konfigurationsfehler trifft mehr als einen Commit auf einem Ref.
 # =============================================================================
 
 name: "CodeQL Advanced"
@@ -15,6 +29,7 @@ on:
     branches: ["main"]
   schedule:
     - cron: "37 22 * * 3"
+  workflow_dispatch:
 
 jobs:
   analyze:

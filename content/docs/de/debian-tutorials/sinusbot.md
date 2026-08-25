@@ -8,9 +8,9 @@ tags: ["debian", "sinusbot", "teamspeak"]
 
 ## Downloads
 
-- [Sinusbot v1.0.1](https://www.sinusbot.com/pre/sinusbot-1.0.1-amd64.tar.bz2), Mirror: [Sinusbot v1.0.1](https://cloud.musiker15.de/index.php/s/wRgebXoXYXTYHGS)
-- [Sinusbot v1.0.2](https://www.sinusbot.com/pre/sinusbot-1.0.2-amd64.tar.bz2), Mirror: [Sinusbot v1.0.2](https://cloud.musiker15.de/index.php/s/tbGpCQCZFexELis)
-- [TeamSpeak Client 3.5.3](https://files.teamspeak-services.com/releases/client/3.5.3/TeamSpeak3-Client-linux_amd64-3.5.3.run), Mirror: [TeamSpeak Client 3.5.3](https://cloud.musiker15.de/index.php/s/WdHZWPJkAFAQ75L)
+- [Sinusbot v1.0.1](https://www.sinusbot.com/pre/sinusbot-1.0.1-amd64.tar.bz2), Mirror: [Sinusbot v1.0.1](https://uploads.musiker15.de/sinusbot-1.0.1-amd64.tar.bz2)
+- [Sinusbot v1.0.2](https://www.sinusbot.com/pre/sinusbot-1.0.2-amd64.tar.bz2), Mirror: [Sinusbot v1.0.2](https://uploads.musiker15.de/sinusbot-1.0.2-amd64.tar.bz2)
+- [TeamSpeak Client 3.5.3](https://files.teamspeak-services.com/releases/client/3.5.3/TeamSpeak3-Client-linux_amd64-3.5.3.run), Mirror: [TeamSpeak Client 3.5.3](https://uploads.musiker15.de/TeamSpeak3-Client-linux_amd64-3.5.3.run)
 
 ---
 

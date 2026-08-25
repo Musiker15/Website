@@ -6,8 +6,6 @@ order: 7
 tags: ["debian", "pgadmin", "postgres"]
 ---
 
-# pgAdmin 4: Setup Runbook
-
 ## DNS
 
 Create an A record: `pgadmin.your-domain.com` → server IP.

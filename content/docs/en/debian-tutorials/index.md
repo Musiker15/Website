@@ -20,7 +20,6 @@ self-hosted server.
 - **[Sinusbot](/en/docs/debian-tutorials/sinusbot)**: music bot for TeamSpeak
 - **[pgAdmin 4: Setup Runbook](/en/docs/debian-tutorials/pgadmin-setup)**: PostgreSQL web UI behind Apache + HTTPS
 - **[Wildcard SSL with acme.sh and IONOS DNS](/en/docs/debian-tutorials/acme-sh-wildcard-ionos)**: auto-renewing wildcard certificates via DNS-01
-- **[txAdmin behind an Apache reverse proxy](/en/docs/debian-tutorials/txadmin-reverse-proxy)**: FiveM panel over HTTPS and WebSocket, without an open port 40120
 
 <Callout type="warning">
 Commands run with `sudo` or as root can permanently change the system. Read

@@ -2,7 +2,7 @@
 title: "PC Hardware"
 description: "My current workstation: chassis, CPU, GPU, monitors and peripherals."
 date: 2026-05-27
-order: 3
+order: 1
 tags: ["hardware"]
 ---
 

@@ -2,7 +2,7 @@
 title: "FiveM server"
 description: "Set up a FiveM server on Debian, run txAdmin safely behind Apache and keep the artifacts up to date automatically. Three steps, each building on the last."
 date: 2026-08-25
-order: 2
+order: 4
 tags: ["fivem", "fxserver", "txadmin", "debian", "linux"]
 ---
 

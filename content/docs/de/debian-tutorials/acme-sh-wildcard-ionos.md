@@ -2,7 +2,7 @@
 title: "Wildcard-SSL mit acme.sh und IONOS-DNS"
 description: "Wildcard-Zertifikate automatisch beziehen und erneuern: acme.sh, DNS-01 über die IONOS-API, ZeroSSL und ein Apache-Deploy, das sich nicht selbst abschießt."
 date: 2026-08-05
-order: 8
+order: 9
 tags: ["debian", "apache", "ssl", "acme", "wildcard", "ionos", "zerossl"]
 ---
 

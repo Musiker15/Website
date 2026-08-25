@@ -2,7 +2,7 @@
 title: "Wildcard SSL with acme.sh and IONOS DNS"
 description: "Issue and auto-renew wildcard certificates: acme.sh, DNS-01 via the IONOS API, ZeroSSL and an Apache deploy that will not take itself down."
 date: 2026-08-05
-order: 8
+order: 9
 tags: ["debian", "apache", "ssl", "acme", "wildcard", "ionos", "zerossl"]
 ---
 

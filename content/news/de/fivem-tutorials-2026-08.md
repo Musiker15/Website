@@ -22,10 +22,15 @@ Vom leeren Debian bis zum laufenden Dienst: eigener Systembenutzer, das
 FXServer-Artefakt, die Trennung von Artefakt und Serverdaten, eine systemd-Unit
 und der erste Start mit txAdmin.
 
-Der Punkt, an dem sich dieses Tutorial von den üblichen unterscheidet: txAdmin
-hört von Anfang an nur auf `127.0.0.1`. Für das Erstsetup läuft ein SSH-Tunnel
-statt eines offenen Ports. Das kostet zwanzig Sekunden und erspart das
-Zeitfenster, in dem ein frisches Verwaltungspanel offen im Netz steht.
+Der Punkt, an dem sich dieses Tutorial von den üblichen unterscheidet: Port
+40120 ist von Anfang an gesperrt. Für das Erstsetup läuft ein SSH-Tunnel statt
+eines offenen Ports. Das kostet zwanzig Sekunden und erspart das Zeitfenster, in
+dem ein frisches Verwaltungspanel offen im Netz steht.
+
+Und ein Hinweis, der mich selbst Zeit gekostet hätte: die naheliegende
+Interface-Einstellung von txAdmin taugt dafür **nicht**. Sie bindet nicht nur
+das Panel, sondern zwingt auch den Spielserver auf dasselbe Interface. Auf
+Loopback gesetzt ist der Server danach für niemanden mehr erreichbar.
 
 ## Schritt 2: txAdmin hinter einem Reverse Proxy
 
@@ -36,7 +41,9 @@ damit die Live-Konsole wirklich live ist. Dazu drei Dinge, die in fast jeder
 kopierten Konfiguration stecken und still Schaden anrichten:
 
 - **Ohne WebSocket-Upgrade** fällt socket.io auf HTTP-Polling zurück. Das Panel
-  läuft weiter, nur träge, und deshalb fällt es monatelang nicht auf.
+  läuft weiter, nur träge, und deshalb fällt es monatelang nicht auf. Getestet
+  wird das im Browser, ein von Hand gebauter curl-Handshake misst nur sich
+  selbst.
 - **`X-Forwarded-For` von Hand zu setzen** verdoppelt die Client-IP, weil
   `mod_proxy_http` den Header selbst schon anhängt. In der Ban-Ansicht steht
   danach Unsinn.

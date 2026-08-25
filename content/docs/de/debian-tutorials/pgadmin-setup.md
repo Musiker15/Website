@@ -2,7 +2,7 @@
 title: "pgAdmin 4: Setup-Runbook"
 description: "pgAdmin 4 (Web) hinter Apache mit HTTPS auf Debian installieren."
 date: 2026-06-23
-order: 7
+order: 8
 tags: ["debian", "pgadmin", "postgres"]
 ---
 

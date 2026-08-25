@@ -2,7 +2,7 @@
 title: "Step 3: update FXServer artifacts automatically"
 description: "An update script that fetches the current version from the Cfx changelog API, swaps only the artifact files and restores the previous state if the server fails to come back. Plus the matching cron entry."
 date: 2026-08-25
-order: 3
+order: 4
 tags: ["fivem", "fxserver", "cron", "systemd", "automation", "bash", "debian"]
 ---
 

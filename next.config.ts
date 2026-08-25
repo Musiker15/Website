@@ -113,19 +113,6 @@ const nextConfig: NextConfig = {
         destination: "/de/docs/debian-tutorials/teamspeak3",
         permanent: true,
       },
-      // Die FiveM-Reihe lag am 25.08.2026 fuer rund eine Stunde unter
-      // debian-tutorials und wurde in einen eigenen Bereich verschoben.
-      // Die alten Adressen waren live, also bleiben sie erreichbar.
-      {
-        source: "/de/docs/debian-tutorials/txadmin-reverse-proxy",
-        destination: "/de/docs/fivem/txadmin-reverse-proxy",
-        permanent: true,
-      },
-      {
-        source: "/en/docs/debian-tutorials/txadmin-reverse-proxy",
-        destination: "/en/docs/fivem/txadmin-reverse-proxy",
-        permanent: true,
-      },
       // Legacy-Pages
       { source: "/datenschutz", destination: "/de/datenschutz", permanent: true },
       { source: "/impressum", destination: "/de/impressum", permanent: true },

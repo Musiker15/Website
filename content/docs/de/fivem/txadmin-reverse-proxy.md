@@ -2,14 +2,14 @@
 title: "Schritt 2: txAdmin hinter einem Apache-Reverse-Proxy"
 description: "Das txAdmin-Panel über Apache 2.4 mit HTTPS auf einer eigenen Subdomain erreichbar machen, inklusive WebSocket-Weiche für die Live-Konsole und den Fallen, die dabei niemand bemerkt."
 date: 2026-08-25
-order: 2
+order: 3
 tags: ["fivem", "txadmin", "apache", "reverse-proxy", "websocket", "debian", "ssl"]
 ---
 
 Das hier ist der zweite Teil der [FiveM-Reihe](/de/docs/fivem). Nach
-[Schritt 1](/de/docs/fivem/installation) läuft txAdmin auf `127.0.0.1:40120` und
-ist nur über einen SSH-Tunnel erreichbar. Das ist sicher, aber unbequem, und für
-mehr als eine Person taugt es nicht.
+[Schritt 1](/de/docs/fivem/installation) ist Port 40120 von außen gesperrt und
+das Panel nur über einen SSH-Tunnel erreichbar. Das ist sicher, aber unbequem,
+und für mehr als eine Person taugt es nicht.
 
 Am Ende dieses Teils nimmt Apache die Anfragen unter einer eigenen Subdomain per
 HTTPS entgegen, die Live-Konsole bekommt eine echte WebSocket-Verbindung, und
@@ -23,8 +23,8 @@ durch Apache, das ist kein HTTP. Nur das Webpanel wandert hinter den Proxy.
 
 ## Voraussetzungen
 
-- ein laufender FXServer nach [Schritt 1](/de/docs/fivem/installation), txAdmin
-  hört auf `127.0.0.1:40120`
+- ein laufender FXServer nach [Schritt 1](/de/docs/fivem/installation), das
+  Panel ist lokal unter `127.0.0.1:40120` erreichbar und von außen gesperrt
 - Apache 2.4 mit funktionierendem HTTPS, entweder über
   [Certbot](/de/docs/debian-tutorials/certbot) oder über ein
   [Wildcard-Zertifikat](/de/docs/debian-tutorials/acme-sh-wildcard-ionos)
@@ -206,34 +206,75 @@ Ab jetzt ist der SSH-Tunnel aus [Schritt 1](/de/docs/fivem/installation)
 ## Prüfen
 
 ```bash
-# Hoert txAdmin weiterhin nur lokal
-ss -tlnp | grep 40120
-
 # Ist der Port von aussen dicht (von einem anderen Rechner aus)
 curl -m 5 http://<server-ip>:40120/ ; echo "exit: $?"
 
 # Antwortet der Proxy
 curl -sI https://tx.example.de/ | head -1
-
-# Kommt das WebSocket-Upgrade durch
-curl -si "https://tx.example.de/socket.io/?EIO=4&transport=websocket" \
-  -H "Connection: Upgrade" -H "Upgrade: websocket" \
-  -H "Sec-WebSocket-Version: 13" \
-  -H "Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==" | head -1
 ```
 
-Die letzte Zeile muss `HTTP/1.1 101 Switching Protocols` liefern. Kommt
-stattdessen `200` oder `400`, greift die Weiche aus Schritt 2.2 nicht, und
-socket.io fällt auf HTTP-Polling zurück. Die Oberfläche funktioniert dann
-trotzdem, nur träge, und die Live-Konsole hinkt hinterher. Genau deshalb fällt
-dieser Fehler oft monatelang nicht auf.
+### Den WebSocket-Upgrade misst man im Browser, nicht mit curl
+
+<Callout type="danger">
+**Ein von Hand zusammengesetzter Handshake mit `curl` taugt als Test nicht.**
+engine.io lehnt ihn mit `400` ab, und zwar auch dann, wenn man direkt am Backend
+vorbei am Proxy misst und eine gültige Sitzung hat. Man misst dann sein eigenes
+Testwerkzeug und hält einen funktionierenden Proxy für kaputt.
+</Callout>
+
+Richtig ist der echte Browser. Panel öffnen, Entwicklerwerkzeuge, Netzwerk,
+Filter **WS**. Dort muss eine Verbindung mit Status **101** stehen. Oder in der
+Konsole:
+
+```js
+new WebSocket("wss://tx.example.de/socket.io/?EIO=4&transport=websocket").onopen = () =>
+  console.log("Upgrade steht");
+```
+
+Bleibt es beim Polling, siehst Du im Netzwerk-Tab stattdessen alle paar Sekunden
+neue `transport=polling`-Anfragen.
+
+### Wenn der Upgrade nicht durchgeht
+
+`upgrade=websocket` ist die Standardantwort, und sie reicht nicht immer. Auf
+einem meiner Server blieb es trotz `upgrade=websocket`, `upgrade=ANY`,
+`mod_proxy_wstunnel` mit Rewrite-Weiche und abgeschaltetem `h2c` bei Status
+`400`.
+
+Die Messung, die dort weitergeholfen hat, ist der Vergleich der
+**Antwortgröße**. Das Backend antwortet auf denselben Handshake mit 34 Bytes,
+durch den Proxy kamen 1414. Der `400` stammte also von Apache selbst, nicht von
+txAdmin:
+
+```bash
+# Direkt am Backend, auf dem Server
+curl -s -o /dev/null -w '%{size_download}\n' \
+  "http://127.0.0.1:40120/socket.io/?EIO=4&transport=websocket"
+
+# Durch den Proxy
+curl -s -o /dev/null -w '%{size_download}\n' \
+  "https://tx.example.de/socket.io/?EIO=4&transport=websocket"
+```
+
+**Regel daraus: liefern Proxy und Backend denselben Statuscode, ist der
+Statuscode kein Beweis.** Erst Größe oder Rumpf sagen, wer geantwortet hat. Wer
+weitersucht, beginnt bei `LogLevel alert proxy:trace3`.
+
+<Callout type="note">
+**Dringend ist das Ganze nicht.** socket.io beginnt jede Verbindung mit
+HTTP-Longpolling und versucht den Upgrade erst danach. Scheitert er, bleibt es
+still beim Polling. Das Panel funktioniert, Live-Konsole und Log-Stream laufen
+weiter, nur mit mehr Anfragen und etwas Verzögerung. Im Log steht dazu nichts,
+deshalb fällt es oft monatelang nicht auf, und deshalb lohnt der Blick in den
+Netzwerk-Tab einmal nach der Einrichtung.
+</Callout>
 
 ## Häufige Fehler
 
 | Meldung oder Symptom                              | Ursache                                   | Lösung                                        |
 | ------------------------------------------------- | ----------------------------------------- | --------------------------------------------- |
 | `503 Service Unavailable`                         | FXServer läuft nicht                      | `systemctl status fivem`, `ss -tlnp`          |
-| Panel lädt, Live-Konsole bleibt leer              | WebSocket-Upgrade kommt nicht durch       | Weiche aus Schritt 2.2 prüfen, `101` erwarten |
+| Panel lädt, Live-Konsole nur traege (Polling)     | WebSocket-Upgrade kommt nicht durch       | Weiche aus Schritt 2.2 prüfen, `101` erwarten |
 | Panel verbindet sich alle paar Minuten neu        | `ProxyTimeout` zu kurz                    | `ProxyTimeout 600` setzen                     |
 | CSP-Verletzung zu `wss://` in der Browser-Konsole | falsche Domain in `connect-src`           | eigene Subdomain eintragen oder CSP weglassen |
 | Alle Zugriffe kommen mit derselben IP an          | `X-Forwarded-For` doppelt gesetzt         | manuelle `RequestHeader`-Zeile entfernen      |

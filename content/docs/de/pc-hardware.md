@@ -2,7 +2,7 @@
 title: "PC-Hardware"
 description: "Meine aktuelle Workstation: Gehäuse, CPU, GPU, Monitore und Peripherie."
 date: 2026-05-27
-order: 10
+order: 3
 tags: ["hardware"]
 ---
 

@@ -2,7 +2,7 @@
 title: "Apache2, PHP 8, MariaDB und phpMyAdmin"
 description: "Kompletter LAMP-Stack: Apache 2, PHP 8, MariaDB und phpMyAdmin installieren und konfigurieren."
 date: 2026-05-27
-order: 2
+order: 3
 tags: ["debian", "apache", "php", "mariadb", "phpmyadmin"]
 ---
 

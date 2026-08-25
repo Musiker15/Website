@@ -2,7 +2,7 @@
 title: "Schritt 1: FiveM-Server auf Debian installieren"
 description: "FXServer-Artefakt einrichten, eigenen Systembenutzer anlegen, systemd-Unit schreiben und txAdmin über einen SSH-Tunnel einrichten, ohne dabei Port 40120 zu öffnen."
 date: 2026-08-25
-order: 1
+order: 2
 tags: ["fivem", "fxserver", "txadmin", "debian", "systemd", "ssh"]
 ---
 
@@ -10,11 +10,11 @@ Das hier ist der erste Teil der [FiveM-Reihe](/de/docs/fivem). Am Ende läuft ei
 FXServer als eigener Systemdienst, txAdmin ist eingerichtet, und der Server
 startet nach einem Neustart der Maschine von allein wieder.
 
-Ein Punkt zieht sich durch die ganze Anleitung: **txAdmin hört von der ersten
-Minute an nur auf `127.0.0.1`.** Für das Erstsetup brauchst Du deshalb einen
-SSH-Tunnel statt eines offenen Ports. Das sind zwanzig Sekunden mehr Aufwand und
-erspart das Zeitfenster, in dem ein frisch installiertes Verwaltungspanel offen
-im Netz steht. Genau dieses Fenster wird zuverlässig gescannt.
+Ein Punkt zieht sich durch die ganze Anleitung: **Port 40120 ist von der ersten
+Minute an dicht.** Für das Erstsetup brauchst Du deshalb einen SSH-Tunnel statt
+eines offenen Ports. Das sind zwanzig Sekunden mehr Aufwand und erspart das
+Zeitfenster, in dem ein frisch installiertes Verwaltungspanel offen im Netz
+steht. Genau dieses Fenster wird zuverlässig gescannt.
 
 ## Voraussetzungen
 
@@ -95,22 +95,58 @@ Eine `server.cfg` brauchst Du an dieser Stelle noch nicht. Die legt der
 Setup-Assistent von txAdmin gleich selbst an, samt Lizenzschlüssel und
 Ressourcenliste.
 
-## Schritt 1.4: txAdmin an localhost binden
+## Schritt 1.4: Den Panel-Port schließen
 
-Das ist der Schritt, um den es hier vor allem geht. Ohne ihn hört txAdmin auf
-`0.0.0.0:40120`, also auf jeder Netzwerkschnittstelle, unverschlüsselt.
+txAdmin hört auf `0.0.0.0:40120`, also auf jeder Netzwerkschnittstelle und
+unverschlüsselt. Das muss weg, bevor der Server das erste Mal am Netz hängt.
+
+<Callout type="danger">
+**Der naheliegende Weg funktioniert nicht.** Es gibt zwar eine Stellschraube für
+das Interface, je nach txAdmin-Version `TXHOST_INTERFACE` beziehungsweise die
+Convar `txAdminInterface`. Die bindet aber laut Dokumentation nicht nur txAdmin,
+sondern **zwingt auch den FXServer auf dasselbe Interface**. Eine getrennte
+Einstellung nur für das Panel gibt es nicht.
+
+Auf `127.0.0.1` gesetzt landet damit der **Spielserver** auf Loopback und ist
+für niemanden mehr erreichbar. Der Fehler ist unangenehm, weil das Panel danach
+genau so aussieht, wie man es haben wollte, und nur die Spieler fehlen.
+</Callout>
+
+Der Port wird deshalb über die Firewall geschlossen, nicht über eine
+Konfiguration im Server:
+
+```bash
+ufw allow 30120/tcp
+ufw allow 30120/udp
+ufw allow 22/tcp
+ufw deny  40120/tcp
+ufw enable
+ufw status verbose
+```
+
+Der Spielport 30120 muss offen sein, sonst findet niemand den Server. Der
+Panel-Port wird ausdrücklich verboten. Der Reverse Proxy aus
+[Schritt 2](/de/docs/fivem/txadmin-reverse-proxy) und der SSH-Tunnel aus Schritt
+1.7 erreichen txAdmin weiterhin, beide kommen über `127.0.0.1` und damit gar
+nicht erst an der Firewall vorbei.
+
+<Callout type="warning">
+**`ufw allow 22/tcp` nicht vergessen**, bevor Du `ufw enable` ausführst, sonst
+sperrst Du Dich aus. Läuft SSH auf einem anderen Port, gehört der dort hin.
+</Callout>
+
+Den Port für das Panel legst Du am `run.sh` fest, nicht in der `server.cfg`:
 
 ```
-+set txAdminInterface 127.0.0.1
 +set txAdminPort 40120
 ```
 
-<Callout type="danger">
-**Diese beiden Convars gehören an `run.sh`, nicht in die `server.cfg`.** Die
-`server.cfg` liest der Spielserver, und den startet txAdmin. Zu dem Zeitpunkt,
-an dem die Datei gelesen wird, läuft txAdmin längst und hat seinen Port
-gebunden. Ein `set txAdminPort` in der `server.cfg` wird schlicht ignoriert,
-ohne Fehlermeldung, und man sucht den Fehler an der falschen Stelle.
+<Callout type="note">
+**Diese Convar gehört an `run.sh`.** Die `server.cfg` liest der Spielserver, und
+den startet txAdmin. Zu dem Zeitpunkt, an dem die Datei gelesen wird, läuft
+txAdmin längst und hat seinen Port gebunden. Ein `set txAdminPort` in der
+`server.cfg` wird schlicht ignoriert, ohne Fehlermeldung, und man sucht den
+Fehler an der falschen Stelle.
 </Callout>
 
 ## Schritt 1.5: systemd-Unit
@@ -141,7 +177,6 @@ Group=fivem
 WorkingDirectory=/opt/fivem/server-data
 ExecStart=/opt/fivem/server/run.sh \
     +set serverProfile default \
-    +set txAdminInterface 127.0.0.1 \
     +set txAdminPort 40120
 Restart=always
 RestartSec=15
@@ -192,25 +227,36 @@ Dienst sieht sein eigenes Verzeichnis sonst nicht mehr.
 
 ## Schritt 1.6: Prüfen, dass der Port wirklich zu ist
 
+Lokal lauscht txAdmin erwartungsgemäß auf allen Schnittstellen, das ist in
+Ordnung:
+
 ```bash
 ss -tlnp | grep 40120
 ```
 
-Erwartet wird `127.0.0.1:40120`. Steht dort `0.0.0.0:40120` oder `*:40120`, hat
-die Convar nicht gegriffen, etwa weil das Artefakt zu alt ist. Dann muss die
-Firewall einspringen:
+Entscheidend ist die Prüfung **von außen**, und zwar von einem anderen Rechner
+aus. Auf dem Server selbst misst man nur die Loopback-Route und bekommt immer
+eine Antwort:
 
 ```bash
-ufw allow 30120/tcp
-ufw allow 30120/udp
-ufw deny  40120/tcp
-ufw status verbose
+# Auf einem anderen Rechner, nicht auf dem Server
+curl -m 5 http://<server-ip>:40120/ ; echo "exit: $?"
 ```
 
-Der Spielport 30120 muss offen sein, sonst findet niemand den Server. Der
-Panel-Port wird ausdrücklich verboten, auch wenn Schritt 1.4 sauber gegriffen
-hat. Zwei Schlösser an der Tür, die den kompletten Server steuert, sind
-angemessen.
+Erwartet wird ein Timeout, also Exit-Code 28. Antwortet dort das Panel, greift
+die `ufw`-Regel aus Schritt 1.4 nicht. Häufigste Ursache: Docker oder ein
+anderer Dienst hat eigene iptables-Regeln vor ufw gelegt.
+
+```bash
+ufw status verbose
+iptables -L INPUT -n --line-numbers | head -20
+```
+
+Gegenprobe für den Spielport, der offen sein **muss**:
+
+```bash
+ss -ulnp | grep 30120
+```
 
 ## Schritt 1.7: Erstsetup über einen SSH-Tunnel
 
@@ -274,7 +320,8 @@ systemctl is-active fivem
 | `Permission denied` beim Start                       | `run.sh` nicht ausführbar oder falscher Besitzer                 | `chmod +x run.sh`, `chown -R fivem:fivem`                                |
 | Port 30120 beim Start belegt                         | `KillMode=process`, Kindprozesse überleben                       | auf `KillMode=mixed` umstellen                                           |
 | Dienst startet, aber findet sein Verzeichnis nicht   | `ProtectHome=true` bei Pfad unter `/home`                        | Zeile entfernen oder Server nach `/opt` legen                            |
-| `ss` zeigt `0.0.0.0:40120`                           | Convar nicht übernommen                                          | Artefakt aktualisieren, `ufw deny 40120/tcp`                             |
+| Panel von außen unter `:40120` erreichbar            | `ufw`-Regel greift nicht, oft wegen Docker-iptables              | `ufw status verbose`, `iptables -L INPUT -n`                             |
+| Spielserver plötzlich für niemanden erreichbar       | Interface-Convar gesetzt, sie bindet auch den FXServer           | Convar entfernen, Port über die Firewall schließen                       |
 | Browser erreicht `127.0.0.1:40120` nicht             | SSH-Tunnel nicht offen oder auf dem Server statt lokal gestartet | Befehl aus Schritt 1.7 auf dem eigenen PC ausführen                      |
 | PIN im Log abgelaufen                                | die PIN gilt nur wenige Minuten                                  | `systemctl restart fivem`, Log sofort lesen                              |
 | Server taucht nicht in der Serverliste auf           | Lizenzschlüssel fehlt oder Netzwerk beim Boot noch nicht bereit  | `sv_licenseKey` prüfen, `network-online.target` in der Unit              |

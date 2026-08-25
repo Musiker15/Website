@@ -2,7 +2,7 @@
 title: "FiveM server"
 description: "Set up a FiveM server on Debian, run txAdmin safely behind Apache and keep the artifacts up to date automatically. Three steps, each building on the last."
 date: 2026-08-25
-order: 21
+order: 2
 tags: ["fivem", "fxserver", "txadmin", "debian", "linux"]
 ---
 
@@ -17,8 +17,8 @@ them in order.
 
 - **[Step 1: install the FiveM server](/en/docs/fivem/installation)**
   FXServer artifact, a dedicated system user, a systemd unit and the first start
-  with txAdmin. The panel listens on `127.0.0.1` from the very beginning, and
-  the initial setup is done through an SSH tunnel.
+  with txAdmin. Port 40120 is blocked in the firewall from the very beginning,
+  and the initial setup goes through an SSH tunnel.
 
 - **[Step 2: txAdmin behind a reverse proxy](/en/docs/fivem/txadmin-reverse-proxy)**
   Apache 2.4 in front, HTTPS on its own subdomain, WebSockets for the live

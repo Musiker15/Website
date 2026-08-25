@@ -2,7 +2,7 @@
 title: "Certbot: Let's Encrypt (free SSL certificates)"
 description: "Install Certbot and have SSL certificates from Let's Encrypt renewed automatically."
 date: 2026-06-13
-order: 4
+order: 5
 tags: ["debian", "apache", "ssl", "letsencrypt", "certbot"]
 ---
 

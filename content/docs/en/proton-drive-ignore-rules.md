@@ -2,7 +2,7 @@
 title: "Proton Drive: keeping files out of sync"
 description: "A fork of the Proton Drive client for Windows that understands ignore rules. A .protonignore in the sync folder, plus .gitignore per directory, in full gitignore syntax."
 date: 2026-08-20
-order: 20
+order: 4
 tags: ["proton", "windows", "open-source", "sync"]
 ---
 

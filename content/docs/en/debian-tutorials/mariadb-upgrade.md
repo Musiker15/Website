@@ -2,7 +2,7 @@
 title: "MariaDB upgrade on Debian / Ubuntu"
 description: "Major release upgrade from MariaDB 10 to 11 without data loss."
 date: 2026-06-13
-order: 3
+order: 4
 tags: ["debian", "mariadb"]
 ---
 

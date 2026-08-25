@@ -22,10 +22,15 @@ From a bare Debian box to a running service: a dedicated system user, the
 FXServer artifact, separating artifact from server data, a systemd unit and the
 first start with txAdmin.
 
-The point where this guide differs from the usual ones: txAdmin listens on
-`127.0.0.1` from the very beginning. The initial setup runs through an SSH
-tunnel instead of an open port. That costs twenty seconds and removes the window
-in which a fresh management panel sits open on the internet.
+The point where this guide differs from the usual ones: port 40120 is blocked
+from the very beginning. The initial setup runs through an SSH tunnel instead of
+an open port. That costs twenty seconds and removes the window in which a fresh
+management panel sits open on the internet.
+
+Plus a warning that would have cost me time: txAdmin's obvious interface setting
+is **not** the way to do it. It does not only bind the panel, it forces the game
+server onto the same interface. Put on loopback, the server is unreachable for
+everyone.
 
 ## Step 2: txAdmin behind a reverse proxy
 
@@ -37,7 +42,8 @@ configuration and quietly cause damage:
 
 - **Without the WebSocket upgrade** socket.io falls back to HTTP polling. The
   panel keeps working, just sluggishly, which is why it goes unnoticed for
-  months.
+  months. Test it in a browser, a hand-built curl handshake only measures
+  itself.
 - **Setting `X-Forwarded-For` by hand** duplicates the client IP, because
   `mod_proxy_http` already appends the header itself. The ban view then shows
   nonsense.

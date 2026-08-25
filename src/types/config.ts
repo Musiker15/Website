@@ -1,3 +1,5 @@
+// Muss vor dem ersten Schema stehen, sonst greift jitless nicht mehr.
+import "@/lib/zod-setup";
 import { z } from "zod";
 
 // ============================================================================

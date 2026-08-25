@@ -226,15 +226,32 @@ test.describe("Sprachwechsel", () => {
 });
 
 test.describe("Content-Security-Policy", () => {
-  test("kein Verstoß beim Öffnen von Menüs und Suchdialog", async ({ page }) => {
-    await page.goto("/de");
-    await page.evaluate(() => {
+  /**
+   * Der Listener wird über `addInitScript` registriert, also bevor die Seite
+   * eigenen Code ausführt. Vorher stand er hinter `page.goto`, und damit war
+   * dieser Test wertlos: Verstöße beim Laden passierten davor und wurden je
+   * nach Timing mal gesehen und mal nicht. Gemessen am 25.08.2026 mit
+   * `--repeat-each=20`: 13 von 20 Läufen rot, in der CI durch `retries: 2`
+   * verdeckt.
+   *
+   * Aufgefallen ist dabei ein echter Verstoß, der auf **jeder** Seite auftrat
+   * und nichts mit Menüs zu tun hatte: Zod prüft mit `Function("")`, ob es
+   * seine Validatoren JIT-kompilieren darf. Behoben über `jitless: true`,
+   * siehe src/lib/zod-setup.ts.
+   */
+  test("kein Verstoß beim Laden und beim Öffnen von Menüs und Suchdialog", async ({ page }) => {
+    await page.addInitScript(() => {
       const w = window as unknown as { __csp: string[] };
       w.__csp = [];
       document.addEventListener("securitypolicyviolation", (e) =>
-        w.__csp.push(e.violatedDirective),
+        w.__csp.push(`${e.violatedDirective} ${e.blockedURI} ${e.sourceFile ?? ""}`),
       );
     });
+    await page.goto("/de");
+    expect(
+      await page.evaluate(() => (window as unknown as { __csp: string[] }).__csp),
+      "schon beim reinen Laden",
+    ).toEqual([]);
 
     await page.getByRole("button", { name: /sprache/i }).click();
     await page.keyboard.press("Escape");

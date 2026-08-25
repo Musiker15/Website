@@ -197,10 +197,12 @@ Website eingebunden sind. Eine Verbindung zu Servern Dritter
 
 ### Such­funktion
 
-Die Such­funktion dieser Website basiert auf einem Build-Time-erstellten
-JSON-Index und der Bibliothek **FlexSearch**, die vollständig **im
-Browser des Besuchers** läuft. Es findet keine Übermittlung von
-Such­eingaben an den Server oder an externe Such-Dienste statt.
+Die Such­funktion dieser Website basiert auf einem zur Build-Zeit
+erzeugten JSON-Index, der beim Öffnen der Suche in den Browser geladen
+und dort vollständig **im Gerät des Besuchers** durchsucht wird. Eine
+Such-Bibliothek eines Dritten kommt dabei nicht zum Einsatz. Es findet
+keine Übermittlung von Such­eingaben an den Server oder an externe
+Such-Dienste statt.
 
 ### Externe Links
 

@@ -8,7 +8,8 @@ Dateien in diesem Ordner werden **unverändert** unter `/` ausgeliefert.
 |---|---|
 | `favicon.ico` | Klassisches Browser-Favicon (aus Docusaurus übernommen) |
 | `logo.png` | Musiker15-M-Logo (auch als `apple-touch-icon` referenziert) |
-| `robots.txt` | Fallback (wird durch `src/app/robots.ts` überschrieben) |
+| `robots.txt` | Einzige Quelle für `/robots.txt`. Apache liefert die Datei direkt aus (`Alias` + `ProxyPass !`), der Request erreicht Node nie |
+| `manifest.webmanifest` | Einzige Quelle für `/manifest.webmanifest`, ebenfalls direkt über Apache |
 | `search-index.json` | wird zur Build-Zeit über `pnpm run build:search` generiert (gitignored) |
 
 ## OpenGraph-Image

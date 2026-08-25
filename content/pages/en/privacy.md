@@ -191,8 +191,9 @@ Fonts) takes place.
 ### Search function
 
 The search function of this site is based on a build-time-generated
-JSON index and the **FlexSearch** library, which runs **entirely in the
-visitor's browser**. Search queries are not transmitted to the server or
+JSON index that is loaded into the browser when you open the search and
+filtered **entirely on the visitor's device**. No third-party search
+library is involved. Search queries are not transmitted to the server or
 to any external search service.
 
 ### External links

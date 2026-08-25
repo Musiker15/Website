@@ -29,6 +29,9 @@ const config = {
     {
       label: { de: "Tutorials", en: "Tutorials" },
       href: "/docs",
+      // Reihenfolge wie im Doc-Baum, siehe die `order`-Werte in
+      // content/docs/<locale>/. Dieses Menü wird NICHT aus dem Content
+      // erzeugt, ein neuer Bereich muss hier von Hand nachgetragen werden.
       children: [
         {
           label: { de: "PC-Hardware", en: "PC Hardware" },
@@ -39,11 +42,27 @@ const config = {
           },
         },
         {
+          label: { de: "Proton Drive", en: "Proton Drive" },
+          href: "/docs/proton-drive-ignore-rules",
+          description: {
+            de: "Dateien und Ordner vom Sync ausschließen",
+            en: "Keeping files and folders out of sync",
+          },
+        },
+        {
           label: { de: "Debian-Tutorials", en: "Debian Tutorials" },
           href: "/docs/debian-tutorials",
           description: {
             de: "Server-Setup, Apache, MariaDB, Certbot & mehr",
             en: "Server setup, Apache, MariaDB, Certbot & more",
+          },
+        },
+        {
+          label: { de: "FiveM-Server", en: "FiveM server" },
+          href: "/docs/fivem",
+          description: {
+            de: "FXServer aufsetzen, txAdmin absichern, Updates automatisieren",
+            en: "Set up FXServer, secure txAdmin, automate updates",
           },
         },
       ],

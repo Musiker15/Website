@@ -245,9 +245,9 @@ Details: Abschnitt „Datenschutz-Audit" in [CLAUDE.md](./CLAUDE.md).
 
 ## 📄 Lizenz
 
-**Copyright © 2026 MSK Scripts — Alle Rechte vorbehalten.**
+**Copyright © 2026 MSK Scripts. Alle Rechte vorbehalten.**
 
-Dieses Projekt steht unter der **MSK Source Available License (MSK-SAL) v1.0** —
+Dieses Projekt steht unter der **MSK Source Available License (MSK-SAL) v1.1**,
 einer proprietären „Source Available"-Lizenz. Der Quellcode ist **einsehbar**,
 aber **nicht frei nutzbar**.
 
@@ -264,11 +264,16 @@ Erlaubt (ohne weitere Genehmigung):
 - Lokales Ausführen zu rein privaten, nicht-kommerziellen Studienzwecken
 - Bug-Reports via GitHub-Issues
 - Pull Requests, die dem Projekt zugutekommen
+- Sicherheitsforschung unter den Bedingungen in [SECURITY.md](SECURITY.md) (§ 6)
 
 Untersagt (ohne ausdrückliche schriftliche Genehmigung):
 Kopieren · abgeleitete Werke · öffentlicher Betrieb · kommerzielle Verwertung ·
-Weitergabe · Design-Nachahmung · Reverse Engineering · Entfernen von
-Urheberrechtshinweisen — siehe § 3 der Lizenz für die vollständige Liste.
+Weitergabe · Nachbau der konkreten Gestaltung · Reverse Engineering zur
+Reproduktion der Geschäftslogik · Entfernen von Urheberrechtshinweisen. Die
+vollständige Liste steht in § 3 der Lizenz.
+
+Unberührt bleiben die zwingenden Nutzerrechte aus §§ 69d, 69e UrhG, die kein
+Vertrag einschränken kann (§ 5 der Lizenz).
 
 Für kommerzielle Lizenzen, Kooperationen oder Nutzungen außerhalb des
 gestatteten Rahmens: `info@msk-scripts.de` (Betreff: `MSK License Request`).

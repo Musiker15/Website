@@ -3,213 +3,141 @@ title: "Privacy Policy"
 description: "Information on the processing of personal data under GDPR, DDG and TDDDG."
 order: 101
 toc: true
+updated: 2026-09-02
 ---
 
-## 1. Privacy at a glance
+_As of: September 2026_
 
-### General information
+## 1. At a glance
 
-The following information provides a simple overview of what happens to
-your personal data when you visit this website. Personal data is any
-data by which you can be personally identified.
+This website is a statically rendered Next.js site without tracking, analytics
+or marketing components. I do not collect any personal data myself, neither
+through forms nor scripts or accounts. The only data processing that takes place
+when you visit is carried out by the hosting provider in the form of server logs
+(section 3).
 
-### Data collection on this website
-
-This website is a Next.js-rendered page without any tracking, analytics
-or marketing components. The website operator does **not** collect any
-data themselves. There are no forms, no tracking scripts and no
-analytics tools. The only data processing happens automatically via the
-hosting provider (see section "Hosting & Server Log Files").
-
-### What rights do you have regarding your data?
-
-You have the right to receive free information about the origin,
-recipient and purpose of your stored personal data at any time, as well
-as the right to request correction or deletion of this data. Please
-contact the operator for any further questions.
-
-## 2. Hosting & Server Log Files
-
-The contents of this website are hosted with the following provider:
-
-**netcup GmbH**  
-Daimlerstraße 25  
-D-76185 Karlsruhe, Germany
-
-When you visit this website, netcup automatically collects the following
-information in server log files, which your browser transmits: browser
-type and version, operating system, referrer URL, hostname of the
-accessing computer, time of the server request and the IP address. This
-data is not merged with other data sources.
-
-**Retention period:** Server logs are processed exclusively for the
-purposes of technical operation, stability and security. They are
-deleted after at most 14 days, or in the event of a security
-incident, until the incident has been fully resolved. The operator does
-not associate this data with you personally.
-
-**Legal basis:** Processing is based on the legitimate interest in a
-technically error-free presentation and the security of this website
-(Art. 6 para. 1 lit. f GDPR).
-
-For more information:
-[netcup Privacy Policy](https://www.netcup.com/de/kontakt/datenschutzerklaerung).
-
-### Data Processing Agreement
-
-A data processing agreement in accordance with Art. 28 GDPR has been
-concluded with the hosting provider mentioned above.
-
-## 3. General information and mandatory disclosures
-
-### Data protection
-
-The operator of these pages takes the protection of your personal data
-very seriously. Personal data is treated confidentially and in accordance
-with the statutory data protection regulations and this privacy policy.
-
-### Information on the responsible party
-
-The party responsible for data processing on this website is:
+## 2. Controller
 
 **Moritz Kohm**  
 c/o Impressumservice Dein-Impressum  
 Stettiner Str. 41  
 35410 Hungen  
-Germany
-
-**Contact:**
+Germany  
 Email: `info@musiker15.de`
 
-### Data protection officer
+A data protection officer is not required by law and has not been appointed.
 
-The appointment of a data protection officer is not legally required.
-For privacy-related inquiries, please contact the responsible party
-directly.
+## 3. Hosting and server log files
 
-### Storage duration
+The website is hosted by:
 
-Unless a more specific storage period has been stated within this
-privacy policy, your personal data will remain until the purpose for
-which it was collected no longer applies. If you assert a justified
-deletion request or revoke consent to data processing, your data will
-be deleted, unless other legally permissible reasons for storing your
-personal data exist.
+**netcup GmbH**, Daimlerstraße 25, 76185 Karlsruhe, Germany
 
-### General information on legal bases
+When the website is accessed, the web server automatically records the following
+in log files: IP address, date and time, file accessed, HTTP status code, volume
+of data transferred, referrer URL, browser type and version, operating system.
+This data is not merged with other data sources and is not attributed to any
+individual.
 
-If you have consented to data processing, we process your personal data
-on the basis of Art. 6 para. 1 lit. a GDPR. Data required for the
-performance of a contract or for the implementation of pre-contractual
-measures is processed on the basis of Art. 6 para. 1 lit. b GDPR. Data
-required to fulfil a legal obligation is processed on the basis of
-Art. 6 para. 1 lit. c GDPR. Processing may additionally be based on the
-legitimate interest pursuant to Art. 6 para. 1 lit. f GDPR.
+**Purpose:** technical provision, stability, error analysis and defence against
+attacks.  
+**Legal basis:** Art. 6 para. 1 lit. f GDPR.  
+**Storage period:** 14 days at the latest; in the event of a security incident,
+until it has been resolved.
 
-### Revocation of consent to data processing
+A data processing agreement pursuant to Art. 28 GDPR is in place with netcup.
+netcup privacy policy:
+https://www.netcup.com/de/kontakt/datenschutzerklaerung
 
-Many data processing operations are only possible with your explicit
-consent. You can revoke consent you have already given at any time. The
-lawfulness of data processing carried out until revocation remains
-unaffected by the revocation.
+## 4. Cookies and local storage (§ 25 TDDDG, German Telecommunications Digital Services Data Protection Act)
 
-### Right to object to data collection in special cases (Art. 21 GDPR)
+This website sets exactly one cookie and stores one further value locally in
+your browser:
 
-If data processing is carried out on the basis of Art. 6 para. 1 lit. e
-or lit. f GDPR, you have the right at any time to object, for reasons
-arising from your particular situation, to the processing of your
-personal data; this also applies to profiling based on these
-provisions.
+| Name          | Purpose                                                      | Duration                          | Properties                                           |
+| ------------- | ------------------------------------------------------------ | --------------------------------- | ---------------------------------------------------- |
+| `NEXT_LOCALE` | stores the selected display language (German/English)        | 12 months                         | cookie, HttpOnly, Secure, SameSite=Lax               |
+| `theme`       | stores the selected appearance (light, dark, system setting) | until you clear your browser data | localStorage, not a cookie, never sent to the server |
 
-### Right to restriction of processing (Art. 18 GDPR)
+Both entries are strictly necessary for the display you selected yourself (§ 25
+para. 2 no. 2 TDDDG); consent is therefore not required. Legal basis for the
+associated processing: Art. 6 para. 1 lit. f GDPR. No tracking, analytics or
+third-party cookies are set, which is why there is no cookie banner.
 
-You have the right to request the restriction of the processing of your
-personal data.
+## 5. Technology used
 
-### Right to data portability
+**Fonts:** Inter and JetBrains Mono are served locally from the website build.
+No connection is made to Google Fonts or any other third-party servers.
 
-You have the right to have data that we process automatically on the
-basis of your consent or in fulfilment of a contract handed over to
-yourself or to a third party in a commonly used, machine-readable
-format.
+**Search function:** The search works with an index generated at build time,
+which is loaded into your browser when you open the search and is searched
+there. Search queries are transmitted neither to my server nor to third parties.
 
-### Information, correction and deletion
+**Content Security Policy:** The website uses a nonce-based CSP with
+`strict-dynamic`; external scripts, images and fonts are blocked. When you visit,
+no communication with third-party servers takes place as long as you do not
+click an external link.
 
-You have the right to free information about your stored personal data,
-its origin and recipient and the purpose of the data processing at any
-time, as well as the right to correction or deletion of this data.
+**Downloads:** Scripts and configuration files from the tutorials are provided
+via GitHub or via the subdomain `uploads.musiker15.de`, which runs on the same
+server. Downloads are only recorded in the server logs pursuant to section 3.
 
-### No automated decision-making
+## 6. External links
 
-Automated decision-making, including profiling within the meaning of
-Art. 22 GDPR, does **not** take place on this website.
+The website links to GitHub (GitHub, Inc., USA), Discord (Discord Inc., USA) and
+msk-scripts.de, and individual tutorials additionally link to third-party
+download offerings such as sinusbot.com and files.teamspeak-services.com. These
+are plain links without embedded content or widgets. Data
+is only transmitted to the respective provider once you click a link; their
+privacy terms apply in that case.
 
-### Right to lodge a complaint with the supervisory authority
+## 7. Contact by email
 
-In the event of violations of the GDPR, data subjects have the right to
-lodge a complaint with a supervisory authority. The supervisory authority
-responsible for the operator is:
+If you send me an email, I store your details (sender address, content, time) in
+order to process your enquiry. Legal basis: Art. 6 para. 1 lit. f GDPR
+(responding to enquiries) or lit. b GDPR where a contract is involved. I delete
+emails as soon as the enquiry has been concluded and no retention obligation
+applies, after 12 months at the latest.
 
-**State Commissioner for Data Protection and Freedom of Information Baden-Württemberg**  
+## 8. Your rights
+
+You have the right of access (Art. 15 GDPR), rectification (Art. 16), erasure
+(Art. 17), restriction of processing (Art. 18) and data portability (Art. 20).
+You may withdraw any consent given at any time with effect for the future
+(Art. 7 para. 3).
+
+<Callout type="warning">
+
+**Right to object (Art. 21 GDPR):** Where data is processed on the basis of
+Art. 6 para. 1 lit. f GDPR, you may object at any time on grounds relating to
+your particular situation. The data will then no longer be processed unless
+there are compelling legitimate grounds that override your interests.
+
+</Callout>
+
+**Right to lodge a complaint (Art. 77 GDPR)** with a supervisory authority. The
+authority responsible for me is:
+
+Der Landesbeauftragte für den Datenschutz und die Informationsfreiheit
+Baden-Württemberg  
 Lautenschlagerstraße 20  
-70173 Stuttgart, Germany  
+70173 Stuttgart  
+Germany  
 Phone: +49 711 615541-0  
 Email: `poststelle@lfdi.bwl.de`  
-Web: [baden-wuerttemberg.datenschutz.de](https://www.baden-wuerttemberg.datenschutz.de)
+https://www.baden-wuerttemberg.datenschutz.de
 
-### SSL / TLS encryption
+## 9. No automated decision-making
 
-This site uses SSL / TLS encryption for security reasons. You can
-recognise an encrypted connection by the fact that the address line of
-the browser changes from "http://" to "https://" and by the lock symbol
-in your browser bar.
+Automated decision-making including profiling (Art. 22 GDPR) does not take
+place.
 
-## 4. Data collection on this website
+## 10. Encryption
 
-### Cookies and local storage (§ 25 TDDDG)
+The website is exclusively accessible via HTTPS (TLS).
 
-This website does **not** set any cookies for tracking or marketing
-purposes. No third-party cookies are embedded either.
+## 11. Changes
 
-Single exception: the technically necessary cookie `NEXT_LOCALE`, which
-stores your selected display language (German / English) so the
-preference persists across visits. This cookie is set with the
-`HttpOnly`, `Secure` and `SameSite=Lax` flags and is not used for
-tracking purposes. It constitutes a strictly necessary function
-according to § 25 para. 2 no. 2 TDDDG; consent is therefore not
-required.
-
-## 5. Technologies used
-
-### Locally hosted webfonts
-
-This site uses open source fonts (Inter, JetBrains Mono) bundled
-**locally** into the website's build via the `@fontsource-variable/*`
-packages. **No connection** to third-party servers (in particular Google
-Fonts) takes place.
-
-### Search function
-
-The search function of this site is based on a build-time-generated
-JSON index that is loaded into the browser when you open the search and
-filtered **entirely on the visitor's device**. No third-party search
-library is involved. Search queries are not transmitted to the server or
-to any external search service.
-
-### External links
-
-This website contains links to external services (e.g. GitHub, Discord,
-MSK Scripts). When you click on such a link, you leave this site and are
-taken to the respective external page. The respective provider is solely
-responsible for the content and data processing on those pages. Data is
-only transmitted to those providers once you click on the respective
-link.
-
-### Strict Content Security Policy
-
-This site uses a nonce-based Content Security Policy (CSP) with
-`'strict-dynamic'`. External resources (images, scripts, fonts) are
-strictly disabled (`img-src 'self' data: blob:`,
-`connect-src 'self'`, `font-src 'self' data:`). When you visit this
-site, **no communication** with third-party servers takes place unless
-you actively click on an external link.
+I will amend this privacy policy whenever the website or the legal situation
+changes. You will always find the current version at
+https://www.musiker15.de/en/privacy.

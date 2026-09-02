@@ -3,6 +3,7 @@ title: "Impressum"
 description: "Anbieterkennzeichnung nach § 5 DDG und Verantwortlicher nach § 18 Abs. 2 MStV."
 order: 100
 toc: false
+updated: 2026-09-02
 ---
 
 ## Angaben gemäß § 5 DDG
@@ -10,7 +11,8 @@ toc: false
 **Moritz Kohm**  
 c/o Impressumservice Dein-Impressum  
 Stettiner Str. 41  
-35410 Hungen
+35410 Hungen  
+Deutschland
 
 ## Kontakt
 
@@ -23,51 +25,39 @@ c/o Impressumservice Dein-Impressum
 Stettiner Str. 41  
 35410 Hungen
 
-## Haftungsausschluss
+## Hinweise zu Inhalten und Links
 
-### Haftung für Inhalte
+**Inhalte:** Die Tutorials und Anleitungen auf dieser Website habe ich nach
+bestem Wissen erstellt und auf meinen eigenen Systemen getestet. Sie ersetzen
+keine individuelle Beratung. Die Ausführung der beschriebenen Schritte erfolgt
+auf eigene Verantwortung; für Schäden an Systemen oder Datenverlust infolge der
+Anwendung wird, außer bei Vorsatz oder grober Fahrlässigkeit, keine Haftung
+übernommen. Fehler und Korrekturen kannst Du über GitHub oder per E-Mail melden.
 
-Die Inhalte dieser Seiten wurden mit größter Sorgfalt erstellt. Für die
-Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine
-Gewähr übernommen werden.
+**Links:** Diese Website enthält Links zu externen Websites Dritter (z. B.
+GitHub, Discord, msk-scripts.de). Für deren Inhalte ist der jeweilige Anbieter
+verantwortlich. Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße
+erkennbar; bei Bekanntwerden von Rechtsverletzungen werden entsprechende Links
+umgehend entfernt.
 
-### Haftung für Links
+## Urheberrecht
 
-Diese Website enthält Links zu externen Webseiten Dritter, auf deren
-Inhalte kein Einfluss genommen werden kann. Für die Inhalte der verlinkten
-Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten
-verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung
-auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum
-Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche
-Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte
-einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von
-Rechtsverletzungen werden derartige Links umgehend entfernt.
-
-### Urheberrecht
-
-Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen
-Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung,
-Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der
-Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des
-jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite
-sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.
-Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden,
-werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte
-Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine
-Urheberrechtsverletzung aufmerksam werden, bitte ich um einen
-entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden
-derartige Inhalte umgehend entfernt.
+Die von mir erstellten Inhalte auf dieser Website unterliegen dem deutschen
+Urheberrecht. Code-Beispiele und Skripte aus den Tutorials dürfen frei verwendet
+und angepasst werden, sofern beim jeweiligen Beitrag oder Repository keine
+andere Lizenz angegeben ist. Die Übernahme ganzer Artikel bedarf meiner
+Zustimmung. Inhalte Dritter sind als solche gekennzeichnet.
 
 ## Widerspruch gegen Werbe-Mails
 
-Der Nutzung der im Rahmen der Impressumspflicht veröffentlichten
-Kontaktdaten zur Übersendung von nicht ausdrücklich angeforderter
-Werbung und Informationsmaterialien wird hiermit widersprochen. Der
-Betreiber der Seiten behält sich ausdrücklich rechtliche Schritte im
-Falle der unverlangten Zusendung von Werbeinformationen, etwa durch
-Spam-E-Mails, vor.
+Der Nutzung der im Impressum veröffentlichten Kontaktdaten zur Übersendung nicht
+ausdrücklich angeforderter Werbung wird widersprochen.
 
 ## Streitbeilegung
 
-Ich bin nicht bereit oder verpflichtet, an Streitbeilegungsverfahren
-vor einer Verbraucherschlichtungsstelle teilzunehmen.
+Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor
+einer Verbraucherschlichtungsstelle teilzunehmen.
+
+---
+
+_Stand: September 2026_

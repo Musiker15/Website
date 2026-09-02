@@ -3,221 +3,145 @@ title: "Datenschutzerklärung"
 description: "Informationen zur Verarbeitung personenbezogener Daten nach DSGVO, DDG und TDDDG."
 order: 101
 toc: true
+updated: 2026-09-02
 ---
 
-## 1. Datenschutz auf einen Blick
+_Stand: September 2026_
 
-### Allgemeine Hinweise
+## 1. Auf einen Blick
 
-Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit
-Deinen personenbezogenen Daten passiert, wenn Du diese Website besuchst.
-Personenbezogene Daten sind alle Daten, mit denen Du persönlich
-identifiziert werden kannst.
+Diese Website ist eine statisch gerenderte Next.js-Seite ohne Tracking-,
+Analyse- oder Marketing-Komponenten. Ich selbst erhebe keine personenbezogenen
+Daten über Formulare, Skripte oder Konten. Die einzige Datenverarbeitung beim
+Besuch erfolgt durch den Hosting-Provider in Form von Server-Logs
+(Abschnitt 3).
 
-### Datenerfassung auf dieser Website
-
-Diese Website ist eine in Next.js gerenderte Seite ohne eigene Tracking-,
-Analyse- oder Marketing-Komponenten. Es findet **keine eigene
-Datenerhebung** durch den Websitebetreiber statt, weder über Formulare
-noch über Tracking-Skripte oder Analyse-Tools. Die einzige
-Datenverarbeitung erfolgt automatisch durch den Hosting-Provider (siehe
-Abschnitt „Hosting & Server-Log-Dateien").
-
-### Welche Rechte hast Du bezüglich Deiner Daten?
-
-Du hast jederzeit das Recht auf unentgeltliche Auskunft über Herkunft,
-Empfänger und Zweck Deiner gespeicherten personenbezogenen Daten sowie
-ein Recht auf Berichtigung oder Löschung dieser Daten. Hierzu sowie zu
-weiteren Fragen kannst Du Dich jederzeit an den Betreiber wenden.
-
-## 2. Hosting & Server-Log-Dateien
-
-Die Inhalte dieser Website werden bei folgendem Anbieter gehostet:
-
-**netcup GmbH**  
-Daimlerstraße 25  
-D-76185 Karlsruhe
-
-Wenn Du diese Website besuchst, erfasst netcup als Auftragsverarbeiter in
-Server-Log-Dateien automatisch folgende Informationen, die Dein Browser
-übermittelt: Browsertyp und -version, verwendetes Betriebssystem,
-Referrer-URL, Hostname des zugreifenden Rechners, Uhrzeit der
-Server­anfrage sowie die IP-Adresse. Eine Zusammen­führung dieser Daten
-mit anderen Datenquellen erfolgt nicht.
-
-**Speicherdauer:** Die Server-Logs werden ausschließlich zu Zwecken der
-technischen Bereitstellung, Stabilität und Sicherheit verarbeitet. Sie
-werden spätestens nach 14 Tagen gelöscht, im Falle eines
-Sicherheits­vorfalls bis zur abschließenden Klärung des Vorfalls. Eine
-Zuordnung dieser Daten zu Deiner Person nimmt der Betreiber nicht vor.
-
-**Rechtsgrundlage:** Die Verarbeitung erfolgt auf Grundlage des
-berechtigten Interesses an einer technisch fehlerfreien Bereitstellung
-und Sicherheit dieser Website (Art. 6 Abs. 1 lit. f DSGVO).
-
-Weitere Informationen:
-[Datenschutzerklärung netcup](https://www.netcup.com/de/kontakt/datenschutzerklaerung).
-
-### Auftragsverarbeitung
-
-Mit dem oben genannten Anbieter wurde ein Vertrag über Auftrags­verarbeitung
-gemäß Art. 28 DSGVO geschlossen.
-
-## 3. Allgemeine Hinweise und Pflichtinformationen
-
-### Datenschutz
-
-Der Betreiber dieser Seiten nimmt den Schutz Deiner persönlichen Daten
-sehr ernst. Personenbezogene Daten werden vertraulich und entsprechend
-den gesetzlichen Datenschutz­vorschriften sowie dieser Datenschutz­erklärung
-behandelt.
-
-### Hinweis zur verantwortlichen Stelle
-
-Verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:
+## 2. Verantwortlicher
 
 **Moritz Kohm**  
 c/o Impressumservice Dein-Impressum  
 Stettiner Str. 41  
-35410 Hungen
-
-**Kontakt:**
+35410 Hungen  
+Deutschland  
 E-Mail: `info@musiker15.de`
 
-### Datenschutz­beauftragter
+Ein Datenschutzbeauftragter ist gesetzlich nicht erforderlich und nicht
+bestellt.
 
-Die Bestellung eines Datenschutz­beauftragten ist gesetzlich nicht
-erforderlich. Bei Anfragen zum Datenschutz wende Dich bitte direkt an
-die verantwortliche Stelle.
+## 3. Hosting und Server-Logdateien
 
-### Speicherdauer
+Die Website wird gehostet bei:
 
-Soweit innerhalb dieser Datenschutz­erklärung keine speziellere
-Speicher­dauer genannt wurde, verbleiben personen­bezogene Daten bis zum
-Wegfall des Zwecks für die Daten­verarbeitung. Sofern ein berechtigtes
-Löschungs­ersuchen geltend gemacht oder eine Einwilligung zur
-Daten­verarbeitung widerrufen wird, werden die Daten gelöscht, sofern
-keine anderen rechtlich zulässigen Gründe für die Speicherung der Daten
-bestehen.
+**netcup GmbH**, Daimlerstraße 25, 76185 Karlsruhe, Deutschland
 
-### Allgemeine Hinweise zu den Rechtsgrundlagen
+Beim Aufruf der Website erfasst der Webserver automatisch in Logdateien:
+IP-Adresse, Datum und Uhrzeit, aufgerufene Datei, HTTP-Statuscode, übertragene
+Datenmenge, Referrer-URL, Browsertyp und -version, Betriebssystem. Diese Daten
+werden nicht mit anderen Datenquellen zusammengeführt und nicht einer Person
+zugeordnet.
 
-Soweit Du in eine Daten­verarbeitung eingewilligt hast, verarbeiten wir
-Deine personen­bezogenen Daten auf Grundlage von Art. 6 Abs. 1 lit. a
-DSGVO. Daten, die zur Erfüllung eines Vertrages oder zur Durchführung
-vor­vertraglicher Maßnahmen erforderlich sind, verarbeiten wir auf
-Grundlage von Art. 6 Abs. 1 lit. b DSGVO. Daten, die zur Erfüllung einer
-rechtlichen Verpflichtung erforderlich sind, auf Grundlage von Art. 6
-Abs. 1 lit. c DSGVO. Die Verarbeitung kann zudem auf Grundlage des
-berechtigten Interesses gemäß Art. 6 Abs. 1 lit. f DSGVO erfolgen.
+**Zweck:** technische Bereitstellung, Stabilität, Fehleranalyse und Abwehr von
+Angriffen.  
+**Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO.  
+**Speicherdauer:** spätestens 14 Tage; bei einem Sicherheitsvorfall bis zu
+dessen Klärung.
 
-### Widerruf Deiner Einwilligung zur Daten­verarbeitung
+Mit netcup besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO.
+Datenschutzerklärung von netcup:
+https://www.netcup.com/de/kontakt/datenschutzerklaerung
 
-Viele Daten­verarbeitungs­vorgänge sind nur mit Deiner ausdrücklichen
-Einwilligung möglich. Du kannst eine bereits erteilte Einwilligung
-jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten
-Daten­verarbeitung bleibt vom Widerruf unberührt.
+## 4. Cookies und lokale Speicherung (§ 25 TDDDG)
 
-### Widerspruchsrecht gegen die Daten­erhebung in besonderen Fällen (Art. 21 DSGVO)
+Diese Website setzt genau ein Cookie und speichert einen weiteren Wert lokal in
+Deinem Browser:
 
-Wenn die Daten­verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. e oder
-lit. f DSGVO erfolgt, hast Du jederzeit das Recht, aus Gründen, die sich
-aus Deiner besonderen Situation ergeben, gegen die Verarbeitung Deiner
-personen­bezogenen Daten Widerspruch einzulegen; dies gilt auch für ein
-auf diese Bestimmungen gestütztes Profiling.
+| Name          | Zweck                                                                | Dauer                           | Eigenschaften                                                  |
+| ------------- | -------------------------------------------------------------------- | ------------------------------- | -------------------------------------------------------------- |
+| `NEXT_LOCALE` | speichert die gewählte Anzeigesprache (Deutsch/Englisch)             | 12 Monate                       | Cookie, HttpOnly, Secure, SameSite=Lax                         |
+| `theme`       | speichert die gewählte Darstellung (hell, dunkel, Systemeinstellung) | bis Du die Browserdaten löschst | localStorage, kein Cookie, wird nicht an den Server übertragen |
 
-### Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)
+Beide Einträge sind für die von Dir selbst gewählte Anzeige unbedingt
+erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG); eine Einwilligung ist daher nicht nötig.
+Rechtsgrundlage für die damit verbundene Verarbeitung: Art. 6 Abs. 1 lit. f
+DSGVO. Es werden keine Tracking-, Analyse- oder Drittanbieter-Cookies gesetzt,
+deshalb gibt es auch kein Cookie-Banner.
 
-Du hast das Recht, die Einschränkung der Verarbeitung Deiner
-personen­bezogenen Daten zu verlangen.
+## 5. Eingesetzte Technik
 
-### Recht auf Daten­übertragbarkeit
+**Schriftarten:** Inter und JetBrains Mono werden lokal aus dem Build der
+Website ausgeliefert. Es findet keine Verbindung zu Google Fonts oder anderen
+Servern Dritter statt.
 
-Du hast das Recht, Daten, die wir auf Grundlage Deiner Einwilligung oder
-in Erfüllung eines Vertrags automatisiert verarbeiten, an Dich oder an
-einen Dritten in einem gängigen, maschinen­lesbaren Format aushändigen
-zu lassen.
+**Suchfunktion:** Die Suche arbeitet mit einem zur Build-Zeit erzeugten Index,
+der beim Öffnen der Suche in Deinen Browser geladen und dort durchsucht wird.
+Sucheingaben werden weder an meinen Server noch an Dritte übermittelt.
 
-### Auskunft, Berichtigung und Löschung
+**Content Security Policy:** Die Website setzt eine Nonce-basierte CSP mit
+`strict-dynamic` ein; externe Skripte, Bilder und Schriften sind blockiert. Beim
+Besuch findet keine Kommunikation mit Servern Dritter statt, solange Du keinen
+externen Link anklickst.
 
-Du hast im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das
-Recht auf unentgeltliche Auskunft über Deine gespeicherten
-personen­bezogenen Daten, deren Herkunft und Empfänger und den Zweck der
-Daten­verarbeitung sowie ein Recht auf Berichtigung oder Löschung dieser
-Daten.
+**Downloads:** Skripte und Konfigurationsdateien aus den Tutorials werden über
+GitHub bzw. über die Subdomain `uploads.musiker15.de` bereitgestellt, die auf
+demselben Server läuft. Downloads werden nur in den Server-Logs nach
+Abschnitt 3 erfasst.
 
-### Keine automatisierte Entscheidungs­findung
+## 6. Externe Links
 
-Eine automatisierte Entscheidungs­findung einschließlich Profiling im
-Sinne von Art. 22 DSGVO findet auf dieser Website **nicht** statt.
+Die Website verlinkt auf GitHub (GitHub, Inc., USA), Discord (Discord Inc.,
+USA) und msk-scripts.de, einzelne Tutorials zusätzlich auf Download-Angebote
+Dritter wie sinusbot.com und files.teamspeak-services.com. Es handelt sich um
+einfache Links ohne eingebettete
+Inhalte oder Widgets. Erst wenn Du einen Link anklickst, werden Daten an den
+jeweiligen Anbieter übermittelt; dafür gelten dessen Datenschutzbestimmungen.
 
-### Beschwerderecht bei der zuständigen Aufsichts­behörde
+## 7. Kontakt per E-Mail
 
-Im Falle von Verstößen gegen die DSGVO steht den Betroffenen ein
-Beschwerderecht bei einer Aufsichtsbehörde zu. Für den Betreiber
-zuständige Aufsichts­behörde ist:
+Wenn Du mir eine E-Mail schreibst, speichere ich Deine Angaben (Absenderadresse,
+Inhalt, Zeitpunkt) zur Bearbeitung der Anfrage. Rechtsgrundlage: Art. 6 Abs. 1
+lit. f DSGVO (Beantwortung von Anfragen) bzw. lit. b DSGVO, wenn es um einen
+Vertrag geht. E-Mails lösche ich, sobald die Anfrage abgeschlossen ist und keine
+Aufbewahrungspflicht besteht, spätestens nach 12 Monaten.
 
-**Der Landesbeauftragte für den Datenschutz und die Informations­freiheit Baden-Württemberg**  
+## 8. Deine Rechte
+
+Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung
+(Art. 17), Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit
+(Art. 20). Eine erteilte Einwilligung kannst Du jederzeit mit Wirkung für die
+Zukunft widerrufen (Art. 7 Abs. 3).
+
+<Callout type="warning">
+
+**Widerspruchsrecht (Art. 21 DSGVO):** Soweit Daten auf Grundlage von Art. 6
+Abs. 1 lit. f DSGVO verarbeitet werden, kannst Du aus Gründen, die sich aus
+Deiner besonderen Situation ergeben, jederzeit Widerspruch einlegen. Die Daten
+werden dann nicht mehr verarbeitet, es sei denn, es liegen zwingende
+schutzwürdige Gründe vor, die Deine Interessen überwiegen.
+
+</Callout>
+
+**Beschwerderecht (Art. 77 DSGVO)** bei einer Aufsichtsbehörde, zuständig für
+mich:
+
+Der Landesbeauftragte für den Datenschutz und die Informationsfreiheit
+Baden-Württemberg  
 Lautenschlagerstraße 20  
 70173 Stuttgart  
 Telefon: +49 711 615541-0  
 E-Mail: `poststelle@lfdi.bwl.de`  
-Web: [baden-wuerttemberg.datenschutz.de](https://www.baden-wuerttemberg.datenschutz.de)
+https://www.baden-wuerttemberg.datenschutz.de
 
-### SSL- bzw. TLS-Verschlüsselung
+## 9. Keine automatisierte Entscheidungsfindung
 
-Diese Seite nutzt aus Sicherheitsgründen eine SSL- bzw. TLS-Verschlüsselung.
-Eine verschlüsselte Verbindung erkennst Du daran, dass die Adresszeile
-des Browsers von „http://" auf „https://" wechselt und am Schloss-Symbol
-in Deiner Browserzeile.
+Eine automatisierte Entscheidungsfindung einschließlich Profiling (Art. 22
+DSGVO) findet nicht statt.
 
-## 4. Daten­erfassung auf dieser Website
+## 10. Verschlüsselung
 
-### Cookies und lokale Speicher (§ 25 TDDDG)
+Die Website ist ausschließlich über HTTPS (TLS) erreichbar.
 
-Diese Website setzt **keine Cookies** zu Tracking- oder Marketing­zwecken.
-Es werden auch keine Cookies von Drittanbietern eingebunden.
+## 11. Änderungen
 
-Einzige Ausnahme: das technisch notwendige Cookie `NEXT_LOCALE`, das die
-gewählte Anzeigesprache (Deutsch / Englisch) speichert, damit die
-Sprachpräferenz beim nächsten Besuch erhalten bleibt. Dieses Cookie ist
-mit den Flags `HttpOnly`, `Secure` und `SameSite=Lax` gesetzt und wird
-nicht zu Tracking-Zwecken verwendet. Es handelt sich um eine unbedingt
-erforderliche Funktion gemäß § 25 Abs. 2 Nr. 2 TDDDG; eine Einwilligung
-ist daher nicht erforderlich.
-
-## 5. Eingesetzte Technologien
-
-### Lokal eingebundene Webfonts
-
-Diese Seite verwendet Open-Source-Schriften (Inter, JetBrains Mono), die
-über die Pakete `@fontsource-variable/*` **lokal** in das Build der
-Website eingebunden sind. Eine Verbindung zu Servern Dritter
-(insbesondere Google Fonts) findet dabei **nicht** statt.
-
-### Such­funktion
-
-Die Such­funktion dieser Website basiert auf einem zur Build-Zeit
-erzeugten JSON-Index, der beim Öffnen der Suche in den Browser geladen
-und dort vollständig **im Gerät des Besuchers** durchsucht wird. Eine
-Such-Bibliothek eines Dritten kommt dabei nicht zum Einsatz. Es findet
-keine Übermittlung von Such­eingaben an den Server oder an externe
-Such-Dienste statt.
-
-### Externe Links
-
-Diese Website enthält Links zu externen Diensten (z. B. GitHub, Discord,
-MSK Scripts). Beim Klick auf einen solchen Link verlässt Du diese Seite
-und gelangst auf die jeweilige externe Seite, für deren Inhalte und
-Datenverarbeitung ausschließlich der jeweilige Anbieter verantwortlich
-ist. Eine Übermittlung Deiner Daten an diese Anbieter findet erst beim
-Klick auf den jeweiligen Link statt.
-
-### Strikte Content Security Policy
-
-Diese Seite setzt eine Nonce-basierte Content Security Policy (CSP) mit
-`'strict-dynamic'` ein. Externe Ressourcen (Bilder, Skripte, Schriften)
-sind strikt deaktiviert (`img-src 'self' data: blob:`, `connect-src 'self'`,
-`font-src 'self' data:`). Beim Besuch dieser Seite findet **keine
-Kommunikation** mit Servern Dritter statt, solange Du keinen externen
-Link aktiv anklickst.
+Diese Datenschutzerklärung passe ich an, wenn sich die Website oder die
+Rechtslage ändert. Die aktuelle Fassung findest Du stets unter
+https://www.musiker15.de/de/datenschutz.

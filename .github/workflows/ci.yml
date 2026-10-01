@@ -92,6 +92,13 @@ jobs:
         env:
           NEXT_TELEMETRY_DISABLED: "1"
 
+      # Starts the build under the sandboxing options of musiker15.service, read
+      # from the unit file. The Playwright run below starts the same build too,
+      # but with a writable home, and that difference is exactly what took the
+      # site down on 01.10.2026. See scripts/start-like-service.sh.
+      - name: Start like the service
+        run: bash scripts/start-like-service.sh
+
       - name: Test (Vitest)
         # `pnpm test` ist `vitest run` (einmalig, kein Watch-Mode). Kein
         # --passWithNoTests mehr: ein leerer Lauf soll auffallen, nicht durchgehen.

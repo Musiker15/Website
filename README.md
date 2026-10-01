@@ -201,7 +201,8 @@ Fallback auf die letzten 5 Releases unter `/opt/musiker15/releases/`.
 | `/de/news`                          | Liste sortiert nach `frontmatter.date`                 |
 | `/de/<slug>`                        | Catch-All: `content/pages/de/<slug>.md`                |
 | `/sitemap.xml`                      | auto-generiert (`src/app/sitemap.ts`)                  |
-| `/robots.txt`                       | auto-generiert (`src/app/robots.ts`)                   |
+| `/llms.txt`                         | auto-generiert (`src/lib/llms.ts`)                     |
+| `/robots.txt`                       | statisch aus `public/robots.txt`, Apache liefert aus   |
 
 ---
 
@@ -228,7 +229,7 @@ blob:`, `connect-src 'self'`, `font-src 'self' data:`.
 
 **Trade-off:** Alle App-Routes werden dynamisch gerendert (kein SSG) —
 notwendig, damit jeder Request einen frischen Nonce erhält. Statisch
-bleiben nur `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`.
+bleiben nur `/sitemap.xml`, `/llms.txt`, `/robots.txt`, `/manifest.webmanifest`.
 
 Details: Abschnitt „Datenschutz-Audit" in [CLAUDE.md](./CLAUDE.md).
 

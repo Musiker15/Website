@@ -1,16 +1,16 @@
-# Graph Report - musiker15-website  (2026-08-25)
+# Graph Report - musiker15-website  (2026-10-01)
 
 ## Corpus Check
-- 125 files · ~66,053 words
+- 131 files · ~70,965 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1037 nodes · 1518 edges · 102 communities (82 shown, 20 thin omitted)
+- 1061 nodes · 1596 edges · 105 communities (85 shown, 20 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 106 edges (avg confidence: 0.88)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b2f0b512`
+- Built from commit: `e225bfa3`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -24,7 +24,7 @@
 - build-search-index.ts
 - Project Package Metadata
 - SSL and Personal Bio
-- cn
+- Button.tsx
 - Header.tsx
 - config.ts
 - Proton Drive Sync Rules
@@ -101,7 +101,7 @@
 - Workstation Peripherals
 - de/fivem/auto-update.md
 - en/fivem/auto-update.md
-- sitemap.ts
+- seo.ts
 - Manuelle phpMyAdmin-Installation
 - Footer.tsx
 - Dedicated Postgres SUPERUSER role "DbAdmin"
@@ -109,21 +109,24 @@
 - en/fivem-tutorials-2026-08.md
 - de/fivem/index.md
 - en/fivem/index.md
-- next.config.ts
+- lib/content.ts
 - certbot.timer (systemd-Renewal)
 - Paket python3-certbot-apache
+- utils.ts
+- cn
+- SearchDialog.tsx
 
 ## God Nodes (most connected - your core abstractions)
-1. `Locale` - 49 edges
+1. `Locale` - 50 edges
 2. `cn()` - 40 edges
 3. `t()` - 23 edges
 4. `compilerOptions` - 21 edges
 5. `scripts` - 16 edges
-6. `getContent()` - 15 edges
-7. `siteConfig` - 12 edges
-8. `renderMDX()` - 12 edges
-9. `Debian Tutorials section index` - 12 edges
-10. `Button` - 11 edges
+6. `getContent()` - 16 edges
+7. `siteConfig` - 15 edges
+8. `listAllContentItems()` - 14 edges
+9. `listNews()` - 14 edges
+10. `buildJsonLdGraph()` - 14 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Pre-Commit Check Commands` --semantically_similar_to--> `Validate Job`  [INFERRED] [semantically similar]
@@ -163,19 +166,19 @@
 - **TeamSpeak music bot stack: TS3 server, TS3 client, Sinusbot, yt-dlp** — content_docs_en_debian_tutorials_teamspeak3_ts3server_startscript, content_docs_en_debian_tutorials_sinusbot_ts3_client, content_docs_en_debian_tutorials_sinusbot_sinusbot_service, content_docs_en_debian_tutorials_sinusbot_yt_dlp [INFERRED 0.85]
 - **TeamSpeak-Voice-Stack (TS3-Server, TS3-Client, Sinusbot-Musik-Bot)** — content_docs_de_debian_tutorials_teamspeak3_ts3server_startscript, content_docs_de_debian_tutorials_sinusbot_webinterface_port_8087 [INFERRED 0.85]
 
-## Communities (102 total, 20 thin omitted)
+## Communities (105 total, 20 thin omitted)
 
 ### Community 0 - "Locale"
-Cohesion: 0.05
-Nodes (84): .next, DocsIndexPage(), generateMetadata(), Props, DocPage(), generateMetadata(), generateStaticParams(), Props (+76 more)
+Cohesion: 0.06
+Nodes (64): DocsIndexPage(), generateMetadata(), Props, DocPage(), generateMetadata(), generateStaticParams(), Props, generateMetadata() (+56 more)
 
 ### Community 1 - "Frontend Dependencies"
 Cohesion: 0.04
 Nodes (47): clsx, @fontsource-variable/inter, @fontsource-variable/jetbrains-mono, geist, get-nonce, gray-matter, lucide-react, next (+39 more)
 
 ### Community 2 - "layout.tsx"
-Cohesion: 0.22
-Nodes (5): LocaleLayout(), viewport, NonceSetup(), ThemeProvider(), OG_IMAGE_SIZE
+Cohesion: 0.24
+Nodes (4): LocaleLayout(), viewport, NonceSetup(), ThemeProvider()
 
 ### Community 3 - "TypeScript and Build Paths"
 Cohesion: 0.05
@@ -190,7 +193,7 @@ Cohesion: 0.16
 Nodes (15): apache2 package, phpmyadmin.conf via conf-available + a2enconf, Manual phpMyAdmin install preferred over apt package, phpMyAdmin, lc-messages-dir fix in 50-server.cnf, Alternatives: gunicorn on 127.0.0.1:5050 behind ProxyPass, or Adminer, pgadmin.your-domain.com Apache vhost (80 redirect + 443 WSGI), Upstream HTTP basic auth via .pgadmin_htpasswd (defense in depth) (+7 more)
 
 ### Community 6 - "build-search-index.ts"
-Cohesion: 0.15
+Cohesion: 0.14
 Nodes (15): CONTENT_ROOT, extractHeadings(), LOCALES, main(), OUT_FILE, PUBLIC_DIR, SECTIONS, stripHtmlTags() (+7 more)
 
 ### Community 7 - "Project Package Metadata"
@@ -201,17 +204,17 @@ Nodes (30): author, description, engines, node, pnpm, license, name, packageMana
 Cohesion: 0.09
 Nodes (29): Installing acme.sh from the tarball instead of the install script, News: New tutorial wildcard SSL with acme.sh and IONOS DNS (EN), apachectl -t does not verify that key and certificate belong together, CA/Browser Forum ballot SC-081v3 (certificate lifetime reduction), DNS-01 validation through the IONOS API, grep -r does not follow symlinks, missing sites-enabled vhosts, Automatic renewal via a systemd timer instead of acme.sh's own cron job, ZeroSSL preferred over the IONOS ACME server (+21 more)
 
-### Community 9 - "cn"
-Cohesion: 0.06
-Nodes (32): Callout(), CalloutProps, CalloutType, config, CodeBlock(), CodeBlockProps, Disclosure(), mdxComponents (+24 more)
+### Community 9 - "Button.tsx"
+Cohesion: 0.18
+Nodes (8): ThemeItem(), ThemeToggle(), Button, ButtonProps, ButtonSize, ButtonVariant, sizeClasses, variantClasses
 
 ### Community 10 - "Header.tsx"
-Cohesion: 0.18
-Nodes (12): config, navigationConfig, Header(), HeaderProps, ICONS, isActive(), Navbar(), NavbarItem() (+4 more)
+Cohesion: 0.13
+Nodes (19): config, navigationConfig, NewsIndexPage(), TreeNode(), Header(), HeaderProps, ICONS, MobileItem() (+11 more)
 
 ### Community 11 - "config.ts"
-Cohesion: 0.13
-Nodes (15): config, footerConfig, FooterColumn, FooterColumnSchema, FooterConfig, FooterConfigSchema, FooterLink, FooterLinkSchema (+7 more)
+Cohesion: 0.14
+Nodes (14): config, footerConfig, FooterColumn, FooterColumnSchema, FooterConfig, FooterConfigSchema, FooterLink, FooterLinkSchema (+6 more)
 
 ### Community 12 - "Proton Drive Sync Rules"
 Cohesion: 0.11
@@ -262,8 +265,8 @@ Cohesion: 0.17
 Nodes (13): mariadb-server / mariadb-client, PHP 8.3 packages, update-alternatives and a2dismod php7.4 to php8.3 migration, Ondrej Sury PHP APT repository (packages.sury.org), hostnamectl version check, Debian 11 is oldstable, one version jump at a time, php.list in sources.list.d must be updated too, /etc/apt/sources.list release rename (buster to bullseye) (+5 more)
 
 ### Community 24 - "site.config.ts"
-Cohesion: 0.17
-Nodes (9): config, siteConfig, GET(), xmlEscape(), metadata, CTASection(), Props, SiteConfig (+1 more)
+Cohesion: 0.14
+Nodes (11): config, siteConfig, nextConfig, securityHeaders, withNextIntl, .next, metadata, CTASection() (+3 more)
 
 ### Community 25 - "Automated Deployment Scripts"
 Cohesion: 0.17
@@ -437,9 +440,9 @@ Nodes (11): Alles auf einmal: der Installer, Die fertigen Dateien, Häufige Fehl
 Cohesion: 0.17
 Nodes (11): All at once: the installer, Common problems, Four decisions that make the difference, How a run goes, Requirements, Step 3.1: understanding the changelog API, Step 3.2: install the update script, Step 3.3: cron entry (+3 more)
 
-### Community 90 - "sitemap.ts"
-Cohesion: 0.27
-Nodes (9): languagesFor(), lastModifiedOf(), newestOf(), sitemap(), LocaleSwitcher(), hrefFor(), NAMES, alternatePath() (+1 more)
+### Community 90 - "seo.ts"
+Cohesion: 0.18
+Nodes (12): LocaleSwitcher(), hrefFor(), NAMES, alternatePath(), BreadcrumbEntry, buildJsonLd(), BuildMetadataParams, LD_IDS (+4 more)
 
 ### Community 91 - "Manuelle phpMyAdmin-Installation"
 Cohesion: 0.20
@@ -469,9 +472,21 @@ Nodes (3): Die Reihe, Was Du vorher brauchst, Wenn Du nur einen Teil brauchst
 Cohesion: 0.50
 Nodes (3): If you only need one part, The series, What you need up front
 
-### Community 98 - "next.config.ts"
-Cohesion: 0.50
-Nodes (3): nextConfig, securityHeaders, withNextIntl
+### Community 98 - "lib/content.ts"
+Cohesion: 0.12
+Nodes (30): dynamic, GET(), GET(), xmlEscape(), HomePage(), Props, languagesFor(), sitemap() (+22 more)
+
+### Community 102 - "utils.ts"
+Cohesion: 0.17
+Nodes (10): Callout(), CalloutProps, CalloutType, config, CodeBlock(), CodeBlockProps, mdxComponents, absoluteUrl() (+2 more)
+
+### Community 103 - "cn"
+Cohesion: 0.22
+Nodes (12): Disclosure(), Badge, BadgeProps, Variant, variants, Card, CardContent, CardDescription (+4 more)
+
+### Community 104 - "SearchDialog.tsx"
+Cohesion: 0.25
+Nodes (5): Props, ResultGroup, SearchDialog(), SECTION_ICON, ContentSection
 
 ## Ambiguous Edges - Review These
 - `Musiker15 M-Logo (embedded base64 PNG)` → `Slate/Blue Palette (#ffffff, #cbd5e1, #94a3b8, #64748b)`  [AMBIGUOUS]
@@ -482,7 +497,7 @@ Nodes (3): nextConfig, securityHeaders, withNextIntl
   public/logo.png · relation: conceptually_related_to
 
 ## Knowledge Gaps
-- **397 isolated node(s):** `config`, `config`, `config`, `withNextIntl`, `securityHeaders` (+392 more)
+- **400 isolated node(s):** `config`, `config`, `config`, `withNextIntl`, `securityHeaders` (+395 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -495,11 +510,11 @@ _Questions this graph is uniquely positioned to answer:_
   _Edge tagged AMBIGUOUS (relation: semantically_similar_to) - confidence is low._
 - **What is the exact relationship between `Site Design System Palette` and `Mark Without Wordmark`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
-- **Why does `.next` connect `Locale` to `next.config.ts`, `TypeScript and Build Paths`, `layout.tsx`, `site.config.ts`, `sitemap.ts`?**
-  _High betweenness centrality (0.018) - this node is a cross-community bridge._
-- **Why does `exclude` connect `TypeScript and Build Paths` to `Locale`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
-- **Why does `phpMyAdmin` connect `phpMyAdmin` to `Manuelle phpMyAdmin-Installation`, `Dedicated Postgres SUPERUSER role "DbAdmin"`, `Debian and MariaDB Upgrades`?**
-  _High betweenness centrality (0.015) - this node is a cross-community bridge._
+- **Why does `.next` connect `site.config.ts` to `Locale`, `layout.tsx`, `TypeScript and Build Paths`, `lib/content.ts`, `seo.ts`?**
+  _High betweenness centrality (0.037) - this node is a cross-community bridge._
+- **Why does `exclude` connect `TypeScript and Build Paths` to `site.config.ts`?**
+  _High betweenness centrality (0.030) - this node is a cross-community bridge._
 - **What connects `config`, `config`, `config` to the rest of the system?**
-  _397 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _400 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Locale` be split into smaller, more focused modules?**
+  _Cohesion score 0.06155950752393981 - nodes in this community are weakly interconnected._

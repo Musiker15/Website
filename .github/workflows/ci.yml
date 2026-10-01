@@ -31,6 +31,35 @@ env:
   NODE_VERSION: "24"
 
 jobs:
+  # Checks the tree that actually ships, and fails on high or critical there.
+  # Until 01.10.2026 nothing did: Next 16.3.3 with a critical advisory in
+  # next/og, the function behind the Open Graph image, went live unnoticed.
+  #
+  # Production dependencies only. The dev tree carries findings from the lint
+  # toolchain that have no upstream fix at times, and those must not hide a
+  # real advisory in what the server runs.
+  #
+  # A job of its own, so a finding shows up under its own name instead of
+  # stopping the build before the tests have said anything. It reads the
+  # lockfile and needs no install.
+  audit:
+    name: Audit (production tree)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      # --ignore-registry-errors: an outage of the audit endpoint is not a
+      # vulnerability and should not turn the check red.
+      - name: Audit
+        run: pnpm audit --prod --audit-level=high --ignore-registry-errors
+
   validate:
     name: Validate
     runs-on: ubuntu-latest

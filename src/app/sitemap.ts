@@ -1,24 +1,14 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site.config";
-import { listAllContentItems, listNews } from "@/lib/content";
+import {
+  homeLastModified,
+  lastModifiedOf,
+  listAllContentItems,
+  listNews,
+  newestOf,
+} from "@/lib/content";
 import { alternatePath } from "@/lib/seo";
 import { SUPPORTED_LOCALES } from "@/types/config";
-import type { ContentItem } from "@/types/content";
-
-/**
- * Letztes Änderungsdatum eines Items: bevorzugt aus dem Frontmatter, sonst die
- * mtime der Datei.
- */
-function lastModifiedOf(item: ContentItem): Date {
-  return item.frontmatter.updated ?? item.frontmatter.date ?? item.modifiedAt;
-}
-
-/** Jüngstes Datum aus einer Liste, für die Übersichtsseiten. */
-function newestOf(items: ContentItem[], fallback: Date): Date {
-  let newest = 0;
-  for (const item of items) newest = Math.max(newest, lastModifiedOf(item).getTime());
-  return newest > 0 ? new Date(newest) : fallback;
-}
 
 /**
  * hreflang-Alternates für einen Pfad, im Format das Next.js für die Sitemap
@@ -48,7 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Startseite: ändert sich mit dem neuesten News-Eintrag (LatestNews-Block).
     entries.push({
       url: `${siteConfig.url}/${locale}`,
-      lastModified: newestOf(news, buildTime),
+      lastModified: homeLastModified(locale) ?? buildTime,
       changeFrequency: "weekly",
       priority: 1.0,
       alternates: { languages: languagesFor(`/${locale}`) },
@@ -57,14 +47,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Übersichtsseiten: so alt wie ihr jüngster Eintrag.
     entries.push({
       url: `${siteConfig.url}/${locale}/docs`,
-      lastModified: newestOf(docs, buildTime),
+      lastModified: newestOf(docs) ?? buildTime,
       changeFrequency: "weekly",
       priority: 0.9,
       alternates: { languages: languagesFor(`/${locale}/docs`) },
     });
     entries.push({
       url: `${siteConfig.url}/${locale}/news`,
-      lastModified: newestOf(news, buildTime),
+      lastModified: newestOf(news) ?? buildTime,
       changeFrequency: "monthly",
       priority: 0.6,
       alternates: { languages: languagesFor(`/${locale}/news`) },

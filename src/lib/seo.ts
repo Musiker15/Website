@@ -142,7 +142,17 @@ export function buildArticleMetadata(
  * JSON-LD-Generator für strukturierte Daten.
  */
 export function buildJsonLd(payload: Record<string, unknown>): string {
-  return JSON.stringify({ "@context": "https://schema.org", ...payload });
+  return serializeLd({ "@context": "https://schema.org", ...payload });
+}
+
+/**
+ * JSON for a `<script>` element. A literal `</script>` inside a string would
+ * end the element early, and since the FAQ answers come from free Markdown, the
+ * data is no longer limited to titles and dates. Escaping the angle bracket
+ * removes the whole class of problem and changes nothing for a JSON parser.
+ */
+function serializeLd(value: unknown): string {
+  return JSON.stringify(value).replace(/</g, "\\u003c");
 }
 
 /**
@@ -153,7 +163,7 @@ export function buildJsonLd(payload: Record<string, unknown>): string {
  * dieselbe Person in jedem Block erneut auszuschreiben.
  */
 export function buildJsonLdGraph(nodes: Array<Record<string, unknown>>): string {
-  return JSON.stringify({ "@context": "https://schema.org", "@graph": nodes });
+  return serializeLd({ "@context": "https://schema.org", "@graph": nodes });
 }
 
 /** Stabile Knoten-IDs, damit sich die Graph-Teile gegenseitig referenzieren können. */
@@ -183,6 +193,67 @@ export function buildBreadcrumbLd(entries: BreadcrumbEntry[]): Record<string, un
       position: index + 1,
       name: entry.name,
       ...(entry.path ? { item: `${siteConfig.url}${entry.path}` } : {}),
+    })),
+  };
+}
+
+interface WebPageLdParams {
+  /** Path of the page, e.g. `/de`. */
+  path: string;
+  name: string;
+  description: string;
+  locale: Locale;
+  /** Left out when nothing tells when the page last changed. */
+  modifiedAt?: Date;
+}
+
+/**
+ * `WebPage` node for a page that is not an article, which today is the front
+ * page. It carries the date the page last changed: without one, a reader of
+ * the structured data has no way to tell a maintained page from an abandoned
+ * one. A build date is not a substitute, it would move with every deploy.
+ */
+export function buildWebPageLd({
+  path,
+  name,
+  description,
+  locale,
+  modifiedAt,
+}: WebPageLdParams): Record<string, unknown> {
+  const url = `${siteConfig.url}${path}`;
+
+  return {
+    "@type": "WebPage",
+    "@id": `${url}#webpage`,
+    url,
+    name,
+    description,
+    isPartOf: { "@id": LD_IDS.website },
+    about: { "@id": LD_IDS.person },
+    inLanguage: locale === "de" ? "de-DE" : "en-US",
+    ...(modifiedAt ? { dateModified: modifiedAt.toISOString() } : {}),
+  };
+}
+
+/**
+ * `FAQPage` node from the questions of a page, see `extractFaq`.
+ *
+ * Only for questions and answers a visitor can read on that same page. Google
+ * shows the rich result for few sites these days, but answer engines read the
+ * node as what it is: a list of questions with the site's own answers.
+ */
+export function buildFaqLd(
+  entries: Array<{ question: string; answer: string }>,
+  path: string,
+): Record<string, unknown> {
+  return {
+    "@type": "FAQPage",
+    "@id": `${siteConfig.url}${path}#faq`,
+    isPartOf: { "@id": LD_IDS.website },
+    mainEntity: entries.map((entry) => ({
+      "@type": "Question",
+      name: entry.question,
+      acceptedAnswer: { "@type": "Answer", text: entry.answer },
     })),
   };
 }

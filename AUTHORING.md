@@ -115,6 +115,7 @@ Vollständige Liste aller Felder, die im Frontmatter möglich sind:
 | `draft`       | –       | true/false (default false) | `true`                                  |
 | `toc`         | –       | true/false (default true)  | `false`                                 |
 | `hideTitle`   | –       | true/false (default false) | `true`                                  |
+| `faq`         | –       | true/false (default false) | `true`                                  |
 | `image`       | –       | Pfad                       | `/images/hero.png`                      |
 | `imageAlt`    | –       | string                     | `"Screenshot"`                          |
 
@@ -124,6 +125,10 @@ Vollständige Liste aller Felder, die im Frontmatter möglich sind:
 - **`draft: true`** — Seite ist nur in `pnpm dev` sichtbar, nicht in Production
 - **`toc: false`** — kein „Auf dieser Seite"-Widget rechts
 - **`hideTitle: true`** — unterdrückt die automatische `<h1>` aus dem Frontmatter
+- **`faq: true`**: zeichnet die Seite für Suchmaschinen als Fragenliste aus. Jede
+  `###`-Überschrift gilt als Frage, der Text darunter als Antwort, eine
+  `##`-Überschrift gruppiert nur. Nur für Seiten setzen, die wirklich so
+  aufgebaut sind, sonst wird aus einer Zwischenüberschrift eine Frage
 
 ---
 

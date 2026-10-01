@@ -121,6 +121,33 @@ export function listNews(locale: Locale): ContentItem[] {
 }
 
 /**
+ * When a content item last changed: the frontmatter says so first, the mtime of
+ * the file is the fallback.
+ */
+export function lastModifiedOf(item: ContentItem): Date {
+  return item.frontmatter.updated ?? item.frontmatter.date ?? item.modifiedAt;
+}
+
+/** The newest change date in a list, or `undefined` for an empty one. */
+export function newestOf(items: ContentItem[]): Date | undefined {
+  let newest = 0;
+  for (const item of items) newest = Math.max(newest, lastModifiedOf(item).getTime());
+  return newest > 0 ? new Date(newest) : undefined;
+}
+
+/**
+ * When the front page last changed.
+ *
+ * It has no content file of its own. What changes on it is the LatestNews
+ * block, so it is as old as the newest news entry. The sitemap and the
+ * structured data of the front page both read it from here, which keeps the
+ * two from stating different dates.
+ */
+export function homeLastModified(locale: Locale): Date | undefined {
+  return newestOf(listNews(locale));
+}
+
+/**
  * Die zuletzt geschriebenen Tutorials, absteigend nach `date`.
  *
  * Übersichtsseiten fallen raus: ein Item ist ein Ordner-Index, wenn ein

@@ -5,8 +5,9 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DocNavMobile } from "@/components/content/DocNavMobile";
 import { TableOfContents } from "@/components/content/TableOfContents";
 import { getContent, listContent } from "@/lib/content";
+import { extractFaq } from "@/lib/faq";
 import { renderMDX } from "@/lib/mdx";
-import { buildArticleMetadata, buildBreadcrumbLd, buildJsonLdGraph } from "@/lib/seo";
+import { buildArticleMetadata, buildBreadcrumbLd, buildFaqLd, buildJsonLdGraph } from "@/lib/seo";
 import { SUPPORTED_LOCALES, type Locale } from "@/types/config";
 
 interface Props {
@@ -42,7 +43,15 @@ export default async function CatchAllPage({ params }: Props) {
   // wiederholt es nur, was zwei Zeilen darunter ohnehin steht.
   const showToc = item.frontmatter.toc && headings.length > 1;
 
-  const ld = buildJsonLdGraph([buildBreadcrumbLd([{ name: item.frontmatter.title }])]);
+  // A page flagged as FAQ marks up its questions. An empty list gets no node:
+  // a FAQPage without questions is invalid, and it would claim something the
+  // page does not hold.
+  const faq = item.frontmatter.faq ? extractFaq(item.content) : [];
+
+  const ld = buildJsonLdGraph([
+    buildBreadcrumbLd([{ name: item.frontmatter.title }]),
+    ...(faq.length > 0 ? [buildFaqLd(faq, item.url)] : []),
+  ]);
 
   return (
     // Der Fließtext steht auf `--measure`, wie überall sonst auch. Diese Seite

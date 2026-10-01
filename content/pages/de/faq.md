@@ -3,6 +3,7 @@ title: "FAQ"
 metaTitle: "FAQ zu den Debian-Tutorials und zum Server-Stack"
 description: "Häufige Fragen rund um die Tutorials, den Server-Stack und Musiker15 selbst."
 order: 3
+faq: true
 ---
 
 ## Allgemein

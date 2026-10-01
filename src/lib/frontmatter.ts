@@ -24,6 +24,12 @@ export const FrontmatterSchema = z.object({
   draft: z.boolean().default(false),
   toc: z.boolean().default(true),
   hideTitle: z.boolean().default(false),
+  /**
+   * Marks a page of questions and answers. Every H3 is read as a question and
+   * the text below it as its answer, and both go out as `FAQPage` structured
+   * data. Set it only where the page really is a list of questions.
+   */
+  faq: z.boolean().default(false),
   image: z.string().optional(),
   imageAlt: z.string().optional(),
   /** Optional: Pfad zur originalen Datei (für "Edit on GitHub"-Links) */

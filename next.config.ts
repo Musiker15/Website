@@ -1,7 +1,6 @@
+import { mkdirSync } from "node:fs";
+import path from "node:path";
 import type { NextConfig } from "next";
-import createNextIntlPlugin from "next-intl/plugin";
-
-const withNextIntl = createNextIntlPlugin("./src/i18n.ts");
 
 // =============================================================================
 // Security-Header — Single Source of Truth (außer CSP)
@@ -120,4 +119,38 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withNextIntl(nextConfig);
+/**
+ * Where @swc/core may unpack its native binary.
+ *
+ * Since 1.16.13 the package no longer loads the binary from node_modules. It
+ * unpacks it on first use into a cache, by default below the home directory.
+ * musiker15.service runs with ProtectHome=read-only, so that default is a
+ * read-only file system there, and `next start` died before it had loaded this
+ * file. That took the site down on 01.10.2026.
+ *
+ * The application directory is the one place the service may write to
+ * (ReadWritePaths in the unit), so the cache goes there, below `.next/cache`
+ * where Next keeps its own. A value set from outside wins.
+ */
+function provideSwcCache(): void {
+  if (process.env.SWC_NATIVE_BINDING_CACHE) return;
+
+  const dir = path.join(process.cwd(), ".next", "cache", "swc-native");
+  // Owner only: the directory holds a binary that gets loaded into the
+  // process, nobody else has any business writing to it.
+  mkdirSync(dir, { recursive: true, mode: 0o700 });
+  process.env.SWC_NATIVE_BINDING_CACHE = dir;
+}
+
+/**
+ * A function instead of a plain object, for one reason: the order. next-intl's
+ * plugin loads @swc/core the moment it is imported, and a static import at the
+ * top of this file would run before any line of it. The dynamic import below
+ * runs after the cache has a place.
+ */
+export default async function config(): Promise<NextConfig> {
+  provideSwcCache();
+
+  const { default: createNextIntlPlugin } = await import("next-intl/plugin");
+  return createNextIntlPlugin("./src/i18n.ts")(nextConfig);
+}

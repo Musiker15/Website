@@ -66,14 +66,14 @@
     "@types/node": "^26.1.1",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.5",
-    "eslint": "^10.9.1",
+    "eslint": "^10.11.0",
     "postcss": "^8.5.19",
-    "prettier": "^3.9.6",
+    "prettier": "^3.9.9",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.10",
     "typescript": "^5.7.2",
-    "typescript-eslint": "^8.68.0",
+    "typescript-eslint": "^8.70.1",
     "vitest": "^4.1.11"
   }
 }

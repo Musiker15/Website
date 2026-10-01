@@ -89,3 +89,13 @@ overrides:
   # gepatcht in 1.1.16. Trifft das transitive brace-expansion 1.1.15
   # (dev-scope). Selektiv auf den 1.x-Zweig, der 5.x-Zweig ist nicht betroffen.
   brace-expansion@<1.1.16: '1.1.16'
+
+  # The 5.x branch has since been hit three times, all DoS in the expansion:
+  #   GHSA-6j4f-fj2g-mc7p (high):     uncontrolled recursion, patched in 5.0.10
+  #   GHSA-qhr7-859c-m2p7 (high):     uncontrolled recursion, patched in 5.0.11
+  #   GHSA-q2hr-2g5m-vwhr (moderate): quadratic-time expansion, patched in 5.0.12
+  # Affected: >= 4.0.0, below the respective patch. Installed was 5.0.9, pulled
+  # in by minimatch 10 under ESLint and typescript-eslint, so dev scope only:
+  # it never runs on the server, and the audit gate does not look at it.
+  # Limited to the 5.x branch, there is no 4.x in the tree.
+  'brace-expansion@>=5.0.0 <5.0.12': '5.0.12'

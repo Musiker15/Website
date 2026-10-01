@@ -55,7 +55,7 @@
     "remark-gfm": "^4.0.0",
     "shiki": "^4.4.3",
     "tailwind-merge": "^2.5.5",
-    "zod": "^4.4.3"
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

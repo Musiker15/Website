@@ -19,10 +19,10 @@ when you visit is carried out by the hosting provider in the form of server logs
 ## 2. Controller
 
 **Moritz Kohm**  
-c/o Impressumservice Dein-Impressum  
-Stettiner Str. 41  
-35410 Hungen  
-Germany  
+Hauptstraße 103  
+68535 Edingen-Neckarhausen   
+Germany
+
 Email: `info@musiker15.de`
 
 A data protection officer is not required by law and has not been appointed.

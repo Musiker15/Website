@@ -9,9 +9,8 @@ updated: 2026-09-02
 ## Angaben gemäß § 5 DDG
 
 **Moritz Kohm**  
-c/o Impressumservice Dein-Impressum  
-Stettiner Str. 41  
-35410 Hungen  
+Hauptstraße 103  
+68535 Edingen-Neckarhausen  
 Deutschland
 
 ## Kontakt
@@ -20,10 +19,7 @@ E-Mail: `info@musiker15.de`
 
 ## Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
 
-**Moritz Kohm**  
-c/o Impressumservice Dein-Impressum  
-Stettiner Str. 41  
-35410 Hungen
+Moritz Kohm, Anschrift wie oben.
 
 ## Hinweise zu Inhalten und Links
 

@@ -19,10 +19,10 @@ Besuch erfolgt durch den Hosting-Provider in Form von Server-Logs
 ## 2. Verantwortlicher
 
 **Moritz Kohm**  
-c/o Impressumservice Dein-Impressum  
-Stettiner Str. 41  
-35410 Hungen  
-Deutschland  
+Hauptstraße 103  
+68535 Edingen-Neckarhausen   
+Deutschland
+
 E-Mail: `info@musiker15.de`
 
 Ein Datenschutzbeauftragter ist gesetzlich nicht erforderlich und nicht

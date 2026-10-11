@@ -136,6 +136,11 @@ function provideSwcCache(): void {
   if (process.env.SWC_NATIVE_BINDING_CACHE) return;
 
   const dir = path.join(process.cwd(), ".next", "cache", "swc-native");
+  // The parents first, with the default mode. A recursive mkdir applies its
+  // mode to every directory it creates, and on a fresh checkout that includes
+  // `.next` itself. With 0700 there, Apache could no longer reach
+  // `.next/static` and every script and stylesheet answered 404 (01.10. to 11.10.2026).
+  mkdirSync(path.dirname(dir), { recursive: true });
   // Owner only: the directory holds a binary that gets loaded into the
   // process, nobody else has any business writing to it.
   mkdirSync(dir, { recursive: true, mode: 0o700 });

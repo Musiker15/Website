@@ -99,6 +99,19 @@ jobs:
       - name: Start like the service
         run: bash scripts/start-like-service.sh
 
+      # Apache serves /_next/static straight from the file system as www-data,
+      # so every directory on the way there needs the search bit for others.
+      # A .next with mode 0700 left the live site without CSS and JS.
+      - name: Static files reachable for Apache
+        run: |
+          for d in .next .next/static; do
+            mode=$(stat -c %a "$d")
+            if [ $(( 8#$mode & 1 )) -eq 0 ]; then
+              echo "::error::$d hat Modus $mode, Apache kann /_next/static nicht ausliefern"
+              exit 1
+            fi
+          done
+
       - name: Test (Vitest)
         # `pnpm test` ist `vitest run` (einmalig, kein Watch-Mode). Kein
         # --passWithNoTests mehr: ein leerer Lauf soll auffallen, nicht durchgehen.

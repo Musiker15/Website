@@ -105,3 +105,14 @@ overrides:
   # Comes in through postcss under next (production tree), postcss asks for
   # ^1.2.1, so 1.2.2 stays inside its range.
   source-map-js@<1.2.2: '1.2.2'
+
+  # GHSA-rj75-hqrm-r3gf (moderate): postcss-selector-parser, quadratic
+  # complexity in flat selector parsing. Affected: < 7.1.6, patched in 7.1.6,
+  # there is no fixed 6.x. Comes in through @tailwindcss/typography (dev
+  # scope, runs at build time only).
+  #
+  # Deliberate deviation: typography 0.5.20 (latest) pins exactly 6.0.10, the
+  # override pushes it a major past that. Verified by building before and
+  # after and comparing the generated CSS: identical. Can go once typography
+  # moves to 7.x itself.
+  postcss-selector-parser@<7.1.6: '7.1.6'

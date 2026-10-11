@@ -99,3 +99,9 @@ overrides:
   # it never runs on the server, and the audit gate does not look at it.
   # Limited to the 5.x branch, there is no 4.x in the tree.
   'brace-expansion@>=5.0.0 <5.0.12': '5.0.12'
+
+  # GHSA-68fv-2mgg-jv7q (high): source-map-js event-loop DoS through indexed
+  # source-map section offsets. Affected: >= 1.0.0 < 1.2.2, patched in 1.2.2.
+  # Comes in through postcss under next (production tree), postcss asks for
+  # ^1.2.1, so 1.2.2 stays inside its range.
+  source-map-js@<1.2.2: '1.2.2'

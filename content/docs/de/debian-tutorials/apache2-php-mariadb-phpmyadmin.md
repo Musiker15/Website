@@ -1,12 +1,21 @@
 ---
 title: "Apache2, PHP 8, MariaDB und phpMyAdmin"
-description: "Kompletter LAMP-Stack: Apache 2, PHP 8, MariaDB und phpMyAdmin installieren und konfigurieren."
+description: "Kompletter LAMP-Stack: Apache 2, PHP 8.4 über FPM, MariaDB und phpMyAdmin installieren und konfigurieren."
 date: 2026-05-27
+updated: 2026-10-22
 order: 3
 tags: ["debian", "apache", "php", "mariadb", "phpmyadmin"]
 ---
 
-## Installation von Apache 2, PHP 8.3 und MariaDB
+## Installation von Apache 2, PHP 8.4 und MariaDB
+
+PHP läuft in dieser Anleitung über **PHP-FPM**, also in eigenen Prozessen neben
+Apache und nicht als Apache-Modul (`mod_php`). Apache reicht PHP-Anfragen nur
+weiter. Das hat drei Vorteile: Apache kann das sparsamere `mpm_event` nutzen,
+PHP lässt sich unabhängig von Apache aktualisieren und neu starten, und Du
+vermeidest die Variante, die bei den
+[php2shell-Lücken vom Oktober 2026](/de/news/php2shell-2026-10) am stärksten
+betroffen war.
 
 ```bash
 # Update and install some dependencies
@@ -21,9 +30,14 @@ apt update
 # Install apache2 package
 apt install apache2 -y
 
-# Install PHP 8.3 packages
-apt install php8.3 php8.3-common php8.3-cli php8.3-{bz2,curl,mbstring,intl} -y
-apt install php8.3-mysql php8.3-opcache php8.3-xml php8.3-xsl php8.3-zip php8.3-apcu -y
+# Install PHP 8.4 with FPM (no Apache module)
+apt install php8.4-fpm php8.4-common php8.4-cli php8.4-{bz2,curl,mbstring,intl} -y
+apt install php8.4-mysql php8.4-opcache php8.4-xml php8.4-xsl php8.4-zip php8.4-apcu -y
+
+# Hand PHP requests from Apache over to FPM
+a2enmod proxy_fcgi setenvif
+a2enconf php8.4-fpm
+systemctl restart apache2
 
 # Install MySQL/MariaDB packages
 curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | sudo bash
@@ -34,6 +48,35 @@ apt install mariadb-server mariadb-client -y
 mysql_secure_installation
 ```
 
+<Callout type="warning">
+Installiere nicht das Paket `php8.4` ohne Zusatz. Es ist ein Metapaket, und
+solange `php8.4-fpm` nicht installiert ist, holt es `libapache2-mod-php8.4`
+dazu, also genau das Apache-Modul, das hier vermieden werden soll. Mit den
+Befehlen oben brauchst Du es nicht.
+</Callout>
+
+### Prüfen, ob PHP über FPM läuft
+
+```bash
+apache2ctl -M | grep -E 'mpm|proxy_fcgi|php'
+systemctl is-active php8.4-fpm
+```
+
+In der Ausgabe sollten `mpm_event_module` und `proxy_fcgi_module` stehen, aber
+kein `php_module`. Wer es im Browser sehen will, legt kurz eine Testdatei an:
+
+```bash
+echo '<?php phpinfo();' > /var/www/html/info.php
+```
+
+Unter `http://deine-domain.de/info.php` muss bei **Server API** dann
+`FPM/FastCGI` stehen. Lösche die Datei danach sofort wieder, sie verrät viel
+über den Server:
+
+```bash
+rm /var/www/html/info.php
+```
+
 ## PHP-Version verwalten
 
 Die aktive PHP-CLI-Version lässt sich jederzeit umstellen:
@@ -42,17 +85,73 @@ Die aktive PHP-CLI-Version lässt sich jederzeit umstellen:
 update-alternatives --config php
 ```
 
-### Upgrade von PHP 7.4 auf PHP 8.3
-
-Falls Du von einer älteren PHP-Version (z.B. 7.4) kommst, deaktivierst Du nach
-der Installation von PHP 8.3 das alte Apache-Modul und räumst die alten Pakete
-auf:
+Das betrifft nur die Kommandozeile, also `php` in Skripten und Cronjobs. Welche
+Version Deine Webseiten ausliefert, entscheidet die FPM-Konfiguration, die in
+Apache eingebunden ist. Ein Wechsel von 8.3 auf 8.4 sieht so aus:
 
 ```bash
-a2dismod php7.4
-a2enmod php8.3
+a2disconf php8.3-fpm
+a2enconf php8.4-fpm
+systemctl reload apache2
+```
+
+### Nach jedem PHP-Update neu starten
+
+Ein installiertes Update wirkt erst, wenn die laufenden PHP-Prozesse neu
+gestartet sind. Das Paket startet FPM beim Update normalerweise selbst neu.
+Prüfen kannst Du es so:
+
+```bash
+grep ' upgrade php8.4-fpm' /var/log/dpkg.log | tail -1
+systemctl show -p ActiveEnterTimestamp php8.4-fpm
+```
+
+Der Startzeitpunkt muss nach dem Update liegen. Falls nicht:
+
+```bash
+systemctl restart php8.4-fpm
+```
+
+### Umstieg vom Apache-Modul auf PHP-FPM
+
+Falls Dein Server PHP noch als Apache-Modul ausführt, etwa weil Du einer
+früheren Fassung dieser Anleitung gefolgt bist, stellst Du so um. Ob das der
+Fall ist, zeigt `apache2ctl -M | grep php_module`.
+
+```bash
+# Install PHP 8.4 with FPM, as above
+apt install php8.4-fpm php8.4-common php8.4-cli php8.4-{bz2,curl,mbstring,intl} -y
+apt install php8.4-mysql php8.4-opcache php8.4-xml php8.4-xsl php8.4-zip php8.4-apcu -y
+
+# Switch off the old Apache module (use your version, e.g. php7.4 or php8.3)
+a2dismod php8.3
+a2dismod mpm_prefork
+a2enmod mpm_event
+
+# Hand PHP requests from Apache over to FPM
+a2enmod proxy_fcgi setenvif
+a2enconf php8.4-fpm
 systemctl restart apache2
-apt-get purge -y php7.*
+```
+
+Danach prüfst Du wie [oben](#pruefen-ob-php-ueber-fpm-laeuft) beschrieben, dass
+kein `php_module` mehr geladen ist. Zwei Dinge gehen beim Umstieg leicht
+verloren:
+
+- **Erweiterungen**: Hast Du für die alte Version weitere Pakete installiert,
+  etwa `php8.3-gd`, brauchst Du sie für 8.4 noch einmal (`php8.4-gd`).
+- **Eigene Einstellungen**: Das Modul liest `/etc/php/<version>/apache2/php.ini`,
+  FPM liest `/etc/php/8.4/fpm/php.ini`. Was Du dort geändert hattest, etwa
+  `upload_max_filesize` oder `memory_limit`, überträgst Du in die Datei von FPM
+  und startest `php8.4-fpm` neu.
+
+Läuft alles, entfernst Du das alte Modul und, falls Du sie nicht mehr brauchst,
+die alte PHP-Version:
+
+```bash
+apt-get purge -y 'libapache2-mod-php*'
+# Old PHP version, adjust to yours
+apt-get purge -y 'php7.4*'
 ```
 
 ## Automatische Installation von phpMyAdmin
@@ -69,6 +168,10 @@ dass man es bequem über `apt update && apt upgrade -y` mit aktuell hält.
 ```bash
 apt install phpmyadmin
 ```
+
+Mit der Paketquelle von Sury zieht das Paket zusätzlich die PHP-CLI in der
+neuesten Version nach (derzeit 8.5). Für Deine Webseiten ändert das nichts, die
+laufen weiter über FPM mit PHP 8.4.
 
 Man wird nun gefragt, welcher Webserver genutzt wird. Hier wählen wir
 **apache** aus und bestätigen mit ENTER. Die nächste Frage bestätigen wir
@@ -126,7 +229,7 @@ Alias /phpmyadmin /usr/share/phpmyadmin
 <Directory /usr/share/phpmyadmin/libraries>
     Require all denied
 </Directory>
-<Directory /usr/share/phpmyadmin/setup/lib>
+<Directory /usr/share/phpmyadmin/setup>
     Require all denied
 </Directory>
 ```

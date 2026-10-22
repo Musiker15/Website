@@ -1,12 +1,20 @@
 ---
 title: "Apache 2, PHP 8, MariaDB and phpMyAdmin"
-description: "Full LAMP stack: install and configure Apache 2, PHP 8, MariaDB and phpMyAdmin."
+description: "Full LAMP stack: install and configure Apache 2, PHP 8.4 via FPM, MariaDB and phpMyAdmin."
 date: 2026-06-13
+updated: 2026-10-22
 order: 3
 tags: ["debian", "apache", "php", "mariadb", "phpmyadmin"]
 ---
 
-## Installing Apache 2, PHP 8.3 and MariaDB
+## Installing Apache 2, PHP 8.4 and MariaDB
+
+In this guide PHP runs through **PHP-FPM**, in its own processes next to Apache
+rather than as an Apache module (`mod_php`). Apache only passes PHP requests
+on. That has three advantages: Apache can use the leaner `mpm_event`, PHP can
+be updated and restarted independently of Apache, and you avoid the variant
+that was hit hardest by the
+[php2shell flaws of October 2026](/en/news/php2shell-2026-10).
 
 ```bash
 # Update and install some dependencies
@@ -21,9 +29,14 @@ apt update
 # Install apache2 package
 apt install apache2 -y
 
-# Install PHP 8.3 packages
-apt install php8.3 php8.3-common php8.3-cli php8.3-{bz2,curl,mbstring,intl} -y
-apt install php8.3-mysql php8.3-opcache php8.3-xml php8.3-xsl php8.3-zip php8.3-apcu -y
+# Install PHP 8.4 with FPM (no Apache module)
+apt install php8.4-fpm php8.4-common php8.4-cli php8.4-{bz2,curl,mbstring,intl} -y
+apt install php8.4-mysql php8.4-opcache php8.4-xml php8.4-xsl php8.4-zip php8.4-apcu -y
+
+# Hand PHP requests from Apache over to FPM
+a2enmod proxy_fcgi setenvif
+a2enconf php8.4-fpm
+systemctl restart apache2
 
 # Install MySQL/MariaDB packages
 curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | sudo bash
@@ -34,6 +47,35 @@ apt install mariadb-server mariadb-client -y
 mysql_secure_installation
 ```
 
+<Callout type="warning">
+Don't install the plain `php8.4` package. It is a metapackage, and as long as
+`php8.4-fpm` is not installed it pulls in `libapache2-mod-php8.4`, exactly the
+Apache module this guide avoids. With the commands above you don't need it.
+</Callout>
+
+### Checking that PHP runs through FPM
+
+```bash
+apache2ctl -M | grep -E 'mpm|proxy_fcgi|php'
+systemctl is-active php8.4-fpm
+```
+
+The output should list `mpm_event_module` and `proxy_fcgi_module`, but no
+`php_module`. If you want to see it in the browser, create a test file for a
+moment:
+
+```bash
+echo '<?php phpinfo();' > /var/www/html/info.php
+```
+
+At `http://your-domain.com/info.php`, **Server API** must then read
+`FPM/FastCGI`. Delete the file again right away, it reveals a lot about the
+server:
+
+```bash
+rm /var/www/html/info.php
+```
+
 ## Managing the PHP version
 
 The active PHP CLI version can be switched at any time:
@@ -42,16 +84,72 @@ The active PHP CLI version can be switched at any time:
 update-alternatives --config php
 ```
 
-### Upgrade from PHP 7.4 to PHP 8.3
-
-If you're coming from an older PHP version (e.g. 7.4), disable the old Apache
-module after installing PHP 8.3 and clean up the old packages:
+That only affects the command line, meaning `php` in scripts and cron jobs.
+Which version serves your websites is decided by the FPM configuration enabled
+in Apache. Switching from 8.3 to 8.4 looks like this:
 
 ```bash
-a2dismod php7.4
-a2enmod php8.3
+a2disconf php8.3-fpm
+a2enconf php8.4-fpm
+systemctl reload apache2
+```
+
+### Restart after every PHP update
+
+An installed update only takes effect once the running PHP processes have been
+restarted. The package usually restarts FPM by itself during the update. You
+can check it like this:
+
+```bash
+grep ' upgrade php8.4-fpm' /var/log/dpkg.log | tail -1
+systemctl show -p ActiveEnterTimestamp php8.4-fpm
+```
+
+The start time must be after the update. If it isn't:
+
+```bash
+systemctl restart php8.4-fpm
+```
+
+### Switching from the Apache module to PHP-FPM
+
+If your server still runs PHP as an Apache module, for example because you
+followed an earlier version of this guide, this is how to switch. Whether that
+is the case shows `apache2ctl -M | grep php_module`.
+
+```bash
+# Install PHP 8.4 with FPM, as above
+apt install php8.4-fpm php8.4-common php8.4-cli php8.4-{bz2,curl,mbstring,intl} -y
+apt install php8.4-mysql php8.4-opcache php8.4-xml php8.4-xsl php8.4-zip php8.4-apcu -y
+
+# Switch off the old Apache module (use your version, e.g. php7.4 or php8.3)
+a2dismod php8.3
+a2dismod mpm_prefork
+a2enmod mpm_event
+
+# Hand PHP requests from Apache over to FPM
+a2enmod proxy_fcgi setenvif
+a2enconf php8.4-fpm
 systemctl restart apache2
-apt-get purge -y php7.*
+```
+
+Then check as described [above](#checking-that-php-runs-through-fpm) that no
+`php_module` is loaded anymore. Two things easily get lost in the switch:
+
+- **Extensions**: if you installed further packages for the old version, such
+  as `php8.3-gd`, you need them again for 8.4 (`php8.4-gd`).
+- **Your own settings**: the module reads `/etc/php/<version>/apache2/php.ini`,
+  FPM reads `/etc/php/8.4/fpm/php.ini`. Whatever you changed there, such as
+  `upload_max_filesize` or `memory_limit`, carry over into FPM's file and
+  restart `php8.4-fpm`.
+
+Once everything works, remove the old module and, if you no longer need it,
+the old PHP version:
+
+```bash
+apt-get purge -y 'libapache2-mod-php*'
+# Old PHP version, adjust to yours
+apt-get purge -y 'php7.4*'
 ```
 
 ## Automatic installation of phpMyAdmin
@@ -68,6 +166,10 @@ keep it up to date via `apt update && apt upgrade -y`.
 ```bash
 apt install phpmyadmin
 ```
+
+With the Sury repository the package also pulls in the PHP CLI in the newest
+version (currently 8.5). Nothing changes for your websites, they keep running
+through FPM with PHP 8.4.
 
 You'll now be asked which web server is being used. Here we select **apache**
 and confirm with ENTER. We confirm the next question with ENTER as well.
@@ -121,7 +223,7 @@ Alias /phpmyadmin /usr/share/phpmyadmin
 <Directory /usr/share/phpmyadmin/libraries>
     Require all denied
 </Directory>
-<Directory /usr/share/phpmyadmin/setup/lib>
+<Directory /usr/share/phpmyadmin/setup>
     Require all denied
 </Directory>
 ```

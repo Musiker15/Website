@@ -20,18 +20,6 @@ allowBuilds:
 # Parent-Pakete (z.B. vitest, tsx) nominell verlangen. Wird genutzt um
 # Security-Patches durchzusetzen, ohne auf einen Parent-Bump warten zu müssen.
 overrides:
-  # GHSA (high):     server.fs.deny bypass via Windows alternate paths
-  # GHSA (moderate): launch-editor NTLMv2 hash disclosure via UNC paths
-  # Beide betreffen vite >= 8.0.0, <= 8.0.15 — gepatcht in 8.0.16.
-  #
-  # GHSA-698v-4r3x-3vcv (moderate): launch-editor inside vite, escapeCmdArgs()
-  # omits % escaping on Windows. Affected: >= 8.0.0, <= 8.1.5, patched in
-  # 8.1.6. Lower bound raised, capped below 9 so no untested major slips in.
-  # vite is a peer of vitest, and the override alone did not move the peer
-  # pnpm installs on its own (it stayed on 8.0.16). vite is therefore a direct
-  # devDependency since 2026-10-22, the override stays as the floor.
-  vite: '>=8.1.6 <9'
-
   # CVE: XSS via Unescaped </style> in CSS Stringify Output (< 8.5.0) sowie ein
   # weiteres Advisory, das erst in 8.5.18 gepatcht ist.
   # GHSA-fxqj-rqcc-2cmp (moderate): unvollständiger Fix von GHSA-6g55-p6wh-862q,

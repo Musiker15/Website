@@ -10,7 +10,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/config/site.config";
 import { SUPPORTED_LOCALES, type Locale } from "@/types/config";
-import { buildJsonLdGraph, LD_IDS, OG_IMAGE_SIZE } from "@/lib/seo";
+import { buildJsonLdGraph, hreflangAlternates, LD_IDS, OG_IMAGE_SIZE } from "@/lib/seo";
 
 // Fonts werden vollständig lokal über das @fontsource-Paket geladen.
 // Keine Kommunikation zu Google/Adobe — weder beim Build noch zur Laufzeit.
@@ -89,11 +89,7 @@ export async function generateMetadata({
     formatDetection: { telephone: false, email: false, address: false },
     alternates: {
       canonical: `/${l}`,
-      languages: {
-        "de-DE": "/de",
-        "en-US": "/en",
-        "x-default": "/de",
-      },
+      languages: hreflangAlternates(`/${l}`),
       types: {
         "application/rss+xml": [{ url: `/${l}/news/feed.xml`, title: `${siteConfig.name} | News` }],
       },

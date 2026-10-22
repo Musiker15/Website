@@ -54,6 +54,20 @@ export function alternatePath(path: string, target: Locale): string {
   return mapped ? `/${mapped[target]}` : rest;
 }
 
+/**
+ * hreflang alternates for a path: the plain language codes plus x-default,
+ * which points at the German version. Single source for the page metadata,
+ * the locale layout and the sitemap, so all of them announce the same set.
+ */
+export function hreflangAlternates(path: string): Record<string, string> {
+  const de = `${siteConfig.url}/de${alternatePath(path, "de")}`;
+  return {
+    de,
+    en: `${siteConfig.url}/en${alternatePath(path, "en")}`,
+    "x-default": de,
+  };
+}
+
 export function buildMetadata(params: BuildMetadataParams): Metadata {
   const {
     title,
@@ -70,8 +84,6 @@ export function buildMetadata(params: BuildMetadataParams): Metadata {
 
   const url = `${siteConfig.url}${path.startsWith("/") ? path : `/${path}`}`;
   const ogImage = image ?? siteConfig.ogImage;
-  const altDe = alternatePath(path, "de");
-  const altEn = alternatePath(path, "en");
   const ogLocale = locale === "de" ? "de_DE" : "en_US";
 
   return {
@@ -79,11 +91,7 @@ export function buildMetadata(params: BuildMetadataParams): Metadata {
     description,
     alternates: {
       canonical: url,
-      languages: {
-        "de-DE": `${siteConfig.url}/de${altDe}`,
-        "en-US": `${siteConfig.url}/en${altEn}`,
-        "x-default": `${siteConfig.url}/de${altDe}`,
-      },
+      languages: hreflangAlternates(path),
     },
     openGraph: {
       type,

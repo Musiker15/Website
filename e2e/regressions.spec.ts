@@ -194,6 +194,25 @@ test.describe("Statuscodes", () => {
   });
 });
 
+test.describe("hreflang", () => {
+  // next-intl used to send a Link header with hreflang alternates on
+  // https://localhost/... and /en/impressum for /de/impressum. The alternates
+  // belong in the HTML only, with the same codes as the sitemap.
+  test("no hreflang Link header, the HTML carries de, en and x-default", async ({ request }) => {
+    for (const path of ["/de/impressum", "/en/imprint", TUTORIAL]) {
+      const response = await request.get(path);
+      expect(response.status(), path).toBe(200);
+      expect(response.headers()["link"] ?? "", path).not.toContain("hreflang");
+
+      const html = await response.text();
+      for (const code of ["de", "en", "x-default"]) {
+        expect(html, `${path} ${code}`).toContain(`hrefLang="${code}"`);
+      }
+      expect(html, path).not.toContain('hrefLang="de-DE"');
+    }
+  });
+});
+
 test.describe("Sprachwechsel", () => {
   test("lädt das Dokument neu und beginnt oben", async ({ page }) => {
     await page.goto("/de");

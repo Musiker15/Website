@@ -7,20 +7,11 @@ import {
   listNews,
   newestOf,
 } from "@/lib/content";
-import { alternatePath } from "@/lib/seo";
+// hreflang alternates come from the same function as the page metadata, so the
+// sitemap and the HTML announce the same codes and `/de/impressum` points at
+// `/en/imprint` here as well.
+import { hreflangAlternates } from "@/lib/seo";
 import { SUPPORTED_LOCALES } from "@/types/config";
-
-/**
- * hreflang-Alternates für einen Pfad, im Format das Next.js für die Sitemap
- * erwartet. Nutzt dieselbe Slug-Auflösung wie die Seiten-Metadata, damit
- * `/de/impressum` auch hier auf `/en/imprint` zeigt und nicht ins Leere.
- */
-function languagesFor(path: string): Record<string, string> {
-  return {
-    de: `${siteConfig.url}/de${alternatePath(path, "de")}`,
-    en: `${siteConfig.url}/en${alternatePath(path, "en")}`,
-  };
-}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
@@ -41,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: homeLastModified(locale) ?? buildTime,
       changeFrequency: "weekly",
       priority: 1.0,
-      alternates: { languages: languagesFor(`/${locale}`) },
+      alternates: { languages: hreflangAlternates(`/${locale}`) },
     });
 
     // Übersichtsseiten: so alt wie ihr jüngster Eintrag.
@@ -50,14 +41,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: newestOf(docs) ?? buildTime,
       changeFrequency: "weekly",
       priority: 0.9,
-      alternates: { languages: languagesFor(`/${locale}/docs`) },
+      alternates: { languages: hreflangAlternates(`/${locale}/docs`) },
     });
     entries.push({
       url: `${siteConfig.url}/${locale}/news`,
       lastModified: newestOf(news) ?? buildTime,
       changeFrequency: "monthly",
       priority: 0.6,
-      alternates: { languages: languagesFor(`/${locale}/news`) },
+      alternates: { languages: hreflangAlternates(`/${locale}/news`) },
     });
 
     // Tutorials — der inhaltliche Kern, entsprechend hohe Priorität.
@@ -67,7 +58,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: lastModifiedOf(item),
         changeFrequency: "monthly",
         priority: 0.8,
-        alternates: { languages: languagesFor(item.url) },
+        alternates: { languages: hreflangAlternates(item.url) },
       });
     }
 
@@ -77,7 +68,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: lastModifiedOf(item),
         changeFrequency: "yearly",
         priority: 0.4,
-        alternates: { languages: languagesFor(item.url) },
+        alternates: { languages: hreflangAlternates(item.url) },
       });
     }
 
@@ -87,7 +78,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: lastModifiedOf(item),
         changeFrequency: "yearly",
         priority: 0.5,
-        alternates: { languages: languagesFor(item.url) },
+        alternates: { languages: hreflangAlternates(item.url) },
       });
     }
   }

@@ -7,6 +7,11 @@ const intlMiddleware = createMiddleware({
   defaultLocale: "de",
   localePrefix: "always",
   localeDetection: true,
+  // No hreflang Link header: behind Apache it named https://localhost/... as
+  // the alternates, sent an unprefixed x-default and mapped /de/impressum to
+  // the non-existent /en/impressum. The HTML and the sitemap carry the
+  // correct alternates from hreflangAlternates() in src/lib/seo.ts.
+  alternateLinks: false,
   // NEXT_LOCALE Cookie absichern (Mozilla Observatory: Cookies-Check):
   // • secure   → nur über HTTPS übertragen
   // • sameSite → "lax" reicht für Locale-Persistenz

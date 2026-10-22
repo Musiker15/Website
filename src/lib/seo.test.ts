@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { alternatePath, buildMetadata } from "./seo";
+import { alternatePath, buildMetadata, hreflangAlternates } from "./seo";
 import { siteConfig } from "@/config/site.config";
+import sitemap from "@/app/sitemap";
 
 // =============================================================================
 // alternatePath / hreflang-Alternates
@@ -64,8 +65,8 @@ describe("buildMetadata alternates", () => {
 
     expect(meta.alternates?.canonical).toBe(`${siteConfig.url}/de/impressum`);
     expect(meta.alternates?.languages).toMatchObject({
-      "de-DE": `${siteConfig.url}/de/impressum`,
-      "en-US": `${siteConfig.url}/en/imprint`,
+      de: `${siteConfig.url}/de/impressum`,
+      en: `${siteConfig.url}/en/imprint`,
       "x-default": `${siteConfig.url}/de/impressum`,
     });
   });
@@ -74,8 +75,8 @@ describe("buildMetadata alternates", () => {
     const meta = buildMetadata({ title: "Imprint", locale: "en", path: "/en/imprint" });
 
     expect(meta.alternates?.languages).toMatchObject({
-      "de-DE": `${siteConfig.url}/de/impressum`,
-      "en-US": `${siteConfig.url}/en/imprint`,
+      de: `${siteConfig.url}/de/impressum`,
+      en: `${siteConfig.url}/en/imprint`,
     });
   });
 
@@ -87,8 +88,39 @@ describe("buildMetadata alternates", () => {
     });
 
     expect(meta.alternates?.languages).toMatchObject({
-      "de-DE": `${siteConfig.url}/de/docs/debian-tutorials/certbot`,
-      "en-US": `${siteConfig.url}/en/docs/debian-tutorials/certbot`,
+      de: `${siteConfig.url}/de/docs/debian-tutorials/certbot`,
+      en: `${siteConfig.url}/en/docs/debian-tutorials/certbot`,
     });
+  });
+});
+
+// =============================================================================
+// One set of hreflang codes
+// -----------------------------------------------------------------------------
+// Until 2026-10-22 the HTML said de-DE/en-US/x-default and the sitemap de/en
+// without x-default. Both sources now go through hreflangAlternates(); these
+// tests keep a third spelling from creeping back in.
+// =============================================================================
+
+describe("hreflang codes", () => {
+  it("uses the plain language codes plus x-default", () => {
+    expect(Object.keys(hreflangAlternates("/de/about"))).toEqual(["de", "en", "x-default"]);
+  });
+
+  it("points x-default at the German version", () => {
+    const alt = hreflangAlternates("/en/privacy");
+    expect(alt["x-default"]).toBe(`${siteConfig.url}/de/datenschutz`);
+    expect(alt["x-default"]).toBe(alt.de);
+  });
+
+  it("announces the same alternates in page metadata and sitemap", () => {
+    const entries = sitemap();
+    expect(entries.length).toBeGreaterThan(10);
+
+    for (const entry of entries) {
+      const path = entry.url.slice(siteConfig.url.length);
+      const fromMetadata = buildMetadata({ title: "x", locale: "de", path }).alternates?.languages;
+      expect(entry.alternates?.languages, entry.url).toEqual(fromMetadata);
+    }
   });
 });

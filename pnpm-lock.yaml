@@ -5467,9 +5467,6 @@ snapshots:
 
   semver@7.8.6: {}
 
-  semver@7.8.6:
-    optional: true
-
   sharp@0.35.5(@types/node@26.6.5):
     dependencies:
       '@img/colour': 1.1.0

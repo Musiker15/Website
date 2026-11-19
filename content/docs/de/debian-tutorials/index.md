@@ -20,6 +20,7 @@ Server selbst aufsetzen, pflegen oder erweitern wollen.
 - **[Sinusbot](/de/docs/debian-tutorials/sinusbot)**: Musik-Bot für TeamSpeak
 - **[pgAdmin 4: Setup-Runbook](/de/docs/debian-tutorials/pgadmin-setup)**: PostgreSQL-Weboberfläche hinter Apache + HTTPS
 - **[Wildcard-SSL mit acme.sh und IONOS-DNS](/de/docs/debian-tutorials/acme-sh-wildcard-ionos)**: Wildcard-Zertifikate per DNS-01 automatisch erneuern
+- **[unattended-upgrades](/de/docs/debian-tutorials/unattended-upgrades)**: automatische Sicherheitsupdates, auch für Sury, MariaDB und Docker
 
 <Callout type="warning">
 Befehle, die mit `sudo` oder als root ausgeführt werden, können das System

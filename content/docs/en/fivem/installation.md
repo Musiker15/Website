@@ -1,6 +1,7 @@
 ---
 title: "Step 1: install a FiveM server on Debian"
 description: "Set up the FXServer artifact, create a dedicated system user, write a systemd unit and run the txAdmin setup through an SSH tunnel without ever opening port 40120."
+metaDescription: "Set up the FXServer artifact, a system user and a systemd unit, then run the txAdmin setup through an SSH tunnel without opening port 40120."
 date: 2026-08-25
 order: 2
 tags: ["fivem", "fxserver", "txadmin", "debian", "systemd", "ssh"]

@@ -1,6 +1,7 @@
 ---
 title: "Proton Drive mit Ignore-Regeln: ein Fork des Windows-Clients"
 description: "Eine .protonignore im Sync-Ordner und .gitignore pro Verzeichnis, damit node_modules und Build-Ordner nicht mehr in der Cloud landen. Quelloffen, selbst zu bauen."
+metaDescription: "Eine .protonignore im Sync-Ordner und .gitignore pro Verzeichnis, damit node_modules und Build-Ordner nicht mehr in der Cloud landen."
 date: 2026-08-20
 author: "Moritz Kohm"
 tags: ["proton", "windows", "open-source", "sync"]

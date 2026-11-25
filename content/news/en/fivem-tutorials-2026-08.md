@@ -1,6 +1,7 @@
 ---
 title: "New section: FiveM server, in three steps"
 description: "A three-part series from a bare Debian box to a server that keeps itself current: installation, txAdmin behind HTTPS and automatic artifact updates. The scripts are available for download."
+metaDescription: "A three-part series from a bare Debian box to a server that keeps itself current: installation, txAdmin behind HTTPS and artifact updates."
 date: 2026-08-25
 author: "Moritz Kohm"
 tags: ["tutorials", "fivem", "debian", "apache"]

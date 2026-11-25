@@ -1,6 +1,7 @@
 ---
 title: "Schritt 1: FiveM-Server auf Debian installieren"
 description: "FXServer-Artefakt einrichten, eigenen Systembenutzer anlegen, systemd-Unit schreiben und txAdmin über einen SSH-Tunnel einrichten, ohne dabei Port 40120 zu öffnen."
+metaDescription: "FXServer-Artefakt einrichten, Systembenutzer und systemd-Unit anlegen und txAdmin über einen SSH-Tunnel einrichten, ohne Port 40120 zu öffnen."
 date: 2026-08-25
 order: 2
 tags: ["fivem", "fxserver", "txadmin", "debian", "systemd", "ssh"]

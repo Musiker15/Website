@@ -1,6 +1,7 @@
 ---
 title: "Neuer Bereich: FiveM-Server, in drei Schritten"
 description: "Eine dreiteilige Reihe vom leeren Debian bis zum Server, der sich selbst aktuell hält: Installation, txAdmin hinter HTTPS und automatische Artefakt-Updates. Die Skripte gibt es zum Herunterladen."
+metaDescription: "Eine dreiteilige Reihe vom leeren Debian bis zum Server, der sich selbst aktuell hält: Installation, txAdmin hinter HTTPS und Artefakt-Updates."
 date: 2026-08-25
 author: "Moritz Kohm"
 tags: ["tutorials", "fivem", "debian", "apache"]

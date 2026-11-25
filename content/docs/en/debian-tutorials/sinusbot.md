@@ -1,6 +1,7 @@
 ---
 title: "Sinusbot"
-description: "Music bot for TeamSpeak: install, configure and update Sinusbot."
+description: "Music bot for TeamSpeak: install, configure and update Sinusbot on Debian."
+metaTitle: "Install Sinusbot on Debian"
 date: 2026-05-27
 order: 7
 tags: ["debian", "sinusbot", "teamspeak"]

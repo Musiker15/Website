@@ -1,6 +1,7 @@
 ---
 title: "Impressum"
 description: "Anbieterkennzeichnung nach § 5 DDG und Verantwortlicher nach § 18 Abs. 2 MStV."
+metaTitle: "Impressum und Kontakt"
 order: 100
 toc: false
 updated: 2026-09-02

@@ -43,6 +43,8 @@
   "news": {
     "title": "News & Updates",
     "subtitle": "Aktuelle Beiträge, Hinweise und Neuigkeiten.",
+    "metaTitle": "Neuigkeiten zu Tutorials und Projekten",
+    "metaDescription": "Neue Tutorials, Projekt-Updates und Hinweise zu Debian, Server-Administration, FiveM und meinen eigenen Werkzeugen.",
     "empty": "Hier steht noch nichts. Die Tutorials sind der bessere Startpunkt."
   },
   "search": {

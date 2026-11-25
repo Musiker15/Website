@@ -1,6 +1,7 @@
 ---
 title: "unattended-upgrades: automatic updates for Debian and Ubuntu"
 description: "Install security updates automatically, add third-party sources such as Sury (PHP), MariaDB or Docker, restart services and the server properly, and prove at the end that it actually works."
+metaDescription: "Install security updates automatically, add third-party sources such as Sury (PHP), MariaDB or Docker, and prove that it works."
 date: 2026-11-19
 order: 10
 tags: ["debian", "ubuntu", "apt", "unattended-upgrades", "security", "php", "sury"]

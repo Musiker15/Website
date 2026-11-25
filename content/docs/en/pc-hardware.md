@@ -1,6 +1,7 @@
 ---
 title: "PC Hardware"
-description: "My current workstation: chassis, CPU, GPU, monitors and peripherals."
+description: "My current workstation in detail: chassis, CPU, GPU, monitors and peripherals."
+metaTitle: "My PC setup: hardware and peripherals"
 date: 2026-05-27
 order: 1
 tags: ["hardware"]

@@ -1,6 +1,8 @@
 ---
 title: "php2shell: zwei kritische PHP-Lücken und was mein Server dazu sagt"
 description: "Am 21.10.2026 hat PHP zwei Lücken geschlossen, über die sich ohne Anmeldung Code ausführen lässt. Was dahintersteckt, wie Du Deinen Server prüfst und was die Prüfung bei mir ergeben hat."
+metaTitle: "php2shell: zwei kritische Lücken in PHP"
+metaDescription: "Am 21.10.2026 hat PHP zwei Lücken geschlossen, über die sich ohne Anmeldung Code ausführen lässt. Was dahintersteckt und wie Du prüfst."
 date: 2026-10-22
 author: "Moritz Kohm"
 tags: ["php", "security", "debian", "apache", "nextcloud"]

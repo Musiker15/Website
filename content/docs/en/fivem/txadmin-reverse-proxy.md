@@ -1,6 +1,7 @@
 ---
 title: "Step 2: txAdmin behind an Apache reverse proxy"
 description: "Make the txAdmin panel reachable over HTTPS on its own subdomain through Apache 2.4, including the WebSocket switch for the live console and the traps nobody notices."
+metaDescription: "Make the txAdmin panel reachable over HTTPS on its own subdomain through Apache 2.4, including the WebSocket switch for the live console."
 date: 2026-08-25
 order: 3
 tags: ["fivem", "txadmin", "apache", "reverse-proxy", "websocket", "debian", "ssl"]

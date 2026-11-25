@@ -1,6 +1,7 @@
 ---
 title: "TeamSpeak 3 Server"
-description: "TS3-Server auf Debian manuell aufsetzen, updaten und Fehler beheben."
+description: "Einen TeamSpeak-3-Server auf Debian manuell aufsetzen, updaten und Fehler beheben."
+metaTitle: "TeamSpeak-3-Server auf Debian einrichten"
 date: 2026-05-27
 order: 6
 tags: ["debian", "teamspeak"]

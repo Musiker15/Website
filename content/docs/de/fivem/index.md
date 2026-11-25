@@ -1,6 +1,8 @@
 ---
 title: "FiveM-Server"
 description: "Einen FiveM-Server auf Debian aufsetzen, txAdmin sicher hinter Apache betreiben und die Artefakte automatisch aktuell halten. Drei Schritte, aufeinander aufbauend."
+metaTitle: "FiveM-Server auf Debian betreiben"
+metaDescription: "Einen FiveM-Server auf Debian aufsetzen, txAdmin sicher hinter Apache betreiben und die Artefakte automatisch aktuell halten."
 date: 2026-08-25
 order: 4
 tags: ["fivem", "fxserver", "txadmin", "debian", "linux"]

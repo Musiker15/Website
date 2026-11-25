@@ -14,7 +14,7 @@ import { SiteConfigSchema, type SiteConfig } from "@/types/config";
 const config = {
   name: "Musiker15",
   tagline: {
-    de: "Tutorials & Guides",
+    de: "Tutorials & Anleitungen",
     en: "Tutorials & Guides",
   },
   description: {

@@ -14,8 +14,10 @@ export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "news" });
   return buildMetadata({
-    title: t("title"),
-    description: t("subtitle"),
+    // The visible heading and subtitle stay short; the search result gets its
+    // own wording, one per language, inside the title and description limits.
+    title: t("metaTitle"),
+    description: t("metaDescription"),
     locale,
     path: `/${locale}/news`,
   });

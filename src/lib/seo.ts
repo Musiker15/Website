@@ -11,6 +11,58 @@ import type { Frontmatter } from "./frontmatter";
  */
 export const OG_IMAGE_SIZE = { width: 1200, height: 630 } as const;
 
+/**
+ * Limits for the title and description a search result shows. Longer text is
+ * cut off in the snippet, shorter text wastes the room. `validate-content`
+ * checks every page against them before the build.
+ */
+export const TITLE_MIN = 30;
+export const TITLE_MAX = 60;
+export const META_DESCRIPTION_MIN = 70;
+export const META_DESCRIPTION_MAX = 155;
+
+/** Suffix the root layout's title template appends to every page title. */
+export const TITLE_SUFFIX = ` | ${siteConfig.name}`;
+
+/**
+ * The page title as the metadata needs it. The layout appends the site name
+ * through its template; when that would push the title past `TITLE_MAX`, the
+ * title goes out on its own instead, so the words of the page stay visible
+ * and the brand is what gets dropped.
+ */
+export function pageTitle(title: string): string | { absolute: string } {
+  return (title + TITLE_SUFFIX).length <= TITLE_MAX ? title : { absolute: title };
+}
+
+/** The title exactly as it ends up in `<title>`. */
+export function renderedTitle(title: string): string {
+  const t = pageTitle(title);
+  return typeof t === "string" ? t + TITLE_SUFFIX : t.absolute;
+}
+
+/**
+ * Title and description of a content page as a search result shows them,
+ * checked against the limits above. Run by `scripts/validate-content.ts`
+ * before every build. Drafts are never published and stay out.
+ */
+export function searchSnippetErrors(fm: Frontmatter): string[] {
+  if (fm.draft) return [];
+  const errors: string[] = [];
+  const title = renderedTitle(fm.metaTitle ?? fm.title);
+  if (title.length < TITLE_MIN || title.length > TITLE_MAX) {
+    errors.push(
+      `title: "${title}" has ${title.length} characters, allowed are ${TITLE_MIN} to ${TITLE_MAX} (set metaTitle)`,
+    );
+  }
+  const description = fm.metaDescription ?? fm.description ?? "";
+  if (description.length < META_DESCRIPTION_MIN || description.length > META_DESCRIPTION_MAX) {
+    errors.push(
+      `description: ${description.length} characters, allowed are ${META_DESCRIPTION_MIN} to ${META_DESCRIPTION_MAX} (set metaDescription)`,
+    );
+  }
+  return errors;
+}
+
 interface BuildMetadataParams {
   title: string;
   description?: string;
@@ -87,7 +139,7 @@ export function buildMetadata(params: BuildMetadataParams): Metadata {
   const ogLocale = locale === "de" ? "de_DE" : "en_US";
 
   return {
-    title,
+    title: pageTitle(title),
     description,
     alternates: {
       canonical: url,
@@ -134,7 +186,7 @@ export function buildArticleMetadata(
     // Seitenzusammenhang kurz sein darf ("Über Musiker15"), der Titel im
     // Suchergebnis aber ohne diesen Zusammenhang funktionieren muss.
     title: frontmatter.metaTitle ?? frontmatter.title,
-    description: frontmatter.description,
+    description: frontmatter.metaDescription ?? frontmatter.description,
     locale,
     path,
     image: frontmatter.image,

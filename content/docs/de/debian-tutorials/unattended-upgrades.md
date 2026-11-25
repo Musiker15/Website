@@ -1,6 +1,8 @@
 ---
 title: "unattended-upgrades: automatische Updates für Debian und Ubuntu"
 description: "Sicherheitsupdates automatisch einspielen, Fremdquellen wie Sury (PHP), MariaDB oder Docker einbinden, Dienste und Server richtig neu starten und am Ende nachweisen, dass es greift."
+metaTitle: "Automatische Updates mit unattended-upgrades"
+metaDescription: "Sicherheitsupdates automatisch einspielen, Fremdquellen wie Sury (PHP), MariaDB oder Docker einbinden und nachweisen, dass es greift."
 date: 2026-11-19
 order: 10
 tags: ["debian", "ubuntu", "apt", "unattended-upgrades", "security", "php", "sury"]

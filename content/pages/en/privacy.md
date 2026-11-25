@@ -1,6 +1,7 @@
 ---
 title: "Privacy Policy"
 description: "Information on the processing of personal data under GDPR, DDG and TDDDG."
+metaTitle: "Privacy policy (GDPR)"
 order: 101
 toc: true
 updated: 2026-09-02

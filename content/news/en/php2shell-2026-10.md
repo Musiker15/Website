@@ -1,6 +1,8 @@
 ---
 title: "php2shell: two critical PHP flaws and what my server has to say"
 description: "On 21 October 2026 PHP closed two flaws that allow code execution without a login. What is behind them, how to check your server, and what the check turned up on mine."
+metaTitle: "php2shell: two critical flaws in PHP"
+metaDescription: "On 21 October 2026 PHP closed two flaws that allow code execution without a login. What is behind them and how to check your server."
 date: 2026-10-22
 author: "Moritz Kohm"
 tags: ["php", "security", "debian", "apache", "nextcloud"]

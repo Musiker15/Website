@@ -1,6 +1,7 @@
 ---
 title: "Neues Tutorial: Wildcard-SSL mit acme.sh und IONOS-DNS"
 description: "Ein Zertifikat für alle Subdomains, ausgestellt über DNS-01 und automatisch erneuert per systemd-Timer. Inklusive der Stolpersteine, die mich selbst Zeit gekostet haben."
+metaDescription: "Ein Zertifikat für alle Subdomains, ausgestellt über DNS-01 und automatisch erneuert per systemd-Timer, samt den Stolpersteinen dabei."
 date: 2026-08-06
 author: "Moritz Kohm"
 tags: ["tutorials", "ssl", "apache", "debian"]

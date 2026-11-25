@@ -1,7 +1,7 @@
 ---
 title: "Community"
 metaTitle: "Community: Discord, GitHub and MSK Scripts"
-description: "Discord, GitHub, MSK Scripts: where to find me."
+description: "Discord, GitHub, MSK Scripts: all the places where you can find and reach me."
 order: 2
 ---
 

@@ -15,6 +15,12 @@ export const FrontmatterSchema = z.object({
    */
   metaTitle: z.string().min(1).max(160).optional(),
   description: z.string().max(320).optional(),
+  /**
+   * Optional description for search results only. Falls back to
+   * `description`. Use it when the visible description is longer than a search
+   * snippet holds (see `META_DESCRIPTION_MAX` in `src/lib/seo.ts`).
+   */
+  metaDescription: z.string().min(1).max(320).optional(),
   date: z.coerce.date().optional(),
   updated: z.coerce.date().optional(),
   author: z.string().optional(),

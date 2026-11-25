@@ -9,6 +9,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { FrontmatterSchema } from "../src/lib/frontmatter";
+import { searchSnippetErrors } from "../src/lib/seo";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
 
@@ -48,6 +49,8 @@ function main() {
           file: rel,
           errors: result.error.issues.map((e) => `${e.path.join(".") || "(root)"}: ${e.message}`),
         });
+      } else if (searchSnippetErrors(result.data).length > 0) {
+        errors.push({ file: rel, errors: searchSnippetErrors(result.data) });
       } else {
         if (content.trim().length < 20) {
           console.warn(`  ⚠ ${rel} — Body sehr kurz (< 20 Zeichen)`);

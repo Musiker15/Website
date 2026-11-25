@@ -1,6 +1,7 @@
 ---
 title: "Proton Drive: Dateien vom Sync ausschließen"
 description: "Ein Fork des Proton-Drive-Clients für Windows, der Ignore-Regeln kennt. Eine .protonignore im Sync-Ordner, dazu .gitignore pro Verzeichnis, in vollständiger gitignore-Syntax."
+metaDescription: "Ein Fork des Proton-Drive-Clients für Windows mit Ignore-Regeln: eine .protonignore im Sync-Ordner und .gitignore pro Verzeichnis."
 date: 2026-08-20
 order: 2
 tags: ["proton", "windows", "open-source", "sync"]

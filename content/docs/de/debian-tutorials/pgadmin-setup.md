@@ -1,6 +1,6 @@
 ---
 title: "pgAdmin 4: Setup-Runbook"
-description: "pgAdmin 4 (Web) hinter Apache mit HTTPS auf Debian installieren."
+description: "pgAdmin 4 (Web) hinter Apache mit HTTPS auf Debian installieren, als Runbook Schritt für Schritt."
 date: 2026-06-23
 order: 8
 tags: ["debian", "pgadmin", "postgres"]

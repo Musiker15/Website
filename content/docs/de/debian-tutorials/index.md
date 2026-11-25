@@ -1,6 +1,7 @@
 ---
 title: "Debian-Tutorials"
 description: "Server-Setup, Apache, MariaDB, Certbot und mehr: Schritt-für-Schritt-Anleitungen für Debian."
+metaTitle: "Debian-Tutorials für Server-Admins"
 date: 2026-05-27
 order: 3
 tags: ["debian", "linux"]

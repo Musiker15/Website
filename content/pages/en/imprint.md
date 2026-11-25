@@ -1,6 +1,7 @@
 ---
 title: "Legal Notice"
 description: "Provider identification according to § 5 DDG and party responsible for content under § 18 para. 2 MStV."
+metaTitle: "Legal notice and contact"
 order: 100
 toc: false
 updated: 2026-09-02

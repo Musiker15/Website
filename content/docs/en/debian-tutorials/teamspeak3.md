@@ -1,6 +1,7 @@
 ---
 title: "TeamSpeak 3 Server"
-description: "Manually set up, update and troubleshoot a TS3 server on Debian."
+description: "Manually set up, update and troubleshoot a TeamSpeak 3 server on Debian."
+metaTitle: "Set up a TeamSpeak 3 server on Debian"
 date: 2026-06-13
 order: 6
 tags: ["debian", "teamspeak"]

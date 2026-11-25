@@ -9,7 +9,8 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /_next/
+# /_next/ stays open: it holds the CSS, JavaScript and images a crawler needs
+# to render the pages the way a visitor sees them.
 # Hält den Suchindex (public/search-index.json, rund 86 KB Fließtext) draußen.
 Disallow: /*.json$
 # Suchergebnisseiten stehen zusätzlich per Metadata auf noindex.

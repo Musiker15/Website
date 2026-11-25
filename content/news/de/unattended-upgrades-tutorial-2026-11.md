@@ -1,6 +1,7 @@
 ---
 title: "Neues Tutorial: automatische Updates mit unattended-upgrades"
 description: "Wie Debian und Ubuntu Sicherheitsupdates selbst einspielen, warum PHP von Sury dabei im Default leer ausgeht und welche drei stillen Fallen ich auf meinem eigenen Server gefunden habe."
+metaDescription: "Wie Debian und Ubuntu Sicherheitsupdates selbst einspielen, warum PHP von Sury im Default leer ausgeht und welche drei stillen Fallen es gibt."
 date: 2026-11-19
 author: "Moritz Kohm"
 tags: ["tutorials", "debian", "ubuntu", "security", "php"]

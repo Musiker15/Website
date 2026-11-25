@@ -1,6 +1,7 @@
 ---
 title: "Schritt 3: FXServer-Artefakte automatisch aktualisieren"
 description: "Ein Update-Script, das die aktuelle Version über die Cfx-Changelog-API holt, nur die Artefakt-Dateien tauscht und bei einem Fehlstart den alten Stand zurückholt. Dazu der passende Cron-Eintrag."
+metaDescription: "Ein Update-Script holt die aktuelle Version über die Cfx-Changelog-API, tauscht nur die Artefakte und rollt bei einem Fehlstart zurück."
 date: 2026-08-25
 order: 4
 tags: ["fivem", "fxserver", "cron", "systemd", "automation", "bash", "debian"]

@@ -1,6 +1,8 @@
 ---
 title: "SSHCraft: mein eigener SSH-Client mit selbst betriebenem Sync"
 description: "SSHCraft ist ein quelloffener SSH-Client in Rust, der Hosts und Schlüssel über einen eigenen Server zwischen Geräten synchronisiert, kostenlos und Ende-zu-Ende verschlüsselt. Was er kann, wie er entstanden ist und was als Nächstes kommt."
+metaTitle: "SSHCraft: mein SSH-Client mit eigenem Sync-Server"
+metaDescription: "SSHCraft ist ein quelloffener SSH-Client in Rust, der Hosts und Schlüssel über einen eigenen Server Ende-zu-Ende verschlüsselt synchronisiert."
 date: 2026-11-16
 author: "Moritz Kohm"
 tags: ["sshcraft", "ssh", "rust", "open-source", "self-hosting"]

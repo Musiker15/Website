@@ -31,17 +31,21 @@ export function Header({ locale }: HeaderProps) {
         <Link
           href={`/${locale}`}
           className="flex shrink-0 items-center gap-2 font-semibold tracking-tight text-[var(--color-foreground)] transition-colors duration-[var(--duration-hover)] ease-[var(--ease-out)] hover:text-[var(--color-primary)]"
-          aria-label={siteConfig.name}
         >
+          {/* The logo carries the link's name, so it is there below `sm` as
+              well, where the written name is hidden. The name is not read a
+              second time. */}
           <Image
             src="/logo.png"
-            alt=""
+            alt={siteConfig.name}
             width={32}
             height={32}
             priority
             className="h-6 w-6 object-contain"
           />
-          <span className="hidden text-base sm:inline">{siteConfig.name}</span>
+          <span aria-hidden="true" className="hidden text-base sm:inline">
+            {siteConfig.name}
+          </span>
         </Link>
 
         {/* Desktop-Navigation */}

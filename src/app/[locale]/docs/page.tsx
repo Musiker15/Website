@@ -25,7 +25,8 @@ export async function generateMetadata({ params }: Props) {
   const index = getContent("docs", locale, []);
   return buildMetadata({
     title: index?.frontmatter.metaTitle ?? index?.frontmatter.title ?? t("title"),
-    description: index?.frontmatter.description ?? t("subtitle"),
+    description:
+      index?.frontmatter.metaDescription ?? index?.frontmatter.description ?? t("subtitle"),
     locale,
     path: `/${locale}/docs`,
   });
